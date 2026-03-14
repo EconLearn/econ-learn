@@ -1,0 +1,226 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { courses, type Course } from "@/data/courses";
+import { useAuth } from "@/components/providers/AuthProvider";
+import { useNavStore } from "@/lib/stores/nav-store";
+
+export default function Sidebar() {
+  const pathname = usePathname();
+  const { user } = useAuth();
+  const { completedModules, profile } = useNavStore();
+  const [expandedCourse, setExpandedCourse] = useState<string | null>(
+    pathname.startsWith("/micro") ? "micro" : pathname.startsWith("/macro") ? "macro" : null
+  );
+
+  const getCompletedCount = (courseId: string) => {
+    const course = courses.find((c) => c.id === courseId);
+    if (!course) return 0;
+    return course.modules.filter((m) => completedModules.has(m.id)).length;
+  };
+
+  return (
+    <aside className="w-[260px] h-screen overflow-y-auto sticky top-0 flex flex-col" style={{ background: 'var(--color-surface)', borderRight: '1px solid var(--color-border-subtle)' }}>
+      <div className="px-5 py-5" style={{ borderBottom: '1px solid var(--color-border-subtle)' }}>
+        <Link href="/" className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: 'var(--color-ink)' }}>
+            <span className="text-white font-bold text-[12px]">E</span>
+          </div>
+          <span className="text-[15px] font-semibold" style={{ color: 'var(--color-ink)' }}>EconLearn</span>
+        </Link>
+      </div>
+
+      <nav className="flex-1 px-3 py-3 space-y-0.5">
+        <Link
+          href="/"
+          className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-150 ${
+            pathname === "/"
+              ? "font-semibold"
+              : ""
+          }`}
+          style={pathname === "/"
+            ? { background: 'var(--color-surface-sunken)', color: 'var(--color-ink)' }
+            : { color: 'var(--color-ink-muted)' }}
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+          </svg>
+          Home
+        </Link>
+
+        {user && (
+          <Link
+            href="/dashboard"
+            className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-150 ${
+              pathname === "/dashboard"
+                ? "font-semibold"
+                : ""
+            }`}
+            style={pathname === "/dashboard"
+              ? { background: 'var(--color-surface-sunken)', color: 'var(--color-ink)' }
+              : { color: 'var(--color-ink-muted)' }}
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+            </svg>
+            Dashboard
+          </Link>
+        )}
+
+        <div className="pt-4 pb-1 px-3">
+          <p className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: 'var(--color-ink-faint)' }}>
+            Courses
+          </p>
+        </div>
+
+        {courses.map((course) => (
+          <CourseSection
+            key={course.id}
+            course={course}
+            expanded={expandedCourse === course.id}
+            onToggle={() =>
+              setExpandedCourse(expandedCourse === course.id ? null : course.id)
+            }
+            currentPath={pathname}
+            completedModules={completedModules}
+            completedCount={getCompletedCount(course.id)}
+            isLoggedIn={!!user}
+          />
+        ))}
+      </nav>
+
+      {/* User section at bottom */}
+      <div className="flex-shrink-0 p-3" style={{ borderTop: '1px solid var(--color-border-subtle)' }}>
+        {user && profile ? (
+          <Link
+            href="/profile"
+            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-all duration-150 hover:opacity-80"
+          >
+            <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'var(--color-ink)' }}>
+              <span className="text-white text-[10px] font-bold">
+                {(profile.display_name || "U")[0].toUpperCase()}
+              </span>
+            </div>
+            <span className="text-sm font-medium truncate" style={{ color: 'var(--color-ink-light)' }}>
+              {profile.display_name}
+            </span>
+          </Link>
+        ) : (
+          <Link
+            href="/login"
+            className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] transition-all duration-150"
+            style={{ color: 'var(--color-ink-muted)' }}
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </svg>
+            Sign in to save progress
+          </Link>
+        )}
+      </div>
+    </aside>
+  );
+}
+
+function CourseSection({
+  course,
+  expanded,
+  onToggle,
+  currentPath,
+  completedModules,
+  completedCount,
+  isLoggedIn,
+}: {
+  course: Course;
+  expanded: boolean;
+  onToggle: () => void;
+  currentPath: string;
+  completedModules: Set<string>;
+  completedCount: number;
+  isLoggedIn: boolean;
+}) {
+  return (
+    <div>
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-[13px] font-semibold transition-all duration-150"
+        style={{ color: expanded ? 'var(--color-ink)' : 'var(--color-ink-muted)' }}
+      >
+        <span className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full" style={{ background: course.id === "micro" ? 'var(--graph-demand)' : '#6d28d9' }} />
+          {course.shortTitle}
+          {isLoggedIn && (
+            <span className="text-[10px] font-normal tabular-nums" style={{ color: 'var(--color-ink-faint)' }}>
+              {completedCount}/{course.modules.length}
+            </span>
+          )}
+        </span>
+        <svg
+          className={`w-3.5 h-3.5 transition-transform duration-200 ${
+            expanded ? "rotate-90" : ""
+          }`}
+          style={{ color: 'var(--color-ink-faint)' }}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            style={{ overflow: "hidden" }}
+          >
+            <div className="ml-3 pl-3 space-y-px" style={{ borderLeft: '1px solid var(--color-border-subtle)' }}>
+              {course.modules.map((mod, index) => {
+                const isActive = currentPath === mod.href;
+                const isCompleted = completedModules.has(mod.id);
+                return (
+                  <motion.div
+                    key={mod.id}
+                    initial={{ opacity: 0, x: -4 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.03, duration: 0.2 }}
+                  >
+                    <Link
+                      href={mod.href}
+                      className={`flex items-center gap-2 px-2.5 py-1.5 text-[12.5px] transition-all duration-150 ${
+                        isActive
+                          ? "font-semibold -ml-[13px] pl-[11px]"
+                          : ""
+                      }`}
+                      style={isActive
+                        ? { color: 'var(--color-ink)', borderLeft: '2px solid var(--graph-equilibrium)' }
+                        : { color: 'var(--color-ink-muted)' }}
+                    >
+                      {isLoggedIn && isCompleted ? (
+                        <svg className="w-3.5 h-3.5 flex-shrink-0" style={{ color: 'var(--graph-equilibrium)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      ) : (
+                        <span className="text-[10px] w-3.5 text-center tabular-nums flex-shrink-0" style={{ color: 'var(--color-ink-faint)' }}>
+                          {index + 1}
+                        </span>
+                      )}
+                      <span className="truncate">{mod.title}</span>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
