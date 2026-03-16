@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { microCourse, macroCourse } from "@/data/courses";
+import { blogPosts } from "@/data/blog-posts";
 
 const BASE_URL = "https://econlearn.org";
 
@@ -24,6 +25,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/about`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/privacy`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
+    {
+      url: `${BASE_URL}/terms`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.2,
     },
     {
       url: `${BASE_URL}/login`,
@@ -57,5 +82,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
-  return [...staticPages, ...microModulePages, ...macroModulePages];
+  const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: post.updatedAt || post.publishedAt,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [
+    ...staticPages,
+    ...microModulePages,
+    ...macroModulePages,
+    ...blogPages,
+  ];
 }

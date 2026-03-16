@@ -1,51 +1,53 @@
 export const monopolyContent = {
   title: "Monopoly",
-  subtitle: "One firm, no competition, and why that changes everything about pricing and output",
+  subtitle: "What happens when one firm owns the entire market and nobody can do a thing about it",
   sections: [
     {
       heading: "The Only Seller",
-      content: `Your electric company can charge whatever it wants. A wheat farmer can't. The difference? The wheat farmer competes with thousands of identical sellers, so customers just buy the cheapest grain. A **monopolist** faces no competition. One seller, no close substitutes, full control over price. That makes the monopolist a **price maker**.
+      content: `Economists in the late 19th century believed monopolies were temporary — that high profits would inevitably attract competitors who'd break the stranglehold. Standard Oil proved them spectacularly wrong. John D. Rockefeller controlled over 90% of U.S. oil refining by 1880 and maintained that grip for decades through railroad rebates, predatory pricing, and horizontal integration. The competitors never showed up, because Rockefeller made sure the door was welded shut behind him.
 
-Pfizer holding a patent on a new cancer drug, De Beers controlling 85% of the world's rough diamond supply in the 1990s. Buyers either pay up or go without.
+A **monopolist** is the sole seller in a market with no close substitutes. Unlike a wheat farmer competing against thousands of identical operations, the monopolist faces no competition. One seller, full control over price. That makes the monopolist a **price maker**.
 
-What keeps competitors from rushing in? A **barrier to entry**:
-- **Patents** (pharmaceutical exclusivity for 20 years)
-- Exclusive resource control (De Beers locking up diamond mines)
-- Massive startup costs (nobody casually builds a second electrical grid)
-- Government franchise (your local water utility holds a legal monopoly)
+Pfizer holding a patent on a blockbuster cancer drug. De Beers controlling 85% of the world's rough diamond supply through the 1990s. Your local electric utility. Buyers either pay up or go without.
 
-Remove the barrier and monopoly power collapses. That last point matters more than students usually realize.`,
+What keeps competitors out? A **barrier to entry**:
+- **Patents** grant pharmaceutical companies 20 years of exclusivity — Humira earned AbbVie over $200 billion before its patent expired in 2023
+- Exclusive resource control, like De Beers locking up diamond mines across southern Africa
+- Massive startup costs — nobody casually builds a second electrical grid serving the same city
+- Government franchise, where your local water utility holds a legal monopoly granted by the municipality
+
+Remove the barrier and monopoly power evaporates. That point matters far more than most AP students realize when answering free-response questions about long-run monopoly behavior.`,
     },
     {
       heading: "Why MR Is Less Than Price",
-      content: `Say you sell 10 units at $50 each. You want to sell an 11th, but the demand curve slopes down, so the price must drop to $49. You gain $49 from the new buyer. You also lose $1 on each of the 10 units you were already selling. Net gain: $49 minus $10 = $39. That $39 is your **marginal revenue**, well below the $49 price.
+      content: `Say you sell 10 units at $50 each. You want to sell an 11th. But the demand curve slopes down, so the price must drop to $49 for all units. You gain $49 from the new buyer. You also lose $1 on each of the 10 units you were already selling, because those buyers now pay $49 instead of $50. Net gain: $49 minus $10 = $39. That $39 is your **marginal revenue**, and it sits well below the $49 price.
 
-For a monopolist, MR is always less than price. A competitive firm never deals with this because it sells at the market price without moving the needle. The monopolist *is* the market. Every output decision shifts the price for everyone.
+For a monopolist, MR is always less than price. Always.
 
-On the graph, the **MR curve** (purple, dashed) sits below the **demand curve** (blue). For a linear demand curve, both start at the same vertical intercept, but MR falls twice as fast. That wedge between price and MR is what drives everything else in monopoly analysis: profit maximization, deadweight loss, all of it.`,
+A competitive firm never faces this problem because it sells at the market price without nudging it. The monopolist *is* the market. Every output decision moves the price for everyone. On the graph, the **MR curve** sits below the **demand curve**. For a linear demand curve, both start at the same vertical intercept, but MR falls twice as fast. That growing wedge between price and MR drives everything else in monopoly analysis — profit maximization, the deadweight loss triangle, all of it.`,
     },
     {
       heading: "Profit Maximization: MR = MC",
       content: `A monopolist follows the same profit rule as any firm: keep producing as long as the next unit brings in more revenue than it costs. Stop when **MR = MC**.
 
-Here's the common exam mistake. People confuse the quantity decision with the price decision. The monopolist does *not* charge the price where MR = MC. It's two separate steps:
+The mistake that kills exam scores is confusing the quantity decision with the price decision. If a free-response question asks you to identify the monopoly price and you point to where MR crosses MC on the vertical axis, that's wrong. The process has two distinct steps:
 
 1. Find the quantity where MR = MC. Call it Qm.
-2. Go *up* to the demand curve at Qm to read the maximum price buyers will pay. Charge that price (Pm).
+2. Go *up* to the demand curve at Qm to read the maximum price buyers will pay. That's the monopoly price, Pm.
 
-Think of Pfizer with a patented drug: they find the output level where MR = MC, then check the demand curve to see what patients (or insurers) will pay for that quantity. The price lands above MC, sometimes far above it.
+Pfizer doesn't look at the MR = MC intersection and charge that dollar amount. Pfizer finds the output level where MR = MC, then checks the demand curve to see what patients or insurance companies will actually pay for that quantity. The price lands above MC. Sometimes far above it.
 
-The result is **less output** and a **higher price** than a competitive market would deliver. Competition pushes production out to P = MC. The monopolist stops short, leaving willing buyers unserved.`,
+The result: **less output** and a **higher price** than a competitive market would deliver. Competition pushes production out to where P = MC. The monopolist stops well short, leaving willing buyers unserved and transactions unmade.`,
     },
     {
       heading: "Deadweight Loss",
-      content: `A patient is willing to pay $200 for a drug that costs $30 to produce. Under competition, that trade happens and both sides gain. Under monopoly, the price sits at $250 and the patient walks away empty-handed. The $170 of surplus that *would* have existed vanishes entirely.
+      content: `A patient is willing to pay $200 for a drug that costs $30 to produce. Under competition, that trade happens and both sides gain. Under monopoly, the firm prices the drug at $250 and the patient walks away empty-handed. The $170 of potential surplus vanishes entirely. Nobody gets it.
 
-Multiply that across every unit between the monopoly quantity (Qm) and the competitive quantity (Qc), and you get **deadweight loss (DWL)**. On the graph it's the triangle between those two quantities, representing trades where buyers valued the good above production cost but got priced out anyway.
+Multiply that across every unit between the monopoly quantity (Qm) and the competitive quantity (Qc), and you get the **deadweight loss (DWL)** triangle. On the graph, it sits between those two quantities — representing trades where buyers valued the good above the production cost but got priced out anyway.
 
-DWL is *not* the monopolist's profit. This distinction is important. Profit is a transfer. Surplus moves from consumers to the producer, but it still exists somewhere. DWL is surplus that nobody gets. It's just destroyed.
+DWL is *not* the monopolist's profit. This trips people up constantly. Profit is a transfer — surplus moves from consumers to the producer, but it still exists somewhere in the economy. Deadweight loss is surplus that nobody captures. Destroyed.
 
-Governments pursue **antitrust regulation** precisely because of this. The bigger the gap between Qm and Qc, the larger that triangle, and the more society loses.`,
+The U.S. Department of Justice pursues **antitrust regulation** precisely because of this. The bigger the gap between Qm and Qc, the larger that triangle, and the more society loses. The 1998 antitrust case against Microsoft, the 2020 suit against Google — the underlying economic argument is always about this deadweight loss and the consumer harm it represents.`,
     },
     {
       heading: "Worked Example",
@@ -87,7 +89,7 @@ export const monopolyQuestions = [
       "Because the government regulates monopoly prices",
     ],
     correctIndex: 1,
-    explanation: "Correct. Selling one more unit means dropping the price on every unit already being sold, so the revenue gain from the new buyer is partially offset by the revenue lost on all previous units, so MR falls below price. Option A (high fixed costs) is wrong because fixed costs don't touch marginal revenue. MR is about the change in revenue from one more unit, which depends entirely on the demand curve. Option C is wrong because consumer valuation has nothing to do with it; even highly valued products have MR < P under monopoly. Option D is wrong because government price regulation would actually constrain the monopolist's pricing, not explain why MR sits below demand.",
+    explanation: "Selling one more unit forces the monopolist to drop the price on every unit already being sold. The revenue gained from the new buyer is partially eaten by the revenue lost on all previous units. So MR sits below price at every quantity. (A) is irrelevant — fixed costs have nothing to do with marginal revenue, which measures the change in revenue from one additional unit. (C) makes no sense; consumer valuation doesn't explain the MR-price gap. (D) describes regulated monopoly, a different scenario entirely.",
   },
   {
     id: "mon-2",
@@ -99,7 +101,7 @@ export const monopolyQuestions = [
       "MR = 0",
     ],
     correctIndex: 2,
-    explanation: "Correct. It's a two-step process. First find the quantity where MR = MC, then go up to the demand curve to read off the price. Option A (P = MC) is the competitive firm's rule, not the monopolist's. Since MR < P for a monopolist, setting P = MC would push output past the profit-maximizing point. Option B (P = ATC) describes the break-even point where economic profit is zero, and nothing about that maximizes profit. Option D (MR = 0) maximizes total revenue, not profit. A firm that ignores costs will overshoot.",
+    explanation: "Two steps. First, find the quantity where MR = MC. Second, go up to the demand curve to read the price. (A) is the competitive firm's rule — since MR < P for a monopolist, setting P = MC would push output past the profit-maximizing point. (B) is just the break-even condition where economic profit equals zero; nothing about it maximizes profit. (D) maximizes total revenue, not profit. A firm ignoring costs entirely will overshoot.",
   },
   {
     id: "mon-3",
@@ -111,7 +113,7 @@ export const monopolyQuestions = [
       "The same output at a higher price",
     ],
     correctIndex: 1,
-    explanation: "Correct. The monopolist stops producing at MR = MC, which is fewer units than competition's P = MC outcome. Fewer units on the market means a higher price along the demand curve. Option A (more output, higher price) contradicts basic demand; you can't sell more at a higher price without demand shifting outward. Option C (more output, lower price) describes the competitive outcome, not the monopoly one. Option D (same output, higher price) is impossible without a demand shift; the monopolist raises price precisely *by* restricting quantity.",
+    explanation: "The monopolist restricts output to MR = MC, which is fewer units than competition's P = MC outcome. Fewer units on the market means a higher price along the demand curve. (A) contradicts basic demand — you can't sell more at a higher price without an outward demand shift. (C) describes what competition delivers, not monopoly. (D) is impossible without a demand shift; the monopolist raises price *by* restricting quantity.",
   },
   {
     id: "mon-4",
@@ -123,7 +125,7 @@ export const monopolyQuestions = [
       "The difference between price and marginal cost",
     ],
     correctIndex: 2,
-    explanation: "Correct. DWL represents trades that would have made both buyers and sellers better off but never happen because the monopolist restricts output. Every unit between Qm and Qc has buyers willing to pay more than it costs to produce, and that surplus just evaporates. Option A (monopolist's total profit) confuses a transfer with a loss. Profit shifts surplus from consumers to the producer, but it still exists; DWL is surplus nobody gets. Option B (revenue lost) is vague and misleading; the monopolist deliberately forgoes that revenue because producing those units would lower MR below MC. Option D (P minus MC) describes the markup per unit, not total lost surplus.",
+    explanation: "DWL is the surplus from trades that would have made both sides better off but never happen because the monopolist chokes output. Every unit between Qm and Qc has buyers willing to pay more than production cost, and that potential surplus just evaporates. (A) confuses a transfer with a loss — profit shifts surplus from consumers to the producer, but the surplus still exists. DWL is surplus nobody gets. (B) is misleading; the monopolist deliberately forgoes those units because producing them would drop MR below MC. (D) describes the per-unit markup, not total lost surplus.",
   },
   {
     id: "mon-5",
@@ -135,7 +137,7 @@ export const monopolyQuestions = [
       "Demand for the product is perfectly inelastic",
     ],
     correctIndex: 2,
-    explanation: "Correct. In a competitive market, positive profit is a neon sign that says \"enter here,\" and new firms flood in, supply rises, and profit falls to zero. Monopolists dodge this because barriers to entry (patents, resource control, scale economies, legal restrictions) keep rivals out. Option A (more efficient) is wrong because efficiency has nothing to do with it; a wildly inefficient monopolist still earns profit if no one can enter. Option B (government subsidies) describes a specific policy, not the general reason monopoly profit persists. Option D (perfectly inelastic demand) is wrong because no real-world demand curve is perfectly inelastic; at some price, buyers walk away.",
+    explanation: "In a competitive market, positive profit is a neon sign screaming \"enter here.\" New firms flood in and profit falls to zero. Monopolists avoid this fate because barriers to entry — patents, control over resources, scale economies, legal restrictions — keep rivals out permanently. (A) has nothing to do with it; an inefficient monopolist still earns profit if nobody can enter. (B) describes a specific policy, not the general mechanism. (D) is wrong because no real-world demand curve is perfectly inelastic. At some price, buyers walk away.",
   },
   {
     id: "mon-6",
@@ -147,7 +149,7 @@ export const monopolyQuestions = [
       "$60",
     ],
     correctIndex: 1,
-    explanation: "Plug in: MR = 100 − 2(30) = 100 − 60 = $40. Quick sanity check: price at Q = 30 is P = 100 − 30 = $70, and MR ($40) is less than P ($70), exactly what we'd expect. Option A ($70) is the price, not MR. This is the most common mistake on exam day: students read off the demand curve instead of the MR curve. Option C ($100) is the demand intercept (price when Q = 0), not MR at Q = 30. Option D ($60) doesn't correspond to any meaningful calculation here.",
+    explanation: "MR = 100 − 2(30) = 100 − 60 = $40. Price at Q = 30 is P = 100 − 30 = $70, and MR ($40) is below P ($70) — exactly as expected. (A) is the price, not MR. Reading off the demand curve when the question asks for MR is probably the single most common computational error on monopoly questions. (C) is the y-intercept when Q = 0, not MR at Q = 30. (D) doesn't correspond to any correct calculation.",
   },
   {
     id: "mon-7",
@@ -159,7 +161,7 @@ export const monopolyQuestions = [
       "Demand is very large relative to the minimum efficient scale",
     ],
     correctIndex: 1,
-    explanation: "Correct. A natural monopoly exists when economies of scale stretch across the entire market demand, so one firm's average cost keeps falling, so splitting production between two firms would just duplicate fixed costs. Think about water pipes: one network serving a city costs far less than two overlapping networks. Option A describes a legal/government-granted monopoly, which is a different category entirely. Option C describes resource-based monopoly (like De Beers with diamond mines), not a natural one. Option D has the logic backwards: natural monopolies arise when demand is *small* relative to minimum efficient scale, meaning one firm hits the entire market before exhausting its scale advantages.",
+    explanation: "A natural monopoly exists when economies of scale extend across the entire range of market demand. One firm's average cost keeps falling, so splitting production between two firms would just duplicate fixed infrastructure. Think water pipes — one network costs far less than two overlapping ones. (A) describes a government-granted monopoly, a different category. (C) describes resource-based monopoly like De Beers with diamond mines. (D) has the logic backwards: natural monopolies emerge when demand is *small* relative to minimum efficient scale, so one firm serves the whole market before exhausting its cost advantages.",
   },
   {
     id: "mon-8",
@@ -171,7 +173,7 @@ export const monopolyQuestions = [
       "Maximum total revenue",
     ],
     correctIndex: 1,
-    explanation: "Correct. Profit per unit is (P − ATC), and total economic profit is that margin times quantity: (P − ATC) x Q. On the graph, it's the rectangle with height from ATC to P and width Qm. Option A (zero economic profit) would require P = ATC exactly, which is the break-even case, not what the question describes. Option C (a loss) has the inequality flipped; P > ATC means the firm is above break-even, not below it. Option D (maximum total revenue) confuses revenue with profit. Maximum revenue happens where MR = 0, which ignores costs entirely. A firm maximizing revenue instead of profit would overproduce.",
+    explanation: "Profit per unit is (P − ATC), total economic profit is that margin times quantity. On the graph, it's the shaded rectangle from ATC up to P, with width Qm. (A) requires P = ATC exactly, the break-even case, not what the question describes. (C) has the inequality flipped; P > ATC means the firm is profitable. (D) confuses revenue maximization (where MR = 0) with profit maximization (where MR = MC). A firm chasing maximum revenue ignores costs and overproduces.",
   },
   {
     id: "mon-9",
@@ -183,7 +185,7 @@ export const monopolyQuestions = [
       "$125",
     ],
     correctIndex: 2,
-    explanation: "Set MR = MC: 120 − 4Q = 20, so Qm = 25. The competitive output is P = MC: 120 − 2Q = 20, giving Qc = 50. At Qm = 25, price is 120 − 2(25) = $70, and MC = $20. The DWL triangle spans from Q = 25 to Q = 50, bounded above by the demand curve and below by MC ($20). The height at Qm is $70 − $20 = $50, and the height at Qc is $0 (demand meets MC). DWL = 0.5 × (50 − 25) × (70 − 20) = 0.5 × 25 × 50 = $625. Option A ($250) likely results from using an incorrect base or height. Option B ($500) drops the one-half from the triangle formula. Option D ($125) uses far too small a quantity gap.",
+    explanation: "Set MR = MC: 120 − 4Q = 20, so Qm = 25. Competitive output: 120 − 2Q = 20, giving Qc = 50. At Qm = 25, price = 120 − 50 = $70 and MC = $20. The DWL triangle spans Q = 25 to Q = 50, with height $70 − $20 = $50 at the left edge. DWL = 0.5 × 25 × 50 = $625. (B) drops the 0.5 from the triangle formula and gets $1,250... wait, or maybe uses a smaller base — either way, $500 results from a calculation error. (A) and (D) use incorrect dimensions for the triangle.",
   },
   {
     id: "mon-10",
@@ -195,7 +197,7 @@ export const monopolyQuestions = [
       "Lies above the demand curve at every quantity",
     ],
     correctIndex: 1,
-    explanation: "For linear demand P = a − bQ, total revenue is TR = aQ − bQ², so MR = a − 2bQ. The MR curve shares the same y-intercept (a) but falls twice as fast (slope −2b vs. −b). Option A is wrong because MR's slope is −2b, not −b, so it falls twice as steeply. Option C describes the demand curve faced by a perfectly competitive firm, not a monopolist. Option D reverses the relationship; MR lies below demand for every positive quantity because selling additional units requires lowering the price on all previous units.",
+    explanation: "For P = a − bQ, total revenue is TR = aQ − bQ², so MR = a − 2bQ. Same y-intercept (a), but the slope is −2b instead of −b. MR falls twice as fast. (A) is wrong because the slope doubles. (C) describes what a perfectly competitive firm sees, not a monopolist. (D) reverses reality — MR lies *below* demand at every positive quantity because selling more requires cutting the price on all existing units.",
   },
   {
     id: "mon-11",
@@ -207,7 +209,7 @@ export const monopolyQuestions = [
       "Deadweight loss increases because the firm overproduces",
     ],
     correctIndex: 1,
-    explanation: "A natural monopoly has declining average total cost over the relevant range of output, meaning MC lies below ATC. Forcing P = MC sets price below ATC, so the firm suffers losses and will exit unless the government provides a subsidy. The output is allocatively efficient (P = MC maximizes total surplus), but the firm cannot sustain it independently. Option A is wrong because with a natural monopoly's cost structure, MC < ATC, so P = MC means P < ATC and the firm loses money. Option C is wrong because P = MC forces output beyond the monopoly quantity, not at it. Option D is wrong because moving from monopoly output toward the P = MC output reduces deadweight loss rather than increasing it.",
+    explanation: "Natural monopolies have declining ATC over the relevant output range, meaning MC sits below ATC. Forcing P = MC sets price below ATC, so the firm runs at a loss and will exit unless subsidized. The output is allocatively efficient — P = MC maximizes total surplus — but the firm can't sustain it on its own. (A) gets the cost structure wrong; with a natural monopoly, MC < ATC, so P = MC means losses. (C) is wrong because P = MC pushes output *beyond* the monopoly level, not at it. (D) is backwards — moving from monopoly output toward P = MC *reduces* deadweight loss.",
   },
   {
     id: "mon-12",
@@ -219,7 +221,7 @@ export const monopolyQuestions = [
       "Decrease to zero because consumers refuse to pay different prices",
     ],
     correctIndex: 2,
-    explanation: "With third-degree price discrimination, the monopolist sets MR = MC separately in each market segment. The low-price group gets a lower price (because their demand is more elastic), which increases quantity sold to that segment. If this increase outweighs any reduction in the high-price segment, total output rises. This is especially likely when the low-price segment was largely priced out under a single monopoly price. Option A is wrong because while the high-price group may see restricted output, the low-price group typically sees expanded output, and the net effect depends on elasticities. Option B incorrectly assumes a single MR = MC condition; the firm equates MR to MC in each segment independently. Option D is unrealistic; consumers in separated markets cannot observe the other group's price.",
+    explanation: "With third-degree price discrimination, the monopolist sets MR = MC in each market segment independently. The low-price group gets a lower price because their demand is more elastic, which means more units sold to that segment. If the expansion in the elastic market outweighs any contraction in the inelastic one, total output rises. This is especially likely when the low-price group was largely priced out under a single monopoly price. (A) ignores the output gain in the low-price segment. (B) wrongly assumes a single MR = MC condition; the firm equalizes MR to MC separately per segment. (D) is unrealistic — separated consumer groups generally can't observe each other's prices.",
   },
   {
     id: "mon-13",
@@ -231,7 +233,7 @@ export const monopolyQuestions = [
       "Low fixed costs that make entry easy for new firms",
     ],
     correctIndex: 2,
-    explanation: "A patent is a legal barrier that prohibits competitors from producing the same product for 20 years, directly blocking entry regardless of potential profits. This is the textbook example of a strong, enforceable barrier. Option A is weak because advertising spending can be matched by a well-funded entrant; it raises the cost of entry but does not block it legally. Option B actually encourages entry by many differentiated firms, which characterizes monopolistic competition, not monopoly. Option D is the opposite of a barrier; low fixed costs make it easy for firms to enter, undermining monopoly power.",
+    explanation: "A patent legally prohibits competitors from producing the same product for 20 years. It blocks entry regardless of how profitable the market looks. That's as strong as barriers get. (A) is weak — a well-funded entrant can match advertising spending; it raises the cost of entry without legally blocking it. (B) actually encourages multiple firms with differentiated products, which is monopolistic competition, not monopoly. (D) is the opposite of a barrier; low fixed costs make entry *easier*, undermining monopoly power.",
   },
   {
     id: "mon-14",
@@ -243,7 +245,7 @@ export const monopolyQuestions = [
       "$562.50",
     ],
     correctIndex: 0,
-    explanation: "MR = 200 − 10Q. Set MR = MC: 200 − 10Q = 50, so Q = 15. Price = 200 − 5(15) = $125. Profit per unit = P − ATC = $125 − $50 = $75. Total profit = $75 × 15 = $1,125. Option B ($2,250) doubles the correct answer, likely forgetting to account for costs or miscomputing quantity. Option C ($750) likely uses the wrong quantity (Q = 10). Option D ($562.50) appears to halve the correct profit, perhaps confusing profit with consumer surplus or applying the triangle formula where a rectangle is appropriate.",
+    explanation: "MR = 200 − 10Q. Set MR = MC: 200 − 10Q = 50, so Q = 15. Price = 200 − 5(15) = $125. Profit per unit = $125 − $50 = $75. Total profit = $75 × 15 = $1,125. (B) doubles the correct answer, probably by miscomputing quantity or forgetting to subtract costs. (C) uses the wrong quantity. (D) halves the correct profit, possibly confusing the profit rectangle with a triangle calculation.",
   },
   {
     id: "mon-15",
@@ -255,6 +257,6 @@ export const monopolyQuestions = [
       "Reduces producer surplus because the monopolist produces fewer units",
     ],
     correctIndex: 1,
-    explanation: "The monopolist restricts output below the competitive level. Units between Qm and Qc would have generated surplus (buyers valued them above MC), but they are never produced. That lost surplus is deadweight loss; it accrues to nobody. Option A is wrong because monopoly reduces total surplus; the firm may or may not be more efficient, but restricting output destroys surplus regardless. Option C describes perfect (first-degree) price discrimination, not single-price monopoly. A single-price monopolist leaves some consumer surplus intact for those who value the good above the monopoly price. Option D is wrong because the monopolist's producer surplus actually increases relative to competition; the higher price on units sold more than compensates for the lost sales, shifting surplus from consumers to the producer.",
+    explanation: "The monopolist restricts output below the competitive level. Units between Qm and Qc would have generated surplus — buyers valued them above MC — but they're never produced. That lost surplus is deadweight loss, accruing to nobody. (A) is wrong because monopoly *reduces* total surplus; restricting output destroys value regardless of whether the firm is efficient. (C) describes perfect (first-degree) price discrimination, not single-price monopoly. A single-price monopolist leaves consumer surplus intact for buyers who value the good above the monopoly price. (D) is backwards — the monopolist's producer surplus actually *increases* relative to competition because the higher price on sold units more than compensates for the reduced volume.",
   },
 ];

@@ -16,8 +16,37 @@ export const metadata: Metadata = {
 };
 
 export default function MacroPage() {
+  const courseJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: "AP Macroeconomics",
+    description:
+      "Free interactive AP Macroeconomics study guide covering all 12 topics: GDP, fiscal policy, monetary policy, international trade, and more.",
+    provider: {
+      "@type": "Organization",
+      name: "EconLearn",
+      url: "https://econlearn.org",
+    },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      courseWorkload: "PT20H",
+      inLanguage: "en",
+    },
+    isAccessibleForFree: true,
+    numberOfCredits: 0,
+    audience: {
+      "@type": "EducationalAudience",
+      educationalRole: "student",
+    },
+  };
+
   return (
     <div className="macro-page max-w-3xl mx-auto px-6 py-14">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
+      />
       <div className="mb-10">
         <div className="flex items-center gap-2 mb-3">
           <span className="w-2 h-2 rounded-full" style={{ background: 'var(--accent)' }} />

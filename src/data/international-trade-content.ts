@@ -2,90 +2,89 @@ import type { PracticeQuestion } from "@/data/supply-demand-content";
 
 export const internationalTradeContent = {
   title: "International Trade",
-  subtitle: "How countries gain from specialization, and how tariffs distort those gains",
+  subtitle: "From David Ricardo's 1817 insight to the 2018 steel tariffs: why countries specialize, how tariffs distort markets, and where the deadweight loss hides",
   sections: [
     {
       heading: "Comparative Advantage",
-      content: `The United States can produce most things domestically, so why import anything at all? The answer comes down to opportunity cost, not raw ability.
+      content: `In 2001, China joined the World Trade Organization. Over the following decade, Chinese exports to the United States surged from $102 billion to $399 billion. Walmart alone imported an estimated $27 billion worth of Chinese goods annually by 2006, filling its shelves with electronics, clothing, toys, and furniture at prices American manufacturers could not match. American textile mills in North Carolina shuttered. Furniture factories in Virginia closed. Politicians on both sides called for protective tariffs. Yet economists at the Peterson Institute for International Economics estimated that the China trade relationship was saving the average American household roughly $850 per year in lower consumer prices by 2010. The gains and losses from trade are distributed unevenly, but the net calculation is positive, and the reason traces back to a principle David Ricardo articulated in 1817.
 
-A country has an **absolute advantage** when it produces a good with fewer resources. China manufactures more steel per worker-hour than most nations. But trade patterns aren't set by who is "better" at production. They're set by **comparative advantage**: who gives up the least of one good to produce another.
+A country holds an **absolute advantage** when it can produce a good using fewer resources than another country. China manufactures more steel per worker-hour than most nations. But absolute advantage does not determine trade patterns. **Comparative advantage** does: the country that gives up the least of one good to produce another is the one that should specialize in that good. Even if China outproduces Vietnam in both electronics and textiles, both countries benefit when each concentrates where its opportunity cost is lowest. Vietnam's abundant low-cost labor keeps its textile opportunity cost small relative to electronics. China's advanced manufacturing infrastructure keeps its electronics opportunity cost low relative to textiles. Each country specializes according to comparative advantage, they trade, and total world output increases. Both consume combinations of goods that would have been impossible under self-sufficiency.
 
-Even if China outproduces Vietnam in both electronics and textiles, both countries gain when each specializes where its opportunity cost is lowest. Vietnam's cheap labor keeps its textile opportunity cost tiny relative to electronics. China's advanced factories keep its electronics opportunity cost low relative to textiles. Each focuses on its comparative advantage, they trade, and total world output rises. Both consume beyond what they could produce alone.
-
-David Ricardo formalized this logic in 1817. It still anchors every AP trade question.`,
+Ricardo formalized this logic more than two centuries ago. It still anchors every trade question on the AP Macroeconomics exam.`,
     },
     {
       heading: "Gains from Trade",
-      content: `Without trade, a country can only consume what it produces on its own **production possibilities curve**. No Colombian coffee, no German machinery. That ceiling is called autarky.
+      content: `Without trade, a country can consume only what it produces along its own **production possibilities curve**. No Colombian coffee for Americans. No German precision machinery for Brazilians. Economists call this condition autarky, and it imposes a hard ceiling on consumption possibilities.
 
-Trade breaks through it. Colombia exports coffee (comparative advantage) and imports machinery. Germany does the reverse. Both end up consuming bundles of goods that sit outside their individual PPCs. These are combinations that were impossible under self-sufficiency.
+Trade shatters that ceiling. Colombia, with its ideal climate and elevation for growing arabica beans, exports coffee, where its comparative advantage is overwhelming, and imports machinery it would produce only at enormous opportunity cost. Germany, with its engineering infrastructure and skilled labor force, does the reverse. Both countries end up consuming bundles of goods that lie outside their individual production possibilities curves, combinations that were literally impossible under self-sufficiency. The arithmetic is not complicated, but the implication is powerful: voluntary exchange makes both sides richer than isolation ever could.
 
-The gains come from specialization. Resources shift toward their most productive use in each country. The surplus gets split according to the **terms of trade**, the price ratio at which goods are exchanged. As long as the terms of trade fall between the two countries' opportunity costs, both sides benefit.`,
+The gains materialize through specialization. Resources in each country shift toward their most productive use. The surplus output gets divided according to the **terms of trade**, the price ratio at which goods exchange between the two countries. As long as the terms of trade fall between the two countries' domestic opportunity costs, both sides capture a share of the gains. If the terms of trade equal one country's opportunity cost exactly, that country gains nothing while the other captures the entire surplus. The negotiation over terms of trade determines how the pie gets split, but trade theory guarantees that the pie is larger than what either country could bake alone.`,
     },
     {
       heading: "World Price and Trade Flows",
-      content: `When a country drops its trade barriers, the domestic price gets pulled to the **world price** prevailing on international markets.
+      content: `When a country dismantles its trade barriers, the domestic price of a good gets pulled toward the **world price**, the prevailing price on international markets set by global supply and demand.
 
-If the world price of rice sits below the domestic equilibrium, U.S. consumers want more rice than U.S. farmers supply at that price. The gap gets filled by imports. Consumer surplus expands, producer surplus shrinks, but total surplus rises because buyers gain more than sellers lose.
+If the world price of rice sits below the U.S. domestic equilibrium, American consumers can buy rice more cheaply from Thailand or Vietnam than from domestic growers. Domestic demand at the lower world price exceeds what American farmers are willing to supply. The gap gets filled by imports. Consumer surplus expands because buyers pay less. Producer surplus shrinks because domestic growers sell less at a lower price. Total surplus rises because the consumer gain exceeds the producer loss, which is the fundamental efficiency argument for free trade.
 
-If the world price sits **above** domestic equilibrium (U.S. soybeans, for instance, where American farmers are globally competitive), domestic producers supply more than domestic buyers want at that high price. The excess ships abroad as exports. Producer surplus rises, consumer surplus falls, but total surplus still increases.
+When the world price sits **above** the domestic equilibrium, the dynamic flips. American soybean farmers, among the most productive in the world, can sell at the higher world price. At that price, they supply more than domestic buyers want. The excess ships abroad as exports. Producer surplus rises. Consumer surplus falls because domestic buyers now pay the higher world price. Total surplus still increases because the producer gain outweighs the consumer loss.
 
 On the graph, the horizontal teal line represents the world price. Drag the slider to watch imports and exports shift as the world price moves relative to domestic equilibrium.`,
     },
     {
       heading: "Tariffs",
-      content: `In 2018, the U.S. imposed a 25% **tariff** on imported steel. That's a tax paid at the border that raised the effective domestic price. On the graph, the purple line shows the new price: world price plus tariff.
+      content: `In March 2018, President Trump imposed a 25% **tariff** on imported steel and a 10% tariff on imported aluminum under Section 232 of the Trade Expansion Act, citing national security concerns. The steel tariff raised the effective domestic price of imported steel above the world market level. On the graph, the purple line shows this new price: the world price plus the tariff per unit.
 
 Four effects hit simultaneously:
-- **Domestic producers supply more.** U.S. mills become viable at the inflated price and fire up capacity.
-- **Domestic buyers demand less.** Automakers and construction firms cut back as steel costs rise.
-- **Imports shrink.** The gap between what buyers want and what domestic mills produce narrows.
-- **The government collects tariff revenue.** Tariff rate times the remaining import quantity.
+
+- **Domestic producers expand output.** U.S. steel mills that were uncompetitive at the world price become viable at the tariff-inflated price and ramp up production. Nucor and U.S. Steel both reported increased capacity utilization in the months following the announcement.
+- **Domestic consumers cut back.** Automakers like Ford estimated $1 billion in additional steel costs for 2018 alone. Construction firms and appliance manufacturers faced similar squeezes, passing some costs to final consumers and absorbing the rest through thinner margins.
+- **Imports shrink.** The gap between domestic demand and domestic supply narrows as the higher price discourages consumption and encourages domestic production.
+- **The government collects tariff revenue.** Revenue equals the tariff rate multiplied by the remaining quantity of imports.
 
 Drag the tariff slider on the graph to watch all four effects move together.`,
     },
     {
       heading: "Deadweight Loss from Tariffs",
-      content: `So who actually pays for a tariff, and where does the money go? The amber triangles on the graph represent **deadweight loss**: pure waste that benefits nobody.
+      content: `The amber triangles on the graph represent **deadweight loss**, surplus destroyed outright that benefits nobody. Not consumers. Not producers. Not the government. Gone.
 
-The left triangle is **production-side DWL**. Domestic firms produce units that cost more to make than the world price. A U.S. steel mill spending $45 per unit on something importable at $40 is burning resources. The tariff made that inefficient production artificially profitable.
+The left triangle captures **production-side deadweight loss**. Domestic mills produce units that cost more to manufacture than the world price at which those same units could be imported. A U.S. steel plant spending $650 per ton to produce steel that foreign mills sell at $500 is burning resources inefficiently. The tariff made that high-cost production artificially profitable by shielding it from international competition.
 
-The right triangle is **consumption-side DWL**. Buyers who would have purchased at the world price refuse to pay the tariff-inflated price. Those transactions vanish entirely.
+The right triangle captures **consumption-side deadweight loss**. Buyers who would have purchased steel at the world price but refuse to pay the tariff-inflated price exit the market entirely. Those transactions vanish. A construction firm that would have started a project at $500-per-ton steel cancels the project at $650. The value that project would have created is lost.
 
-The purple rectangle between the triangles is tariff revenue, a transfer from consumers to the government. Not a net loss, since it stays in someone's hands. The two triangles, however, represent surplus that's destroyed outright. No one recovers it.`,
+Between the two triangles sits the purple rectangle, which is tariff revenue. That revenue represents a transfer from consumers to the government. It is not a net loss to society because the money stays in someone's hands and can be spent or redistributed. The two triangles, on the other hand, represent surplus that is destroyed. No one recovers it. That is why economists describe tariffs as reducing total surplus in the domestic market.`,
     },
     {
       heading: "Quotas",
-      content: `Instead of taxing imports, a government can cap how many enter the country. A **quota** is a hard ceiling on import quantity. The U.S. used quotas on Japanese auto imports in the 1980s. The EU still caps certain agricultural imports today.
+      content: `Rather than taxing imports, a government can cap the quantity that enters the country. A **quota** is a hard numerical ceiling on import volume. In the early 1980s, the Reagan administration pressured Japan into accepting "voluntary export restraints" that limited Japanese automobile shipments to 1.68 million vehicles per year. The European Union still maintains quotas on certain agricultural products from non-member countries.
 
-On the surface, quotas and tariffs look the same: domestic price rises, imports fall, domestic production climbs, and consumers lose surplus. The difference is where the money goes. With a tariff, the government collects revenue. With a quota, whoever holds the **import licenses** pockets the equivalent windfall, called **quota rents**. That's the gap between the world price and the inflated domestic price on every permitted unit.
+On the surface, quotas and tariffs produce identical market effects: the domestic price rises, imports fall, domestic production climbs, and consumers lose surplus. The critical distinction lies in where the revenue flows. With a tariff, the government collects the difference between the domestic price and the world price on every imported unit. With a quota, whoever holds the **import licenses** captures that same windfall, known as **quota rents**. The rent per unit is the gap between the inflated domestic price and the world price, multiplied across every permitted import.
 
-If the government auctions those licenses, it recaptures the rents, making the quota functionally identical to a tariff. But licenses are often handed to politically connected firms for free, which makes quotas less transparent and harder for voters to track.`,
+If the government auctions the import licenses competitively, it recaptures the rents and the quota becomes functionally identical to a tariff. In practice, licenses are frequently allocated to politically connected firms at no cost, which makes quotas less transparent than tariffs and harder for the public to scrutinize. The same distortion, but with the money flowing to private intermediaries instead of the public treasury.`,
     },
     {
       heading: "AP Exam Connections",
-      content: `Trade questions account for roughly 10-15% of the AP Macro exam. Here are the recurring topics:
+      content: `Trade questions account for roughly 10-15% of the AP Macroeconomics exam. The topics that recur most frequently include:
 
-- Calculating **comparative advantage** from a production possibilities table or output-per-worker data. Expect this on exam day.
-- Identifying which country exports and which imports once trade opens
-- Tracing tariff effects through the full chain: price, quantity, imports, consumer surplus, producer surplus, government revenue, and **deadweight loss**
-- Distinguishing tariffs from quotas, especially regarding who captures the revenue
-- Arguing that free trade maximizes total surplus while trade barriers reduce it
-- Evaluating protectionist arguments (infant industry, national security, anti-dumping). The AP exam treats these as narrow exceptions, not as legitimate challenges to comparative advantage.`,
+- Calculating **comparative advantage** from a production possibilities table or an output-per-worker dataset, then determining which country should export which good. Expect at least one question requiring opportunity cost calculations.
+- Identifying whether a country will import or export a good once borders open, based on whether the world price falls above or below the domestic equilibrium
+- Walking through the full chain of tariff effects: price increase, quantity changes, the shift in imports, changes to consumer surplus and producer surplus, government revenue, and the two **deadweight loss** triangles
+- Distinguishing tariffs from quotas, particularly the question of who captures the revenue equivalent (government versus import license holders)
+- Making the case that free trade maximizes total surplus while trade barriers reduce it, even though the distribution of gains and losses across producers, consumers, and the government varies by policy
+- Evaluating protectionist arguments such as the infant industry defense, national security exceptions, and anti-dumping provisions. The AP exam framework treats these as narrow, situational exceptions rather than broad challenges to the principle of comparative advantage.`,
     },
     {
       heading: "Worked Example",
-      content: `Domestic steel equilibrium: P = $60, Q = 50 units. World price: $40. What happens when borders open, then the government imposes a $10 tariff?
+      content: `Domestic steel market equilibrium: price = $60 per unit, quantity = 50 units. World price: $40 per unit. Trace what happens when borders open, then when the government imposes a $10 tariff.
 
-**Free trade.** At the $40 world price, demand rises to 70 units (cheaper steel, more buyers). Domestic supply falls to 30 units (mills can't compete at $40). Imports fill the 40-unit gap. Consumers gain from lower prices. Domestic producers lose sales. But the consumer gain exceeds the producer loss, so total surplus rises.
+**Free trade.** At the $40 world price, domestic demand rises to 70 units because consumers respond to the lower price. Domestic supply drops to 30 units because many mills cannot produce profitably at $40. Imports fill the 40-unit gap (70 demanded minus 30 supplied domestically). Consumers gain surplus from the lower price. Domestic producers lose sales and surplus. The consumer gain exceeds the producer loss, so total surplus in the domestic market rises relative to autarky.
 
-**Impose the tariff.** Effective price: $40 + $10 = $50. Demand shrinks to 60 units. Domestic supply climbs to 40 units. Imports fall by half: 60 - 40 = 20 units.
+**Impose a $10 tariff.** The effective domestic price becomes $40 + $10 = $50. Demand falls from 70 to 60 units. Domestic supply rises from 30 to 40 units as more mills become profitable at $50. Imports drop by half: 60 - 40 = 20 units.
 
-**Revenue.** Tariff revenue = $10 x 20 imported units = $200. That's the purple rectangle on the graph, a transfer from consumers to the government treasury.
+**Tariff revenue.** The government collects $10 on each of the 20 imported units, totaling $200. That is the purple rectangle on the graph, a transfer from consumers to the government treasury.
 
-**Deadweight loss.** Two DWL triangles appear. Production side: domestic mills now produce units costing between $40 and $50 that could have been imported at $40. Consumption side: buyers willing to pay $40 but not $50 exit the market. Neither triangle benefits anyone. That surplus is destroyed.
+**Deadweight loss.** Two triangles appear. On the production side, domestic mills now produce units costing between $40 and $50 that could have been imported at $40. Resources are wasted on inefficient production. On the consumption side, buyers who would have purchased at $40 but will not pay $50 exit the market. Those transactions are destroyed. Neither triangle benefits anyone.
 
-The pattern holds across every tariff scenario: price rises, domestic output increases, consumption drops, imports shrink, and deadweight loss appears.`,
+The pattern repeats across every tariff scenario on the AP exam: price rises, domestic output increases, consumption drops, imports shrink, the government collects revenue, and deadweight loss appears.`,
     },
   ],
 };
@@ -103,7 +102,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Run the math: Country A gives up 10/5 = 2 cloth per wine. Country B gives up 8/4 = 2 cloth per wine. Identical opportunity costs, so neither country has a comparative advantage in wine, so no gains from trade exist here. Option A is wrong because producing more wine is absolute advantage, not comparative. Option B is wrong because B's opportunity cost is not lower; it's the same. Option D falls into the classic trap: absolute advantage (producing more of everything) does not determine who trades what. Only opportunity costs do.",
+      "Country A gives up 10/5 = 2 cloth per wine. Country B gives up 8/4 = 2 cloth per wine. Identical opportunity costs. Neither country has a comparative advantage in wine, and no gains from trade exist for this good. Option A confuses absolute advantage (producing more) with comparative advantage (lower opportunity cost). Option B is factually incorrect; B's opportunity cost equals A's, not lower. Option D falls into the trap of thinking absolute advantage determines trade patterns. Only relative opportunity costs matter.",
   },
   {
     id: "it-2",
@@ -117,7 +116,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "World price below domestic equilibrium = consumers pay less than they did under autarky. Lower price, higher quantity demanded, larger consumer surplus triangle. That's an unambiguous win for buyers. Option A tries to make 'flood the market' sound scary, but cheaper imports are precisely why consumer surplus grows: more goods, lower prices. Option C is wrong because supply does adjust (domestic producers cut back), but that doesn't freeze consumer surplus. Option D confuses producer losses with consumer losses: domestic firms do produce less, but that hurts producers, not consumers.",
+      "World price below domestic equilibrium means consumers pay less than they did under autarky. Lower price, higher quantity demanded, larger consumer surplus triangle. Unambiguous win for buyers. Option A uses alarming language about markets being \"flooded,\" but cheaper imports are precisely why consumer surplus grows. Option C is wrong because supply does adjust (domestic producers cut back), but that contraction hurts producers, not consumers. Option D confuses producer losses with consumer losses.",
   },
   {
     id: "it-3",
@@ -131,7 +130,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "EXCEPT question: three options are true, one is false. A tariff does reduce imports (A is true), raise the domestic price (B is true), and boost domestic production (D is true). What it does not do is increase total surplus. The two DWL triangles represent surplus destroyed outright. Total surplus falls, not rises, making C the false statement. Students miss this when they focus on tariff revenue and forget that revenue is a transfer (consumers to government), not a net gain.",
+      "Three of these are true; one is false. A tariff reduces imports (A is true), raises the domestic price (B is true), and boosts domestic production (D is true). Total surplus, however, falls. The two deadweight loss triangles represent surplus destroyed outright that nobody captures. Option C is the false statement. Tariff revenue is a transfer from consumers to the government, not a net gain, and the DWL triangles ensure the market as a whole loses.",
   },
   {
     id: "it-4",
@@ -145,7 +144,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Two sources of waste. First, domestic firms produce units costing more than the world price, burning resources on production that imports could handle cheaper. Second, consumers who'd buy at the world price get priced out by the tariff, and those transactions simply vanish. Option A confuses revenue with DWL: tariff revenue moves from consumers to the government, but it's still in someone's pocket; it's a transfer, not destruction. Option C is irrelevant: foreign producers earning less isn't deadweight loss in the domestic market. Option D overstates tariffs: most tariffs reduce imports, they don't eliminate them entirely.",
+      "Two sources of waste. Domestic firms produce units that cost more than the world price, burning resources on production that imports could handle more cheaply. Consumers willing to buy at the world price get priced out by the tariff and those transactions vanish entirely. Option A confuses tariff revenue with deadweight loss. Revenue is a transfer from consumers to the government; it stays in someone's pocket, so it is not destroyed. Option C is irrelevant to the domestic market's surplus calculation. Option D overstates the effect; most tariffs reduce imports rather than eliminating them completely.",
   },
   {
     id: "it-5",
@@ -159,7 +158,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Same price effect, same DWL triangles, same reduction in imports, but the money flows differently. Tariff revenue lands in the government's treasury. Quota rents land in the pockets of whoever holds import licenses, which could be domestic firms, foreign firms, or the government (only if licenses are auctioned). Option A is wrong because quotas do raise the domestic price: restricting quantity drives price up, same as a tariff. Option C is wrong because quotas produce the exact same two deadweight loss triangles. Option D oversimplifies: neither tool benefits consumers; both raise prices on them.",
+      "Same price effect. Same deadweight loss triangles. Same import reduction. The difference is in the revenue-equivalent area. Tariff revenue goes to the government treasury. Quota rents go to whoever holds the import licenses, which could be domestic firms, foreign firms, or the government only if licenses are auctioned. Option A is wrong because quotas do raise domestic prices by restricting supply. Option C is wrong because quotas produce the identical two DWL triangles. Option D oversimplifies; neither tariffs nor quotas benefit consumers since both raise prices.",
   },
   {
     id: "it-6",
@@ -173,7 +172,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "World price above domestic equilibrium means domestic producers can sell at a higher price than they were getting before trade. At that price, they supply more than domestic buyers want. The excess goes abroad as exports. Option A reverses the logic entirely: a higher world price means domestic supply exceeds domestic demand, creating an export surplus, not an import gap. Option C is flatly wrong; trade benefits countries regardless of whether the world price is above or below domestic equilibrium. Option D confuses the direction: foreign producers aren't the relevant actors here; domestic producers are the ones selling to the world.",
+      "A world price above the domestic equilibrium means domestic producers can sell at a higher price than they previously received. At that elevated price, they supply more than domestic consumers want. The excess goes abroad as exports. Option A reverses the logic entirely; a higher world price creates an export surplus, not an import gap. Option C is flatly wrong; trade benefits countries regardless of the direction of the price difference. Option D misidentifies the relevant actors; domestic producers are the ones selling to the world market.",
   },
   {
     id: "it-7",
@@ -187,7 +186,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Lower opportunity cost in computers means this country should lean into computer production and trade for textiles. But 'specialize' doesn't mean 'produce only one good.' Complete specialization is the textbook extreme; real economies specialize partially and still capture gains from trade. Option A overstates the theory: comparative advantage pushes toward more production of your strong suit, not total abandonment of the other good. Option C gets it backwards: self-sufficiency is what trade theory argues against. Option D confuses which good to export: you export where your opportunity cost is low, not the good where it's high.",
+      "Comparative advantage in computers means this country's opportunity cost of computers is lower than its trading partners'. Trade theory says lean into computer production and trade for textiles. But \"specialize\" does not mean \"produce exclusively.\" Complete specialization is a textbook extreme. Real economies specialize partially and still capture gains. Option A overstates the theory. Option C describes autarky, which is what trade theory argues against. Option D confuses which good to export; you export where your opportunity cost is low, not the other good.",
   },
   {
     id: "it-8",
@@ -201,7 +200,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Think about both sides of the multiplication: revenue = tariff rate x import quantity. At $0 tariff, revenue is zero (nothing to collect). As the tariff climbs, revenue rises because you're taxing each imported unit more. But higher tariffs also crush import volume. At some point the tariff is so large that imports hit zero, and zero imports means zero revenue. The result is an inverted-U shape, similar to the Laffer curve logic. Option A only tracks the rate going up and ignores the quantity collapsing. Option C is wrong because revenue clearly changes as both variables shift. Option D is wrong at small tariff levels: a tiny tariff barely dents import volume, so revenue initially rises.",
+      "Revenue equals the tariff rate multiplied by the import quantity. At a $0 tariff, revenue is zero. As the tariff climbs, revenue rises because each imported unit is taxed more. But higher tariffs simultaneously crush import volume. At some prohibitive tariff level, imports drop to zero, and zero imports means zero revenue. The result traces an inverted-U shape, conceptually similar to the Laffer curve. Option A tracks only the rate rising and ignores the quantity collapsing. Option C is wrong because both variables shift as the tariff changes. Option D is incorrect at small tariff levels; a tiny tariff barely dents import volume, so revenue initially climbs.",
   },
   {
     id: "it-9",
@@ -215,7 +214,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Calculate opportunity costs. Country A: 1 steel costs 100/50 = 2 wheat. Country B: 1 steel costs 60/40 = 1.5 wheat. Country B gives up less wheat per unit of steel, so B has the comparative advantage in steel (and A has the comparative advantage in wheat, since A gives up only 0.5 steel per wheat versus B's 0.67). Option A confuses absolute advantage with comparative advantage: producing more is irrelevant; what matters is the opportunity cost. Option C reverses the comparison: 2 wheat is higher than 1.5 wheat, so A has the higher cost of steel, not the lower one. Option D commits the classic error of thinking absolute advantage determines trade patterns; Ricardo showed that comparative advantage is what drives mutually beneficial specialization.",
+      "Country A: 1 steel costs 100/50 = 2 wheat. Country B: 1 steel costs 60/40 = 1.5 wheat. Country B gives up less wheat per unit of steel, so B has the comparative advantage. Country A, meanwhile, has the comparative advantage in wheat (0.5 steel per wheat versus B's 0.67). Option A confuses absolute advantage with comparative advantage. Option C reverses the comparison; 2 wheat is a higher cost than 1.5 wheat. Option D commits the classic error of assuming absolute advantage determines trade patterns.",
   },
   {
     id: "it-10",
@@ -229,7 +228,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "The terms of trade must fall between the two countries' opportunity costs of the exported good. Country B exports steel (comparative advantage) at a domestic cost of 1.5 wheat per steel. Country A imports steel at a domestic cost of 2 wheat per steel. For both to gain, the trading price of steel must be between 1.5 and 2 wheat per steel. Below 1.5, Country B would be selling steel for less than it costs domestically, so there is no gain. Above 2, Country A could produce steel more cheaply at home, so there is no gain from importing. Option A is too low for either country to benefit from steel trade. Option B includes values below Country B's opportunity cost, which would hurt B. Option D is above Country A's opportunity cost, so A would prefer domestic production.",
+      "The terms of trade must fall between the two countries' opportunity costs of the exported good. Country B exports steel at a domestic cost of 1.5 wheat per steel. Country A imports steel at a domestic cost of 2 wheat per steel. For both to gain, the price must sit between 1.5 and 2. Below 1.5, Country B would sell steel for less than its domestic opportunity cost, eliminating its gain. Above 2, Country A could produce steel more cheaply at home and would have no reason to import. Option A is far too low. Option B includes values below Country B's opportunity cost. Option D exceeds Country A's opportunity cost.",
   },
   {
     id: "it-11",
@@ -243,7 +242,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "A tariff raises the domestic price above the world price. Consumers pay more and buy less (consumer surplus falls). Domestic producers sell at the higher tariff-inflated price and expand output (producer surplus rises). The government collects tariff revenue on remaining imports. But the two deadweight loss triangles, from inefficient domestic production and lost consumer transactions, mean total surplus falls. The consumer loss exceeds the combined producer gain plus government revenue. Option A reverses the consumer effect: consumers are unambiguously hurt by higher prices. Option C is wrong because the government explicitly collects revenue equal to the tariff rate times the import quantity. Option D ignores the price increase: consumers who switch to domestic cars still pay a higher price than they would under free trade.",
+      "The tariff raises the domestic price above the world price. Consumers pay more and buy less, so consumer surplus falls. Domestic producers sell at the higher price and expand output, so producer surplus rises. The government collects revenue on the remaining imports. But the two deadweight loss triangles mean total surplus declines. The consumer loss exceeds the combined producer gain and government revenue. Option A reverses the consumer effect. Option C is wrong because the government explicitly collects tariff revenue. Option D ignores the price increase; consumers who switch to domestic cars still pay more than they would under free trade.",
   },
   {
     id: "it-12",
@@ -257,7 +256,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Under a quota, there is no tax collected at the border. The price rises from $20 to $30 because supply is restricted. The 40 units still imported generate a $10 per-unit windfall ($30 domestic price minus $20 world price) for whoever holds the import licenses, and this is quota rent totaling $400. Unless the government auctions the licenses, this rent goes to private license holders rather than the treasury. Option A describes a tariff outcome, not a quota. Quotas generate no government revenue without license auctions. Option C is wrong because the $400 is not destroyed; it transfers to license holders as profit. Option D confuses domestic producers' gains (from selling at the higher domestic price) with the quota rents on imported units. Domestic producers benefit separately from the higher price, but the import margin goes to license holders.",
+      "Under a quota, there is no border tax. The price rises from $20 to $30 because supply is restricted. The 40 imported units carry a $10-per-unit windfall, the gap between the $30 domestic price and the $20 world price, totaling $400. That windfall goes to whoever holds the import licenses. Unless the government auctions those licenses, the rent accrues to private holders. Option A describes a tariff outcome, not a quota. Option C is wrong because the $400 is transferred, not destroyed. Option D confuses the quota rents on imported units with the separate gains domestic producers capture from selling at the higher domestic price.",
   },
   {
     id: "it-13",
@@ -271,7 +270,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The trade balance (net exports) equals exports minus imports: $800B - $950B = -$150 billion. A negative trade balance is a trade deficit, meaning the country imports more than it exports. This must be financed by capital inflows: foreigners invest in the deficit country's assets to cover the gap. Option A reverses the sign: a surplus requires exports to exceed imports, which is not the case here. Option C is wrong because $800B does not equal $950B. Option D confuses the total import figure with the deficit: the deficit is the difference between exports and imports, not the import total itself.",
+      "Net exports = exports minus imports = $800B - $950B = -$150 billion. Negative net exports means a trade deficit. The country imports more than it exports, and the gap must be financed by capital inflows from foreign investors. Option A reverses the sign; a surplus requires exports to exceed imports. Option C is wrong because $800B does not equal $950B. Option D confuses total imports with the deficit; the deficit is the difference, not the total.",
   },
   {
     id: "it-14",
@@ -285,7 +284,7 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The balance of payments identity requires that the current account plus the financial account equals zero (ignoring the small statistical discrepancy and official reserves). A current account deficit of $200 billion means the country is spending more abroad than it earns. To finance this, it must attract $200 billion in net foreign investment, creating a financial account surplus. The U.S. has run this pattern for decades: trade deficits financed by foreign purchases of Treasury bonds and American assets. Option A would mean both accounts are in deficit, which violates the balance of payments identity. Option C contradicts the requirement that the deficit be financed by capital inflows. Option D confuses the government budget with the balance of payments; they are related but distinct concepts.",
+      "The balance of payments identity: current account + financial account = approximately zero. A $200 billion current account deficit (spending more abroad than earning) requires $200 billion in net foreign investment inflows, creating a financial account surplus. The United States has operated this way for decades, running trade deficits financed by foreign purchases of Treasury bonds and American real estate. Option A violates the identity; both accounts cannot be in deficit. Option C contradicts the requirement that the deficit be financed. Option D confuses the government budget with the balance of payments; they are related concepts but not mechanically identical.",
   },
   {
     id: "it-15",
@@ -299,6 +298,6 @@ export const internationalTradeQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Trade allows a country to consume beyond its production possibilities curve by specializing in the good where it has a comparative advantage, exporting the surplus, and importing the other good. The consumption possibilities with trade exceed the PPC. Even starting from an inefficient point inside the PPC, trade enables a move to a consumption bundle that was previously impossible. Option A ignores the fundamental insight of trade theory: the entire point is that trade expands consumption possibilities beyond the PPC. Option C confuses consumption with production: a country still cannot produce beyond its PPC (that requires growth shifting the PPC outward), but it can consume beyond it through trade. Option D incorrectly requires absolute advantage; comparative advantage is sufficient and is the basis for gains from trade.",
+      "Trade expands consumption possibilities beyond the PPC. By specializing in the good where it has a comparative advantage, exporting the surplus, and importing the other good, a country can consume combinations of goods that were impossible under self-sufficiency. Even starting from an inefficient point inside the PPC, trade opens consumption bundles that exceed the frontier. Option A ignores the central insight of trade theory. Option C confuses consumption with production; a country cannot produce beyond its PPC without growth that shifts the curve outward, but it can consume beyond it through trade. Option D incorrectly requires absolute advantage; comparative advantage is sufficient.",
   },
 ];

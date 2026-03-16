@@ -3,49 +3,49 @@ import type { PracticeQuestion } from "@/data/supply-demand-content";
 export const gdpContent = {
   title: "GDP",
   subtitle:
-    "Measuring the total value of everything an economy produces, and understanding what that number misses",
+    "From Simon Kuznets' 1934 report to Congress to the $27.4 trillion U.S. economy of 2024 — how the world learned to measure national output, and what the number still misses",
   sections: [
     {
       heading: "What GDP Actually Measures (and What It Misses)",
-      content: `How rich is a country? You can't just count factories or acres of farmland. You need a single number that captures total economic activity across an entire nation. That number is **Gross Domestic Product**.
+      content: `Before 1934, no country on Earth had a reliable way to measure its total economic output. The Great Depression was devastating the United States, and policymakers were flying blind. Congress commissioned economist Simon Kuznets to build a system of national income accounts, and by 1937, the framework that would become **Gross Domestic Product** was taking shape.
 
-**GDP** is the total market value of all *final* goods and services produced *within a country's borders* during a specific time period, usually a year or a quarter. Every bakery loaf, every haircut, every new car off the assembly line, every hour of legal counsel counts.
+**GDP** is the total market value of all *final* goods and services produced *within a country's borders* during a specific time period — usually a year or a quarter. Every bakery loaf, every haircut, every new Toyota Camry off the Georgetown, Kentucky assembly line, every hour of legal counsel counts toward the total. U.S. GDP reached approximately $27.4 trillion in 2023.
 
-The word "final" carries weight here. Tires sold to Ford are an *intermediate good*, and their value is already embedded in the car's price. Counting both the tires and the car would be **double counting**. GDP only captures the finished product reaching the end user.
+The word "final" carries significant weight. Tires sold to Ford are an *intermediate good* — their value is already embedded in the finished car's price. Counting both the tires and the car would be **double counting**, inflating the GDP figure beyond true output. GDP captures only the finished product reaching the end user.
 
-"Domestic" is equally important. A Japanese-owned Honda factory in Ohio contributes to *U.S.* GDP because the production happens on American soil. An American-owned Apple factory in China contributes to *Chinese* GDP. It's the location of production, not ownership, that determines which country claims the output.`,
+"Domestic" matters equally. A Japanese-owned Honda factory in Marysville, Ohio contributes to *U.S.* GDP because production happens on American soil. An American-owned Apple supplier in Shenzhen contributes to *Chinese* GDP. Location of production, not ownership, determines which nation claims the output. That boundary distinction was formally standardized by the United Nations System of National Accounts in 1953.`,
     },
     {
       heading: "The Expenditure Approach: C + I + G + NX",
-      content: `The most common way to measure GDP is to add up all spending on final goods and services. The **expenditure approach** sorts this spending into four buckets:
+      content: `The most common method for measuring GDP adds up all spending on final goods and services. The **expenditure approach** sorts this spending into four categories, a framework that became standard in U.S. national accounting by the late 1940s.
 
-**Consumption (C)** accounts for roughly 68-70% of U.S. GDP. Groceries, rent, Netflix, dentist visits. Anything households buy.
+**Consumption (C)** is the largest component — roughly 68-70% of U.S. GDP in recent decades. Groceries, rent, Netflix subscriptions, dental visits. Everything households purchase.
 
-**Investment (I)** covers business spending on capital goods (factories, machinery, software), residential construction, and changes in inventories. This trips people up: "investment" in GDP accounting is *not* financial investment like buying stocks. It means physical or productive assets.
+**Investment (I)** covers business spending on capital goods (factories, machinery, software), residential construction, and changes in business inventories. A persistent source of confusion on AP exams: "investment" in GDP accounting does not mean buying shares of Apple stock. It means physical or productive assets. When Intel broke ground on its $20 billion semiconductor fabrication plant in Ohio in 2022, that was investment.
 
-**Government purchases (G)** includes federal, state, and local spending on goods and services. Teacher salaries, military equipment, highway construction all count. Transfer payments like Social Security are excluded because the government receives no new good or service in return.
+**Government purchases (G)** includes federal, state, and local spending on goods and services — teacher salaries, military equipment, highway construction. Transfer payments like Social Security checks are excluded because the government receives no new good or service in return.
 
-**Net exports (NX)** equals exports minus imports (X - M). Boeing selling a jet to a foreign airline adds to GDP. An American buying a Korean-made TV subtracts from it. The U.S. typically runs a trade deficit, so NX is negative.
+**Net exports (NX)** equals exports minus imports (X − M). Boeing selling a 787 Dreamliner to a Japanese airline adds to U.S. GDP. An American buying a Samsung television subtracts from it. The U.S. has run a trade deficit almost every year since 1976, so NX is typically negative.
 
 **GDP = C + I + G + NX**
 
-This is an accounting identity, not a theory. Every dollar of final output gets purchased by someone, and that buyer falls into one of these four categories.`,
+This is an accounting identity, not a theory. Every dollar of final output gets purchased by someone, and that buyer falls into one of these four buckets.`,
     },
     {
       heading: "Nominal vs Real GDP and the GDP Deflator",
-      content: `GDP rises from $20 trillion to $21 trillion. Did the economy actually produce more, or did prices just climb? That question is the entire reason we distinguish nominal from real GDP.
+      content: `GDP rises from $20 trillion to $21 trillion. Did the economy actually produce more goods and services, or did prices simply climb? That question haunted economic measurement from the start, and the distinction between nominal and real GDP is the answer the profession developed.
 
-**Nominal GDP** uses *current-year prices*. If both quantities and prices rise, nominal GDP rises, but you can't separate the two effects.
+**Nominal GDP** uses *current-year prices*. If both output quantities and prices rise, nominal GDP rises — but the two effects are tangled together.
 
-**Real GDP** uses *constant base-year prices*, stripping out inflation. It answers a cleaner question: did the economy produce more goods and services? Real GDP is the number that matters for growth calculations and recession calls.
+**Real GDP** uses *constant base-year prices*, stripping out inflation to isolate actual changes in production. Real GDP is the figure that matters for growth calculations and recession calls. When the NBER declared a recession in 2008, it was tracking real GDP, not nominal.
 
-The **GDP deflator** connects them:
+The **GDP deflator** bridges the two:
 
 GDP Deflator = (Nominal GDP / Real GDP) x 100
 
-Unlike the CPI, which tracks a basket of consumer goods, the deflator covers the price level of *everything* produced domestically. A deflator moving from 100 to 105 means the overall price level rose 5%.
+Unlike the Consumer Price Index (which the Bureau of Labor Statistics has published since 1913 and which tracks a basket of consumer goods), the deflator covers the price level of *everything* produced domestically. A deflator moving from 100 to 105 means the overall domestic price level rose 5%.
 
-The 2021-2022 COVID recovery exposed this distinction sharply. Nominal GDP surged, partly on the back of rapid price increases. Real GDP growth was considerably weaker. The economy was producing more, but not nearly as much as the headline numbers implied.`,
+The 2021-2022 COVID recovery exposed this distinction starkly. Nominal U.S. GDP surged, partly on the back of rapid price increases that pushed annual inflation above 9% by June 2022. Real GDP growth was considerably weaker. The economy was producing more, but not nearly as much as the nominal headlines implied.`,
     },
     {
       heading: "Worked Example: Calculating Real GDP",
@@ -61,32 +61,32 @@ Tacos: 120 units at $3 each = $360
 Textbooks: 25 units at $60 each = $1,500
 **Nominal GDP (current year) = $1,860**
 
-That's a 55% nominal increase. But how much reflects real growth versus inflation?
+A 55% nominal increase. But how much reflects real growth versus price inflation?
 
-**Calculate Real GDP** using base-year prices for current-year quantities:
+**Calculate Real GDP** using base-year prices applied to current-year quantities:
 Tacos: 120 x $2 = $240
 Textbooks: 25 x $50 = $1,250
 **Real GDP (current year) = $1,490**
 
 **GDP Deflator** = ($1,860 / $1,490) x 100 = **124.8**
 
-So real output grew from $1,200 to $1,490, a **24.2% increase**. The deflator tells us prices rose **24.8%**. The 55% nominal gain splits into roughly equal parts real growth and inflation. Skipping the real GDP calculation would have overstated actual output gains by more than double.`,
+Real output grew from $1,200 to $1,490 — a **24.2% increase**. The deflator reveals prices rose **24.8%**. The 55% nominal gain splits into roughly equal parts real growth and inflation. Skipping the real GDP calculation would have overstated actual output gains by more than double. Kuznets himself warned Congress in the 1930s that raw dollar figures could be deeply misleading without price adjustments.`,
     },
     {
       heading: "Limitations of GDP",
-      content: `GDP is the most cited economic statistic on Earth, but it has blind spots that matter. Not the most exciting topic, but understanding these gaps is important.
+      content: `GDP became the world's most-cited economic statistic after World War II, when the Bretton Woods institutions adopted it as the standard yardstick for national economic performance. Kuznets himself cautioned that the metric had blind spots. He was right.
 
-**Unpaid work is invisible.** A parent raising children at home produces real value, but GDP records none of it. If that parent hires a nanny and takes a paid job, GDP rises even though total productive activity may be unchanged. Household production, volunteering, and caregiving all fall outside the count.
+**Unpaid work is invisible.** A parent raising children at home produces real economic value, but GDP records none of it. If that same parent hires a nanny and takes a paid job, GDP rises — even though total productive activity may be unchanged. Household production, volunteering, and caregiving all fall outside the count. Economists have estimated that unpaid household labor in the U.S. would add trillions to GDP if it were included.
 
-**The underground economy is missing.** Cash-paid labor, unreported income, and illegal transactions never appear. In some developing countries the informal economy may reach 30-40% of total output, which means GDP systematically understates their economic activity.
+**The underground economy is missing.** Cash-paid labor, unreported income, illegal transactions — none of it appears. In some developing countries, the informal economy may account for 30-40% of actual economic activity, meaning GDP systematically understates their true output.
 
-**GDP ignores inequality.** A country with $10 trillion in GDP could have most of that income concentrated among a handful of billionaires while the median citizen struggles. **GDP per capita** helps, but it's still just an average that says nothing about distribution.
+**GDP ignores inequality.** A country with $10 trillion in GDP could have most income concentrated among a tiny elite while the median citizen struggles. **GDP per capita** is still just an average. It says nothing about distribution. The Gini coefficient and income quintile data exist to fill that gap, but they rarely make front pages.
 
-**Environmental destruction can boost GDP.** An oil spill generates paid economic activity: cleanup crews, equipment manufacturers, lawyers. Clear-cutting a rainforest and selling the timber adds to GDP. The natural capital destroyed never subtracts from it.
+**Environmental destruction can boost GDP.** The Deepwater Horizon oil spill in 2010 generated billions in paid cleanup activity — crews, equipment, lawyers — all of which counted as GDP. The ecological damage to the Gulf of Mexico was never subtracted. Clear-cutting a rainforest and selling the timber adds to GDP. The destroyed natural capital does not register as a loss.
 
-**Quality of life goes unmeasured.** Leisure time, mental health, safety, political freedom, life satisfaction. None of it shows up. The U.S. has an enormous GDP but ranks below many smaller economies on life expectancy and self-reported happiness.
+**Quality of life goes unmeasured.** Leisure time, mental health, personal safety, political freedom, life satisfaction. None of it appears in GDP. The U.S. has the largest GDP on Earth but ranks below many smaller economies on life expectancy and self-reported happiness indices.
 
-GDP remains the best single measure of economic output. But it measures *production*, not *well-being*. Confusing the two is one of the most common errors in public economic debate.`,
+GDP remains the best single measure of market production. But it measures *output*, not *well-being*. Kuznets warned about conflating the two in 1934. Ninety years later, the warning still applies.`,
     },
   ],
 };
@@ -104,7 +104,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "GDP measures production within a country's borders, regardless of who owns the factory. Since the factory is located in Mexico, its output counts toward Mexico's GDP. The nationality of the owner does not matter for GDP -- it would matter for GNP (Gross National Product), which tracks output by a country's citizens. Option A confuses GDP with GNP.",
+      "GDP measures production within a country's borders, regardless of ownership. The factory is in Mexico, so its output counts toward Mexico's GDP. Ownership would matter for GNP (Gross National Product), which tracks output by a country's citizens. Option A confuses GDP with GNP — a distinction formalized in national accounting standards after World War II.",
   },
   {
     id: "gdp-2",
@@ -118,7 +118,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 3,
     explanation:
-      "GDP counts new final goods and services produced in the current period. A new house is a new final good. Option A is a used good (already counted when first produced). Option B is a transfer payment -- no new good or service is produced in exchange. Option C is an intermediate good -- the flour's value will be captured in the final product (bread, pastries) sold to consumers.",
+      "A new house is a final good produced in the current period. Option A fails because used goods were already counted when first produced. Option B is a transfer payment — no new production occurs in exchange. Option C is an intermediate good whose value will be captured in the final product sold to consumers.",
   },
   {
     id: "gdp-3",
@@ -127,7 +127,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     options: ["13%", "8%", "5%", "3%"],
     correctIndex: 3,
     explanation:
-      "Real GDP growth roughly equals nominal GDP growth minus inflation. If nominal GDP rose 8% and prices rose 5%, the actual increase in output was about 3%. Option A incorrectly adds the two. Option B ignores inflation entirely. Option C confuses the inflation rate with the growth rate. The precise calculation uses the formula: Real GDP growth = ((1 + nominal growth) / (1 + inflation)) - 1, which gives approximately 2.86%, rounded to 3%.",
+      "Real GDP growth approximately equals nominal growth minus inflation: 8% − 5% = 3%. The precise formula — ((1.08 / 1.05) − 1) — yields about 2.86%, which rounds to 3%. Option A incorrectly adds the two figures. Option B ignores inflation entirely. Option C mistakes the inflation rate for the growth rate.",
   },
   {
     id: "gdp-4",
@@ -141,7 +141,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 3,
     explanation:
-      "Consumer spending (C) accounts for roughly 68-70% of U.S. GDP, making it by far the largest component. Investment (I) is typically around 17-18%, government purchases (G) around 17%, and net exports (NX) are actually negative since the U.S. imports more than it exports. Option C is wrong not only because NX is not the largest, but because it is typically negative for the U.S.",
+      "Consumer spending has dominated U.S. GDP since national income accounting began — roughly 68-70% of the total in recent decades. Investment runs around 17-18%, government purchases around 17%, and net exports are typically negative because the U.S. has run a trade deficit almost continuously since 1976.",
   },
   {
     id: "gdp-5",
@@ -155,7 +155,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "GDP only counts market transactions. The parent's $60,000 salary was counted in GDP; their unpaid childcare at home is not. Even though the caregiving has real economic value, GDP cannot capture it because no market transaction occurs. This is one of GDP's well-known limitations. Option A is wrong because paid childcare (like daycare) IS counted in GDP -- it is only unpaid caregiving that is excluded. Option C is wrong because saving money is not the same as producing output.",
+      "GDP only captures market transactions. The $60,000 salary was counted; unpaid caregiving at home is not, even though it has real economic value. This is one of the limitations Kuznets identified in the 1930s. Option A is wrong because paid childcare (daycare services) IS counted in GDP. Option C confuses saving money with producing output.",
   },
   {
     id: "gdp-6",
@@ -169,7 +169,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The value of intermediate goods is already embedded in the price of the final good. If you count the steel sold to a car manufacturer AND the finished car, you are counting the steel twice -- once on its own and once as part of the car. This double counting would inflate GDP beyond the true value of final production. Option A is wrong because intermediate goods absolutely have economic value; they are just captured in the final product's price.",
+      "The value of intermediate goods is already embedded in the final good's price. Counting the steel sold to General Motors AND the finished Chevrolet would count the steel twice — inflating GDP beyond the true value of final production. Option A is wrong because intermediate goods absolutely have value; their value is simply captured downstream in the final product.",
   },
   {
     id: "gdp-7",
@@ -183,7 +183,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "A GDP deflator of 100 means nominal GDP equals real GDP, which happens in the base year by definition (since current-year prices equal base-year prices). Option A is misleading because the deflator being 100 just means the price level matches the base year -- it does not mean there is zero inflation in that year. Option D confuses the GDP deflator with the CPI; the deflator covers all domestically produced goods, not just a consumer basket.",
+      "A GDP deflator of 100 means nominal GDP equals real GDP — the definition of the base year, since current prices match base-year prices. Option A is misleading; the deflator being 100 just means the price level matches the base year, not that there is zero year-over-year inflation. Option D confuses the GDP deflator with the CPI; they measure different baskets of goods.",
   },
   {
     id: "gdp-8",
@@ -197,7 +197,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Real GDP uses base-year prices applied to current-year quantities. Shoes: 120 x $50 = $6,000. Shirts: 220 x $20 = $4,400. Real GDP = $6,000 + $4,400 = $10,400. Option A ($12,700) is nominal GDP for the current year (120 x $60 + 220 x $25 = $7,200 + $5,500), which fails to strip out price increases. Option C ($12,200) is not derivable from the given data and likely results from mixing base-year and current-year prices inconsistently. Option D ($9,000) is base-year nominal GDP (100 x $50 + 200 x $20), not the current-year real GDP.",
+      "Real GDP applies base-year prices to current-year quantities: shoes at 120 × $50 = $6,000; shirts at 220 × $20 = $4,400. Total: $10,400. Option A ($12,700) is nominal GDP for the current year (120 × $60 + 220 × $25), which fails to strip out price increases. Option D ($9,000) is base-year nominal GDP (100 × $50 + 200 × $20). Option C does not correspond to any correct calculation with the given data.",
   },
   {
     id: "gdp-9",
@@ -211,7 +211,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "GDP deflator = (Nominal GDP / Real GDP) x 100 = ($800B / $640B) x 100 = 125. A deflator of 125 means the overall price level is 25% higher than in the base year (when the deflator was 100). Option A (80) reverses the formula, dividing real by nominal. Option C (160) results from an arithmetic error and incorrectly claims a recession based on a price index, when the deflator measures prices, not output levels. Option D expresses the ratio without multiplying by 100, which is not the standard GDP deflator format.",
+      "GDP deflator = (Nominal / Real) × 100 = ($800B / $640B) × 100 = 125. A deflator of 125 means the overall price level is 25% higher than in the base year. Option A reverses the formula (divides real by nominal). Option C produces an arithmetic error and incorrectly connects a price index to a recession call. Option D omits the multiplication by 100, which is not the standard format.",
   },
   {
     id: "gdp-10",
@@ -225,7 +225,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "The sale of an existing home is not counted in current GDP because the house was already counted when it was originally built in 2005. Reselling it does not represent new production. However, the real estate agent's commission on the sale would count as a current service. Option A is included because legal services are a final service produced in the current period. Option B is included as government purchases (G). Option D is included because unsold inventory counts as investment (I) in GDP accounting -- the goods were produced in the current period even though they were not yet sold to a final buyer.",
+      "Reselling an existing home does not represent new production — that house was already counted when it was built in 2005. The real estate agent's commission would count as a current service, but the home itself does not re-enter GDP. Option A is a current final service. Option B is government purchases (G). Option D counts because unsold inventory is classified as investment (I) in GDP accounting — the vehicles were produced in the current period.",
   },
   {
     id: "gdp-11",
@@ -239,7 +239,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Both countries have a GDP per capita of $40,000, but per capita figures are averages that reveal nothing about how income is distributed. Country X might have a small elite earning millions while most citizens live in poverty, whereas Country Y might have a broad middle class. Standard of living comparisons require looking beyond averages to measures of inequality like the Gini coefficient. Option A raises a valid concern about nominal versus real comparisons, but the question's core flaw is about distribution, not inflation adjustment. Option C is irrelevant because population growth rates do not affect a point-in-time per capita calculation. Option D is incorrect because GNP per capita suffers from the same distributional blindness as GDP per capita.",
+      "Both countries show $40,000 per capita, but that average reveals nothing about distribution. Country X might have a small elite earning millions while most citizens live in poverty, whereas Country Y might have a broad middle class. Measures like the Gini coefficient exist precisely to capture what per-capita averages obscure. Option A raises a valid concern, but the question's core flaw is distributional. Option C is irrelevant to a point-in-time calculation. Option D suffers from the same distributional blindness.",
   },
   {
     id: "gdp-12",
@@ -253,7 +253,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "GDP counts only final goods to avoid double counting. The $10 million in steel is an intermediate good whose value is already embedded in the $25 million price of the finished cars. Counting both would inflate GDP to $35 million, overstating actual production. Option A commits this exact double-counting error. Option C ($15 million) represents the value added by the auto manufacturer alone, but the value-added approach should sum value added at all stages ($10M by the steel company + $15M by the auto manufacturer = $25M), yielding the same $25 million. Option D incorrectly excludes the final good and counts only the intermediate input.",
+      "GDP counts only final goods to avoid double counting. The $10 million in steel is embedded in the $25 million car price. Option A commits that double-counting error. Option C ($15 million) represents only the auto manufacturer's value added, but the value-added approach sums all stages ($10M + $15M = $25M), reaching the same answer. Option D incorrectly excludes the final product.",
   },
   {
     id: "gdp-13",
@@ -267,7 +267,7 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "GDP records all market production regardless of whether it improves welfare. Reconstruction spending counts as new production (government purchases and private investment), but the destruction of existing capital -- roads, buildings, homes -- is never subtracted. Society is merely returning to where it started, yet GDP registers a gain. This is a classic illustration of GDP's failure as a welfare measure. Option A is wrong because government expenditure on goods and services is absolutely included in GDP as the G component. Option C makes an unsupported assumption; natural disasters do not necessarily reduce the labor force permanently. Option D is incorrect because GDP measures production, and the reconstruction activity genuinely increases measured output even if net welfare has not improved.",
+      "Reconstruction spending genuinely counts as new production — government purchases and private investment. But the destroyed capital (roads, buildings, homes) is never subtracted from GDP. Society spends billions to return to where it started, yet GDP registers a gain. After the 2011 Tohoku earthquake, Japan's reconstruction spending boosted GDP figures even though the country had suffered catastrophic losses. Option A is wrong because government expenditure on goods and services is included in GDP. Option C makes an unsupported assumption. Option D is incorrect because reconstruction activity does increase measured output.",
   },
   {
     id: "gdp-14",
@@ -281,6 +281,6 @@ export const gdpQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "GDP = C + I + G + NX = $10T + $3T + $3.5T + ($2T - $2.8T) = $10T + $3T + $3.5T + (-$0.8T) = $15.7 trillion. Net exports are negative because imports exceed exports, so NX subtracts from the total. Option A ($21.3T) adds imports instead of subtracting them, treating all flows as positive. Option C ($16.5T) likely ignores the net export calculation and adds exports without subtracting imports. Option D ($14.9T) subtracts both exports and imports or makes another arithmetic error. The key is remembering that NX = exports minus imports, and when a country runs a trade deficit, NX is negative.",
+      "GDP = C + I + G + NX = $10T + $3T + $3.5T + ($2T − $2.8T) = $15.7 trillion. Net exports are −$0.8T because imports exceed exports, reflecting the kind of trade deficit the U.S. has run since the mid-1970s. Option A adds imports instead of subtracting them. Option C likely ignores the net export calculation. Option D results from an additional arithmetic error.",
   },
 ];

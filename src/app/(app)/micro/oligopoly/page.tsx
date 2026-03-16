@@ -1,78 +1,40 @@
-"use client";
+import type { Metadata } from "next";
+import { microCourse } from "@/data/courses";
+import ClientPage from "./ClientPage";
 
-import PracticeQuiz from "@/components/ui/PracticeQuiz";
-import { oligopolyContent, oligopolyQuestions } from "@/data/oligopoly-content";
-import Link from "next/link";
-import PageTransition from "@/components/layout/PageTransition";
-import ScrollReveal from "@/components/layout/ScrollReveal";
-import ModuleNav from "@/components/ui/ModuleNav";
-import FlashcardDeck from "@/components/ui/FlashcardDeck";
-import { oligopolyFlashcards } from "@/data/flashcards/micro-flashcards";
+const MODULE_ID = "oligopoly";
 
-export default function OligopolyPage() {
+const mod = microCourse.modules.find((m) => m.id === MODULE_ID)!;
+
+export const metadata: Metadata = {
+  title: `${mod.title} - AP Microeconomics | EconLearn`,
+  description: `${mod.description} Free interactive lesson with practice questions, graphs, and flashcards.`,
+  alternates: { canonical: `https://econlearn.org${mod.href}` },
+  openGraph: {
+    title: `${mod.title} - AP Micro | EconLearn`,
+    description: mod.description,
+    url: `https://econlearn.org${mod.href}`,
+  },
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://econlearn.org" },
+    { "@type": "ListItem", position: 2, name: "AP Microeconomics", item: "https://econlearn.org/micro" },
+    { "@type": "ListItem", position: 3, name: mod.title, item: `https://econlearn.org${mod.href}` },
+  ],
+};
+
+export default function Page() {
   return (
-    <PageTransition>
-      <div className="max-w-3xl mx-auto px-6 py-10 lg:py-14">
-        <div className="module-breadcrumb">
-          <Link href="/micro" className="hover:text-gray-600">
-            Micro
-          </Link>
-          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
-          <span className="current">{oligopolyContent.title}</span>
-        </div>
-
-        <div className="module-header">
-          <h1 className="text-2xl lg:text-3xl">
-            {oligopolyContent.title}
-          </h1>
-          <p >{oligopolyContent.subtitle}</p>
-        </div>
-
-        <div className="prose-econ">
-          {oligopolyContent.sections.map((section, i) => (
-            <ScrollReveal key={i}>
-              <div className="mb-8">
-                <h2>{section.heading}</h2>
-                {section.content.split("\n\n").map((para, j) => (
-                  <p
-                    key={j}
-                    dangerouslySetInnerHTML={{
-                      __html: para
-                        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-                        .replace(/\*(.*?)\*/g, "<em>$1</em>")
-                        .replace(/\n/g, "<br />"),
-                    }}
-                  />
-                ))}
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-
-        <div className="mb-10">
-          <h2 style={{ color: "var(--color-ink)" }} className="text-lg font-semibold mb-1">Practice Questions</h2>
-          <p style={{ color: "var(--color-ink-muted)" }} className="text-[13px] mb-5">
-            AP-style questions to test your understanding.
-          </p>
-          <PracticeQuiz questions={oligopolyQuestions} moduleId="oligopoly" />
-        </div>
-
-      
-          {/* Flashcards */}
-          <div className="mb-10">
-            <h2 style={{ color: "var(--color-ink)" }} className="text-lg font-semibold mb-1">
-              Flashcards
-            </h2>
-            <p style={{ color: "var(--color-ink-muted)" }} className="text-[13px] mb-5">
-              Tap to flip. Sort cards as you learn them.
-            </p>
-            <FlashcardDeck cards={oligopolyFlashcards} moduleId="oligopoly" />
-          </div>
-        
-          <ModuleNav courseId="micro" currentModuleId="oligopoly" />
-      </div>
-    </PageTransition>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <ClientPage />
+    </>
   );
 }

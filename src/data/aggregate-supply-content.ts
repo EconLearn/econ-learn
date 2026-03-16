@@ -3,82 +3,84 @@ import type { PracticeQuestion } from "@/data/supply-demand-content";
 export const aggregateSupplyContent = {
   title: "Aggregate Supply",
   subtitle:
-    "How the economy's total output responds to price changes differently in the short run versus the long run",
+    "Watch the curves shift in real time — short-run stickiness versus the long-run vertical line, and why the difference matters for every macro policy question",
   sections: [
     {
       heading: "Why SRAS Slopes Upward",
-      content: `Picture this: the overall price level rises 10%, but employers haven't renegotiated wages yet. From the firm's perspective, revenue per unit just jumped while labor costs stayed flat. Margins widen. Production ramps up. Scale that across millions of firms and you get the upward slope of the **Short-Run Aggregate Supply (SRAS)** curve.
+      content: `Look at the upward-sloping curve on the graph. That's your **Short-Run Aggregate Supply (SRAS)**. Drag the price level slider up and notice what happens to output — it rises. The reason is deceptively simple: wages haven't caught up yet.
 
-Two models explain the mechanism:
+Imagine the overall price level jumps 10%. Employers are still paying last quarter's wages because contracts lock those numbers in. Revenue per unit climbed, but labor costs didn't budge. Margins widen. Firms ramp up production. Scale that across every factory, office, and restaurant in the economy and you get that upward slope you see on screen.
 
-The **sticky-wage model** holds that nominal wages are locked in by contracts and can't adjust instantly. When the price level rises but wages lag, firms find it cheaper in real terms to hire and produce more. Workers don't immediately demand raises because their contracts hold, or because they haven't yet noticed the broader price increase.
+Two models explain the mechanism.
 
-The **misperceptions model** tells a different story. Firms sometimes confuse a general price increase with a rise in the *relative* price of their own product. A wheat farmer sees wheat prices climb and concludes demand for wheat has increased. She plants more. In reality, all prices rose. She expanded output based on a misread of the signal.
+The **sticky-wage model** says nominal wages are frozen by contracts. When the price level rises and wages lag behind, hiring gets cheaper in real terms. Workers don't immediately push for raises — their contracts hold, or they simply haven't registered the broader price increase yet. So firms expand output.
 
-Both models reach the same conclusion: in the short run, higher price levels produce higher output because input costs, especially wages, haven't caught up.`,
+The **misperceptions model** tells a completely different story. A wheat farmer sees wheat prices climb and thinks, "Demand for my wheat just jumped." She plants more. But actually all prices rose together. She expanded based on a misread signal — confusing a general price increase with a rise in the *relative* price of her product.
+
+Both models land in the same place: higher price levels produce higher output in the short run because input costs, especially wages, are stuck.`,
     },
     {
       heading: "What Shifts SRAS",
-      content: `SRAS shifts when production costs change across the economy, independent of the price level.
+      content: `The curve you're looking at shifts left or right when production costs change economy-wide — independent of the price level itself.
 
-**Input prices** are the most common driver. An oil price spike raises costs for transportation, manufacturing, agriculture, and chemicals all at once. Firms need a higher price level to justify the same output, so SRAS shifts left. Falling commodity prices do the opposite.
+**Input prices** drive most shifts. Toggle the oil price control on the graph and watch SRAS slide left as costs spike. An oil price increase in the style of 1973 raises costs for transportation, manufacturing, agriculture, and chemicals simultaneously. Firms need a higher price level to justify the same output. Falling commodity prices push the curve the other direction.
 
-**Productivity improvements** shift SRAS right. Workers producing more output per hour (through better technology, training, or management) lower the cost per unit. Firms supply more at every price level.
+**Productivity improvements** shift SRAS right. Workers producing more output per hour — through better tech, better training, smarter management — lower the cost per unit. Every price level now supports more output.
 
-**Supply shocks** are sudden and unexpected. A hurricane destroying Gulf Coast refineries, a pandemic shutting factories, a war disrupting grain exports. All shift SRAS left abruptly. A positive shock like a fracking technology breakthrough shifts SRAS right.
+**Supply shocks** hit suddenly. A hurricane wrecking Gulf Coast refineries. A pandemic shuttering factories. A war cutting off Ukrainian grain exports in 2022. All of these yank SRAS left. A positive shock like the fracking revolution after 2008 pushes it right.
 
-**Government regulations and production taxes** also matter. A new environmental regulation that raises compliance costs shifts SRAS left. A manufacturing subsidy shifts it right.
+**Government regulations and production taxes** matter too. A new EPA compliance rule that raises costs for manufacturers shifts SRAS left. A targeted manufacturing subsidy shifts it right.
 
-Here's the AP exam distinction worth memorizing: demand-side factors (consumer confidence, government spending, money supply) shift AD. Supply-side factors (input costs, productivity, supply shocks) shift SRAS.`,
+One distinction the AP Macroeconomics exam hammers repeatedly: demand-side factors (consumer confidence, government spending, money supply) shift AD. Supply-side factors (input costs, productivity, supply shocks) shift SRAS. Mixing these up on a free-response question costs you the entire explanation point.`,
     },
     {
       heading: "LRAS and Potential Output",
-      content: `Given enough time, wages and all input prices fully adjust to match the price level. Contracts get renegotiated. Workers demand raises. Firms reprice their output. The stickiness that gave SRAS its upward slope disappears.
+      content: `Now look at the vertical line on the graph. That's your **Long-Run Aggregate Supply (LRAS)**.
 
-Once everything has adjusted, the economy's output depends only on its real productive capacity: how many workers it has, how much capital they work with, and the state of technology. The price level becomes irrelevant. That's why the **Long-Run Aggregate Supply (LRAS)** curve is a vertical line.
+Given enough time, every sticky price unsticks. Contracts get renegotiated. Workers demand raises that match actual inflation. Firms reprice their goods. The stickiness that gave SRAS its upward slope vanishes completely. Once everything adjusts, the economy's output depends only on real productive capacity — how many workers exist, how much capital they operate, and what technology is available. The price level becomes irrelevant to output. Vertical line.
 
-That line sits at **potential GDP** (or full-employment output), the maximum the economy can sustainably produce with all resources deployed at normal rates. "Full employment" doesn't mean zero unemployment, and this is a point that confuses people. It means unemployment is at the **natural rate**, which includes frictional and structural unemployment but not cyclical.
+That line sits at **potential GDP**, sometimes called full-employment output. The maximum sustainable production level with all resources deployed at normal rates. "Full employment" trips people up. It does not mean zero unemployment. It means unemployment sits at the **natural rate** — which includes frictional unemployment (people between jobs) and structural unemployment (skills mismatch) but excludes cyclical unemployment.
 
-LRAS shifts only when the economy's productive capacity changes: labor force growth, physical capital accumulation, technological advances, or improvements in institutions and education.`,
+LRAS shifts only when productive capacity itself changes. Labor force growth from immigration. Capital accumulation from business investment. Technological breakthroughs. Institutional improvements in education or property rights. Notice on the graph that dragging the price level slider does absolutely nothing to LRAS. It stays put.`,
     },
     {
       heading: "The Self-Correction Mechanism",
-      content: `The economy falls into recession. Actual GDP drops below potential GDP, creating a **recessionary gap**, and unemployment climbs above the natural rate. What happens if the government does nothing?
+      content: `Drag actual GDP on the graph to the left of the LRAS line. See that gap? That's a **recessionary gap** — actual output below potential, unemployment above the natural rate.
 
-The self-correction model says the economy eventually heals itself. With high unemployment, workers compete for scarce jobs. Nominal wages fall over time (or at least grow slower than they otherwise would). Falling wages reduce production costs. Lower costs shift SRAS right, and output gradually returns to potential GDP at a lower price level.
+The self-correction story goes like this. With high unemployment, workers compete for scarce jobs. Nominal wages fall over time, or at minimum grow slower than they otherwise would. Falling wages reduce production costs. Lower costs shift SRAS right. Watch the curve slide rightward on the graph until output returns to potential GDP at a lower price level.
 
-An **inflationary gap** self-corrects in the opposite direction. When actual GDP exceeds potential, labor is scarce. Workers demand higher wages, costs rise, SRAS shifts left, and output cools back to the LRAS.
+An **inflationary gap** self-corrects in reverse. Drag actual GDP to the right of LRAS. Labor is scarce. Workers demand raises. Costs climb. SRAS shifts left. Output cools back to the vertical line.
 
-The real debate in macroeconomics is about speed. Classical economists argue the adjustment is fast enough that government intervention is unnecessary. Keynesians counter that wages are extremely sticky downward. Workers and unions resist pay cuts fiercely. In a severe recession, self-correction could take years while millions suffer.
+The real fight in macroeconomics is about speed.
 
-The Great Depression took over a decade. Milder recessions have self-corrected within a year or two. How bad the downturn is determines whether patience is a viable policy.`,
+Classical economists say adjustment happens fast enough that government intervention mostly creates noise. Keynesians counter that wages are brutally sticky downward — workers and unions resist pay cuts with everything they've got. In a severe recession, self-correction could drag on for years while millions sit unemployed. The Great Depression took over a decade. The 2001 recession self-corrected in about eighteen months. Severity determines whether patience qualifies as a serious policy stance.`,
     },
     {
       heading: "Supply Shocks in History",
-      content: `The 1970s oil crises remain the textbook negative supply shock. In 1973, OPEC imposed an oil embargo and prices quadrupled. In 1979, the Iranian Revolution disrupted supply again and prices doubled. Oil feeds into nearly every production process, so the entire SRAS curve shifted sharply left.
+      content: `The 1973 OPEC oil embargo remains the textbook negative supply shock. Prices quadrupled almost overnight. Then in 1979, the Iranian Revolution disrupted supply again and prices doubled. Oil feeds into nearly every production process, so SRAS shifted sharply left both times.
 
-The result was **stagflation**: rising prices *and* falling output at the same time. Before the 1970s, most economists believed inflation and recession couldn't coexist. The Phillips Curve said they should move in opposite directions. Stagflation shattered that assumption and forced a rethinking of macroeconomic theory.
+The result was **stagflation** — rising prices *and* falling output simultaneously. Before the 1970s, most economists believed inflation and recession couldn't coexist. The Phillips Curve said they moved in opposite directions. Stagflation broke that framework and forced a wholesale rethinking of macroeconomic theory.
 
-COVID-19 created a very different kind of supply shock in 2020-2021. Factories shut down. Shipping containers piled up at the wrong ports. Semiconductor shortages halted auto production. Workers left the labor force. SRAS shifted left dramatically. Meanwhile, massive stimulus checks shifted AD right. The collision of reduced supply and increased demand produced the sharp inflation spike of 2021-2022.
+COVID-19 produced a very different shock in 2020-2021. Factories shut down across Asia. Shipping containers piled up at wrong ports. The global semiconductor shortage halted auto production at Ford, GM, and Toyota for months. Workers left the labor force entirely. SRAS shifted left dramatically. Meanwhile, the $1,200 and $1,400 stimulus checks plus expanded unemployment benefits shifted AD right. Reduced supply colliding with boosted demand — that collision produced the sharp inflation spike running above 8% by mid-2022.
 
-The policy lesson from both episodes is worth remembering: demand shocks and supply shocks require different responses. A demand-driven recession can be addressed by stimulating spending. A supply-driven shock is far harder because stimulating demand just piles more inflation onto an already constrained economy.`,
+The policy lesson from both episodes: demand shocks and supply shocks require different responses. A demand-driven recession can be addressed by stimulating spending through fiscal or monetary policy. A supply-driven shock is far harder. Stimulating demand when supply is constrained just piles more inflation onto an already stressed economy.`,
     },
     {
       heading: "Worked Example: SRAS Shift and New Equilibrium",
-      content: `Starting point: long-run equilibrium with a price level of **110** and real GDP of **$5 trillion** (equal to potential GDP). A major oil price shock hits.
+      content: `Look at the starting position on the graph: long-run equilibrium with a price level of **110** and real GDP of **$5 trillion**, sitting right on the LRAS line. Potential GDP equals actual GDP. Now hit the oil shock button.
 
-The oil shock raises production costs economy-wide, shifting SRAS left. The new short-run equilibrium settles at a price level of **120** and real GDP of **$4.6 trillion**.
+The shock raises production costs economy-wide, dragging SRAS to the left. Watch where the new intersection lands. The short-run equilibrium settles at a price level of **120** and real GDP of **$4.6 trillion**.
 
 **Identify the gap.**
-Potential GDP = $5T. Actual GDP = $4.6T. Since actual < potential, this is a **recessionary gap** of $400 billion.
+Potential GDP = $5T. Actual GDP = $4.6T. Actual falls short of potential. That's a **recessionary gap** of $400 billion.
 
 **What happened on the graph.**
-SRAS shifted left. Output fell from $5T to $4.6T while the price level rose from 110 to 120. Falling output with rising prices is the definition of **stagflation**.
+Three things occurred at once: the price level jumped from 110 to 120, output fell from $5T to $4.6T, and a deadweight loss region appeared between the old and new equilibrium points. Rising prices with falling output. That's the definition of **stagflation**.
 
 **Self-correction process.**
-With GDP below potential, unemployment exceeds the natural rate. Over time, excess unemployment puts downward pressure on wages. Falling wages reduce costs, and SRAS gradually shifts back to the right. The economy moves along the AD curve toward $5T, and the price level drifts down from 120.
+With GDP below potential, unemployment exceeds the natural rate. Over time — toggle the "self-correct" animation — excess unemployment pushes wages down. Falling wages reduce costs. SRAS gradually drifts back rightward. The economy slides along the AD curve toward $5T, and the price level eases down from 120.
 
-Here's the difficult reality: self-correction from a negative supply shock means enduring both higher prices and higher unemployment during the adjustment. Stimulating AD would close the output gap but worsen inflation. Tightening to fight inflation would deepen the recession. Neither tool solves both problems at the same time.`,
+The painful reality with a negative supply shock: self-correction means enduring both elevated prices and elevated unemployment during the entire adjustment period. Stimulating AD would close the output gap but worsen inflation. Tightening monetary policy to fight inflation would deepen the recession. Neither tool fixes both problems simultaneously, which is exactly why the 2022 Fed faced such brutal tradeoffs.`,
     },
   ],
 };
@@ -96,7 +98,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The upward slope of SRAS is driven by sticky wages and input prices. When the overall price level rises but wages have not yet adjusted, firms see wider profit margins and increase production. Option A is wrong because capital investment is a long-run decision, not an immediate response to price level changes. Option D contradicts the law of demand -- consumers demand less, not more, when prices rise.",
+      "Sticky wages and input prices create the upward slope. When the overall price level rises but wages haven't adjusted yet, profit margins widen and firms produce more. (A) is off — capital investment is a long-run decision, not a snap response to price level changes. (D) contradicts the law of demand outright.",
   },
   {
     id: "as-2",
@@ -110,7 +112,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Oil is a key production input. When oil prices rise, it costs more to produce virtually everything, shifting SRAS left. Options A, C, and D all affect the demand side of the economy (AD), not the supply side. A drop in consumer confidence shifts AD left. More government spending and lower interest rates shift AD right. None of these change firms' production costs.",
+      "Oil is embedded in virtually every production process. When its price rises, costs climb economy-wide, and SRAS shifts left. The other three options — consumer confidence, government spending, interest rates — all live on the demand side of the model. They shift AD, not SRAS. A quick test: does it change production costs? If not, it's probably an AD shifter.",
   },
   {
     id: "as-3",
@@ -124,7 +126,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "LRAS is vertical because once all wages and prices have fully adjusted, the price level has no effect on real output. Output is determined by the economy's resources -- labor, capital, and technology. Option C is misleading because firms can increase production, but potential GDP is the maximum sustainable output. Option D is wrong because the money supply is not fixed in the long run and is not the reason LRAS is vertical.",
+      "Once wages and prices fully adjust, the price level has zero effect on real output. Output is pinned to the economy's resources — labor, capital, technology. (C) is misleading because firms can increase production; potential GDP just represents the maximum sustainable level. (D) is wrong on both counts: the money supply isn't fixed, and it wouldn't explain the vertical shape anyway.",
   },
   {
     id: "as-4",
@@ -138,7 +140,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "In a recessionary gap, unemployment exceeds the natural rate, putting downward pressure on wages over time. Falling wages reduce production costs, shifting SRAS to the right. This gradually returns output to potential GDP at a lower price level. Option A describes an AD shift, which is not part of the self-correction mechanism. Option D gets the price direction wrong -- self-correction from a recessionary gap involves falling prices, not rising ones.",
+      "Self-correction runs through the supply side. Unemployment above the natural rate pushes wages down. Lower wages mean lower production costs, so SRAS shifts right until output returns to potential GDP — at a lower price level, not a higher one. (A) describes an AD shift, which is government intervention or a lucky confidence boost, not self-correction. (D) gets the price direction exactly backward.",
   },
   {
     id: "as-5",
@@ -152,7 +154,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Stagflation -- rising prices combined with falling output -- results from a leftward shift of SRAS. When production costs increase suddenly (like an oil shock), firms produce less at every price level, pushing the price level up while output falls. Option A (AD shifting right) causes both higher prices and higher output, not the stagnation part. Option D (AD shifting left) causes lower prices and lower output, not the inflation part.",
+      "SRAS shifting left means firms produce less at every price level while the price level rises. That's stagflation — inflation plus stagnation. (A) gives you higher prices and higher output, missing the stagnation. (D) gives you lower prices and lower output, missing the inflation.",
   },
   {
     id: "as-6",
@@ -166,7 +168,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "LRAS shifts right when the economy's productive capacity permanently increases. A technological breakthrough allows more output from the same resources, expanding potential GDP. Option A affects AD through monetary policy, not productive capacity. Option B shifts SRAS left (higher input costs) but does not change long-run capacity. Option D shifts AD by putting more money in consumers' hands but does not expand the economy's ability to produce.",
+      "LRAS moves only when the economy's productive capacity permanently expands. A tech breakthrough lets the economy squeeze more output from the same resources, so potential GDP grows. (A) is monetary policy — shifts AD. (B) shifts SRAS left by raising input costs but doesn't change what the economy can produce at full capacity. (D) puts more dollars in consumers' pockets (AD shift) without expanding the ability to produce anything new.",
   },
   {
     id: "as-7",
@@ -180,7 +182,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "COVID created two simultaneous shocks. Supply chain breakdowns, factory shutdowns, and labor shortages shifted SRAS left (less output at every price level). Meanwhile, stimulus checks and expanded unemployment benefits boosted consumer spending, shifting AD right. The combination of reduced supply and increased demand produced significant inflation. Option D is wrong on the demand side -- massive fiscal stimulus clearly boosted aggregate demand, not reduced it.",
+      "Two shocks hit simultaneously. Factory shutdowns, labor shortages, and broken supply chains shifted SRAS left. Stimulus checks and expanded unemployment benefits boosted spending, shifting AD right. Reduced supply plus increased demand produced significant inflation. If you picked (D), you got the demand side wrong — $2 trillion in fiscal stimulus clearly boosted aggregate demand.",
   },
   {
     id: "as-8",
@@ -194,7 +196,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Higher nominal wages increase production costs for firms across the economy. Since SRAS shifts are driven by changes in input costs, a widespread wage increase shifts SRAS to the left. At the new short-run equilibrium, the price level is higher and real GDP falls below potential, creating a recessionary gap. Option A is wrong because LRAS depends on the economy's real productive capacity (labor, capital, technology), not on the nominal wage level. Option C confuses a supply-side cost change with a demand-side income effect; while workers earn more per hour, the higher costs reduce output and employment, so the net demand effect is not a simple rightward AD shift. Option D describes the long-run adjustment, not the short-run impact.",
+      "Higher nominal wages mean higher production costs across the board. SRAS shifts left. At the new short-run equilibrium, the price level is higher and real GDP drops below potential — creating a recessionary gap. (A) confuses nominal wages with productive capacity; LRAS depends on real factors like labor supply and technology, not the nominal wage level. (C) sounds plausible but misses the supply-side hit: yes workers earn more per hour, but higher costs reduce output and employment, so the net effect isn't a clean rightward AD shift. (D) describes the long-run adjustment, not what happens in the short run when contracts just got signed.",
   },
   {
     id: "as-9",
@@ -208,7 +210,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The classical range corresponds to the vertical portion of aggregate supply at or near potential GDP, where all resources are fully employed and additional demand only raises prices without increasing output. The Keynesian range is the relatively flat portion far below potential, where significant idle capacity (unemployed workers, shuttered factories) means firms can increase output without bidding up input prices. Option A reverses the two ranges entirely. Option C ignores the fundamental insight that the slope of AS depends on how close the economy is to full capacity. Option D incorrectly ties the ranges to development status rather than to capacity utilization.",
+      "Look at the far right of the AS curve on the graph — where it goes nearly vertical. That's the classical range, at or near potential GDP, where all resources are employed and pushing demand higher only raises prices. Now look at the flat stretch on the far left. That's the Keynesian range, where idle factories and unemployed workers mean firms can ramp up output without bidding up input prices. (A) swaps the two ranges entirely — a common wrong answer on the AP exam. (C) ignores the fundamental point that the curve's slope depends on how close the economy is to full capacity.",
   },
   {
     id: "as-10",
@@ -222,7 +224,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 0,
     explanation:
-      "The self-correction mechanism works entirely through the supply side. When actual GDP is below potential, unemployment exceeds the natural rate. Surplus labor puts downward pressure on nominal wages over time. Falling wages reduce production costs across the economy, shifting SRAS to the right until output returns to potential GDP. The price level ends up lower than during the recessionary gap. Option B incorrectly has firms raising prices during a recession when demand is weak; firms have no pricing power with idle capacity. Option C describes monetary policy, which is an active intervention, not self-correction. Option D reverses the adjustment: the economy moves back to LRAS, not LRAS moving to match depressed output.",
+      "Self-correction works entirely through the supply side. Surplus labor pushes nominal wages down over time. Falling wages lower production costs, shifting SRAS right until output returns to potential GDP. The price level ends up lower. (B) gets it wrong because firms have no pricing power when demand is weak and capacity sits idle — you can't just raise prices into a recession. (C) describes monetary policy, which is active intervention, the opposite of self-correction. (D) has the adjustment running the wrong direction; the economy moves back to LRAS, not LRAS collapsing to match depressed output.",
   },
   {
     id: "as-11",
@@ -236,7 +238,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "A major reduction in energy costs has both short-run and long-run supply effects. In the short run, lower energy prices reduce production costs for virtually all industries, shifting SRAS right. In the long run, the permanent addition of a valuable natural resource expands the economy's productive capacity, shifting LRAS right. Option A focuses only on the demand side and misses the more significant supply-side impact; while consumers may benefit, the primary channel is reduced production costs. Option C ignores the short-run cost reduction that clearly shifts SRAS. Option D describes a possible secondary labor reallocation effect but misidentifies the dominant impact, which is a massive cost reduction, not a labor shortage.",
+      "Both curves shift. In the short run, slashing energy costs reduces production costs for nearly every industry, so SRAS moves right. In the long run, a permanent new resource base expands the economy's productive capacity, shifting LRAS right too. (A) only looks at the demand side and misses the much larger supply-side story. (C) pretends that cutting energy costs in half wouldn't immediately lower production costs — it obviously would.",
   },
   {
     id: "as-12",
@@ -250,7 +252,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "When the actual price level falls below expectations, nominal wages are locked in at the previously agreed level. With prices lower but wages unchanged, real wages (nominal wage divided by price level) are higher than firms anticipated. Higher real labor costs squeeze profit margins, making production less profitable, so firms reduce output and employment. This is why unexpected deflation or below-expected price levels cause recessions in the sticky-wage framework. Option A reverses the logic; lower-than-expected prices with sticky wages raise real costs, not lower them. Option C is incorrect because the entire point of sticky wages is that contracts cannot be renegotiated instantly. Option D assumes voluntary flexibility that contradicts the sticky-wage assumption.",
+      "Wages got locked in at levels that assumed a higher price level. When prices come in lower than expected but wages stay put, real wages (nominal wage divided by actual price level) end up higher than firms planned for. Higher real labor costs squeeze margins, so firms cut production and lay off workers. That's why unexpected deflation causes recessions in the sticky-wage framework. (A) reverses the logic entirely. (C) contradicts the whole premise — the point of sticky wages is that contracts can't be renegotiated instantly.",
   },
   {
     id: "as-13",
@@ -264,7 +266,7 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 0,
     explanation:
-      "A temporary decline in oil prices reduces current production costs, shifting SRAS right. However, because the price decline is temporary (driven by a price war that will eventually end), it does not permanently expand the economy's productive capacity, so LRAS does not shift. Option B shifts both SRAS and LRAS because a larger labor force permanently increases productive capacity. Option C shifts both because new capital stock permanently raises potential output. Option D shifts both because permanent productivity gains expand what the economy can sustainably produce at full employment.",
+      "A temporary oil price drop — like the Saudi-Russia price war of early 2020 — reduces current production costs, sliding SRAS right. But because it's temporary, the economy's long-run productive capacity doesn't change, so LRAS stays put. (B), (C), and (D) all permanently expand what the economy can produce, meaning both SRAS and LRAS shift right.",
   },
   {
     id: "as-14",
@@ -278,6 +280,6 @@ export const aggregateSupplyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "In an inflationary gap, the economy operates beyond sustainable capacity. Unemployment is below the natural rate, so labor markets are extremely tight. Workers leverage their bargaining power to demand higher wages. Rising wages increase production costs, shifting SRAS to the left. Output falls back to potential GDP, but the price level settles at a permanently higher level. Option A describes a demand-side shift that could happen but is not the self-correction mechanism, which operates through the supply side via wage adjustments. Option C is wrong because LRAS does not adjust to accommodate unsustainable output levels; potential GDP is determined by real resources, not by how hot the economy is running. Option D reverses the adjustment direction; prices rise during inflationary gap correction, they do not fall.",
+      "In an inflationary gap, unemployment sits below the natural rate. Labor markets are tight. Workers have leverage and they use it — demanding higher wages. Rising wages push production costs up, shifting SRAS left. Output falls back to potential GDP, but the price level settles permanently higher. (A) describes something that could happen but it's not the self-correction mechanism, which operates through wage adjustments on the supply side. (C) is wrong because LRAS doesn't stretch to accommodate unsustainable output; potential GDP is set by real resources, not by how overheated the economy runs. (D) gets the price direction completely reversed.",
   },
 ];

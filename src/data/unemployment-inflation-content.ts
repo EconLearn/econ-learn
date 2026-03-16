@@ -2,65 +2,67 @@ import type { PracticeQuestion } from "@/data/supply-demand-content";
 
 export const unemploymentInflationContent = {
   title: "Unemployment & Inflation",
-  subtitle: "The different types of unemployment, how we measure inflation, and the tradeoff the Phillips curve describes",
+  subtitle: "From the labor crises of the 1930s to the stagflation of the 1970s — how economists classified joblessness, learned to measure rising prices, and discovered the Phillips curve tradeoff",
   sections: [
     {
       heading: "Types of Unemployment",
-      content: `Zero unemployment is impossible. The reasons why tell you everything about the three types economists distinguish.
+      content: `Zero unemployment has never existed in any market economy, and it never will. The reasons why tell you everything about the three categories economists have distinguished since the mid-20th century.
 
-A recent college graduate sending out resumes, or a marketing manager who quit to chase a better role, is experiencing **frictional unemployment**. Both have usable skills. The search just takes time. Frictional unemployment exists even in a booming economy.
+A recent college graduate sending out resumes, or a marketing manager who quit in January 2024 to chase a better role at a competing firm, is experiencing **frictional unemployment**. Both have usable skills. Jobs exist for people like them. The search simply takes time. Frictional unemployment persists even in a roaring economy.
 
-**Structural unemployment** runs deeper. A West Virginia coal miner displaced by the shift to natural gas can't walk down the street and apply for a similar job. Neither can an assembly-line worker replaced by a robot. The skills or locations no longer match what employers need, and retraining takes months or years.
+**Structural unemployment** runs deeper. When the U.S. coal industry shed roughly 40% of its workforce between 2011 and 2020, a miner in McDowell County, West Virginia could not walk down the street and find a similar job. Neither could assembly-line workers at the Lordstown, Ohio General Motors plant after it closed in 2019. Their skills or locations no longer matched what employers needed. Retraining takes months or years, and geographic relocation is expensive.
 
-**Cyclical unemployment** tracks the business cycle directly. When recession hits, aggregate demand collapses, firms slash payrolls, and layoffs spike across sectors. The 2008-2009 crisis and the early 2020 COVID shutdown are textbook cases. Once GDP returns to potential, cyclical unemployment vanishes.
+**Cyclical unemployment** tracks the business cycle directly. When recession hits, aggregate demand collapses, firms slash payrolls, and layoffs spike across entire sectors. The 2008-2009 financial crisis and the early 2020 COVID shutdown are textbook cases. Once GDP returns to potential, cyclical unemployment vanishes.
 
-The **natural rate of unemployment** = frictional + structural. It prevails when the economy produces at potential GDP, and cyclical unemployment is zero. The natural rate is never zero because job searching and skills mismatches are permanent features of any dynamic economy.`,
+The **natural rate of unemployment** equals frictional plus structural. It prevails when the economy produces at potential GDP and cyclical unemployment is zero. The Congressional Budget Office estimated the U.S. natural rate at roughly 4.4% in 2024. That number is never zero, because job searching and skills mismatches are permanent features of any dynamic economy.`,
     },
     {
       heading: "Measuring Unemployment",
-      content: `The definition of "unemployed" is narrower than most people assume, and the gaps matter for policy.
+      content: `The Bureau of Labor Statistics has published monthly unemployment data since 1940, and the definition of "unemployed" is narrower than most people assume. The gaps matter for policy.
 
-The **labor force** includes everyone 16 and older who is either working or actively searching for work. Retirees, full-time students not seeking jobs, stay-at-home parents, and anyone who has stopped looking are excluded entirely.
+The **labor force** includes everyone 16 and older who is either working or actively searching for work. Retirees, full-time students not seeking employment, stay-at-home parents, and anyone who has stopped looking are excluded entirely.
 
 **Unemployment rate = (Unemployed / Labor Force) x 100**
 
-You must be jobless *and* actively searching to count. That rule creates two major blind spots.
+You must be jobless *and* actively searching to count as unemployed. That requirement creates two major blind spots in the official data.
 
-**Discouraged workers** have given up looking because they believe no work is available. When they stop searching, they exit the labor force. The measured unemployment rate actually falls, even though the job market hasn't improved. The statistic simply stopped counting them. During 2009-2010, this effect masked how severe the labor crisis really was.
+**Discouraged workers** have given up looking because they believe no work is available. When they stop searching, they exit the labor force. The measured unemployment rate actually falls — even though the job market has not improved. The statistic simply stopped counting them. During 2009-2010, this effect masked how severe the labor crisis really was; the official U-3 rate peaked at 10.0% in October 2009, but broader measures suggested the real figure was closer to 17%.
 
-**Underemployment** is the other gap. A software engineer pulling espresso shots part-time because nobody in her field is hiring registers as "employed" in the official data. The headline unemployment rate (U-3) misses this slack entirely. The BLS publishes a broader U-6 measure capturing discouraged workers and the underemployed, but it rarely makes headlines.`,
+**Underemployment** is the other gap. A software engineer pulling espresso shots part-time at Starbucks because nobody in her field is hiring registers as "employed." The headline U-3 rate misses this slack entirely. The BLS publishes a broader U-6 measure that captures discouraged workers and the involuntarily part-time, but U-6 rarely makes front-page headlines.`,
     },
     {
       heading: "Inflation and the CPI",
-      content: `Gas over $5 per gallon in June 2022. Grocery bills up 10%. How does the government compress all of that into a single number? The **Consumer Price Index (CPI)** tracks the cost of a fixed **market basket** of goods and services purchased by a typical urban household.
+      content: `In June 2022, the average price of a gallon of regular gasoline in the United States hit $5.02 — the highest ever recorded by AAA. Grocery bills climbed 10% year-over-year. The government compresses all of that into a single number using the **Consumer Price Index (CPI)**, which tracks the cost of a fixed **market basket** of goods and services purchased by a typical urban household.
 
-The Bureau of Labor Statistics selects the basket: housing, food, transportation, medical care, education, and more. Each item is weighted by its share of a typical budget, with housing dominating. The CPI compares the basket's cost in the current period to a base year, then multiplies by 100.
+The Bureau of Labor Statistics has been publishing the CPI since 1913, making it one of the longest-running economic data series in the country. The BLS selects the basket — housing, food, transportation, medical care, education, and more — weighting each item by its share of a typical budget, with housing dominating at roughly one-third. The CPI compares the basket's cost in the current period to a base year, then multiplies by 100.
 
 Given two CPI values, the inflation rate calculation is straightforward:
 
 **Inflation rate = ((CPI_new - CPI_old) / CPI_old) x 100**
 
-The CPI has known biases that push it above the true cost-of-living increase. **Substitution bias**: beef prices spike and consumers switch to chicken, but the fixed basket assumes they kept buying beef. **New product bias**: the basket updates slowly and misses cheaper or better products entering the market. **Quality change bias**: a laptop priced the same as last year's model but running twice as fast hasn't really held its price. All three mean the CPI overstates actual inflation somewhat.`,
+The CPI has known biases that push it above the true cost-of-living increase, all identified by the 1996 Boskin Commission. **Substitution bias**: beef prices spike and consumers switch to chicken, but the fixed basket assumes they kept buying beef. **New product bias**: the basket updates slowly and misses cheaper or better products entering the market (smartphones did not exist in the original basket). **Quality change bias**: a laptop priced the same as last year's model but running twice as fast has not really held its price in any meaningful sense. All three mean the CPI overstates actual inflation by an estimated 0.8-1.1 percentage points per year, according to the Boskin Commission's findings.`,
     },
     {
       heading: "The Phillips Curve",
-      content: `Can a government print money and spend its way to permanently low unemployment? The **Phillips curve** says no. The benefit is temporary, and inflation is the price you pay.
+      content: `In 1958, A.W. Phillips published a study examining nearly a century of British wage and unemployment data, from 1861 to 1957. The pattern he found was striking: when unemployment fell, wages — and by extension, prices — rose. When unemployment climbed, inflation cooled. The **Phillips curve** was born.
 
-The **short-run Phillips curve (SRPC)** slopes downward: unemployment on the x-axis, inflation on the y-axis. Move up and left for lower unemployment with higher inflation. Move down and right for the reverse. The late 1960s demonstrated this tradeoff clearly. LBJ's spending on Vietnam and the Great Society pushed unemployment down but ignited inflation.
+The **short-run Phillips curve (SRPC)** slopes downward with unemployment on the x-axis and inflation on the y-axis. Move up and left for lower unemployment with higher inflation. Move down and right for the reverse. The late 1960s demonstrated this tradeoff vividly, as Lyndon Johnson's simultaneous spending on Vietnam and Great Society programs pushed unemployment below 4% while inflation crept above 5%.
 
-Here's the long-run punchline. The **long-run Phillips curve (LRPC)** is vertical at the natural rate of unemployment. In the long run, no tradeoff exists. Workers and firms adjust their inflation expectations. A central bank trying to hold unemployment permanently below the natural rate through relentless money creation just produces accelerating inflation with no lasting employment gain. The 1970s proved this conclusively before Volcker crushed the cycle with punishingly high interest rates.
+The long-run story is different. Milton Friedman and Edmund Phelps, working independently in the late 1960s, predicted that the tradeoff was temporary. The **long-run Phillips curve (LRPC)** is vertical at the natural rate of unemployment. Workers and firms eventually adjust their inflation expectations, and a central bank trying to hold unemployment permanently below the natural rate through relentless money creation just produces accelerating inflation with no lasting employment gain. The 1970s proved Friedman right. Paul Volcker's Federal Reserve finally crushed the inflationary cycle in 1981-1982 by pushing the federal funds rate above 20% — triggering a severe recession but breaking the spiral.
 
-What shifts the SRPC? Expected inflation. When people expect higher inflation, the entire curve shifts up: at every unemployment rate, actual inflation is higher. When expectations cool, the curve shifts down.`,
+What shifts the SRPC? Expected inflation. When people expect higher inflation, the entire curve shifts upward: at every unemployment rate, actual inflation is higher. When expectations cool, the curve shifts back down. The anchoring of inflation expectations became the central preoccupation of central banking after the Volcker era.`,
     },
     {
       heading: "Stagflation and Supply Shocks",
-      content: `In 1973, OPEC slashed oil production and energy prices quadrupled. Inflation soared and unemployment soared. Both at once. The Phillips curve predicted those two variables should move in opposite directions, yet here they were climbing together. Economists called it **stagflation**.
+      content: `On October 17, 1973, the Organization of Arab Petroleum Exporting Countries announced an oil embargo against nations that had supported Israel in the Yom Kippur War. Within months, oil prices quadrupled. Inflation soared. Unemployment soared. Both at once.
 
-The culprit was an adverse supply shock. Higher oil prices raised production costs across nearly every industry. Firms cut output and laid off workers while simultaneously passing cost increases on to consumers. The standard Phillips curve tradeoff couldn't account for this because it assumed shocks originated on the demand side.
+The standard Phillips curve predicted those two variables should move in opposite directions. Yet there they were, climbing together. Economists called it **stagflation** — stagnation plus inflation — and it shattered the prevailing Keynesian consensus that policymakers could always choose between the two evils.
 
-On the Phillips curve diagram, an adverse supply shock shifts the SRPC upward and to the right. At every unemployment rate, inflation is now higher. Policymakers face a lose-lose choice: fight inflation with contractionary policy (worsening unemployment) or fight unemployment with expansionary policy (worsening inflation). The Fed under Arthur Burns tried to split the difference throughout the 1970s and mostly made things worse.
+The culprit was an adverse supply shock. Higher oil prices raised production costs across virtually every industry. Firms cut output and laid off workers while simultaneously passing cost increases to consumers. On the Phillips curve diagram, an adverse supply shock shifts the SRPC upward and to the right: at every unemployment rate, inflation is now higher.
 
-Favorable supply shocks work in reverse. Falling oil prices or a productivity breakthrough (the late-1990s tech boom) shift the SRPC downward and to the left, delivering the rare combination of lower inflation and lower unemployment simultaneously.`,
+Policymakers faced a lose-lose choice. Fight inflation with contractionary policy and unemployment worsens. Fight unemployment with expansionary policy and inflation worsens. Arthur Burns, the Fed chairman through most of the 1970s, tried to split the difference and mostly made things worse. Inflation was still running near 13% when Volcker took over in August 1979.
+
+Favorable supply shocks work in reverse. The late-1990s technology boom, combined with falling energy prices, shifted the SRPC downward and to the left — delivering the rare combination of lower inflation and lower unemployment simultaneously. The U.S. unemployment rate fell to 3.9% in 2000 while inflation stayed below 3.5%. A golden moment that supply-side conditions made possible.`,
     },
     {
       heading: "Worked Example",
@@ -72,9 +74,9 @@ The labor force is 160 million, with 6.4 million unemployed.
 
 Unemployment rate = 6.4 / 160 x 100 = **4.0%**.
 
-Context matters here. If the natural rate is 5.0% and the current rate is 4.0%, the economy is running below the natural rate. On the short-run Phillips curve, that puts you in the upper-left zone: low unemployment, building inflationary pressure. Contractionary policy would push unemployment back toward 5.0% and cool inflation. The U.S. was in roughly this position in late 2021, right before the inflation spike.
+Context from the Phillips curve framework: if the natural rate is 5.0% and the current rate is 4.0%, the economy is operating below the natural rate. On the short-run Phillips curve, that positions the economy in the upper-left zone — low unemployment, building inflationary pressure. Contractionary policy would push unemployment back toward 5.0% and cool inflation. The U.S. was in roughly this position in late 2021, before the inflation spike of 2022 forced the Fed into its most aggressive rate-hiking cycle since Volcker.
 
-Now consider a different scenario: a supply shock drives unemployment to 7.0% while inflation jumps to 5.0%. That's stagflation. The SRPC has shifted upward and to the right, and no single demand-side tool fixes both problems. Expansionary policy would reduce unemployment but feed inflation. Contractionary policy would tame prices but deepen the jobs crisis. There's no clean answer, which is exactly what makes supply shocks so difficult for policymakers.`,
+A different scenario: a supply shock drives unemployment to 7.0% while inflation jumps to 5.0%. That is stagflation — the SRPC has shifted upward and to the right. No single demand-side tool fixes both problems simultaneously. Expansionary policy would reduce unemployment but feed inflation. Contractionary policy would tame prices but deepen the jobs crisis. The 1970s taught this lesson at enormous cost.`,
     },
   ],
 };
@@ -90,7 +92,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "Seasonal unemployment",
     ],
     correctIndex: 2,
-    explanation: "She has marketable skills and is simply searching, and that is textbook frictional unemployment. The search takes time, but nothing structural is blocking her. Option B (structural) is the trap answer: structural unemployment requires a mismatch between skills and available jobs, like a coal miner in a region with no mining jobs. A new grad has not yet experienced that kind of displacement. Option A (cyclical) would require a recession-driven layoff, not a voluntary first-time job search. Option D (seasonal) applies to predictable calendar-based fluctuations like holiday retail hiring.",
+    explanation: "She has marketable skills and is simply searching — textbook frictional unemployment. Option B is the trap: structural unemployment requires a mismatch between skills and available jobs, like a coal miner in a region where mining has vanished. A new graduate has not experienced that kind of displacement. Option A would require a recession-driven layoff. Option D applies to predictable calendar-based fluctuations like holiday retail staffing.",
   },
   {
     id: "ui-2",
@@ -102,7 +104,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "Only cyclical unemployment",
     ],
     correctIndex: 2,
-    explanation: "The natural rate = frictional + structural. These two types persist even when the economy is healthy and producing at potential GDP. Cyclical unemployment is, by definition, zero at the natural rate. Options A, B, and D all include cyclical unemployment, which is the giveaway that they are wrong. Cyclical unemployment only exists when the economy has deviated from potential output. If cyclical unemployment is present, the economy is not at its natural rate.",
+    explanation: "Natural rate = frictional + structural. These two persist even when the economy is healthy and producing at potential GDP. Cyclical unemployment is zero at the natural rate by definition. Any option that includes cyclical unemployment is automatically wrong — if cyclical unemployment is present, the economy has deviated from potential output.",
   },
   {
     id: "ui-3",
@@ -114,7 +116,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "2.1%",
     ],
     correctIndex: 1,
-    explanation: "Plug into the formula: ((210 - 200) / 200) x 100 = 5%. You divide by the old CPI (200), not the new one. Option A (10%) is the most common mistake: students see a 10-point rise and write 10%, confusing the raw point change with the percentage change. Option C (4.76%) is what you get if you accidentally divide by 210 instead of 200. Option D (2.1%) has no basis in the formula.",
+    explanation: "((210 - 200) / 200) x 100 = 5%. Divide by the old CPI, not the new one. Option A (10%) is the most common error — confusing the raw 10-point increase with a percentage. Option C (4.76%) results from accidentally dividing by 210. Option D has no basis in the formula.",
   },
   {
     id: "ui-4",
@@ -126,7 +128,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "There is no relationship between inflation and unemployment",
     ],
     correctIndex: 2,
-    explanation: "The SRPC slopes downward: moving left (lower unemployment) means moving up (higher inflation). That inverse relationship is the short-run tradeoff. Option A gets the slope backward: it describes an upward-sloping relationship, which the SRPC does not show. Option B also reverses the direction: on the SRPC, lower inflation pairs with higher unemployment, not lower unemployment. Option D contradicts the entire point of the Phillips curve, which exists specifically to describe the relationship between inflation and unemployment.",
+    explanation: "The SRPC slopes downward: moving left (lower unemployment) means moving up (higher inflation). A.W. Phillips documented this inverse relationship in 1958 using British data stretching back to 1861. Option A describes an upward slope, which contradicts the curve. Option B also reverses the direction. Option D contradicts the entire purpose of the Phillips curve.",
   },
   {
     id: "ui-5",
@@ -138,7 +140,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "Increases because the labor force grows",
     ],
     correctIndex: 1,
-    explanation: "When discouraged workers quit searching, they leave the labor force entirely. Both the numerator (unemployed) and denominator (labor force) shrink, and the net math produces a lower unemployment rate, even though the actual job market has not improved. This is one of the U-3 measure's biggest blind spots. Option A sounds logical on the surface (more people are jobless), but the formula only counts people actively seeking work. Option C is wrong because discouraged workers are explicitly not counted once they stop searching. Option D reverses the effect on the labor force: it shrinks, not grows.",
+    explanation: "When discouraged workers quit searching, they leave the labor force. Both numerator and denominator shrink, and the net effect is a lower unemployment rate — even though the actual job market has not improved. This blind spot was particularly severe during 2009-2010, when the official U-3 rate understated the true labor market damage. Option A sounds logical but the BLS formula only counts those actively seeking work. Option C is wrong because discouraged workers are explicitly excluded once they stop searching. Option D reverses the effect on the labor force.",
   },
   {
     id: "ui-6",
@@ -150,7 +152,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "Falling inflation and rising unemployment",
     ],
     correctIndex: 2,
-    explanation: "Stagflation = inflation up + unemployment up, simultaneously. The 1970s oil shocks are the textbook case: OPEC restricted supply, energy costs spiked, firms raised prices and laid off workers at the same time. Option B (rising inflation with falling unemployment) is just normal movement along the SRPC during a demand-driven expansion, which is the standard Phillips curve tradeoff, not stagflation. Option A describes an economy improving on both fronts (favorable supply shock territory). Option D describes the effect of contractionary demand policy, not a supply shock.",
+    explanation: "Stagflation = simultaneous rising inflation and rising unemployment. The 1973-1975 period following OPEC's oil embargo is the classic case. Option B describes normal movement along the SRPC during a demand-driven expansion. Option A describes favorable supply-shock territory. Option D describes contractionary demand policy effects.",
   },
   {
     id: "ui-7",
@@ -162,7 +164,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "The CPI always returns to its base-year value",
     ],
     correctIndex: 1,
-    explanation: "In the long run, workers and firms fully adjust their inflation expectations, and the economy settles back at the natural rate no matter how high or low inflation runs. There is no permanent tradeoff to exploit: you cannot buy permanently lower unemployment with higher inflation. Option A is wrong because the Fed absolutely can change the money supply in the long run; the problem is that doing so only changes inflation, not the unemployment rate. Option C compares fiscal and monetary policy effectiveness, which has nothing to do with why the LRPC is vertical. Option D is nonsensical: the CPI has no mechanism to return to a base-year value.",
+    explanation: "In the long run, workers and firms fully adjust their inflation expectations, and the economy settles at the natural rate regardless of the inflation rate. Friedman and Phelps predicted this in the late 1960s, and the 1970s confirmed it. Option A is wrong because the Fed absolutely can change the money supply long-term — the problem is that doing so only changes inflation, not unemployment. Option C compares policy tools without addressing the LRPC's verticality. Option D is nonsensical.",
   },
   {
     id: "ui-8",
@@ -174,7 +176,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "The SRPC does not shift; only the LRPC shifts",
     ],
     correctIndex: 2,
-    explanation: "An adverse supply shock, like the OPEC oil embargo or the 2021-2022 supply chain crisis, raises production costs and lifts inflation expectations. The SRPC shifts upward and to the right: at every unemployment rate, inflation is now higher. Option A (downward and left) is the exact opposite: that describes a favorable supply shock, like falling oil prices or a productivity breakthrough. Option B is wrong because a supply shock does not move you along the existing curve; it shifts the whole curve. Option D is wrong because the SRPC absolutely does shift in response to supply shocks. That is the entire point of the stagflation story.",
+    explanation: "An adverse supply shock — like the 1973 OPEC embargo or the 2021-2022 global supply chain crisis — raises production costs and lifts inflation expectations. The SRPC shifts upward and to the right: higher inflation at every unemployment rate. Option A is the exact opposite, describing a favorable supply shock. Option B is wrong because a supply shock shifts the whole curve, not just the economy's position on it. Option D is incorrect; the SRPC absolutely shifts in response to supply shocks. That shift is the entire explanation for stagflation.",
   },
   {
     id: "ui-9",
@@ -186,7 +188,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "Natural rate: 5%; cyclically unemployed: 7.5 million",
     ],
     correctIndex: 1,
-    explanation: "The natural rate of unemployment equals frictional plus structural unemployment: 3% + 2% = 5%. Cyclical unemployment is not included because it only exists when the economy deviates from potential output. The number of cyclically unemployed workers is 1.5% of 150 million = 2.25 million. Option A (6.5%) incorrectly adds cyclical unemployment to the natural rate, which contradicts the definition. Option C (3%) uses only frictional unemployment and ignores the structural component. Option D calculates the natural rate correctly at 5% but multiplies 5% (instead of 1.5%) by 150 million to get 7.5 million cyclically unemployed, confusing the natural rate with the cyclical rate.",
+    explanation: "Natural rate = frictional + structural = 3% + 2% = 5%. Cyclical unemployment is excluded by definition. Cyclically unemployed = 1.5% of 150 million = 2.25 million. Option A incorrectly adds cyclical unemployment to the natural rate. Option C uses only frictional unemployment and ignores structural. Option D gets the natural rate right but multiplies 5% (instead of 1.5%) by 150 million, confusing the natural rate with the cyclical rate.",
   },
   {
     id: "ui-10",
@@ -198,7 +200,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "Real wages cannot be determined without knowing the GDP deflator",
     ],
     correctIndex: 1,
-    explanation: "CPI rose from 100 to 110, a 10% increase in the price level. Nominal wages rose from $50,000 to $52,000, only a 4% increase. Since prices rose faster than wages, real purchasing power declined. Real wage in the current year = ($52,000 / 110) x 100 = approximately $47,273, which is less than the base-year $50,000. Option A incorrectly focuses on the absolute dollar increase without comparing the percentage changes. Option C claims proportional increases, but 4% does not equal 10%. Option D is wrong because the CPI is sufficient to calculate real wages; the GDP deflator is an alternative price measure but is not required here.",
+    explanation: "CPI rose from 100 to 110 — a 10% price increase. Nominal wages rose from $50,000 to $52,000 — only 4%. Prices outran wages, so purchasing power declined. Real wage in the current year = ($52,000 / 110) x 100 = approximately $47,273, below the base-year $50,000. This pattern hit American workers hard during the 2021-2022 inflation surge, when wage gains consistently lagged price increases. Option A ignores the percentage comparison. Option C claims proportionality, but 4% does not equal 10%. Option D is wrong because the CPI suffices for this calculation.",
   },
   {
     id: "ui-11",
@@ -210,7 +212,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "Seasonal unemployment, because manufacturing demand fluctuates",
     ],
     correctIndex: 2,
-    explanation: "Structural unemployment occurs when workers' skills, location, or characteristics do not match the requirements of available jobs. Technological displacement through automation is a textbook cause of structural unemployment because the worker's existing skill set has become obsolete. Option A is tempting because the worker is searching, but frictional unemployment assumes the worker has marketable skills and is merely between suitable positions. Option B is wrong because cyclical unemployment is caused by downturns in the business cycle and reduced aggregate demand, not by technological change at the firm level. Option D applies to predictable, calendar-based fluctuations in labor demand, which is unrelated to automation.",
+    explanation: "Technological displacement through automation is a textbook cause of structural unemployment — the worker's existing skills have become obsolete, mirroring the experience of thousands of manufacturing workers across the Rust Belt since the 1980s. Option A is tempting because the worker is searching, but frictional unemployment assumes marketable skills and a temporary search. Option B is wrong because cyclical unemployment stems from business-cycle downturns, not firm-level technology adoption. Option D applies to calendar-based labor fluctuations unrelated to automation.",
   },
   {
     id: "ui-12",
@@ -222,7 +224,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "Workers whose wages are set by long-term contracts without cost-of-living adjustments",
     ],
     correctIndex: 2,
-    explanation: "Borrowers with fixed-rate loans benefit from unexpected inflation because they repay their debts with dollars that have less purchasing power than when they borrowed. The real value of their debt shrinks. Option A is the opposite case: retirees on fixed pensions are harmed because their income buys less as prices rise. Option B describes lenders, who are hurt because the money repaid to them is worth less in real terms than what they lent. Option D describes workers who are also harmed, as their locked-in nominal wages lose purchasing power when prices rise faster than expected.",
+    explanation: "Borrowers with fixed-rate loans repay their debts with dollars that have less purchasing power than when they borrowed. The real value of their debt shrinks. This was a significant wealth transfer during the inflationary 1970s. Option A describes the opposite — retirees on fixed pensions are harmed as purchasing power erodes. Option B describes lenders, who are also hurt. Option D describes workers whose locked-in wages lose real value.",
   },
   {
     id: "ui-13",
@@ -234,7 +236,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "Sunk costs",
     ],
     correctIndex: 1,
-    explanation: "Menu costs are the literal and figurative costs firms incur to change posted prices during inflation: reprinting menus, updating online listings, recoding scanners, and notifying customers. The term originated from restaurants reprinting menus but applies broadly. Option A refers to shoe-leather costs, which are the time and effort individuals and businesses spend trying to minimize cash holdings during inflation (like making more frequent bank trips), not the cost of updating prices. Option C is a general economic concept about forgone alternatives and is not specific to inflation. Option D refers to costs already incurred that cannot be recovered, which is unrelated to the ongoing expense of price adjustment.",
+    explanation: "**Menu costs** are the literal and figurative expenses of changing posted prices — reprinting restaurant menus, updating online listings, recoding scanners. The term originated in the economics literature from the image of restaurants reprinting physical menus but applies broadly to any firm. Option A refers to shoe-leather costs: the time and effort spent minimizing cash holdings during inflation. Option C is a general concept about forgone alternatives, not specific to inflation. Option D refers to irrecoverable past expenses.",
   },
   {
     id: "ui-14",
@@ -246,7 +248,7 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "A favorable supply shock that temporarily increases both inflation and unemployment",
     ],
     correctIndex: 1,
-    explanation: "Simultaneous increases in both unemployment and inflation are the defining feature of stagflation, caused by adverse supply shocks such as energy price spikes. This shifts the SRPC upward and to the right, creating a policy dilemma: demand-side tools can address one problem only by worsening the other. Option A is wrong because movement along the SRPC produces the opposite pattern -- lower unemployment with higher inflation (or vice versa), not both rising. Option C is incorrect because the LRPC shifts when the natural rate of unemployment changes due to structural factors, not when both inflation and unemployment spike simultaneously. Option D contradicts itself; a favorable supply shock lowers both inflation and unemployment, not increases them.",
+    explanation: "Simultaneous increases in both unemployment and inflation define stagflation — the pattern that emerged after the 1973 oil embargo and recurred after the 1979 Iranian Revolution. The SRPC has shifted upward and to the right, and demand-side tools can only address one problem by worsening the other. Option A is wrong because movement along the SRPC produces the inverse pattern (lower unemployment with higher inflation, or vice versa). Option C is about structural labor market changes, not a supply shock. Option D contradicts itself: favorable supply shocks reduce both inflation and unemployment.",
   },
   {
     id: "ui-15",
@@ -258,6 +260,6 @@ export const unemploymentInflationQuestions: PracticeQuestion[] = [
       "The LRPC shifts to the left, permanently reducing the natural rate of unemployment",
     ],
     correctIndex: 1,
-    explanation: "Contractionary monetary policy reduces aggregate demand, which in the short run causes the economy to move down and to the right along the existing SRPC: unemployment increases and inflation decreases. This is the intended tradeoff when fighting inflation. Option A describes the long-run self-correction outcome, not the short-run Phillips curve movement; in the short run, reducing inflation requires accepting higher unemployment. Option C falsely claims inflation can be eliminated without any change in unemployment, which contradicts the short-run tradeoff. Option D incorrectly asserts that monetary policy changes the natural rate; the LRPC position is determined by structural factors like labor market institutions and demographics, not by monetary policy.",
+    explanation: "Contractionary monetary policy reduces aggregate demand, causing a short-run movement down and to the right along the SRPC: unemployment rises and inflation falls. This is precisely the tradeoff Volcker accepted in 1981-1982 when he raised rates above 20% to break inflation — unemployment climbed to 10.8% in the process. Option A describes long-run self-correction, not the short-run Phillips curve movement. Option C falsely claims inflation can vanish without any unemployment cost. Option D incorrectly asserts that monetary policy changes the natural rate, which is determined by structural factors like labor market institutions, not central bank decisions.",
   },
 ];

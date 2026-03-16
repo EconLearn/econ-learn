@@ -4,32 +4,32 @@ export const basicConceptsFlashcards: Flashcard[] = [
   {
     id: "bc-f1",
     front: "Scarcity",
-    back: "The basic economic problem: unlimited wants but limited resources. Every society has to make choices about how to allocate what it has.",
+    back: "We've got unlimited wants and limited stuff. That's it. Every economic question boils down to making tradeoffs because there isn't enough to go around.",
   },
   {
     id: "bc-f2",
     front: "Opportunity Cost",
-    back: "The value of the next best alternative you give up when making a choice. It's the true cost of any decision in economics.",
+    back: "Whatever you gave up to do what you're doing right now. Like if you skip a $15/hr shift to study, the opportunity cost of studying is that $15/hr.",
   },
   {
     id: "bc-f3",
     front: "Production Possibilities Curve",
-    back: "A graph showing all the maximum combinations of two goods an economy can produce with its resources. Points inside the curve are inefficient; points outside are unattainable.",
+    back: "Shows all the max combos of two goods an economy can make. Inside the curve = wasting resources. Outside = can't get there yet. On the curve = efficient.",
   },
   {
     id: "bc-f4",
     front: "Marginal Analysis",
-    back: "Making decisions by comparing the additional benefit of an action to its additional cost. Rational agents act when marginal benefit exceeds marginal cost.",
+    back: "Should I do one more unit of this? Compare the extra benefit to the extra cost. If the benefit's bigger, do it. That's how rational decisions work.",
   },
   {
     id: "bc-f5",
     front: "Comparative Advantage",
-    back: "The ability to produce a good at a lower opportunity cost than another producer. This is what makes mutually beneficial trade possible.",
+    back: "Whoever can produce something at a lower opportunity cost should specialize in it. This is why trade works — even if one country's better at everything.",
   },
   {
     id: "bc-f6",
     front: "Absolute Advantage",
-    back: "Being able to produce more of a good using the same resources as another producer. Important: this doesn't determine who should specialize.",
+    back: "Just means you can produce more with the same resources. But it doesn't tell you who should specialize — that's comparative advantage's job.",
   },
 ];
 
@@ -37,32 +37,32 @@ export const supplyDemandFlashcards: Flashcard[] = [
   {
     id: "sd-f1",
     front: "Law of Demand",
-    back: "As the price of a good rises, quantity demanded falls (all else equal). This inverse relationship is why the demand curve slopes downward.",
+    back: "Price goes up, quantity demanded goes down. Always. That's why the demand curve slopes downward from left to right.",
   },
   {
     id: "sd-f2",
     front: "Law of Supply",
-    back: "As the price of a good rises, quantity supplied rises (all else equal). This direct relationship is why the supply curve slopes upward.",
+    back: "Higher prices mean producers want to sell more. Makes sense — if coffee beans jump to $8/lb, farmers plant more coffee. Supply curve slopes up.",
   },
   {
     id: "sd-f3",
     front: "Equilibrium Price",
-    back: "The price where quantity demanded equals quantity supplied. No shortage, no surplus. The market clears.",
+    back: "Where supply meets demand. No shortage, no surplus — the market just clears.",
   },
   {
     id: "sd-f4",
     front: "Shift vs. Movement",
-    back: "A change in price causes movement along a curve (change in quantity). A change in a non-price factor (income, tastes, input costs) shifts the entire curve.",
+    back: "Price change? You slide along the curve. Something else changes — like consumer income or input costs — the whole curve shifts. Don't mix these up on the exam.",
   },
   {
     id: "sd-f5",
     front: "Price Ceiling",
-    back: "A legal maximum price set below equilibrium. Creates a shortage because quantity demanded exceeds quantity supplied. Classic example: rent control.",
+    back: "Government says \"you can't charge more than $X.\" If that's below equilibrium, you get a shortage. NYC rent control is the classic example — tons of demand, not enough apartments.",
   },
   {
     id: "sd-f6",
     front: "Price Floor",
-    back: "A legal minimum price set above equilibrium. Creates a surplus because quantity supplied exceeds quantity demanded. Classic example: minimum wage.",
+    back: "Legal minimum price, has to be above equilibrium to matter. Creates a surplus. Think minimum wage — if it's set above the market wage, more people want jobs than firms want to hire.",
   },
 ];
 
@@ -70,32 +70,32 @@ export const elasticityFlashcards: Flashcard[] = [
   {
     id: "el-f1",
     front: "Price Elasticity of Demand",
-    back: "How responsive quantity demanded is to a price change. Calculated as % change in quantity demanded divided by % change in price.",
+    back: "Measures how much buyers react to a price change. It's % change in Qd divided by % change in price. Big number = very responsive consumers.",
   },
   {
     id: "el-f2",
     front: "Elastic vs. Inelastic",
-    back: "Elastic (|Ed| > 1): quantity changes more than price. Inelastic (|Ed| < 1): quantity changes less. Unit elastic (|Ed| = 1): they change proportionally.",
+    back: "Elastic means |Ed| > 1 — quantity swings more than price. Inelastic is |Ed| < 1 — people barely change how much they buy. Insulin's super inelastic; vacation flights are elastic.",
   },
   {
     id: "el-f3",
     front: "Total Revenue Test",
-    back: "If demand is elastic, cutting the price raises total revenue. If demand is inelastic, cutting the price lowers it. Useful for firms setting prices.",
+    back: "Quick trick: if demand's elastic, lowering your price actually increases total revenue (you sell way more units). If it's inelastic, a price cut hurts revenue.",
   },
   {
     id: "el-f4",
     front: "Determinants of Elasticity",
-    back: "Demand is more elastic when close substitutes exist, the good is a luxury, it takes a big share of income, or consumers have more time to adjust.",
+    back: "More substitutes = more elastic. Luxury goods = more elastic. Takes up a big chunk of your budget = more elastic. More time to adjust = more elastic. Gasoline in the short run? Pretty inelastic.",
   },
   {
     id: "el-f5",
     front: "Cross-Price Elasticity",
-    back: "How quantity demanded of one good responds to a price change in another. Positive = substitutes. Negative = complements.",
+    back: "Positive means they're substitutes (Coke and Pepsi). Negative means complements (hot dogs and buns).",
   },
   {
     id: "el-f6",
     front: "Income Elasticity of Demand",
-    back: "How quantity demanded responds to a change in income. Positive = normal good. Negative = inferior good.",
+    back: "Positive = normal good, you buy more when income rises. Negative = inferior good — think ramen noodles, you buy less once you can afford better food.",
   },
 ];
 
@@ -103,32 +103,32 @@ export const consumerChoiceFlashcards: Flashcard[] = [
   {
     id: "cc-f1",
     front: "Utility",
-    back: "The satisfaction a consumer gets from consuming a good or service. Economists assume consumers try to maximize their total utility.",
+    back: "Fancy word for satisfaction. Economists assume you're always trying to squeeze the most happiness out of your budget.",
   },
   {
     id: "cc-f2",
     front: "Diminishing Marginal Utility",
-    back: "Each additional unit of a good gives you a little less satisfaction than the one before. This helps explain why demand curves slope downward.",
+    back: "First slice of pizza? Amazing. Fourth slice? Meh. Each extra unit gives you less additional satisfaction than the last one did.",
   },
   {
     id: "cc-f3",
     front: "Utility Maximization Rule",
-    back: "Consumers maximize utility when the marginal utility per dollar is equal across all goods: MU_A/P_A = MU_B/P_B for goods A and B.",
+    back: "You're getting the most bang for your buck when MU per dollar is equal across everything you buy. So MU_A/P_A = MU_B/P_B.",
   },
   {
     id: "cc-f4",
     front: "Budget Constraint",
-    back: "A line showing all combinations of two goods a consumer can afford given income and prices. Its slope equals the negative price ratio (-P_X/P_Y).",
+    back: "A line showing every combo of two goods you can afford. Slope is the negative price ratio (-P_X/P_Y). Income goes up, the whole line shifts out.",
   },
   {
     id: "cc-f5",
     front: "Substitution Effect",
-    back: "When a good's price falls, consumers buy more of it because it's now relatively cheaper compared to other goods, regardless of any purchasing power change.",
+    back: "Price of Coke drops? You switch from Pepsi to Coke because Coke's now the better deal. That switch is the substitution effect — nothing to do with feeling richer.",
   },
   {
     id: "cc-f6",
     front: "Income Effect",
-    back: "When a good's price falls, your real purchasing power increases, so you can buy more of all normal goods. Together with the substitution effect, this explains demand curves.",
+    back: "When something gets cheaper, your money stretches further — you're basically richer. So you buy more stuff. Pair this with the substitution effect and you've got the full demand story.",
   },
 ];
 
@@ -136,32 +136,32 @@ export const productionCostsFlashcards: Flashcard[] = [
   {
     id: "pc-f1",
     front: "Marginal Product",
-    back: "The extra output from hiring one more unit of input (usually labor). It initially rises due to specialization, then falls due to diminishing returns.",
+    back: "Extra output from one more worker. At first it goes up because of specialization, then it falls. Like adding a 5th cook to a tiny kitchen — they just get in the way.",
   },
   {
     id: "pc-f2",
     front: "Diminishing Marginal Returns",
-    back: "As you add more of a variable input to a fixed input, the marginal product eventually declines. This is strictly a short-run phenomenon.",
+    back: "Keep adding workers to a fixed amount of equipment and eventually each new hire adds less output. Short-run concept only — in the long run you can add more equipment too.",
   },
   {
     id: "pc-f3",
     front: "Marginal Cost",
-    back: "The cost of producing one more unit. The MC curve is U-shaped and crosses both ATC and AVC at their minimum points.",
+    back: "Cost of making one more unit. U-shaped curve. Crosses ATC and AVC at their lowest points — that's a favorite exam question.",
   },
   {
     id: "pc-f4",
     front: "Average Total Cost",
-    back: "Total cost divided by quantity (ATC = TC/Q). Equals average fixed cost plus average variable cost. U-shaped in the short run.",
+    back: "TC divided by Q. Also equals AFC + AVC. U-shaped because fixed costs get spread thin at first, then diminishing returns kick in.",
   },
   {
     id: "pc-f5",
     front: "Economies of Scale",
-    back: "When average total cost falls as a firm scales up production. Comes from specialization, bulk purchasing, and spreading fixed costs over more units.",
+    back: "Bigger output, lower average cost. Amazon can ship packages cheaper per unit than a small shop because they spread those massive warehouse costs over millions of orders.",
   },
   {
     id: "pc-f6",
     front: "Explicit vs. Implicit Costs",
-    back: "Explicit costs are actual payments to resource owners. Implicit costs are the opportunity costs of using your own resources. Economic profit accounts for both.",
+    back: "Explicit = money you actually hand over (rent, wages, materials). Implicit = what you gave up, like the salary you could've earned working somewhere else. Economic profit counts both.",
   },
 ];
 
@@ -169,32 +169,32 @@ export const perfectCompetitionFlashcards: Flashcard[] = [
   {
     id: "pcomp-f1",
     front: "Perfect Competition Characteristics",
-    back: "Many small firms, identical products, perfect information, free entry and exit. Each firm is a price taker facing a perfectly elastic demand curve.",
+    back: "Tons of tiny firms, identical product, everyone knows everything, easy to enter or leave. Each firm is a price taker — like a wheat farmer who just takes whatever the market price is.",
   },
   {
     id: "pcomp-f2",
     front: "Profit Maximization Rule",
-    back: "All firms maximize profit (or minimize loss) by producing where MR = MC, as long as price covers average variable cost.",
+    back: "Produce where MR = MC, period. But only if price is at least covering your variable costs — otherwise shut down.",
   },
   {
     id: "pcomp-f3",
     front: "Shutdown Rule",
-    back: "Shut down in the short run if price falls below average variable cost (P < AVC). At that point, you can't even cover your variable costs.",
+    back: "If P < AVC, close up shop in the short run. You'd lose less money by just paying your fixed costs and producing nothing.",
   },
   {
     id: "pcomp-f4",
     front: "Long-Run Equilibrium",
-    back: "In the long run, perfectly competitive firms earn zero economic profit. Price equals minimum ATC (P = min ATC), and firms produce at efficient scale.",
+    back: "Profits attract new firms, losses push firms out. This keeps going until everyone earns zero economic profit. Price settles at the minimum of ATC.",
   },
   {
     id: "pcomp-f5",
     front: "Allocative Efficiency",
-    back: "Achieved when P = MC. Resources go to their highest-valued uses, and the socially optimal quantity gets produced.",
+    back: "P = MC. Society gets exactly the right amount of the good — the last unit's value to consumers equals what it cost to make.",
   },
   {
     id: "pcomp-f6",
     front: "Productive Efficiency",
-    back: "Achieved when firms produce at minimum ATC (P = min ATC). No resources are wasted in production.",
+    back: "Producing at the bottom of the ATC curve. No waste. Perfect competition gets you here in the long run.",
   },
 ];
 
@@ -202,32 +202,32 @@ export const monopolyFlashcards: Flashcard[] = [
   {
     id: "mon-f1",
     front: "Monopoly Characteristics",
-    back: "One seller, unique product with no close substitutes, high barriers to entry. The firm is a price maker and faces the entire market demand curve.",
+    back: "One seller, no close substitutes, high barriers keeping everyone else out. The monopolist IS the market — they face the whole downward-sloping demand curve.",
   },
   {
     id: "mon-f2",
     front: "Monopoly Pricing",
-    back: "Produces where MR = MC, then charges the price on the demand curve above that quantity. Price exceeds MC, which means allocative inefficiency.",
+    back: "Find MR = MC, then go up to the demand curve to set the price. They charge more than MC, which is why monopolies are allocatively inefficient.",
   },
   {
     id: "mon-f3",
     front: "Deadweight Loss (Monopoly)",
-    back: "The surplus lost because the monopolist restricts output below the competitive level. It's the value of trades that never happen.",
+    back: "The triangle of lost surplus because the monopolist produces less than the competitive quantity. Transactions that'd benefit both buyer and seller just don't happen.",
   },
   {
     id: "mon-f4",
     front: "Barriers to Entry",
-    back: "Things that keep new firms out: patents, control of key resources, high startup costs, or government licenses.",
+    back: "Patents (like pharmaceutical companies), owning a key resource, massive startup costs, government licenses. Whatever keeps competitors from showing up.",
   },
   {
     id: "mon-f5",
     front: "Natural Monopoly",
-    back: "A market where one firm can serve the whole market at lower average cost than two or more firms could. Usually arises from very high fixed costs.",
+    back: "When one firm can serve everybody cheaper than two firms could. Utilities are the usual example — it'd be absurd to have three competing sets of power lines running to your house.",
   },
   {
     id: "mon-f6",
     front: "Price Discrimination",
-    back: "Charging different prices to different buyers for the same good, based on willingness to pay. Requires market power, the ability to segment buyers, and prevention of resale.",
+    back: "Charging different people different prices for the same thing based on what they'll pay. Student discounts, airline tickets, senior pricing — all price discrimination. You need market power and the ability to prevent resale.",
   },
 ];
 
@@ -235,32 +235,32 @@ export const monopolisticCompetitionFlashcards: Flashcard[] = [
   {
     id: "mc-f1",
     front: "Monopolistic Competition Characteristics",
-    back: "Many firms selling differentiated products with free entry and exit. Each firm has a small amount of market power from product differentiation.",
+    back: "Lots of firms, differentiated products, easy entry and exit. Think restaurants — there are hundreds, but each one's a little different.",
   },
   {
     id: "mc-f2",
     front: "Product Differentiation",
-    back: "Making your product distinct through branding, quality, features, or location. It gives firms a downward-sloping demand curve even with many competitors.",
+    back: "Making your product stand out — branding, quality, location, features. It's why Nike can charge more than a generic shoe brand and still sell.",
   },
   {
     id: "mc-f3",
     front: "Short-Run Profits (Monopolistic)",
-    back: "In the short run, a monopolistically competitive firm can earn economic profit by producing where MR = MC and charging the price on its demand curve.",
+    back: "A firm can earn economic profit in the short run by producing at MR = MC and pricing off its demand curve. But it won't last.",
   },
   {
     id: "mc-f4",
     front: "Long-Run Equilibrium (Monopolistic)",
-    back: "Free entry and exit drive economic profit to zero. The demand curve becomes tangent to ATC, so P = ATC but P > MC.",
+    back: "New firms see profits and enter, stealing customers until economic profit hits zero. Demand curve ends up just tangent to ATC. P = ATC but P > MC.",
   },
   {
     id: "mc-f5",
     front: "Excess Capacity",
-    back: "In the long run, these firms produce below efficient scale (left of minimum ATC). That's the tradeoff for having product variety.",
+    back: "These firms don't produce at the lowest ATC — they sit to the left of that minimum. The tradeoff? Consumers get variety instead of maximum efficiency.",
   },
   {
     id: "mc-f6",
     front: "Non-Price Competition",
-    back: "Advertising, branding, and product improvements used to attract customers without cutting price. Very common in monopolistic competition.",
+    back: "Competing through ads, branding, loyalty programs, and product upgrades instead of just cutting prices. Starbucks doesn't win on price — they win on vibes and brand.",
   },
 ];
 
@@ -268,32 +268,32 @@ export const oligopolyFlashcards: Flashcard[] = [
   {
     id: "ol-f1",
     front: "Oligopoly Characteristics",
-    back: "A few large firms dominate the market, and their decisions are interdependent. High barriers to entry. Products can be identical or differentiated.",
+    back: "Few big firms, high barriers to entry, and every decision depends on what rivals do. Think Coca-Cola and Pepsi constantly watching each other.",
   },
   {
     id: "ol-f2",
     front: "Game Theory",
-    back: "The study of strategic decision-making where each firm's best move depends on what rivals do. It explains why oligopolists sometimes cooperate and sometimes compete.",
+    back: "Studying strategic decisions where your best move depends on what the other player does. It's how economists model oligopoly behavior — lots of payoff matrices.",
   },
   {
     id: "ol-f3",
     front: "Nash Equilibrium",
-    back: "An outcome where no player can do better by changing strategy on their own, given what everyone else is doing. Neither firm has reason to deviate.",
+    back: "Nobody can improve their outcome by changing strategy alone. Both players are stuck — even if cooperating would've been better for everyone.",
   },
   {
     id: "ol-f4",
     front: "Prisoner's Dilemma",
-    back: "A game where each firm's dominant strategy leads to a worse outcome for both than if they'd cooperated. This is why cartels tend to fall apart.",
+    back: "Both firms would be better off cooperating, but each one's dominant strategy is to cheat. So they both cheat and end up worse. Explains why cartels fall apart.",
   },
   {
     id: "ol-f5",
     front: "Collusion and Cartels",
-    back: "Firms secretly agreeing to restrict output and raise prices, acting like a monopoly. Cartels are illegal in the U.S. and unstable because each member has incentive to cheat.",
+    back: "Firms agreeing behind closed doors to limit output and jack up prices. OPEC is the famous example. It's illegal in the US, and members always have an incentive to secretly produce more.",
   },
   {
     id: "ol-f6",
     front: "Kinked Demand Curve",
-    back: "A model for price rigidity in oligopoly: rivals match your price cuts but ignore your price increases. Creates a kink in the demand curve and a gap in MR.",
+    back: "If you raise your price, rivals won't follow — you lose customers. If you cut your price, they match you — no gain. So prices tend to stay sticky. That's the kink.",
   },
 ];
 
@@ -301,32 +301,32 @@ export const factorMarketsFlashcards: Flashcard[] = [
   {
     id: "fm-f1",
     front: "Derived Demand",
-    back: "Demand for a factor of production (like labor) comes from demand for the final good it helps produce. More demand for the product means more demand for the input.",
+    back: "Firms don't hire workers for fun — they hire because there's demand for the product those workers make. More people buying iPhones = Apple hiring more engineers.",
   },
   {
     id: "fm-f2",
     front: "Marginal Revenue Product",
-    back: "The extra revenue from hiring one more unit of input. MRP = Marginal Product x Marginal Revenue. It's the firm's demand curve for that input.",
+    back: "How much extra revenue one more worker brings in. MRP = MP x MR. It's also the firm's demand curve for labor.",
   },
   {
     id: "fm-f3",
     front: "Profit-Maximizing Hiring Rule",
-    back: "Hire workers until MRP of labor equals the wage rate (MRP_L = W). Hiring beyond that point costs more than the worker brings in.",
+    back: "Keep hiring until the last worker's MRP equals the wage. If a worker brings in $20/hr and costs $20/hr, that's your stopping point.",
   },
   {
     id: "fm-f4",
     front: "Monopsony",
-    back: "A labor market with just one buyer. The monopsonist pays below MRP and hires fewer workers than a competitive market would, creating deadweight loss.",
+    back: "One buyer in the labor market — like a mining town with only one mine. They pay less than MRP and hire fewer people than a competitive market would.",
   },
   {
     id: "fm-f5",
     front: "Least-Cost Rule",
-    back: "A firm minimizes cost when marginal product per dollar is equal across all inputs: MP_L/P_L = MP_K/P_K for labor (L) and capital (K).",
+    back: "Get the cheapest combo of inputs by equalizing marginal product per dollar: MP_L/P_L = MP_K/P_K. If labor gives more bang per buck, use more labor.",
   },
   {
     id: "fm-f6",
     front: "Economic Rent",
-    back: "Payment to a factor above its opportunity cost. Land with perfectly inelastic supply earns pure economic rent since its supply can't increase.",
+    back: "Payment above what's needed to keep a resource in its current use. Think of a pro athlete's $40M salary — they'd probably still play for way less.",
   },
 ];
 
@@ -334,32 +334,32 @@ export const marketFailureFlashcards: Flashcard[] = [
   {
     id: "mf-f1",
     front: "Market Failure",
-    back: "When the free market doesn't allocate resources efficiently, creating deadweight loss. Main causes: externalities, public goods, and market power.",
+    back: "When free markets mess up and don't allocate resources well. Happens with externalities, public goods, or when firms have too much power.",
   },
   {
     id: "mf-f2",
     front: "Negative Externality",
-    back: "A cost imposed on someone not involved in the transaction. The market overproduces because social cost exceeds private cost. Pollution is the classic example.",
+    back: "A factory dumps pollution into a river — nearby residents pay the cost, not the factory. Social cost > private cost, so the market overproduces the polluting good.",
   },
   {
     id: "mf-f3",
     front: "Positive Externality",
-    back: "A benefit to someone not involved in the transaction. The market underproduces because social benefit exceeds private benefit. Education is the classic example.",
+    back: "Your neighbor gets a flu shot and you're less likely to get sick too. Social benefit > private benefit, so the market produces too little. Vaccines and education are big ones.",
   },
   {
     id: "mf-f4",
     front: "Pigouvian Tax",
-    back: "A per-unit tax equal to the external cost of a negative externality. It internalizes the externality and pushes the market to the socially optimal quantity.",
+    back: "Slap a tax on the polluter equal to the external cost. Now they're paying the full social cost, and production drops to the right level. A carbon tax is a Pigouvian tax.",
   },
   {
     id: "mf-f5",
     front: "Coase Theorem",
-    back: "If property rights are clear and transaction costs are low, private parties can negotiate to solve externalities on their own, regardless of who starts with the rights.",
+    back: "If property rights are clear and bargaining is cheap, people can sort out externalities on their own without government. Doesn't matter who starts with the rights — they'll negotiate to the efficient outcome.",
   },
   {
     id: "mf-f6",
     front: "Socially Optimal Output",
-    back: "The quantity where marginal social benefit equals marginal social cost (MSB = MSC). This is where total surplus for society is maximized.",
+    back: "Where MSB = MSC. Total surplus for everyone is maximized at this quantity. It's what a perfectly functioning market would produce.",
   },
 ];
 
@@ -367,32 +367,32 @@ export const publicGoodsFlashcards: Flashcard[] = [
   {
     id: "pg-f1",
     front: "Public Good",
-    back: "Non-rivalrous (one person using it doesn't reduce availability) and non-excludable (you can't stop anyone from using it). National defense is the go-to example.",
+    back: "Non-rival and non-excludable. My using it doesn't use it up, and you can't stop anyone from benefiting. National defense, streetlights, public fireworks shows.",
   },
   {
     id: "pg-f2",
     front: "Free-Rider Problem",
-    back: "People benefit from a public good without paying, so the private market under-provides it. This is the main reason governments step in to supply public goods.",
+    back: "Why pay for something you'll get for free anyway? Everyone thinks this, nobody pays, and the good doesn't get produced. That's why the government funds things like national parks.",
   },
   {
     id: "pg-f3",
     front: "Private Good",
-    back: "Both rivalrous and excludable. Most everyday goods you buy in a store are private goods, and markets handle them efficiently.",
+    back: "Rival and excludable. A sandwich — if I eat it, you can't, and the store can refuse to sell it to me. Markets handle these just fine.",
   },
   {
     id: "pg-f4",
     front: "Common Resource",
-    back: "Rivalrous but non-excludable. Gets overused because nobody can be kept out. Ocean fisheries are a textbook example (tragedy of the commons).",
+    back: "Rival but non-excludable. Gets overharvested because no one can be kept out. Ocean fish stocks are the go-to example — everyone fishes until there's nothing left.",
   },
   {
     id: "pg-f5",
     front: "Club Good",
-    back: "Non-rivalrous but excludable. Providers can charge admission while many people use it at once. Think streaming services or toll roads.",
+    back: "Non-rival but excludable. Netflix — millions stream at once, but you need a subscription to get in.",
   },
   {
     id: "pg-f6",
     front: "Tragedy of the Commons",
-    back: "Shared resources get overexploited because each person acting in self-interest takes more than is socially optimal. Solutions: regulation, quotas, or assigning property rights.",
+    back: "Shared pasture, every herder adds one more cow because the benefit's private but the cost's shared. Multiply that by everyone and the pasture's destroyed. Fix it with property rights, quotas, or regulation.",
   },
 ];
 

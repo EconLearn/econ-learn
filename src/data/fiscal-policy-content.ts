@@ -2,87 +2,79 @@ import type { PracticeQuestion } from "@/data/supply-demand-content";
 
 export const fiscalPolicyContent = {
   title: "Fiscal Policy",
-  subtitle: "Government spending and taxation as tools for shifting aggregate demand and stabilizing the economy",
+  subtitle: "How Congress wields spending and taxation to steer aggregate demand, from trillion-dollar stimulus packages to the quiet mechanics of automatic stabilizers",
   sections: [
     {
       heading: "Expansionary and Contractionary Fiscal Policy",
-      content: `When COVID shut down the economy in 2020, Congress didn't sit around waiting for markets to self-correct. They passed trillions in spending and relief checks. That's fiscal policy in action: the federal government using its spending and taxing power to shift aggregate demand. Congress and the president control these levers, which is what separates fiscal policy from monetary policy (the Fed's territory).
+      content: `On March 27, 2020, President Trump signed the Coronavirus Aid, Relief, and Economic Security Act into law. The price tag was $2.2 trillion, the largest single economic rescue package in American history at that point. Within weeks, the Treasury Department began depositing $1,200 checks into the bank accounts of roughly 160 million Americans. Airlines received $25 billion in payroll grants. Hospitals got $175 billion. Small businesses could apply for forgivable loans through the Paycheck Protection Program, which ultimately distributed $800 billion across two rounds. The logic was blunt: the economy had lost 22 million jobs in March and April, GDP was contracting at an annualized rate of 31.4% in the second quarter, and Congress decided that massive federal spending was the only lever large enough to prevent a depression. That spending was fiscal policy in its rawest form, the federal government using its taxing and spending authority to shift aggregate demand when the private sector could not or would not spend.
 
-**Expansionary fiscal policy** targets a recessionary gap. Increase government spending (G), cut taxes (T), or both. Each shifts AD right, raising real GDP and the price level. The 2009 American Recovery and Reinvestment Act deployed $800 billion in spending and tax cuts to pull the economy out of the Great Recession.
+**Expansionary fiscal policy** targets a recessionary gap. The government can increase spending (G), cut taxes (T), or do both simultaneously, and each approach shifts AD to the right, raising both real GDP and the price level. Nine years before the CARES Act, Congress had deployed the same playbook during the Great Recession. The American Recovery and Reinvestment Act of 2009 injected $831 billion into the economy through a mix of infrastructure projects, state fiscal relief, and middle-class tax cuts.
 
-**Contractionary fiscal policy** works in reverse. An overheating economy with an inflationary gap calls for spending cuts or tax increases to shift AD left. Here's the political reality, though: nobody wins elections by raising taxes or slashing popular programs. Contractionary fiscal policy is rare. The economics are clean, but the politics are brutal.`,
+**Contractionary fiscal policy** operates in reverse. An economy running past its potential output, producing an inflationary gap, theoretically calls for spending cuts or tax increases that shift AD left. The economics of contraction are straightforward. The politics are nearly impossible. Elected officials who vote for tax hikes or slash popular programs tend to lose their seats. This is why genuine contractionary fiscal policy is vanishingly rare in practice, even when textbook models say it should happen.`,
     },
     {
       heading: "The Spending Multiplier",
-      content: `The government hires a contractor for $1 million to repair a bridge. That contractor pays workers, who take their paychecks to grocery stores, landlords, and car dealerships. Those businesses pay their employees, who spend again. One dollar of government spending cycles through the economy multiple times. Economists call this the **multiplier effect**.
+      content: `When the federal government awarded a $42 million contract to rebuild the I-35W bridge in Minneapolis after its 2007 collapse, the money did not simply land in one company's bank account and sit there. The primary contractor, Flatiron-Manson, hired welders, crane operators, and engineers. Those workers deposited their paychecks and spent portions at grocery stores, restaurants, and car dealerships across the Twin Cities metro area. The grocery stores used that revenue to pay their own employees, who turned around and spent again. One injection of government dollars cycled through the economy over and over, each round slightly smaller than the last because some fraction of every dollar was saved rather than spent. Economists call this cascading effect the **multiplier effect**, and it explains why a single dollar of government spending can generate several dollars of total economic activity.
 
-How big is it? That depends on the **marginal propensity to consume (MPC)**, the fraction of each new dollar that people spend rather than save.
-
-**Spending multiplier = 1 / (1 - MPC)**
-
-With an MPC of 0.8 (people spend 80 cents of every new dollar), the multiplier is 1 / 0.2 = 5. A $10 billion infrastructure bill shifts AD right by $50 billion as the money cascades through successive spending rounds. Raise the MPC to 0.9 and the multiplier jumps to 10. The more people spend out of each dollar, the longer the chain runs.`,
+The size of the multiplier depends entirely on the **marginal propensity to consume (MPC)**, the share of each additional dollar that households spend rather than save. The formula is clean: **Spending multiplier = 1 / (1 - MPC)**. If the MPC is 0.8, meaning people spend 80 cents of every new dollar they receive, the multiplier equals 1 / 0.2 = 5. A $10 billion infrastructure bill would shift aggregate demand rightward by $50 billion as the initial spending cascades through successive rounds. Bump the MPC to 0.9 and the multiplier jumps to 10, because each dollar circulates through more hands before leaking out into savings. The higher the MPC, the longer the chain runs and the more powerful each government dollar becomes.`,
     },
     {
       heading: "The Tax Multiplier",
-      content: `The AP exam comes back to this one constantly: why does a $10 billion tax cut produce a smaller AD shift than $10 billion in government spending? It comes down to leakage at the start. If the MPC is 0.8, households save 20% of the tax cut before spending a cent.
+      content: `A question that surfaces on nearly every AP Macroeconomics exam in some form: why does a $10 billion tax cut produce a smaller shift in aggregate demand than $10 billion in direct government spending? The answer lies in what happens at the very first step. When the government spends $10 billion building highways, that entire sum enters the economy immediately. Someone gets paid. With a tax cut, the $10 billion lands in household bank accounts, but households do not spend every cent. If the MPC is 0.8, they save $2 billion right out of the gate. Only $8 billion actually enters the first round of the multiplier chain.
 
-**Tax multiplier = -MPC / (1 - MPC)**
+The formula captures this leakage: **Tax multiplier = -MPC / (1 - MPC)**. The negative sign reflects the inverse relationship between taxes and aggregate demand. A tax cut increases AD while a tax hike decreases it. With an MPC of 0.8, the tax multiplier is -0.8 / 0.2 = **-4**. That $10 billion tax cut shifts AD right by $40 billion, compared to the $50 billion shift from equivalent direct spending.
 
-The negative sign captures the inverse relationship. Tax cuts increase AD, tax hikes decrease it. With MPC = 0.8: -0.8 / 0.2 = **-4**. A $10 billion tax cut shifts AD right by $40 billion, versus $50 billion from the same amount of direct spending.
-
-The gap comes from that very first round. Government spending injects all $10 billion immediately. A tax cut puts $10 billion in household pockets, but they save $2 billion before any spending happens. Only $8 billion enters the multiplier chain. The spending multiplier always exceeds the tax multiplier (in absolute value) by exactly 1, regardless of the MPC.`,
+The gap between the two multipliers is always exactly 1 in absolute value, regardless of the MPC. Spending multiplier minus tax multiplier always equals 1. This mathematical fact emerges from the initial-round leakage: government spending injects 100% of each dollar immediately while tax cuts lose the savings fraction before any spending occurs. That first-round difference of (1 - MPC) times the policy amount accounts for the entire gap.`,
     },
     {
       heading: "Crowding Out",
-      content: `Deficit-financed spending has a complication. To fund a stimulus, the Treasury sells bonds, borrowing from the same pool of loanable funds that businesses want to tap. More borrowers chasing the same savings drives up **interest rates**.
+      content: `Deficit-financed stimulus carries a complication that the simple multiplier math ignores. When Congress spends more than it collects in taxes, the Treasury must sell bonds to cover the shortfall. Those bonds compete for the same pool of loanable funds that businesses want to tap for factory expansions, that developers need for housing projects, that consumers rely on for auto loans and mortgages. More borrowers chasing a finite supply of savings drives up **interest rates** across the economy.
 
-Higher rates make it more expensive for companies to finance factories, for developers to build housing, and for consumers to borrow for big purchases. Private investment drops, partially offsetting the government's spending boost. This is the **crowding-out effect**, and it means the actual AD shift is smaller than the textbook multiplier predicts.
+Higher rates make capital investment more expensive. A manufacturing firm that would have built a new plant at 4% interest might shelve the project at 7%. A real estate developer cancels a condominium project. A family decides the monthly payment on a new car is no longer affordable. Private investment falls, partially offsetting the boost from government spending. This is the **crowding-out effect**, and it means the realized shift in aggregate demand is smaller than what the textbook multiplier predicts.
 
-How much crowding out you get depends on context. During the depths of 2008, private investment demand had already collapsed and rates sat near zero. There wasn't much private borrowing to displace. But in a fully employed economy where firms are actively competing for loans, government borrowing can significantly raise rates and squeeze out private investment. Full crowding out (every government dollar displaces a private dollar) is the theoretical extreme. Partial crowding out is the norm.`,
+The severity of crowding out depends heavily on context. During the depths of the 2008 financial crisis, private investment demand had already collapsed. Interest rates sat near zero. There was very little private borrowing to displace, so government spending faced minimal crowding out. Contrast that with an economy at full employment where firms are actively competing for every available dollar of savings. In that environment, government borrowing can push rates up substantially and squeeze private investment hard. Full crowding out, where every government dollar displaces exactly one private dollar, represents the theoretical extreme. Partial crowding out is the norm in practice.`,
     },
     {
       heading: "Automatic Stabilizers",
-      content: `Congress is slow. Not the most exciting observation, but it matters a lot here. Passing a stimulus bill takes months of debate and political negotiation. By the time relief arrives, the recession may be over or far worse. **Automatic stabilizers** bypass that lag entirely because they kick in without any new legislation.
+      content: `Congress is slow. Passing a major spending bill requires committee hearings, floor debates, conference negotiations between the House and Senate, and a presidential signature. The American Recovery and Reinvestment Act of 2009 was considered fast by legislative standards, and it still took nearly two months from inauguration to signing. By the time relief money flows into the economy, the recession may have deepened or, in some cases, already ended. **Automatic stabilizers** bypass this political friction because they activate without any new legislation.
 
-On the revenue side, the U.S. has a **progressive income tax**. If your income drops from a layoff or reduced hours, you fall into a lower bracket and owe less tax automatically. Your disposable income doesn't drop as far as your gross income did. During expansion, rising incomes push people into higher brackets, and the extra taxes act as a natural brake on spending.
+The U.S. has a **progressive income tax** system. When a worker loses her job or gets her hours cut, her taxable income drops and she falls into a lower bracket, owing less to the IRS automatically. Her disposable income does not collapse as steeply as her gross income did. During expansions, rising incomes push taxpayers into higher brackets, siphoning off purchasing power and acting as a natural brake on aggregate demand.
 
-On the spending side, **unemployment insurance** and safety net programs expand automatically during downturns because more people qualify. When the 2008 recession hit, unemployment claims surged with no legislation needed. Those checks went to people who were almost certain to spend every dollar, cushioning the fall in aggregate demand.
+**Unemployment insurance** works the other side. When the economy contracts, more workers qualify for benefits without Congress lifting a finger. Unemployment claims surged from 211,000 per week in February 2020 to 6.9 million per week by late March. Those checks went overwhelmingly to people who would spend every dollar, cushioning the collapse in consumption. Safety net programs like SNAP follow similar logic, expanding enrollment automatically as incomes fall.
 
-Automatic stabilizers dampen the business cycle, but they can't end a deep recession on their own. They absorb shocks. They don't generate recovery.`,
+Automatic stabilizers dampen the business cycle's swings. They do not end deep recessions on their own. They are shock absorbers, not engines.`,
     },
     {
       heading: "Budget Deficits and the National Debt",
-      content: `In 2020, the U.S. federal government spent roughly $6.5 trillion and collected about $3.4 trillion. That $3.1 trillion gap is a **budget deficit**. The Treasury covers the shortfall by selling bonds to pension funds, foreign governments, individual investors, and banks.
+      content: `In fiscal year 2020, the federal government spent approximately $6.55 trillion and collected about $3.42 trillion in revenue. That $3.13 trillion gap was a **budget deficit**, the largest in U.S. history measured in raw dollars, though as a share of GDP the World War II deficits of 1943-1945 were proportionally larger. The Treasury covered the shortfall by selling bonds, notes, and bills to pension funds, foreign central banks, individual savers, commercial banks, and the Federal Reserve itself.
 
-Stack every deficit (minus the occasional surplus) the government has ever run and you get the **national debt**. Deficit is a flow: how much red ink in a single year. Debt is a stock: the total pile of IOUs outstanding.
+Stack every deficit the government has ever run, subtract the occasional surplus (1998 through 2001 being the most recent stretch), and you arrive at the **national debt**. A deficit is a flow: how much red ink accumulates in a single fiscal year. The debt is a stock: the total pile of outstanding IOUs at any given moment.
 
-In theory, the budget should roughly balance over a full business cycle, with deficits during recessions offset by surpluses during booms. In practice, surpluses are rare. Cutting spending and raising taxes costs politicians their jobs, so deficits persist even during expansions.
+In theory, the budget should roughly balance over a full business cycle, running deficits during recessions to support demand and surpluses during booms to rebuild fiscal capacity. In practice, surpluses are extraordinarily rare because cutting spending and raising taxes is politically toxic regardless of the economic backdrop. Deficits have persisted even during the long expansion of 2010-2019.
 
-Whether high debt actually matters is one of the sharpest divides in economics. On one side: interest payments consume a growing share of the budget, future taxes must rise to service the debt, and creditors may eventually demand higher rates. On the other: a government borrowing in its own currency can always make payments, and the meaningful metric is **debt-to-GDP ratio**, not raw dollars. Japan's debt exceeds 250% of GDP, and it still borrows at low rates.`,
+Whether elevated debt poses a genuine economic threat remains one of the sharpest divides in the profession. Critics point to rising interest payments consuming an ever-larger share of the federal budget, the likelihood that future taxes must increase to service obligations, and the risk that creditors eventually demand higher yields. Defenders note that a sovereign government borrowing in its own currency can always make nominal payments, that the meaningful metric is **debt-to-GDP ratio** rather than the raw dollar figure, and that Japan has carried debt exceeding 250% of GDP for years while still borrowing at rock-bottom rates.`,
     },
     {
       heading: "Fiscal Policy and the Phillips Curve",
-      content: `Everything we just covered about AD shifts has a twin story on the **Phillips Curve**. When Congress runs expansionary fiscal policy (boosting G or cutting T), AD shifts right, real GDP rises, unemployment falls, and inflation picks up. On the short-run Phillips Curve, the economy slides up and to the left: lower unemployment, higher inflation.
+      content: `Every aggregate demand shift from fiscal policy has a mirror image on the **Phillips Curve**. When Congress runs expansionary fiscal policy by increasing government spending or cutting taxes, AD shifts right. Real GDP climbs, unemployment falls, and the price level rises. Translate that onto the short-run Phillips Curve: the economy slides up and to the left, trading lower unemployment for higher inflation.
 
-Contractionary fiscal policy runs the opposite direction. Cutting spending or raising taxes shifts AD left, cools the economy, and moves the economy down and to the right on the Phillips Curve: higher unemployment, lower inflation.
+Contractionary fiscal policy traces the opposite path. Spending cuts or tax increases shift AD left, cool the economy, and push the economy down and to the right along the short-run Phillips Curve. Unemployment rises. Inflation eases.
 
-The trade-off is real in the short run. But there's a critical limit. If the government keeps pumping stimulus after the economy has returned to full employment, the short-run Phillips Curve itself shifts upward as workers and firms adjust their inflation expectations. Eventually, unemployment returns to the **natural rate**, but at a permanently higher inflation level. That's the long-run Phillips Curve in action, a vertical line at the natural rate, just like LRAS is vertical at potential output.
+That trade-off holds in the short run. But there is a boundary. If the government keeps injecting stimulus after the economy has returned to full employment, workers and firms begin adjusting their inflation expectations upward. The short-run Phillips Curve itself shifts up. Unemployment eventually drifts back to the **natural rate**, but the economy arrives there with a permanently higher baseline of inflation. The long-run Phillips Curve captures this reality: a vertical line at the natural rate of unemployment, just as the LRAS curve is vertical at potential output. Fiscal policy can move the economy along the short-run curve but cannot hold unemployment below the natural rate indefinitely without accelerating inflation.
 
-For the AP exam, connect the graphs. An expansionary fiscal policy question should trigger three mental pictures: AD/AS (AD shifts right, GDP up, price level up), the money market (higher income raises money demand, pushing up interest rates), and the Phillips Curve (unemployment down, inflation up). Mastering these connections is what separates a 3 from a 5.`,
+Connecting the graphs matters on the AP exam. An expansionary fiscal policy question should trigger three linked pictures in your mind: the AD/AS diagram (AD shifts right, output rises, price level rises), the money market (higher income raises money demand, pushing interest rates up), and the Phillips Curve (unemployment falls, inflation rises). Tracing those connections cleanly across all three models is where exam scores separate.`,
     },
     {
       heading: "Worked Example",
-      content: `Congress is debating two proposals to fight a recession. MPC = 0.75.
+      content: `Congress is debating two proposals to fight a recession. The MPC is 0.75.
 
-**Option A: spend $20 billion on infrastructure.**
-Spending multiplier = 1 / (1 - 0.75) = 1 / 0.25 = **4**. The full $20B enters the economy immediately. Construction workers spend 75% ($15B), those recipients spend 75% ($11.25B), and the chain continues. Total AD shift: $20B x 4 = **$80 billion**.
+**Option A: spend $20 billion on infrastructure.** The spending multiplier is 1 / (1 - 0.75) = 1 / 0.25 = **4**. The full $20 billion enters the economy on day one. Construction workers spend 75% of their income ($15 billion), the recipients of that spending do the same ($11.25 billion), and the chain continues until the rounds converge. Total AD shift: $20 billion x 4 = **$80 billion**.
 
-**Option B: cut taxes by $20 billion.**
-Tax multiplier = -0.75 / 0.25 = **-3**. Households receive $20B in relief but save 25% upfront ($5B). Only $15B enters the first spending round. Chain: $15B, $11.25B, $8.44B ... Total AD shift: $20B x 3 = **$60 billion**.
+**Option B: cut taxes by $20 billion.** The tax multiplier is -0.75 / 0.25 = **-3**. Households receive the $20 billion in relief but save 25% upfront, which is $5 billion. Only $15 billion enters the first spending round. The chain: $15 billion, then $11.25 billion, then $8.44 billion, and so on. Total AD shift: $20 billion x 3 = **$60 billion**.
 
-Spending wins by $20 billion. On an AD/AS graph, both shift AD right, but spending shifts it further. The multiplier gap is exactly 1 (4 vs. 3) for any MPC value.
+Spending wins by $20 billion in total AD impact. On an AD/AS graph, both proposals shift AD to the right, but the spending option shifts it further. The multiplier gap is always exactly 1 (spending multiplier of 4 versus tax multiplier of 3) for any MPC value.
 
-Both policies raise real GDP and the price level as the economy moves up along the SRAS curve. The real policy question is simple: how much stimulus per dollar does Congress want?`,
+Both policies raise real GDP and the price level as the economy moves up along the SRAS curve. The practical policy question reduces to this: how much aggregate demand shift does Congress want per dollar of fiscal commitment?`,
     },
   ],
 };
@@ -95,7 +87,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     options: ["3", "4", "5", "0.75"],
     correctIndex: 1,
     explanation:
-      "Plug into the formula: 1 / (1 - 0.75) = 1 / 0.25 = 4. Every dollar the government spends generates $4 in total GDP through successive re-spending rounds. Not A (3), that's the tax multiplier for this MPC (-0.75/0.25 = -3, absolute value 3). Mixing up the two multipliers is one of the most common AP exam mistakes. Not C (5), that would require an MPC of 0.8, not 0.75. Not D (0.75), the MPC is an input to the formula, not the multiplier itself.",
+      "Spending multiplier = 1 / (1 - 0.75) = 1 / 0.25 = 4. Each government dollar generates $4 in total GDP as it circulates through successive spending rounds. Option A (3) is the absolute value of the tax multiplier for this MPC, calculated as 0.75/0.25. Confusing the two formulas is an extremely frequent error on the AP exam. Option C (5) would require an MPC of 0.8, not 0.75. Option D treats the MPC itself as the multiplier, but the MPC is an input to the formula, not the output.",
   },
   {
     id: "fp-2",
@@ -109,7 +101,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Multiplier = 1 / (1 - 0.8) = 1 / 0.2 = 5. Total AD shift = $50B x 5 = $250 billion. The $50B cascades: recipients spend $40B (80%), those recipients spend $32B, and so on until the rounds converge to $250B. Not A ($50B), this treats the initial spending as the final answer, ignoring the multiplier entirely. That would only be correct if MPC were zero (nobody re-spends anything). Not B ($200B), this uses a multiplier of 4, which is the tax multiplier for this MPC, not the spending multiplier. Not D ($40B), this just calculates $50B x 0.8, which is the second spending round alone.",
+      "Multiplier = 1 / (1 - 0.8) = 5. Total AD shift = $50B x 5 = $250 billion. The $50B cascades through the economy: recipients spend $40B, those recipients spend $32B, and so on until the geometric series converges to $250B. Option A ignores the multiplier entirely, treating the initial injection as the final answer, which would only be correct if nobody re-spent any of the money. Option B applies a multiplier of 4, which is the tax multiplier for this MPC. Option D just calculates $50B x 0.8, the second spending round alone.",
   },
   {
     id: "fp-3",
@@ -123,7 +115,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The difference comes down to the first round. Government purchases: the full dollar hits the economy immediately. The government buys something, someone gets paid. Tax cut: households receive a dollar but save a fraction (1 - MPC) before spending anything. That first-round savings leakage is why the tax multiplier falls short by exactly 1. Not A: the relative size of tax cuts versus spending bills is a political decision, not a mathematical one. The multiplier gap exists even if both policies are the same dollar amount. Not C: reduced revenue is a consequence of tax cuts, not an explanation for the weaker multiplier. Not D: tax changes absolutely affect AD; the tax multiplier is smaller, but it's not zero.",
+      "Government purchases enter the economy at full force: every dollar gets spent immediately because the government is buying something and someone receives payment. A tax cut puts money in households' pockets, but they save a fraction (1 - MPC) before spending anything. That initial savings leakage means fewer dollars enter the multiplier chain in the first round. The gap between the two multipliers is always exactly 1 in absolute value, regardless of the MPC. Option A confuses a political decision (how large each policy is) with the mathematical relationship between the multipliers. The gap persists even when both policies are the same dollar amount. Option C describes a consequence of tax cuts rather than the mechanism behind the weaker multiplier. Option D is wrong because tax changes clearly affect AD through consumption; the tax multiplier is smaller than the spending multiplier, but it is not zero.",
   },
   {
     id: "fp-4",
@@ -137,7 +129,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Recessionary gap = real GDP below potential, unemployment above the natural rate. The fix: shift AD right by increasing G, cutting T, or both. This is expansionary fiscal policy, exactly what Congress did with the 2009 stimulus and the 2020 CARES Act. Not A: raising taxes and cutting spending is contractionary fiscal policy, which would widen the recessionary gap, not close it. That's the response for an inflationary gap. Not C: equal increases in both G and T would produce only a small net rightward shift (balanced-budget multiplier = 1), not the strong stimulus a recession calls for. Not D: automatic stabilizers aren't discretionary. The question asks about deliberate legislative action, and 'take no action' is by definition not discretionary fiscal policy.",
+      "A recessionary gap means real GDP sits below potential and unemployment exceeds the natural rate. Closing that gap requires shifting AD right, which means increasing G, cutting T, or both. Congress followed exactly this playbook with the 2009 ARRA and the 2020 CARES Act. Option A is contractionary fiscal policy, which would widen the recessionary gap. That prescription fits an inflationary gap, not a recession. Option C would produce only a modest net rightward shift because the balanced-budget multiplier equals 1, far weaker than the strong stimulus a deep recession demands. Option D misreads the question. Automatic stabilizers are not discretionary by definition. The question explicitly asks about deliberate legislative action.",
   },
   {
     id: "fp-5",
@@ -151,7 +143,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The mechanism: government borrows to fund its spending -> demand for loanable funds increases -> real interest rates rise -> businesses face higher borrowing costs -> private investment (I) falls. That drop in I partially offsets the rise in G, so the net AD shift is smaller than the simple multiplier predicts. Not A: crowding out works through interest rates, not consumer confidence. Consumer sentiment might shift for other reasons, but that's not the crowding-out channel. Not C: rising tax revenue during expansions is an automatic stabilizer effect, a completely different concept. Not D: the Fed choosing to tighten monetary policy is a separate, deliberate decision. Crowding out happens through the loanable funds market whether the Fed acts or not.",
+      "The chain: government borrows to fund spending, demand for loanable funds rises, real interest rates climb, businesses face steeper borrowing costs, and private investment (I) contracts. That drop in I partially offsets the increase in G, so the net AD shift is smaller than the simple multiplier formula would suggest. Option A misidentifies the channel. Crowding out operates through interest rates in the loanable funds market, not through consumer sentiment. Option C describes automatic stabilizers, an entirely separate concept. Option D describes a deliberate Fed decision that could coincidentally happen at the same time, but crowding out occurs through the loanable funds market regardless of whether the Fed acts.",
   },
   {
     id: "fp-6",
@@ -165,7 +157,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "The defining feature of automatic stabilizers: they work without Congress passing a single new law. Progressive income taxes do this: when the economy contracts and incomes fall, people drop into lower brackets and keep more of their paycheck. When the economy booms, rising incomes push people into higher brackets, automatically pulling money out of the spending stream. Not A: an infrastructure bill requires legislation, making it discretionary fiscal policy by definition. Not B: the Fed lowering rates is monetary policy, not fiscal policy at all. Not D: stimulus checks are the trickiest wrong answer. They do stabilize the economy, but they require an act of Congress to authorize. 'Automatic' means the mechanism is already baked into existing law.",
+      "The defining characteristic: automatic stabilizers operate without Congress passing new legislation. Progressive income taxes qualify because when incomes fall during a downturn, taxpayers drop into lower brackets automatically, keeping more of their paychecks. During expansions, rising incomes push people into higher brackets, pulling purchasing power out of the economy without any legislative vote. Option A requires an act of Congress, making it discretionary fiscal policy by definition. Option B is monetary policy, not fiscal policy. Option D is the trickiest wrong answer. Stimulus checks do stabilize the economy, but they require specific legislation to authorize. The word \"automatic\" means the mechanism is already embedded in existing law and activates on its own.",
   },
   {
     id: "fp-7",
@@ -179,7 +171,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Work each piece separately. Spending multiplier = 1/0.2 = 5, so a $20B spending boost shifts AD right by $100B. Tax multiplier = 0.8/0.2 = 4, so a $20B tax hike shifts AD left by $80B. Net effect: $100B - $80B = $20B rightward shift. This is the balanced-budget multiplier, and it always equals exactly 1 regardless of the MPC. Not A: this is the most common mistake. Students assume equal-dollar spending and tax increases cancel out, but they don't. The spending multiplier is always larger by 1, so a net rightward shift survives. Not C ($100B): this counts only the spending effect and ignores the contractionary pull of the tax increase. Not D: the net shift is rightward, not leftward, because spending packs more punch per dollar than taxation.",
+      "Work each piece separately. Spending multiplier = 1/0.2 = 5, so the $20B spending increase shifts AD right by $100B. Tax multiplier = 0.8/0.2 = 4, so the $20B tax hike shifts AD left by $80B. Net: $100B - $80B = $20B rightward. This result is the balanced-budget multiplier, which always equals exactly 1 regardless of the MPC. Option A is the most frequent mistake. Equal-dollar changes in spending and taxes do not cancel because the spending multiplier always exceeds the tax multiplier by 1, so a net rightward shift survives. Option C counts only the spending side and ignores the contractionary drag from the tax increase. Option D gets the direction wrong; the net shift is rightward because spending packs more punch per dollar than taxation.",
   },
   {
     id: "fp-8",
@@ -193,7 +185,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Each year the government runs a deficit, it issues new Treasury bonds to cover the gap. Those bonds pile onto the existing stock of debt. Persistent deficits mean the national debt grows year after year. The U.S. has run deficits in all but a handful of years since the 1970s, which is why the debt has ballooned. Not A: this reverses the relationship entirely. Deficits add to debt; only surpluses reduce it. Not C: the money supply is controlled by the Fed through monetary policy, not directly by budget deficits. Not D: there is no automatic mechanism that turns a deficit into a surplus the next year. Surpluses require deliberate policy changes or an economic boom that lifts tax revenue.",
+      "Every year the government runs a deficit, it issues new Treasury securities to cover the gap, and those obligations pile onto the existing stock of debt. The U.S. has run deficits in all but four years since 1970. The debt has grown accordingly. Option A reverses the relationship. Only surpluses reduce the debt; deficits add to it. Option C confuses fiscal and monetary policy. The money supply is controlled by the Fed, not by the size of the budget deficit. Option D imagines a self-correcting mechanism that does not exist. A deficit does not automatically produce a surplus the next year. That would require deliberate policy changes or an economic boom that lifts tax revenue sharply.",
   },
   {
     id: "fp-9",
@@ -207,7 +199,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "With a spending multiplier of 10, the government needs to spend only $45B / 10 = $4.5 billion to generate a $45 billion shift in AD. Option D ($5 billion tax cut) would generate $5B x 9 = $45 billion in AD shift, which also closes the gap but requires more fiscal resources. Option A ($45 billion in spending) massively overshoots, producing $450 billion in AD expansion. Option B ($45 billion tax cut) produces $405 billion in AD expansion, also a massive overshoot. The spending multiplier is always more efficient per dollar than tax cuts because government spending injects the full amount immediately, while tax cuts lose a fraction to saving in the first round.",
+      "With a spending multiplier of 10, the government needs only $45B / 10 = $4.5 billion in new spending to generate a $45 billion AD shift. Compare that to Option D: a $5 billion tax cut generates $5B x 9 = $45 billion in AD expansion, which also closes the gap but costs more in fiscal resources. Option A ($45 billion in spending) overshoots massively, producing $450 billion of AD expansion. Option B ($45 billion in tax cuts) produces $405 billion, another enormous overshoot. Government spending is always more efficient per dollar than tax cuts because it injects the full amount immediately rather than losing a fraction to first-round savings.",
   },
   {
     id: "fp-10",
@@ -221,7 +213,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "When MPC = 0.6: spending multiplier = 1/0.4 = 2.5, tax multiplier = -0.6/0.4 = -1.5, gap = 1. When MPC = 0.8: spending multiplier = 1/0.2 = 5, tax multiplier = -0.8/0.2 = -4, gap = 1. Both multipliers increase as the MPC rises because a higher spending propensity means each dollar circulates through more spending rounds. The gap between them always equals exactly 1 because the spending multiplier formula 1/(1-MPC) minus the tax multiplier formula MPC/(1-MPC) always yields 1. Option A incorrectly claims the gap changes. Option C incorrectly claims the tax multiplier decreases; it increases in absolute value. Option D reverses the direction of change; higher MPC means larger multipliers, not smaller ones.",
+      "At MPC = 0.6: spending multiplier = 1/0.4 = 2.5, tax multiplier = -0.6/0.4 = -1.5, gap = 1. At MPC = 0.8: spending multiplier = 1/0.2 = 5, tax multiplier = -0.8/0.2 = -4, gap = 1. A higher MPC means each dollar circulates through more spending rounds, so both multipliers grow. The gap stays at exactly 1 because the formula 1/(1-MPC) minus MPC/(1-MPC) always simplifies to 1. Option A incorrectly claims the gap changes. Option C is wrong because the tax multiplier increases in absolute value alongside the spending multiplier. Option D reverses the direction entirely; higher MPC produces larger multipliers, not smaller ones.",
   },
   {
     id: "fp-11",
@@ -235,7 +227,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The balanced-budget multiplier always equals 1, regardless of the MPC. The spending effect is $30B x 5 = $150B (rightward AD shift). The tax effect is $30B x 4 = $120B (leftward AD shift). Net: $150B - $120B = $30B. Alternatively, $30B x 1 (balanced-budget multiplier) = $30B. Option A is the most common error; students assume equal-dollar changes cancel out, but the spending multiplier is always larger by 1, so a net expansion survives. Option C counts only the spending effect and ignores the contractionary pull of the tax increase. Option D counts only the tax effect and ignores the expansionary push of the spending increase.",
+      "The balanced-budget multiplier equals 1 regardless of the MPC. Spending effect: $30B x 5 = $150B rightward. Tax effect: $30B x 4 = $120B leftward. Net: $150B - $120B = $30B. You can also compute it directly: $30B x 1 = $30B. Option A is the classic error. Students assume that equal-dollar changes in opposite directions cancel out, but because the spending multiplier is always one unit larger, a net expansion survives. Option C accounts only for the spending effect. Option D accounts only for the tax effect.",
   },
   {
     id: "fp-12",
@@ -249,7 +241,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Crowding out is the primary reason actual multiplier effects fall short of theoretical predictions for deficit-financed spending. When the government borrows heavily, it increases demand in the loanable funds market, driving up interest rates. Higher rates discourage private investment (a component of AD), partially offsetting the government's spending injection. The $150 billion shortfall represents private investment that was crowded out. Option A is possible in theory but does not explain why the stimulus specifically underperformed; the question states MPC = 0.8 as given. Option C describes a mechanism that moderates business cycles but does not specifically counteract stimulus packages. Option D describes a separate policy action that could reduce AD, but the question asks about the most likely explanation for the gap between predicted and actual GDP effects of deficit-financed spending.",
+      "Crowding out is the standard explanation for why actual fiscal multiplier effects fall short of the theoretical prediction when spending is deficit-financed. Heavy government borrowing pushes up demand in the loanable funds market, raising interest rates and discouraging private investment. The $150 billion shortfall represents private investment that was displaced. Option A is logically possible, but the question states MPC = 0.8 as a given parameter, so the shortfall must come from another source. Option C describes an automatic stabilizer mechanism that moderates cycles generally but does not specifically explain the gap between a predicted multiplier effect and the actual outcome of a deficit-financed package. Option D describes a separate, deliberate policy choice by the Fed that could reduce AD, but the question asks for the most likely explanation specific to deficit-financed spending.",
   },
   {
     id: "fp-13",
@@ -263,7 +255,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 0,
     explanation:
-      "The three fiscal policy lags are recognition (economists must first identify that a recession or inflationary gap exists, which requires data that arrives with a delay), legislative (Congress must debate, negotiate, and pass legislation, which can take months), and implementation (once passed, the spending or tax change takes time to flow through the economy). These lags mean fiscal policy often arrives too late and may even be destabilizing if the economy has moved to a different phase by the time the policy takes effect. Option B invents categories that do not correspond to the standard framework. Option C mislabels the lags; they are not defined by macroeconomic time horizons. Option D incorrectly suggests the lags can be eliminated; legislative and implementation lags are inherent to the democratic process and economic adjustment.",
+      "Recognition lag: economic data arrives with a delay, so identifying a recession or inflationary gap takes time. Legislative lag: Congress must debate, negotiate, and vote, a process that consumed weeks even for the fast-tracked CARES Act and months for the 2009 ARRA. Implementation lag: once signed into law, spending and tax changes take time to flow through the economy and generate multiplier effects. These three lags combined mean fiscal policy frequently arrives too late and may even destabilize the economy if conditions have shifted by the time the policy takes effect. Option B invents categories that do not exist in the standard framework. Option C mislabels the lags by confusing them with macroeconomic time horizons. Option D incorrectly suggests the lags can be eliminated; legislative and implementation lags are structural features of democratic governance and economic adjustment.",
   },
   {
     id: "fp-14",
@@ -277,7 +269,7 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "An inflationary gap means actual GDP exceeds potential GDP, so the economy needs contractionary fiscal policy to shift AD left. Decreasing government spending directly reduces the G component of AD, and increasing taxes reduces disposable income, lowering consumption (C). Both shift AD left, closing the inflationary gap. Option A is expansionary fiscal policy, which would widen the inflationary gap by pushing AD further right. Option C sounds contractionary on both sides, but the balanced-budget multiplier of 1 means equal increases in G and T still produce a net expansionary effect -- the opposite of what is needed. Option D is internally contradictory: tax cuts are expansionary (shifting AD right), which worsens an inflationary gap.",
+      "An inflationary gap means real GDP exceeds potential, so the economy needs AD to shift left. Cutting government spending directly reduces the G component. Raising taxes reduces disposable income and thus consumption (C). Both push AD leftward, closing the gap. Option A is expansionary, which would widen the inflationary gap by shifting AD further right. Option C sounds contractionary on both sides, but equal increases in G and T still produce a net expansionary effect because the balanced-budget multiplier is 1, exactly the opposite of what an inflationary gap requires. Option D is internally contradictory: cutting taxes is expansionary while reducing transfer payments is contractionary, and neither combination is the standard prescription for an inflationary gap.",
   },
   {
     id: "fp-15",
@@ -291,6 +283,6 @@ export const fiscalPolicyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "When interest rates hit the zero lower bound, the Fed cannot cut rates further to stimulate borrowing and spending. Fiscal policy becomes critical because government spending directly injects demand into the economy without relying on the interest rate channel. The primary risk of large deficit-financed spending is the crowding-out effect, though in the context of the 2008 recession, crowding out was likely minimal because private demand for loanable funds had collapsed. Option A overstates the effectiveness of unconventional monetary policy; quantitative easing helps but faces diminishing returns and transmission challenges. Option C incorrectly identifies fiscal stimulus as an LRAS shifter; government spending shifts AD, not long-run productive capacity. Option D contradicts the premise; automatic stabilizers moderated the downturn but were insufficient to close the massive recessionary gap caused by the financial crisis.",
+      "When the federal funds rate hits zero, the Fed cannot cut further. Fiscal policy becomes essential because government spending directly injects demand without relying on the interest rate transmission mechanism. The primary risk of large-scale deficit spending is crowding out, though during the 2008 crisis this risk was likely minimal. Private demand for loanable funds had collapsed, so government borrowing faced little competition for savings. Option A overstates unconventional monetary policy. Quantitative easing helped but encountered diminishing returns and transmission problems that limited its effectiveness. Option C misidentifies fiscal stimulus as a supply-side tool; government spending shifts AD, not long-run aggregate supply. Option D contradicts the premise of the question. Automatic stabilizers moderated the downturn but were far too small to close the massive recessionary gap the financial crisis created.",
   },
 ];

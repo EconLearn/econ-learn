@@ -305,6 +305,55 @@ export default function PracticeQuiz({ questions: allQuestions, moduleId }: Prac
           </motion.div>
         )}
 
+        {/* Share buttons */}
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <button
+            onClick={() => {
+              const text = `I scored ${percentage}% on the ${moduleId?.replace(/-/g, " ") || "economics"} quiz on EconLearn!`;
+              const url = `https://econlearn.org${window.location.pathname}`;
+              window.open(
+                `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
+                "_blank",
+                "width=550,height=420"
+              );
+            }}
+            className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors"
+            style={{
+              border: "1px solid var(--color-border-subtle)",
+              color: "var(--color-ink-muted)",
+            }}
+          >
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+            Share
+          </button>
+          <button
+            onClick={() => {
+              const text = `I scored ${percentage}% on the ${moduleId?.replace(/-/g, " ") || "economics"} quiz on EconLearn! Try it: https://econlearn.org${window.location.pathname}`;
+              navigator.clipboard.writeText(text).then(() => {
+                // Brief visual feedback
+                const el = document.activeElement as HTMLButtonElement;
+                if (el) {
+                  const orig = el.textContent;
+                  el.textContent = "Copied!";
+                  setTimeout(() => { el.textContent = orig; }, 1500);
+                }
+              });
+            }}
+            className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors"
+            style={{
+              border: "1px solid var(--color-border-subtle)",
+              color: "var(--color-ink-muted)",
+            }}
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" />
+            </svg>
+            Copy Link
+          </button>
+        </div>
+
         <div className="flex items-center justify-center gap-3">
           <button onClick={handleRestart} className="btn-primary text-sm">
             Try Again

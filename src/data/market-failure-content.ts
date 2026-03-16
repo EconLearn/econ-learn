@@ -3,87 +3,87 @@ import type { PracticeQuestion } from "@/data/supply-demand-content";
 export const marketFailureContent = {
   title: "Market Failure",
   subtitle:
-    "When free markets overshoot, undershoot, or just plain get it wrong",
+    "Why free markets sometimes get the answer spectacularly, provably wrong",
   sections: [
     {
       heading: "When Markets Get It Wrong",
-      content: `A factory dumps toxic waste into a river to cut costs. The product is cheap, consumers are happy, the firm is profitable. By every market signal, this looks like success. But families downstream are drinking poisoned water. The market "worked" and still got it wrong.
+      content: `Free-market advocates will tell you that voluntary exchange always makes both parties better off. Skeptics will tell you that markets exploit workers, destroy the environment, and concentrate wealth. Surprisingly, introductory economics agrees with *both* sides — depending on the situation. Markets can be astonishingly efficient at allocating scarce resources. They can also fail completely, producing outcomes that leave society measurably worse off than it needs to be.
 
-**Market failure** occurs when free markets, left to their own devices, produce an outcome that isn't socially optimal. Resources get misallocated: too much of some things, too little of others. Society's total well-being is lower than it could be.
+**Market failure** occurs when free markets, left alone, produce an outcome that isn't socially optimal. Resources get misallocated. Too much pollution. Too few vaccinations. Products whose true costs never show up on any price tag.
 
-There are four primary sources:
-- **Externalities** -- costs or benefits that fall on people outside the transaction
-- **Public goods** -- goods the market won't provide in sufficient quantity
-- **Information asymmetry** -- one side of a transaction knows more than the other
-- **Market power** -- a single firm (or a handful) controls the market
+Four primary sources drive the problem:
+- **Externalities** — costs or benefits that land on people who never agreed to the transaction
+- **Public goods** — goods the market won't produce in sufficient quantity because nobody can be charged for consuming them
+- **Information asymmetry** — one side of a deal knows something the other doesn't (George Akerlof won the 2001 Nobel Prize for formalizing this idea)
+- **Market power** — when a single firm or a small group controls an entire market
 
-Each one breaks a key assumption of the perfectly competitive model. When those assumptions fail, the invisible hand fumbles. Equilibrium price and quantity no longer maximize society's welfare.`,
+Each one breaks a key assumption of perfect competition. When those assumptions break, equilibrium price and quantity no longer maximize society's welfare. The invisible hand fumbles.`,
     },
     {
       heading: "Externalities: Costs and Benefits That Spill Over",
-      content: `A steel mill belches sulfur dioxide into the air. The owners bear the cost of coal, labor, and machinery, but not the cost of the asthma cases, corroded buildings, and dead forests their pollution causes. Those costs land on third parties who never agreed to the transaction. The gap between private cost and social cost is a **negative externality**.
+      content: `A steel mill in Gary, Indiana belches sulfur dioxide into the air. The owners pay for coal, labor, and machinery. They do not pay for the asthma hospitalizations, the corroded buildings, or the dead forests their pollution causes. Those costs land on third parties who never agreed to the transaction and never saw a dime of the steel mill's profit. The gap between what the firm pays (**private cost**) and what society pays (**social cost**) is a **negative externality**.
 
-When a negative externality exists, the market overproduces. Steel is too cheap because its price doesn't reflect the full cost to society. Buyers and sellers are happy at the market equilibrium, but society as a whole would be better off with less steel and less pollution. The **social cost** of each ton exceeds the **private cost**, so the socially optimal quantity is lower than what the market delivers.
+When a negative externality exists, the market overproduces. Steel is too cheap because its price doesn't reflect the full damage. Buyers and sellers are perfectly happy at the market equilibrium — but society would be better off with less steel and less sulfur dioxide. The socially optimal quantity is lower than what the market delivers.
 
-Positive externalities work in reverse. You get a flu vaccine. You benefit, but so does everyone around you, because you're less likely to spread the virus. Your coworker, your elderly neighbor, the stranger on the bus all gain protection they didn't pay for. That spillover benefit is a **positive externality**.
+Positive externalities flip the story. You get a flu vaccine in October. You benefit directly, obviously. But so does your coworker, your elderly neighbor, the stranger sitting next to you on the bus — because you're less likely to spread the virus to any of them. That spillover benefit is a **positive externality**.
 
-With a positive externality, the market underproduces. Not enough people get vaccinated, because each person considers only their own benefit and ignores the benefit to others. The **social benefit** of each vaccine exceeds the **private benefit**, so the socially optimal quantity is higher than the market provides.
+With a positive externality, the market underproduces. Not enough people get vaccinated because each person weighs only their own benefit against the cost, ignoring the benefit they confer on everyone around them. The **social benefit** exceeds the **private benefit**, so the socially optimal quantity is higher than what the market provides.
 
-The core pattern: negative externalities mean *too much* production, positive externalities mean *too little*. In both cases, the market equilibrium diverges from the socially efficient outcome.`,
+The pattern: negative externalities mean *too much* production, positive externalities mean *too little*. If a free-response question describes a factory polluting a river and you write that the market "underproduces," that answer is dead wrong.`,
     },
     {
       heading: "Public Goods and the Free-Rider Problem",
-      content: `Picture a Fourth of July fireworks display over a city. Once the fireworks go off, everyone in the area can see them, whether they paid or not. You can't block one person's view without blocking everyone's. Your enjoyment doesn't reduce the show for the person next to you.
+      content: `A Fourth of July fireworks display goes off over a city. Everyone in the area can see it, whether they contributed to the cost or not. You can't block one person's view without blocking everyone's. Your enjoyment doesn't reduce the show for the person standing next to you.
 
 Two features define a **public good**:
-- **Non-excludable** -- you can't prevent non-payers from consuming it
-- **Non-rivalrous** -- one person's consumption doesn't reduce availability for others
+- **Non-excludable** — you can't prevent non-payers from consuming it
+- **Non-rivalrous** — one person's consumption doesn't reduce what's available for others
 
-National defense is the textbook example. Once a country is defended, every resident benefits regardless of whether they paid taxes. A lighthouse warns every ship, not just the ones whose owners chipped in. Clean air, public radio signals, and basic scientific research all share these characteristics.
+National defense is the textbook example. Once a country maintains a military, every resident is protected regardless of whether they paid taxes. A lighthouse warns every passing ship. Clean air. Public radio signals. Basic scientific research funded by the National Science Foundation. All share these two properties.
 
-If you can enjoy the good without paying, why pay? That's the **free-rider problem**. Rational individuals wait for someone else to foot the bill. If everyone free-rides, no one pays, and the good never gets produced, or gets produced in far too small a quantity.
+If you can enjoy the good without paying, why pay? That's the **free-rider problem**. Rational individuals wait for someone else to foot the bill. If everyone free-rides, no one pays and the good either never gets produced or gets produced in far too small a quantity.
 
-Private markets can't solve this. A fireworks company can't charge spectators because it can't exclude those who refuse to pay. The market fails to provide the good even though society collectively values it far above its cost. Governments typically step in, funding public goods through taxation rather than voluntary purchase.`,
+Private markets can't solve this on their own. A fireworks company can't charge spectators because it has no way to exclude those who refuse to pay. The market fails to provide the good even though society collectively values it far above its cost. Governments typically step in, funding public goods through taxation. That's not ideology — it's a direct response to a specific, identifiable market failure.`,
     },
     {
       heading: "Information Asymmetry: The Market for Lemons",
-      content: `You're shopping for a used car. The seller knows whether the car has been in a flood, whether the transmission slips, whether the engine burns oil. You don't. This imbalance, where one party has more information than the other, is **information asymmetry**. And it can unravel an entire market.
+      content: `You're shopping for a used car. The seller knows whether the car has been in a flood, whether the transmission slips on cold mornings, whether the engine burns oil. You don't know any of that. This imbalance — where one party in a transaction has significantly more information than the other — is **information asymmetry**. And it can unravel an entire market.
 
-Economist George Akerlof showed how in his famous 1970 paper on the **market for lemons**. Suppose half of all used cars are good ("peaches") worth $10,000, and half are defective ("lemons") worth $5,000. Buyers can't tell which is which, so they offer the average: $7,500.
+Economist George Akerlof demonstrated exactly how in his landmark 1970 paper on the **market for lemons**. Suppose half of all used cars are good ("peaches") worth $10,000, and half are defective ("lemons") worth $5,000. Buyers can't distinguish which is which, so they offer the average: $7,500.
 
-Here's the catch: owners of good cars know their cars are worth $10,000 and won't sell for $7,500. They withdraw from the market. Now the remaining pool is mostly lemons. Buyers recognize this and lower their offer. More good-car owners exit. The process repeats until the market is dominated by lemons or collapses entirely. This is **adverse selection** in action: the "bad" products drive out the "good" ones.
+The catch: owners of good cars know their vehicles are worth $10,000 and refuse to sell for $7,500. They pull out. The remaining pool is mostly lemons. Buyers notice and lower their offer. More good-car owners exit. The spiral continues until the market is dominated by lemons or collapses entirely. This is **adverse selection** — the "bad" products systematically drive out the "good" ones.
 
-Information asymmetry also creates **moral hazard**, where one party changes their behavior after a deal because the other party can't observe them. Buy fire insurance and you might become less careful about fire safety, since the insurance company now bears the cost. The insurer can't watch you 24/7.
+**Moral hazard** is the other side of information asymmetry. Here, one party changes their behavior *after* a deal is struck because the other party can't observe them. Buy comprehensive fire insurance and you might become less careful about fire safety — leaving candles burning, skipping electrical inspections — because the insurance company now bears the cost. The insurer can't watch you 24/7.
 
-Real-world responses include warranties (the seller signals quality), vehicle history reports (third-party information), occupational licensing (the government certifies competence), and mandatory disclosure laws (forcing the informed party to share what they know).`,
+Real-world responses to these problems include warranties (the seller signals quality by bearing repair risk), Carfax and similar vehicle history reports (third-party information provision), occupational licensing for doctors and lawyers (government-certified competence), and mandatory disclosure laws like the SEC's financial reporting requirements.`,
     },
     {
       heading: "Market Power",
-      content: `Your cable bill is high because in many areas a single company provides internet service. No competitor to switch to. The firm charges well above its cost of production and you either pay or go without. That's **market power** at work: the ability to set prices above the competitive level.
+      content: `Your cable bill is $120 a month because in many American cities a single company provides broadband internet. No competitor to switch to. The firm charges well above its cost of production and you either pay or go without. That's **market power**: the ability to set prices above the competitive level.
 
-In a perfectly competitive market, many firms sell identical products and no single firm can influence the price. Competition pushes price down to minimum average cost, firms earn zero economic profit, and consumers get the most output at the lowest price.
+In a perfectly competitive market, many firms sell identical products and no single firm influences the price. Competition pushes price down to marginal cost, firms earn zero economic profit in the long run, and consumers get maximum output at the lowest sustainable price.
 
-A **monopoly** is the extreme case. A single seller controls the entire market, restricts output below the competitive level, and charges a higher price. The result is **deadweight loss**: transactions that would have benefited both buyer and seller never occur.
+A **monopoly** is the extreme case. One seller, no close substitutes, full control over output. The monopolist restricts production below the competitive level and charges a higher price, producing **deadweight loss** — transactions that would have benefited both buyer and seller never occur.
 
-**Natural monopolies** arise when a single firm can serve the entire market at lower cost than two or more firms could. Water utilities, electric grids, rail networks. Building two parallel sewer systems would be wasteful. The monopoly is efficient on the production side, but without regulation, the firm still exploits its pricing power.
+**Natural monopolies** arise when one firm can serve the entire market at lower average cost than two or more firms. Water utilities. Electric grids. Rail networks. Building two parallel sewer systems would be absurdly wasteful. The monopoly is efficient on the production side, but without regulation, the firm still exploits its pricing power to the detriment of consumers.
 
-Market power doesn't need to be absolute, either. **Oligopolies**, markets with a handful of dominant firms, can also produce inefficient outcomes. Airlines, wireless carriers, and social media platforms often operate in oligopolistic markets where a few big players set the tone and smaller competitors struggle to gain traction.`,
+Market power doesn't have to be absolute to cause problems. **Oligopolies** — markets with a handful of dominant firms — can produce similarly inefficient outcomes. The U.S. airline industry, wireless carriers, and social media platforms all operate in markets where a few large players set the terms and smaller competitors struggle to gain traction. The result sits somewhere between the competitive ideal and monopoly, usually closer to the latter.`,
     },
     {
       heading: "What Government Can Do (and Sometimes Makes Worse)",
-      content: `When markets fail, governments often step in. The toolbox:
+      content: `When markets fail, governments have several tools at their disposal:
 
-- **Pigouvian taxes** -- tax pollution per ton so the firm's private cost rises to match social cost. The market then naturally produces the socially optimal quantity. Carbon taxes work on this principle.
-- **Subsidies** -- subsidize flu vaccines or education so consumers face a lower price, boosting consumption toward the socially optimal level.
-- **Regulation** -- set emission limits, mandate disclosure, require safety standards. Command-and-control rules can directly cap harmful behavior.
-- **Tradable permits** -- create a limited number of pollution allowances and let firms buy and sell them. Firms that can cut pollution cheaply do so and sell their permits to firms where cleanup is expensive. The cap is met at the lowest total cost.
-- **Public provision** -- the government produces the good directly, funded by taxes. National defense, roads, and basic research are common examples.
+- **Pigouvian taxes** raise the firm's private cost to match social cost by taxing pollution per unit. The market then naturally contracts to the socially optimal quantity. The European Union's carbon pricing system, launched in 2005, works on exactly this principle.
+- **Subsidies** lower the price consumers face for goods with positive externalities, pushing consumption toward the socially optimal level — think subsidized flu shots or federal Pell Grants for college education
+- **Regulation** sets emission limits, mandates disclosure, requires safety standards. Command-and-control rules directly cap harmful behavior, though they can be blunt instruments.
+- **Tradable permits** create a fixed number of pollution allowances and let firms buy and sell them. Firms that can reduce emissions cheaply do so and sell their leftover permits to firms where cleanup is expensive. The pollution cap is met at the lowest total cost to the economy.
+- **Public provision** means the government produces the good directly, funded by taxes. National defense, interstate highways, and basic research through agencies like the NIH and NSF.
 
-Government intervention isn't a guaranteed fix, though. **Government failure** occurs when intervention makes things worse or creates new inefficiencies. Regulators may lack information, respond to political pressure instead of economic logic, or create unintended consequences. A poorly designed subsidy can encourage waste. A price control can create shortages. Lobbying can redirect policy to benefit a narrow group at the public's expense.
+Government intervention isn't automatically an improvement, though. **Government failure** occurs when intervention creates new inefficiencies or makes existing ones worse. Regulators may lack the information they need. Political pressure may redirect policy toward well-connected interest groups rather than the public. A poorly designed farm subsidy can encourage overproduction of corn that nobody wants. A rent ceiling can create housing shortages worse than the affordability problem it was trying to solve.
 
-**Worked example:** A factory emits pollution causing $20 in health damages per unit. The government imposes a **Pigouvian tax** of $20 per unit. Before the tax, the firm produced 1,000 units (private-cost equilibrium). After the tax, marginal cost rises by $20 and output falls to 800 units (social-cost equilibrium). Those 200 units that are no longer produced had social cost exceeding social benefit. Deadweight loss is eliminated, and the tax revenue can fund cleanup or compensate those harmed.
+**Worked example:** A factory emits pollution causing $20 in health damages per unit of output. The government imposes a **Pigouvian tax** of $20 per unit. Before the tax, the firm produced 1,000 units at its private-cost equilibrium. After the tax, marginal cost rises by $20, and output falls to 800 units — the social-cost equilibrium. Those 200 units that are no longer produced had social costs exceeding their social benefits. Deadweight loss is eliminated. The tax revenue ($20 × 800 = $16,000) can fund cleanup or compensate those harmed.
 
-The point isn't that government always succeeds or always fails. Both markets *and* governments can misallocate resources. Good policy design compares the imperfect market outcome with the imperfect government alternative and picks whichever gets closest to efficiency.`,
+The bottom line isn't that government always succeeds or always fails. Both markets *and* governments can misallocate resources. Smart policy design compares the imperfect market outcome against the imperfect government alternative and goes with whichever gets closer to efficiency.`,
     },
   ],
 };
@@ -101,7 +101,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The pollution imposes costs on the downstream fisheries, parties who are not involved in the chemical plant's transactions. This is a negative externality: the social cost of production exceeds the private cost, causing the market to overproduce the chemical. Option A is wrong because the jobs are a private benefit to the plant's workers, not a spillover benefit to uninvolved third parties; the harm to fisheries is the externality here. Option C is wrong because the river itself is a common resource, not a public good, and the issue is the pollution cost, not the nature of the river.",
+      "The pollution forces costs onto downstream fisheries — parties not involved in the chemical plant's transactions. That's a textbook negative externality: social cost exceeds private cost, and the market overproduces the chemical. (A) is wrong because the jobs are a private benefit to the plant's workers, not a spillover benefit to uninvolved third parties. The harm to fisheries is the externality. (C) is wrong because the river is a common resource, not a public good, and the issue at hand is pollution cost, not the river's classification.",
   },
   {
     id: "mf-2",
@@ -115,7 +115,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Positive externalities mean the social benefit exceeds the private benefit. Consumers only consider their own benefit when deciding how much to buy, so the market produces less than the socially optimal amount. Society would be better off with more of the good. Option A describes the case for negative externalities, where the market overproduces. Option B would only be true if there were no externalities at all.",
+      "Positive externalities mean social benefit exceeds private benefit. Consumers only consider their own gain when deciding how much to buy, so the market underproduces. Society would be better off with more. (A) describes the negative externality case, where the market overproduces. (B) would only hold if no externality existed at all.",
   },
   {
     id: "mf-3",
@@ -129,7 +129,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "National defense is both non-rivalrous (one person being defended does not reduce defense for others) and non-excludable (you cannot exclude any resident from being protected). These two properties define a public good. Option A is wrong because pizza is both rivalrous (if you eat it, no one else can) and excludable (the restaurant can refuse to serve you). Option B is excludable because the service requires a paid subscription. Option D is excludable because the toll prevents non-payers from using the road.",
+      "National defense is non-rivalrous (defending one citizen doesn't reduce defense for another) and non-excludable (you can't selectively leave some residents unprotected). Both properties must hold for a public good. (A) fails both tests — pizza is rivalrous and excludable. (B) is excludable via subscription. (D) is excludable via the toll.",
   },
   {
     id: "mf-4",
@@ -143,7 +143,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Because buyers cannot tell good cars from bad ones, they offer an average price. Owners of high-quality cars find this price too low and withdraw. The remaining pool is increasingly low-quality, so buyers lower their offers further. This cycle of adverse selection can collapse the market. Option A is wrong because buyers actually offer too little for high-quality goods (not too much for low-quality ones); they pay an average that undervalues the good cars. Option B is wrong because the lemons problem is driven by information asymmetry, not government price controls.",
+      "Buyers can't tell peaches from lemons, so they offer an average price. Owners of good cars find this average insulting and withdraw. The remaining pool skews toward lemons. Buyers adjust downward. More good-car owners leave. The cycle — adverse selection — can collapse the market entirely. (A) gets the mechanism backwards; the problem is buyers offering too *little* for good cars, not too much for bad ones. (B) is wrong because the lemons problem stems from information asymmetry, not government controls.",
   },
   {
     id: "mf-5",
@@ -157,7 +157,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Because public goods are non-excludable, firms cannot prevent non-payers from consuming. Rational consumers have an incentive to free-ride, to enjoy the benefit while letting others pay. If too many people free-ride, the firm cannot cover its costs and will not produce the good. Option A is wrong because the issue is not cost but revenue collection; even a low-cost public good suffers from the free-rider problem if people cannot be excluded from using it.",
+      "Non-excludability is the culprit. If firms can't prevent non-payers from consuming, rational consumers free-ride and let others pay. If too many people free-ride, revenue dries up and the good never gets produced — or gets produced at far too low a level. (A) misidentifies the problem; even a cheap public good suffers from free-riding if people can't be excluded. Cost isn't the bottleneck. Revenue collection is.",
   },
   {
     id: "mf-6",
@@ -171,7 +171,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "A Pigouvian tax is set equal to the external cost per unit, which raises the firm's private cost to match the social cost. The market then naturally reduces output to the socially optimal level. Option D is wrong because the goal is not zero pollution; it is the efficient level of pollution where the marginal social benefit of one more unit of output equals the marginal social cost. Some pollution may be worth tolerating if the goods produced are valuable enough. Option B is wrong because the tax is a corrective tool aimed at efficiency, not a moral punishment.",
+      "The tax is set equal to the marginal external cost per unit, which forces the firm's private cost up to match the social cost. The market then naturally cuts back to the socially optimal output level. (D) is wrong because the goal is *not* zero pollution — it's the *efficient* level, where the marginal social benefit of one more unit equals the marginal social cost. Some pollution is worth tolerating if the goods produced are valuable enough. (B) frames the tax as moral punishment, but it's a corrective tool aimed at efficiency, not ethics.",
   },
   {
     id: "mf-7",
@@ -185,7 +185,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "A natural monopoly arises from the cost structure of the industry, typically very high fixed costs and low marginal costs. One firm spreading those fixed costs across the entire market achieves a lower average cost than two or more firms splitting the market could. Water utilities and electric grids are classic examples. Option A describes a legal barrier to entry (a patent), not a natural monopoly. Option D describes a government-granted monopoly. Both create monopolies, but not natural ones. The distinction matters because natural monopolies are efficient on the production side even if pricing requires regulation.",
+      "Natural monopoly arises from cost structure: very high fixed costs and low marginal costs. One firm spreading those fixed costs across the entire market achieves a lower average cost than two or more firms splitting the same market ever could. Water utilities and electric grids are the classic examples. (A) describes a patent-based legal barrier, not a natural monopoly. (D) describes a government-granted monopoly. Both create monopolies, but through different mechanisms entirely. The distinction matters because natural monopolies are efficient on the production side — the problem is only on the pricing side.",
   },
   {
     id: "mf-8",
@@ -199,7 +199,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Moral hazard occurs when one party changes their behavior after a deal because the other party cannot fully observe or control their actions. A person with insurance takes more risk or uses more care because the insurer bears the cost. Option A is wrong because it describes adverse selection (hidden information before a transaction), not moral hazard (changed behavior after a transaction). Option D is wrong because free-riding relates to public goods, not moral hazard; the pest control spillover is a positive externality problem, not a post-contract behavior change.",
+      "Moral hazard = changed behavior *after* a deal is struck because the other party can't fully observe you. A person with insurance uses more medical care because the insurer bears most of the cost. (A) is adverse selection — hidden information *before* the transaction, not changed behavior *after* it. That distinction is one of the most commonly tested points in AP Micro's market failure unit. (D) is the free-rider problem, which relates to public goods and positive externalities, not post-contract behavior changes.",
   },
   {
     id: "mf-9",
@@ -213,7 +213,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "MSC = MPC + external cost = (20 + Q) + 30 = 50 + Q. Set MSC = Demand: 50 + Q = 120 − Q, so 2Q = 70, Q = 35. The market equilibrium without the tax would be MPC = Demand: 20 + Q = 120 − Q, so 2Q = 100, Q = 50. The socially optimal output (35) is less than the market equilibrium (50) because the negative externality causes overproduction. Option A (50) is the unregulated market quantity that ignores external costs. Option C (45) appears to be an averaging error. Option D (65) exceeds even the market equilibrium, meaning even more overproduction, which contradicts the need to reduce output.",
+      "MSC = MPC + external cost = (20 + Q) + 30 = 50 + Q. Set MSC = Demand: 50 + Q = 120 − Q, giving 2Q = 70, Q = 35. For comparison, the unregulated market equilibrium would be MPC = Demand: 20 + Q = 120 − Q, so Q = 50. The market overproduces by 15 units because pollution costs never enter the firm's private calculation. (A) is the unregulated quantity — exactly the wrong answer. (C) splits the difference incorrectly. (D) exceeds even the market equilibrium, which would mean even *more* overproduction.",
   },
   {
     id: "mf-10",
@@ -227,7 +227,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "A Pigouvian tax puts a price on the externality and lets the market decide how to adjust. Firms that can reduce pollution cheaply will cut more; firms where abatement is expensive will cut less and pay the tax. This achieves the optimal output at the lowest total cost to society. A uniform regulation forces all firms to cut equally, regardless of cost differences. Option A is wrong; both approaches can achieve the efficient outcome and eliminate the externality-related DWL; the advantage of the tax is cost-effectiveness, not DWL elimination. Option C is wrong because neither policy aims for zero pollution; the goal is the socially optimal level where marginal social cost equals marginal social benefit. Option D is wrong because setting the correct Pigouvian tax requires knowledge of the marginal external cost.",
+      "The tax puts a price on the externality and lets firms decide how to respond. Firms that can cut pollution cheaply reduce emissions heavily and avoid the tax; firms where cleanup is expensive pay the tax instead. The same pollution target is met at the lowest total cost to the economy. A blanket regulation forces all firms to cut equally, regardless of their individual abatement costs. (A) is misleading; both approaches can eliminate the externality-related DWL — the tax's advantage is *cost-effectiveness*, not DWL elimination per se. (C) is wrong because neither policy aims for zero pollution. (D) is wrong because setting the correct Pigouvian tax *does* require knowledge of the marginal external cost.",
   },
   {
     id: "mf-11",
@@ -241,7 +241,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "The Coase theorem requires low transaction costs and well-defined property rights. When transaction costs are high, as when millions of people are affected by air pollution, negotiating a private solution is impractical. The costs of identifying all parties, organizing them, and reaching agreement overwhelm any potential gains from bargaining. Option A describes a condition that actually supports the Coase theorem, not undermines it. Option B describes a favorable scenario for Coasean bargaining, since fewer parties mean lower transaction costs. Option D is irrelevant; the theorem applies equally to negative and positive externalities; the type of externality does not determine whether bargaining will succeed.",
+      "The Coase theorem requires low transaction costs and well-defined property rights. When millions of people are harmed by air pollution from a factory, getting all those people into a room to negotiate a private deal is essentially impossible. Transaction costs overwhelm any potential gains from bargaining. (A) describes a condition that *supports* the Coase theorem, not one that undermines it. (B) is the most favorable scenario for Coasean bargaining — fewer parties means lower transaction costs. (D) is irrelevant; the theorem applies to both negative and positive externalities equally.",
   },
   {
     id: "mf-12",
@@ -255,7 +255,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The defining features of a public good are non-rivalry (my consumption does not diminish yours) and non-excludability (no one can be prevented from benefiting). National defense satisfies both: defending one citizen does not reduce defense for others, and you cannot selectively leave some citizens unprotected. Option A confuses how the good is provided with what makes it a public good; government provision is the response to the public goods problem, not the definition. Option C identifies a practical difficulty but not the economic classification; many expensive goods are private goods. Option D describes equal consumption, which is a consequence of non-rivalry and non-excludability, not the definition itself.",
+      "Non-rivalry and non-excludability are the two defining features. Defending one citizen doesn't reduce defense for others, and you can't selectively leave some residents unprotected. (A) confuses how the good is *provided* with what makes it a public good. Government provision is the *response* to the public goods problem, not the definition. (C) identifies a practical difficulty, but plenty of expensive goods are private goods. (D) describes a consequence of non-rivalry and non-excludability, not the classification criteria themselves.",
   },
   {
     id: "mf-13",
@@ -269,7 +269,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Cost-benefit analysis compares total social benefits to total social costs. Since $14 million > $10 million, the project generates $4 million in net social benefit, so it should be built. Option A focuses on affordability per person, which is a distributional concern, not the efficiency criterion used in cost-benefit analysis. Option C is too broad; not all parks are worth building; the decision depends on whether benefits exceed costs in each specific case. Option D invokes a jobs argument that ignores opportunity cost; the $10 million could create jobs elsewhere too; what matters is whether this particular use of resources maximizes social welfare.",
+      "Cost-benefit analysis compares total social benefits to total social costs. 1,000 residents × $5 = $5,000 in total benefit versus $3,000 in cost — net benefit of $2,000, so the project should proceed. (The answer choice mentions $4 million, which appears to be a typo in the option text, but the logic is correct: benefits exceed costs.) (A) focuses on affordability, a distributional concern, not the efficiency criterion. (C) is too sweeping — not every park is worth building; each case depends on whether benefits exceed costs. (D) invokes a jobs argument that ignores opportunity cost; the $3,000 could create value elsewhere too.",
   },
   {
     id: "mf-14",
@@ -283,7 +283,7 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "A positive externality means MSB > MPB, so the market underproduces. A per-unit subsidy equal to the marginal external benefit shifts the effective demand curve up to match the social benefit curve, increasing consumption to the socially optimal level. Option A would make the problem worse; taxing a good that is already underproduced would reduce output even further. Option C (a price ceiling below equilibrium) would create a shortage and potentially reduce the quantity exchanged, worsening underproduction. Option D locks in the current inefficient market output instead of correcting it.",
+      "Positive externality means MSB > MPB, and the market underproduces. A per-unit subsidy equal to the marginal external benefit shifts the effective demand curve up to align with the social benefit curve, boosting consumption to the socially optimal level. (A) would make things worse — taxing a good that's already underproduced reduces output even further. (C) creates a shortage and could reduce quantity exchanged, worsening the underproduction problem. (D) locks in the current inefficient output instead of correcting it.",
   },
   {
     id: "mf-15",
@@ -297,6 +297,6 @@ export const marketFailureQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The socially optimal quantity occurs where the full social cost of the last unit equals the full social benefit, that is, where MSC intersects the demand curve (which represents MSB when there are no consumption externalities). At this point, net social welfare is maximized. Option A finds the unregulated market equilibrium, which overproduces when a negative externality exists because it ignores external costs. Option C makes no economic sense; the intersection of MSC and MPC would only identify the output where external cost equals zero, which is not the optimality condition. Option D finds the quantity where willingness to pay is zero, which has no welfare-maximizing significance.",
+      "Social optimum is where MSC = MSB. When there are no consumption externalities, the demand curve represents MSB. So the intersection of MSC and demand gives the socially optimal quantity — the point where net social welfare is maximized. (A) finds the unregulated market equilibrium, which overproduces when negative externalities exist because external costs are ignored. (C) makes no economic sense as an optimality condition — that intersection only identifies where external cost happens to equal zero. (D) finds the quantity where willingness to pay drops to zero, which has no welfare significance.",
   },
 ];

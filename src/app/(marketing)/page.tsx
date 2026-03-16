@@ -8,6 +8,7 @@ import FeatureCard from "@/components/home/FeatureCard";
 import HeroGraph from "@/components/home/HeroGraph";
 import TypingEffect from "@/components/home/TypingEffect";
 import { microCourse, macroCourse } from "@/data/courses";
+import EmailCapture from "@/components/home/EmailCapture";
 
 /* ─── Stagger animation helpers ─── */
 const stagger = {
@@ -398,6 +399,25 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════
+          SECTION 4.5 — EMAIL CAPTURE
+          ══════════════════════════════════════════════════ */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6">
+          <ScrollReveal>
+            <div
+              className="rounded-2xl p-8 sm:p-10"
+              style={{
+                background: "var(--color-surface-raised)",
+                border: "1px solid var(--color-border-subtle)",
+              }}
+            >
+              <EmailCapture />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
           SECTION 5 — CTA
           ══════════════════════════════════════════════════ */}
       <section className="py-24 sm:py-32" style={{ background: "var(--color-surface-raised)" }}>
@@ -454,15 +474,16 @@ export default function HomePage() {
                 <li><Link href="/dashboard" className="text-sm">Dashboard</Link></li>
                 <li><Link href="/login" className="text-sm">Sign In</Link></li>
                 <li><Link href="/signup" className="text-sm">Create Account</Link></li>
+                <li><Link href="/blog" className="text-sm">Blog</Link></li>
               </ul>
             </div>
             <div>
-              <h4>About</h4>
-              <p className="text-sm leading-relaxed max-w-[260px]">
-                EconLearn is a free, interactive platform designed to help
-                students master AP Microeconomics and AP Macroeconomics
-                through hands-on learning.
-              </p>
+              <h4>Company</h4>
+              <ul className="space-y-2.5">
+                <li><Link href="/about" className="text-sm">About</Link></li>
+                <li><Link href="/privacy" className="text-sm">Privacy Policy</Link></li>
+                <li><Link href="/terms" className="text-sm">Terms of Service</Link></li>
+              </ul>
             </div>
           </div>
 
