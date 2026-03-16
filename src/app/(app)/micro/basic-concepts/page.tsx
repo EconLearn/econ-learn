@@ -72,7 +72,7 @@ export default function BasicConceptsPage() {
             </p>
             <ul className="space-y-2">
               {[
-                "Scarcity is universal — even wealthy societies face it.",
+                "Scarcity is universal. Even wealthy societies face it.",
                 "Opportunity cost is the value of the single next-best alternative, not everything you gave up.",
                 "Points on the PPC are efficient. Inside is inefficient. Outside is unattainable.",
                 "The PPC bows outward because of increasing opportunity costs.",

@@ -1,45 +1,45 @@
 export const adasContent = {
   title: "Aggregate Demand & Supply",
-  subtitle: "How an entire economy finds its equilibrium price level and output",
+  subtitle: "Understanding how the whole economy finds its equilibrium price level and output",
   sections: [
     {
       heading: "From Micro to Macro",
-      content: `The 2008 financial crisis did not just wreck housing. It tanked the entire U.S. economy, because a collapse in one sector ripples outward through interconnected markets. The **AD/AS model** captures this reality by analyzing the economy as a whole.
+      content: `The 2008 financial crisis didn't just wreck the housing market. It dragged the entire U.S. economy down with it, because when one sector collapses, the damage ripples outward through interconnected markets. The **AD/AS model** is built to handle exactly this kind of thinking. Instead of looking at one product or one industry, it analyzes the economy as a whole.
 
-The axes replace the micro variables from supply-and-demand:
+The axes swap out the micro variables you're used to from supply-and-demand:
 - **Price Level (PL)** is the average of all prices economy-wide, measured by the CPI or GDP deflator. Not the price of any single good.
 - **Real GDP (Y)** is total output, adjusted for inflation.
 
-AD/AS is how economists diagnose recessions, explain inflation, and judge whether government policy is doing more good than harm.`,
+This is the framework economists use to diagnose recessions, explain inflation, and figure out whether government policy is actually helping or making things worse.`,
     },
     {
       heading: "Aggregate Demand (AD)",
-      content: `Consumers buy groceries. Businesses buy equipment. The government builds highways. Foreigners buy American exports. Add it all up: **aggregate demand** = C + I + G + (X - M).
+      content: `Consumers buy groceries. Businesses buy equipment. The government builds highways. Foreigners buy American exports. Add all of that up and you get **aggregate demand** = C + I + G + (X - M).
 
-The AD curve slopes downward for three reasons:
-- **Wealth effect.** A higher price level erodes the purchasing power of savings. People spend less.
+The AD curve slopes downward, and there are three distinct reasons why:
+- **Wealth effect.** A higher price level erodes the purchasing power of savings, so people spend less.
 - **Interest rate effect.** Higher prices increase the demand for money, which pushes up interest rates. That chokes off business investment and big-ticket consumer purchases like cars and homes.
 - **Exchange rate effect.** Rising U.S. prices make American goods more expensive abroad. Exports fall, imports look cheaper, and net exports decline.
 
-Shifts in the AD curve come from changes in consumer confidence, government spending, tax policy, monetary policy, or foreign income. The Fed slashing rates to near zero during COVID was a massive rightward push on AD. A tax increase shifts AD left.`,
+So what shifts the AD curve? Changes in consumer confidence, government spending, tax policy, monetary policy, or foreign income. The Fed slashing rates to near zero during COVID was a massive rightward push on AD. A tax increase shifts AD left.`,
     },
     {
       heading: "Short-Run Aggregate Supply (SRAS)",
-      content: `A factory owner in 2021 sees prices for her products climbing while worker wages stay locked in by year-end contracts. Every unit sold earns a fatter margin, so she ramps up production. That dynamic, scaled across millions of firms, explains why the **SRAS** curve slopes upward. When the price level rises but input costs have not caught up yet, firms expand output to capture wider margins.
+      content: `Picture a factory owner in 2021. Prices for her products are climbing, but worker wages are still locked in by year-end contracts. Every unit sold earns a fatter margin, so she ramps up production. Scale that dynamic across millions of firms and you can see why the **SRAS** curve slopes upward. When the price level rises but input costs haven't caught up yet, firms expand output to capture those wider margins.
 
-"Short run" means the window where input prices remain sticky. Workers signed contracts months ago. Suppliers quoted prices last quarter. That lag gives the curve its slope.
+"Short run" here means the window where input prices remain sticky. Workers signed contracts months ago. Suppliers quoted prices last quarter. That lag is what gives the curve its upward slope.
 
-What shifts SRAS? Anything that changes production costs economy-wide. The 1973 OPEC embargo sent energy costs through the roof, shifting SRAS left. A manufacturing technology breakthrough that lowers costs for everyone shifts SRAS right. Changes in wages, commodity prices, business taxes, and supply chain disruptions all work through the same channel.`,
+Anything that changes production costs economy-wide will shift SRAS. The 1973 OPEC embargo sent energy costs through the roof, shifting SRAS left. A manufacturing technology breakthrough that lowers costs for everyone shifts SRAS right. Changes in wages, commodity prices, business taxes, and supply chain disruptions all work through the same channel.`,
     },
     {
       heading: "LRAS and Full Employment",
-      content: `The **Long-Run Aggregate Supply (LRAS)** curve is a vertical line. Once all wages and prices have fully adjusted, output depends entirely on real resources: workers, factories, and technology. Double every price and every wage overnight and nothing real changes. The same machines exist. The same workforce shows up Monday morning.
+      content: `The **Long-Run Aggregate Supply (LRAS)** curve is just a vertical line. Once all wages and prices have fully adjusted, output depends entirely on real resources: workers, factories, and technology. If you doubled every price and every wage overnight, nothing real would change. The same machines exist. The same workforce shows up Monday morning.
 
-That vertical line sits at **potential GDP**, the economy's maximum sustainable output. The economy's position relative to LRAS is diagnostic:
+That vertical line sits at **potential GDP**, the economy's maximum sustainable output. Where the economy sits relative to LRAS tells you a lot:
 - Left of LRAS = recessionary gap. Factories sit idle, unemployment runs above normal. The U.S. in 2009.
 - Right of LRAS = inflationary gap. The economy runs hot, overtime is everywhere, wages face upward pressure. The late 1960s before inflation took off.
 
-Self-correction works through wages. In a recessionary gap, high unemployment pushes wages down over time, lowering production costs and shifting SRAS right until output returns to potential. In an inflationary gap, tight labor markets bid wages up, shifting SRAS left and cooling the economy back to LRAS. The mechanism is real, but it can take years to play out.`,
+Self-correction works through wages, and this part trips people up. In a recessionary gap, high unemployment pushes wages down over time, lowering production costs and shifting SRAS right until output returns to potential. In an inflationary gap, tight labor markets bid wages up, shifting SRAS left and cooling the economy back to LRAS. The mechanism is real, but it can take years to fully play out.`,
     },
     {
       heading: "Worked Example",
@@ -49,9 +49,9 @@ Self-correction works through wages. In a recessionary gap, high unemployment pu
 
 Change in AD = 5 x $10B = **$50 billion rightward shift**.
 
-The logic: the government pays $10B to construction firms. Workers receive that as income and spend 80%, or $8B, at restaurants, stores, and landlords. Those recipients spend 80% of $8B ($6.4B), and the chain continues. The geometric series $10B + $8B + $6.4B + $5.12B + ... converges to $50B.
+Here's the logic. The government pays $10B to construction firms. Workers receive that as income and spend 80%, or $8B, at restaurants, stores, and landlords. Those recipients spend 80% of $8B ($6.4B), and the chain keeps going. The geometric series $10B + $8B + $6.4B + $5.12B + ... converges to $50B.
 
-Compare a **$10B tax cut**. Tax multiplier = -MPC / (1 - MPC) = -0.8 / 0.2 = **-4**. The same $10B only shifts AD right by $40B. The gap exists because government spending injects the full $10B into the economy immediately. A tax cut lets households pocket $10B, but they save 20% before spending a dime. Only $8B enters the first round. The spending multiplier exceeds the tax multiplier by exactly 1 regardless of the MPC, and the AP exam tests this distinction constantly.`,
+Now compare a **$10B tax cut**. Tax multiplier = -MPC / (1 - MPC) = -0.8 / 0.2 = **-4**. The same $10B only shifts AD right by $40B. The gap exists because government spending injects the full $10B into the economy immediately. A tax cut lets households pocket $10B, but they save 20% before spending a dime. Only $8B enters the first round. The spending multiplier exceeds the tax multiplier by exactly 1 regardless of the MPC, and the AP exam tests this distinction constantly.`,
     },
   ],
 };
@@ -67,7 +67,7 @@ export const adasQuestions = [
       "AD shifts left",
     ],
     correctIndex: 2,
-    explanation: "G is a direct component of AD = C + I + G + (X - M). More government spending means more total spending at every price level, so AD shifts right. Not A — government purchases affect the demand side (who's buying), not the supply side. SRAS shifts come from changes in production costs like wages or oil prices, not from spending decisions. Not D — an increase in G is expansionary, pushing AD right, not left.",
+    explanation: "G is a direct component of AD = C + I + G + (X - M). More government spending means more total spending at every price level, so AD shifts right. Not A: government purchases affect the demand side (who's buying), not the supply side. SRAS shifts come from changes in production costs like wages or oil prices, not from spending decisions. Not D: an increase in G is expansionary, pushing AD right, not left.",
   },
   {
     id: "adas-2",
@@ -79,7 +79,7 @@ export const adasQuestions = [
       "AD to shift left and SRAS to shift right",
     ],
     correctIndex: 1,
-    explanation: "Oil feeds into the cost of producing nearly everything — transportation, plastics, heating, manufacturing. When oil prices spike, firms face higher costs across the board, which shifts SRAS left. Output falls while prices rise: that's stagflation. The 1970s OPEC crises are the textbook case. Not A — an oil spike hits producers' costs, not consumers' desire to spend. It's a supply shock, not a demand shock. Not C — LRAS only shifts with changes in the economy's productive capacity (labor, capital, technology), not input price swings.",
+    explanation: "Oil feeds into the cost of producing nearly everything: transportation, plastics, heating, manufacturing. When oil prices spike, firms face higher costs across the board, which shifts SRAS left. Output falls while prices rise: that's stagflation. The 1970s OPEC crises are the textbook case. Not A: an oil spike hits producers' costs, not consumers' desire to spend. It's a supply shock, not a demand shock. Not C: LRAS only shifts with changes in the economy's productive capacity (labor, capital, technology), not input price swings.",
   },
   {
     id: "adas-3",
@@ -91,7 +91,7 @@ export const adasQuestions = [
       "Negative GDP growth",
     ],
     correctIndex: 1,
-    explanation: "If actual GDP sits to the right of LRAS, the economy is running beyond what it can sustain. Firms are stretching capacity, workers are logging overtime, and employers compete for scarce labor by bidding up wages. That wage pressure drives prices higher. Not A — a recessionary gap is the mirror image: actual GDP below potential, unemployment rising. The question describes the opposite. Not C — long-run equilibrium means actual GDP equals potential GDP; exceeding LRAS means you've moved past equilibrium.",
+    explanation: "If actual GDP sits to the right of LRAS, the economy is running beyond what it can sustain. Firms are stretching capacity, workers are logging overtime, and employers compete for scarce labor by bidding up wages. That wage pressure drives prices higher. Not A: a recessionary gap is the mirror image: actual GDP below potential, unemployment rising. The question describes the opposite. Not C: long-run equilibrium means actual GDP equals potential GDP; exceeding LRAS means you've moved past equilibrium.",
   },
   {
     id: "adas-4",
@@ -103,7 +103,7 @@ export const adasQuestions = [
       "Lower unemployment below the natural rate",
     ],
     correctIndex: 2,
-    explanation: "Short run: AD shifts right, output rises, prices rise — looks like A. But then wages catch up. Workers demand raises, input costs climb, SRAS shifts left, and output slides back to potential GDP. The only lasting change is a higher price level. Not A — that's the short-run snapshot, not the long-run outcome. Not D — unemployment temporarily dips below the natural rate during the boom, but once wages adjust fully, it returns to the natural rate.",
+    explanation: "Short run: AD shifts right, output rises, prices rise, which looks like A. But then wages catch up. Workers demand raises, input costs climb, SRAS shifts left, and output slides back to potential GDP. The only lasting change is a higher price level. Not A: that's the short-run snapshot, not the long-run outcome. Not D: unemployment temporarily dips below the natural rate during the boom, but once wages adjust fully, it returns to the natural rate.",
   },
   {
     id: "adas-5",
@@ -115,7 +115,7 @@ export const adasQuestions = [
       "An increase in the money supply",
     ],
     correctIndex: 2,
-    explanation: "LRAS moves only when the economy's productive capacity changes — more workers, more capital, or better technology. Immigration expands the labor force, meaning the economy can physically produce more output at full employment. Potential GDP rises, LRAS shifts right. Not A — consumer confidence affects how much people want to spend (AD), not how much the economy can produce. Not B — tax rate cuts primarily boost spending incentives (AD shift); any supply-side effect is secondary and debated. Not D — expanding the money supply is monetary policy that shifts AD through lower interest rates. It doesn't build new factories or add workers.",
+    explanation: "LRAS moves only when the economy's productive capacity changes: more workers, more capital, or better technology. Immigration expands the labor force, meaning the economy can physically produce more output at full employment. Potential GDP rises, LRAS shifts right. Not A: consumer confidence affects how much people want to spend (AD), not how much the economy can produce. Not B: tax rate cuts primarily boost spending incentives (AD shift); any supply-side effect is secondary and debated. Not D: expanding the money supply is monetary policy that shifts AD through lower interest rates. It doesn't build new factories or add workers.",
   },
   {
     id: "adas-6",
@@ -127,7 +127,7 @@ export const adasQuestions = [
       "Rising prices and rising output",
     ],
     correctIndex: 1,
-    explanation: "The name says it all: stag(nation) + (in)flation. Output falls and unemployment rises (the stagnation part) while prices climb (the inflation part). On the graph, SRAS shifts left — the 1970s oil shocks are the classic example. Not A — falling prices with rising output describes a positive supply shock (SRAS shifting right), the opposite situation. Not D — rising prices with rising output is demand-pull inflation from AD shifting right, which looks like an economic boom, not stagflation. Not C — falling prices and falling output would be a deflationary contraction.",
+    explanation: "The name says it all: stag(nation) + (in)flation. Output falls and unemployment rises (the stagnation part) while prices climb (the inflation part). On the graph, SRAS shifts left. The 1970s oil shocks are the classic example. Not A: falling prices with rising output describes a positive supply shock (SRAS shifting right), the opposite situation. Not D: rising prices with rising output is demand-pull inflation from AD shifting right, which looks like an economic boom, not stagflation. Not C: falling prices and falling output would be a deflationary contraction.",
   },
   {
     id: "adas-7",
@@ -135,11 +135,11 @@ export const adasQuestions = [
     options: [
       "A recessionary gap with lower price level and lower output",
       "An inflationary gap with higher price level",
-      "No change — the economy stays at LRAS",
+      "No change, the economy stays at LRAS",
       "SRAS shifts left to maintain the price level",
     ],
     correctIndex: 0,
-    explanation: "AD shifts left, so the economy moves down along the SRAS curve to a new short-run equilibrium: lower output, lower price level. Real GDP drops below potential — that's a recessionary gap. Think of the demand collapse in early 2020. Not C — the economy does not snap back to LRAS instantly. Self-correction requires time for wages and prices to fall, which can take months or years. Not D — this reverses the adjustment mechanism. In a recessionary gap, high unemployment eventually pushes wages down, reducing costs, which shifts SRAS right (not left) to restore long-run equilibrium. Not B — a leftward AD shift creates a recessionary gap, not an inflationary one.",
+    explanation: "AD shifts left, so the economy moves down along the SRAS curve to a new short-run equilibrium: lower output, lower price level. Real GDP drops below potential. That's a recessionary gap. Think of the demand collapse in early 2020. Not C: the economy does not snap back to LRAS instantly. Self-correction requires time for wages and prices to fall, which can take months or years. Not D: this reverses the adjustment mechanism. In a recessionary gap, high unemployment eventually pushes wages down, reducing costs, which shifts SRAS right (not left) to restore long-run equilibrium. Not B: a leftward AD shift creates a recessionary gap, not an inflationary one.",
   },
   {
     id: "adas-8",
@@ -151,7 +151,7 @@ export const adasQuestions = [
       "$8 billion",
     ],
     correctIndex: 2,
-    explanation: "Multiplier = 1/(1 - 0.8) = 1/0.2 = 5. Multiply: $10B x 5 = $50B. The spending chain runs $10B -> $8B -> $6.4B -> $5.12B and so on, converging to $50B. Not A ($10B) — this ignores the multiplier entirely, as if each dollar of government spending generates zero additional spending. Not B ($80B) — this multiplies $10B x 8, confusing the MPC (0.8) with the multiplier (5). The MPC is an input to the formula, not the multiplier itself. Not D ($8B) — this just calculates $10B x 0.8, which is only the second round of spending, not the total effect.",
+    explanation: "Multiplier = 1/(1 - 0.8) = 1/0.2 = 5. Multiply: $10B x 5 = $50B. The spending chain runs $10B -> $8B -> $6.4B -> $5.12B and so on, converging to $50B. Not A ($10B), this ignores the multiplier entirely, as if each dollar of government spending generates zero additional spending. Not B ($80B), this multiplies $10B x 8, confusing the MPC (0.8) with the multiplier (5). The MPC is an input to the formula, not the multiplier itself. Not D ($8B), this just calculates $10B x 0.8, which is only the second round of spending, not the total effect.",
   },
   {
     id: "adas-9",

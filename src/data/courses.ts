@@ -20,7 +20,7 @@ export const microCourse: Course = {
   title: "AP Microeconomics",
   shortTitle: "Micro",
   description:
-    "How individual markets work — from supply and demand to monopoly power.",
+    "How individual markets work, from supply and demand to monopoly power.",
   color: "#3B82F6",
   modules: [
     {

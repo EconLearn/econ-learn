@@ -1,7 +1,7 @@
 export const monopolisticCompContent = {
   title: "Monopolistic Competition",
   subtitle:
-    "The market structure most firms actually operate in: product differentiation, easy entry, and zero long-run profit.",
+    "The market structure most firms actually live in. Product differentiation, easy entry, and profits that don't last.",
 
   sections: [
     {
@@ -16,11 +16,11 @@ Starbucks charges more than a generic diner because customers perceive a differe
     },
     {
       heading: "Short-Run Profit Maximization",
-      content: `In the short run, a monopolistically competitive firm behaves much like a monopolist. It faces a downward-sloping demand curve, and its marginal revenue curve lies below demand for the same algebraic reason as in monopoly: cutting price to sell one more unit means cutting price on *all* units.
+      content: `In the short run, a monopolistically competitive firm behaves a lot like a monopolist. It faces a downward-sloping demand curve, and its marginal revenue curve lies below demand for the same algebraic reason as in monopoly: cutting price to sell one more unit means cutting price on *all* units.
 
 The firm maximizes profit where **MR = MC**, then reads up to the demand curve to find the price consumers will pay for that quantity. If price exceeds average total cost, the firm earns positive economic profit.
 
-Worked example: a boutique bakery faces demand P = 90 - 0.8Q, so MR = 90 - 1.6Q. Marginal cost is MC = 10 + 0.5Q.
+Here's a worked example. A boutique bakery faces demand P = 90 - 0.8Q, so MR = 90 - 1.6Q. Marginal cost is MC = 10 + 0.5Q.
 
 Set MR = MC:
 90 - 1.6Q = 10 + 0.5Q
@@ -34,7 +34,7 @@ Toggle the graph to "Short Run" to see this. The shaded rectangle between price 
     },
     {
       heading: "Long-Run Adjustment: Profit Gets Competed Away",
-      content: `Monopolistic competition diverges from monopoly right here. Those short-run profits attract new entrants. A bakery opens down the street, then another. Each new entrant steals customers from existing firms, which means each existing firm's demand curve *shifts left*.
+      content: `This is where monopolistic competition parts ways with monopoly. Those short-run profits attract new entrants. A bakery opens down the street, then another. Each new entrant steals customers from existing firms, which means each existing firm's demand curve *shifts left*.
 
 Entry continues as long as positive economic profit exists. It stops only when every firm's demand curve has shifted left far enough to become *tangent* to its ATC curve. At that tangency point, price exactly equals average total cost, and economic profit drops to zero.
 
@@ -51,9 +51,9 @@ Toggle the graph to "Long Run" to watch the demand curve slide left until it bec
       heading: "Excess Capacity and the Markup",
       content: `The long-run tangency creates two features that separate monopolistic competition from perfect competition.
 
-First: **excess capacity**. The firm produces on the downward-sloping portion of its ATC curve, to the left of the minimum. It could lower average cost by producing more, but that would require cutting price below ATC. The gap between actual output and the output at minimum ATC is excess capacity. Restaurants, salons, clothing stores, they all operate well below full capacity most of the time. That half-empty restaurant at 2 PM on a Tuesday is excess capacity made visible.
+First: **excess capacity**. The firm produces on the downward-sloping portion of its ATC curve, to the left of the minimum. It could lower average cost by producing more, but that would require cutting price below ATC. The gap between actual output and the output at minimum ATC is excess capacity. Restaurants, salons, clothing stores, they all operate well below full capacity most of the time. That half-empty restaurant at 2 PM on a Tuesday? Excess capacity made visible.
 
-Second: **markup over marginal cost**. Because the demand curve slopes downward, price always exceeds marginal cost in equilibrium (P > MC). In perfect competition, P = MC. The difference is essentially the cost of product variety. Consumers pay slightly more per unit but get a wider range of products to choose from.
+Second: **markup over marginal cost**. Because the demand curve slopes downward, price always exceeds marginal cost in equilibrium (P > MC). In perfect competition, P = MC. The difference is essentially what consumers pay for product variety. They pay slightly more per unit but get a wider range of products to choose from.
 
 Is excess capacity wasteful? Depends who you ask. Some economists say yes, resources are spread too thin across too many firms. Others point out that the variety consumers gain (Thai food *and* Italian *and* Ethiopian on the same block) is worth the slight inefficiency. The AP exam expects you to recognize excess capacity as a feature of the model without making a value judgment.`,
     },
@@ -74,17 +74,17 @@ Key differences from monopoly:
 - Many close substitutes make demand relatively elastic (flat demand curve)
 - Much less market power, smaller markup, smaller DWL
 
-AP exam tip: if a question mentions "differentiated products" and "free entry," you are in monopolistic competition territory. "Identical products" points to perfect competition. "Barriers to entry" points to monopoly or oligopoly.`,
+AP exam tip: if a question mentions "differentiated products" and "free entry," you're in monopolistic competition territory. "Identical products" points to perfect competition. "Barriers to entry" points to monopoly or oligopoly.`,
     },
     {
       heading: "What Students Get Wrong",
-      content: `The most common mistake: confusing the long-run result with perfect competition. Both have zero economic profit. The *reason* differs. In perfect competition, P = MC = minimum ATC. In monopolistic competition, P = ATC but P > MC, and the firm does not produce at minimum ATC.
+      content: `The most common mistake is confusing the long-run result with perfect competition. Both have zero economic profit. But the *reason* differs. In perfect competition, P = MC = minimum ATC. In monopolistic competition, P = ATC but P > MC, and the firm doesn't produce at minimum ATC.
 
-Another frequent error is assuming zero economic profit means the firm is failing. Not true. Zero *economic* profit means the firm earns a normal rate of return, enough to keep operating. The owners earn exactly what they would earn in their next-best alternative. The firm is fine. It just is not earning anything extra.
+Another frequent error: assuming zero economic profit means the firm is failing. It doesn't. Zero *economic* profit means the firm earns a normal rate of return, enough to keep operating. The owners earn exactly what they would earn in their next-best alternative. The firm is fine. It just isn't earning anything extra.
 
-Students also sometimes believe demand becomes horizontal in the long run. It does not. The demand curve shifts left (fewer customers per firm), but it stays downward-sloping because the product is still differentiated. If demand were horizontal, you would be in perfect competition, and there would be no excess capacity.
+Students also sometimes believe demand becomes horizontal in the long run. It doesn't. The demand curve shifts left (fewer customers per firm), but it stays downward-sloping because the product is still differentiated. If demand were horizontal, you'd be in perfect competition, and there would be no excess capacity.
 
-One more: forgetting which curve demand is tangent to. It is tangent to **ATC**, not MC. The tangency point is where P = ATC and the demand curve just barely touches the ATC curve from above. At any other quantity, ATC would exceed price, confirming that zero profit is the best the firm can do.`,
+One more thing worth flagging: forgetting which curve demand is tangent to. It's tangent to **ATC**, not MC. The tangency point is where P = ATC and the demand curve just barely touches the ATC curve from above. At any other quantity, ATC would exceed price, confirming that zero profit is the best the firm can do.`,
     },
   ],
 };
@@ -102,7 +102,7 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 1,
     explanation:
-      "Free entry attracts new firms whenever profit exists, stealing customers from incumbents. Each firm's demand curve shifts left until it is tangent to ATC, making P = ATC and economic profit zero. No government regulation or collusion is involved — it's the automatic result of free entry. Option D is wrong because products remain differentiated even in the long run.",
+      "Free entry attracts new firms whenever profit exists, stealing customers from incumbents. Each firm's demand curve shifts left until it is tangent to ATC, making P = ATC and economic profit zero. No government regulation or collusion is involved; it's the automatic result of free entry. Option D is wrong because products remain differentiated even in the long run.",
   },
   {
     id: "mc-2",
@@ -116,7 +116,7 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 2,
     explanation:
-      "Excess capacity means the firm operates on the downward-sloping portion of ATC — to the left of the minimum point. It could lower average cost by producing more, but profit maximization (MR = MC) doesn't call for that output level. Option A describes the opposite problem. Option B is wrong because the firm is on the falling part of ATC, not the rising part. Option D describes the minimum ATC point itself, not the firm's actual position.",
+      "Excess capacity means the firm operates on the downward-sloping portion of ATC, to the left of the minimum point. It could lower average cost by producing more, but profit maximization (MR = MC) doesn't call for that output level. Option A describes the opposite problem. Option B is wrong because the firm is on the falling part of ATC, not the rising part. Option D describes the minimum ATC point itself, not the firm's actual position.",
   },
   {
     id: "mc-3",
@@ -158,7 +158,7 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 1,
     explanation:
-      "Positive profit attracts entry because there are no barriers. New firms offering similar products draw customers away from existing firms, shifting each incumbent's demand leftward. This continues until profit reaches zero. Government intervention (A) isn't part of the model. Raising prices (C) would reduce quantity demanded and wouldn't be optimal. Consumers don't switch to a different market structure (D) — new firms enter the same monopolistically competitive market.",
+      "Positive profit attracts entry because there are no barriers. New firms offering similar products draw customers away from existing firms, shifting each incumbent's demand leftward. This continues until profit reaches zero. Government intervention (A) isn't part of the model. Raising prices (C) would reduce quantity demanded and wouldn't be optimal. Consumers don't switch to a different market structure (D); new firms enter the same monopolistically competitive market.",
   },
   {
     id: "mc-6",
@@ -172,7 +172,7 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 2,
     explanation:
-      "The long-run zero-profit condition requires P = ATC. Geometrically, this happens when the demand curve is tangent to the ATC curve — they touch at exactly one point. If demand intersected ATC at two points, the firm could earn profit between them. Tangency to MC (A) would imply P = MC, which is perfect competition. The demand curve has no special relationship to MR (B) or AVC (D) at the long-run equilibrium.",
+      "The long-run zero-profit condition requires P = ATC. Geometrically, this happens when the demand curve is tangent to the ATC curve, where they touch at exactly one point. If demand intersected ATC at two points, the firm could earn profit between them. Tangency to MC (A) would imply P = MC, which is perfect competition. The demand curve has no special relationship to MR (B) or AVC (D) at the long-run equilibrium.",
   },
   {
     id: "mc-7",
@@ -186,7 +186,7 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 2,
     explanation:
-      "Product differentiation gives each monopolistically competitive firm a downward-sloping demand curve, which means P > MC. The firm charges a markup over marginal cost, resulting in a higher price than a perfectly competitive firm would charge. Both earn zero profit in the long run (B confuses profit with price — zero profit doesn't mean the same price). There are no barriers to entry in monopolistic competition (D is wrong). More firms doesn't automatically mean lower prices when products are differentiated (A is wrong).",
+      "Product differentiation gives each monopolistically competitive firm a downward-sloping demand curve, which means P > MC. The firm charges a markup over marginal cost, resulting in a higher price than a perfectly competitive firm would charge. Both earn zero profit in the long run (B confuses profit with price; zero profit doesn't mean the same price). There are no barriers to entry in monopolistic competition (D is wrong). More firms doesn't automatically mean lower prices when products are differentiated (A is wrong).",
   },
   {
     id: "mc-8",
@@ -200,7 +200,7 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 1,
     explanation:
-      "Successful advertising increases brand loyalty, which draws more customers (demand shifts right) and makes them less sensitive to price changes (demand becomes steeper / less elastic). This temporarily increases the firm's market power and short-run profit. It doesn't eliminate excess capacity (C) — that's a structural feature of the model. It doesn't create perfect competition (D) — it actually moves further from it by strengthening differentiation. Option A is backward — more brand loyalty means less elasticity, not more.",
+      "Successful advertising increases brand loyalty, which draws more customers (demand shifts right) and makes them less sensitive to price changes (demand becomes steeper / less elastic). This temporarily increases the firm's market power and short-run profit. It doesn't eliminate excess capacity (C), as that's a structural feature of the model. It doesn't create perfect competition (D); it actually moves further from it by strengthening differentiation. Option A is backward; more brand loyalty means less elasticity, not more.",
   },
   {
     id: "mc-9",
@@ -214,7 +214,7 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 1,
     explanation:
-      "Entry continues as long as economic profit attracts new firms. Each entrant steals customers, shifting incumbents' demand curves leftward. Entry stops precisely when the demand curve becomes tangent to ATC — at that single point, P = ATC and economic profit is zero. No more incentive to enter. Option A describes the perfect competition outcome (P = MC), but monopolistic competition never reaches P = MC because the demand curve stays downward-sloping. Option C (MR = ATC) has no standard economic meaning and is not an equilibrium condition in any market structure. Option D would mean the product is no longer differentiated, converting the market to perfect competition, which contradicts the assumption of product differentiation.",
+      "Entry continues as long as economic profit attracts new firms. Each entrant steals customers, shifting incumbents' demand curves leftward. Entry stops precisely when the demand curve becomes tangent to ATC. At that single point, P = ATC and economic profit is zero. No more incentive to enter. Option A describes the perfect competition outcome (P = MC), but monopolistic competition never reaches P = MC because the demand curve stays downward-sloping. Option C (MR = ATC) has no standard economic meaning and is not an equilibrium condition in any market structure. Option D would mean the product is no longer differentiated, converting the market to perfect competition, which contradicts the assumption of product differentiation.",
   },
   {
     id: "mc-10",
@@ -228,7 +228,7 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 2,
     explanation:
-      "The long-run tangency between demand and ATC occurs on the downward-sloping portion of the ATC curve, to the left of its minimum point. The firm could theoretically lower average cost by producing more, but doing so would push price below ATC and generate losses. The gap between actual output and minimum-ATC output is excess capacity. Option A places the firm on the wrong side of the ATC curve — operating beyond minimum ATC would mean rising average costs. Option B describes the perfectly competitive long-run equilibrium, not monopolistic competition. Option D describes allocative efficiency (P = MC), which does not hold in monopolistic competition because P > MC.",
+      "The long-run tangency between demand and ATC occurs on the downward-sloping portion of the ATC curve, to the left of its minimum point. The firm could theoretically lower average cost by producing more, but doing so would push price below ATC and generate losses. The gap between actual output and minimum-ATC output is excess capacity. Option A places the firm on the wrong side of the ATC curve; operating beyond minimum ATC would mean rising average costs. Option B describes the perfectly competitive long-run equilibrium, not monopolistic competition. Option D describes allocative efficiency (P = MC), which does not hold in monopolistic competition because P > MC.",
   },
   {
     id: "mc-11",
@@ -242,7 +242,7 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 2,
     explanation:
-      "Close substitutes are the key difference. A monopolistically competitive firm has many competitors offering similar products, so consumers can easily switch if the price rises. This makes demand relatively elastic (flat). A monopolist, by contrast, has no close substitutes, so its demand curve is steeper (less elastic). Option A reverses the logic — fewer substitutes make demand steeper for the monopolist, not for the monopolistically competitive firm. Option B ignores the critical difference in the number and closeness of substitutes, which directly affects demand elasticity. Option D is extreme and unrealistic — no firm faces perfectly inelastic demand, and brand loyalty in monopolistic competition is moderate at best.",
+      "Close substitutes are the key difference. A monopolistically competitive firm has many competitors offering similar products, so consumers can easily switch if the price rises. This makes demand relatively elastic (flat). A monopolist, by contrast, has no close substitutes, so its demand curve is steeper (less elastic). Option A reverses the logic; fewer substitutes make demand steeper for the monopolist, not for the monopolistically competitive firm. Option B ignores the critical difference in the number and closeness of substitutes, which directly affects demand elasticity. Option D is extreme and unrealistic; no firm faces perfectly inelastic demand, and brand loyalty in monopolistic competition is moderate at best.",
   },
   {
     id: "mc-12",
@@ -256,7 +256,7 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 1,
     explanation:
-      "Starting from zero-profit equilibrium, a leftward demand shift means the demand curve now lies entirely below the ATC curve at the profit-maximizing output. The firm still sets MR = MC, but the resulting price is below ATC, generating economic losses. Option A confuses the short run with the long run — entry and exit take time, so short-run losses persist until firms exit. Option C is irrational — with lower demand, raising price would reduce quantity demanded even further, worsening losses. The firm is already maximizing profit (minimizing losses) at MR = MC. Option D ignores the reality of sunk costs, specialized capital, and the time required to retool — firms do not switch production instantaneously.",
+      "Starting from zero-profit equilibrium, a leftward demand shift means the demand curve now lies entirely below the ATC curve at the profit-maximizing output. The firm still sets MR = MC, but the resulting price is below ATC, generating economic losses. Option A confuses the short run with the long run; entry and exit take time, so short-run losses persist until firms exit. Option C is irrational; with lower demand, raising price would reduce quantity demanded even further, worsening losses. The firm is already maximizing profit (minimizing losses) at MR = MC. Option D ignores the reality of sunk costs, specialized capital, and the time required to retool. Firms do not switch production instantaneously.",
   },
   {
     id: "mc-13",
@@ -270,7 +270,7 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 1,
     explanation:
-      "In perfect competition, long-run equilibrium occurs at minimum ATC where P = MC = minimum ATC — no excess capacity, maximum efficiency. In monopolistic competition, the downward-sloping demand curve creates a tangency to the left of minimum ATC, so P > MC (allocative inefficiency) and the firm underproduces relative to its efficient scale (excess capacity). Both earn zero economic profit. Option A is wrong because only perfect competition produces at minimum ATC. Option C reverses the price relationship — perfect competition yields the lowest possible price, not the highest. Option D is wrong because product differentiation and the resulting markup mean monopolistically competitive prices exceed competitive prices.",
+      "In perfect competition, long-run equilibrium occurs at minimum ATC where P = MC = minimum ATC, with no excess capacity, maximum efficiency. In monopolistic competition, the downward-sloping demand curve creates a tangency to the left of minimum ATC, so P > MC (allocative inefficiency) and the firm underproduces relative to its efficient scale (excess capacity). Both earn zero economic profit. Option A is wrong because only perfect competition produces at minimum ATC. Option C reverses the price relationship; perfect competition yields the lowest possible price, not the highest. Option D is wrong because product differentiation and the resulting markup mean monopolistically competitive prices exceed competitive prices.",
   },
   {
     id: "mc-14",
@@ -284,7 +284,7 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 1,
     explanation:
-      "Free entry is the equalizer. Even if advertising boosts demand, any resulting economic profit attracts entrants who split the market. Long-run equilibrium returns to zero economic profit. However, the ATC curve shifts upward due to advertising costs, so each firm charges a higher price to cover those costs while still earning zero profit. Option A ignores the free entry condition — profit cannot persist when there are no barriers. Option C is too pessimistic — if advertising were unprofitable, rational firms would stop doing it, and the market would adjust. Option D is possible in theory but overstates the effect — monopolistic competition is defined by low barriers to entry, and advertising alone rarely creates the scale barriers needed for oligopoly.",
+      "Free entry is the equalizer. Even if advertising boosts demand, any resulting economic profit attracts entrants who split the market. Long-run equilibrium returns to zero economic profit. However, the ATC curve shifts upward due to advertising costs, so each firm charges a higher price to cover those costs while still earning zero profit. Option A ignores the free entry condition; profit cannot persist when there are no barriers. Option C is too pessimistic; if advertising were unprofitable, rational firms would stop doing it, and the market would adjust. Option D is possible in theory but overstates the effect; monopolistic competition is defined by low barriers to entry, and advertising alone rarely creates the scale barriers needed for oligopoly.",
   },
   {
     id: "mc-15",
@@ -298,6 +298,6 @@ export const monopolisticCompQuestions = [
     ],
     correctIndex: 0,
     explanation:
-      "When firms exit, their former customers redistribute among the remaining firms. Each surviving firm's demand curve shifts to the right, increasing quantity demanded at every price. This process continues until demand shifts far enough rightward that firms return to zero economic profit (demand tangent to ATC). Option B has the direction backwards — exit helps remaining firms, it does not hurt them. Option C confuses firm-level analysis with market-level supply; in monopolistic competition, we focus on individual firm demand curves, not a market supply curve. Option D is unlikely because firm-level cost curves are determined by the firm's own production technology, not by the number of competitors in the industry.",
+      "When firms exit, their former customers redistribute among the remaining firms. Each surviving firm's demand curve shifts to the right, increasing quantity demanded at every price. This process continues until demand shifts far enough rightward that firms return to zero economic profit (demand tangent to ATC). Option B has the direction backwards; exit helps remaining firms, it does not hurt them. Option C confuses firm-level analysis with market-level supply; in monopolistic competition, we focus on individual firm demand curves, not a market supply curve. Option D is unlikely because firm-level cost curves are determined by the firm's own production technology, not by the number of competitors in the industry.",
   },
 ];

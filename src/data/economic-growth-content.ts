@@ -13,13 +13,13 @@ The short answer to why these gaps exist is **economic growth**: sustained incre
 
 South Korea and Ghana had nearly identical GDP per capita in 1960. By 2020, South Korea's was more than 20 times higher. Same starting point, radically different paths. South Korea invested heavily in education, built export-oriented industries, maintained stable institutions, and adopted foreign technology. Ghana struggled with political instability, underinvestment, and commodity dependence.
 
-Growth is not an abstraction. It determines whether a society has modern hospitals or does not, whether most children finish school or drop out. Understanding its sources may be the most important question in all of economics.`,
+Growth isn't an abstraction. It determines whether a society has modern hospitals or doesn't, whether most children finish school or drop out. Understanding its sources may be the most important question in all of economics.`,
     },
     {
       heading: "Physical Capital and Human Capital",
       content: `A farmer with a tractor produces ten times more food than one with a hand plow. That tractor is **physical capital**: the tools, machines, factories, infrastructure, and equipment workers use to produce goods and services. More capital per worker means more output per worker.
 
-Capital alone is not sufficient, though. The farmer also needs to know how to operate the tractor, maintain it, and choose the right planting strategy for her soil. That knowledge is **human capital**: the skills, education, training, and health that make workers productive.
+Capital alone isn't enough, though. The farmer also needs to know how to operate the tractor, maintain it, and choose the right planting strategy for her soil. That knowledge is **human capital**: the skills, education, training, and health that make workers productive.
 
 The two types accumulate differently. Physical capital can be built by redirecting resources toward investment. China invested close to 45% of its GDP for decades, constructing highways, factories, and entire cities at an unprecedented pace. Human capital grows through education and training. Countries with high literacy rates, strong university systems, and healthy populations consistently produce more per worker. The return on education is one of the most robust findings in the field: an extra year of schooling raises earnings by roughly 8-13% on average, across countries and time periods.
 
@@ -29,13 +29,13 @@ Both types of capital face **diminishing returns**. The first tractor on a farm 
       heading: "Technology and Total Factor Productivity",
       content: `If growth depended only on accumulating more capital and labor, diminishing returns would eventually grind it to a halt. Yet rich countries have been growing for over a century. Something else keeps the engine running.
 
-That something is **technology**, defined broadly as any advance in knowledge that produces more output from the same inputs. Better seed varieties, more efficient algorithms, smarter logistics, new drugs that keep workers healthy. Technology expands what is possible.
+That something is **technology**, defined broadly as any advance in knowledge that produces more output from the same inputs. Better seed varieties, more efficient algorithms, smarter logistics, new drugs that keep workers healthy. Technology expands what's possible.
 
-Economists measure this through **total factor productivity (TFP)**, the portion of output growth that cannot be explained by increases in labor or capital alone. If an economy added no new workers and no new machines but still produced 2% more, that 2% is TFP growth. It represents doing things smarter.
+Economists measure this through **total factor productivity (TFP)**, the portion of output growth that can't be explained by increases in labor or capital alone. If an economy added no new workers and no new machines but still produced 2% more, that 2% is TFP growth. It represents doing things smarter.
 
-TFP is what separates rich countries from the rest over the very long run. The U.S. produces vastly more per worker than it did in 1900, and the explanation is not longer hours or proportionally more machines. It is the technology embedded in those machines and the knowledge carried by those workers.
+TFP is what separates rich countries from the rest over the very long run. The U.S. produces vastly more per worker than it did in 1900, and the explanation isn't longer hours or proportionally more machines. It's the technology embedded in those machines and the knowledge carried by those workers.
 
-Developing countries benefit from a crucial advantage: technology can be adopted, not just invented. South Korea did not pioneer the semiconductor. It imported the knowledge and built an industry around it. Technology diffusion from rich to poor countries is one of the most powerful channels for catch-up growth.`,
+Developing countries benefit from a crucial advantage here: technology can be adopted, not just invented. South Korea didn't pioneer the semiconductor. It imported the knowledge and built an industry around it. Technology diffusion from rich to poor countries is one of the most powerful channels for catch-up growth.`,
     },
     {
       heading: "The Rule of 70",
@@ -58,17 +58,17 @@ China averaging 10% growth for three decades is what moved hundreds of millions 
     },
     {
       heading: "Policy Levers for Growth",
-      content: `What can governments actually do to generate growth? Several policy levers have strong empirical backing, though debate around the details is fierce.
+      content: `So what can governments actually do to generate growth? Several policy levers have strong empirical backing, though the debate around details gets fierce.
 
 **Encourage investment.** Capital accumulation requires saving and investment. Lower corporate taxes, investment tax credits, and stable macroeconomic conditions all tend to boost capital formation. China's government channeled enormous resources into infrastructure. The U.S. offers accelerated depreciation to encourage equipment purchases.
 
-**Invest in education and health.** Human capital is built through schools, universities, vocational training, and public health. South Korea spent heavily on education during its development phase and today has one of the world's most educated workforces. A workforce devastated by malaria or HIV cannot be productive, which partly explains growth difficulties across parts of sub-Saharan Africa.
+**Invest in education and health.** Human capital is built through schools, universities, vocational training, and public health. South Korea spent heavily on education during its development phase and today has one of the world's most educated workforces. A workforce devastated by malaria or HIV can't be productive, which partly explains growth difficulties across parts of sub-Saharan Africa.
 
-**Support research and development.** Technology drives long-run growth, and R&D creates new technology. Most basic research has positive **spillover effects** that spread far beyond the firm funding it. Because private firms cannot capture the full social return, they underinvest relative to what is optimal. Government funding for basic science and patent protections help close that gap.
+**Support research and development.** Technology drives long-run growth, and R&D creates new technology. Most basic research has positive **spillover effects** that spread far beyond the firm funding it. Because private firms can't capture the full social return, they underinvest relative to what's optimal. Government funding for basic science and patent protections help close that gap.
 
-**Build strong institutions.** Property rights, rule of law, contract enforcement, low corruption, and political stability create the conditions where investment and innovation can take root. Without secure property rights, nobody builds a factory that could be seized. Without reliable courts, businesses cannot trust each other. Economists like Daron Acemoglu have argued institutions are the deepest driver of cross-country growth differences.
+**Build strong institutions.** Property rights, rule of law, contract enforcement, low corruption, and political stability create the conditions where investment and innovation can take root. Without secure property rights, nobody builds a factory that could be seized. Without reliable courts, businesses can't trust each other. Economists like Daron Acemoglu have argued institutions are the deepest driver of cross-country growth differences.
 
-**Promote trade openness.** Access to larger markets, cheaper inputs, and foreign technologies accelerates growth. Japan, South Korea, Taiwan, Singapore, and China all relied heavily on export-led strategies. Trade lets countries specialize where they are most productive and import the rest.
+**Promote trade openness.** Access to larger markets, cheaper inputs, and foreign technologies accelerates growth. Japan, South Korea, Taiwan, Singapore, and China all relied heavily on export-led strategies. Trade lets countries specialize where they're most productive and import the rest.
 
 No single policy is sufficient. Growth results from many reinforcing factors working over long periods. But the evidence consistently points to the same fundamentals: invest in people, maintain stable institutions, embrace technology, and trade with the world.`,
     },
@@ -181,7 +181,7 @@ export const economicGrowthQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 0,
     explanation:
-      "Rule of 70: doubling time = 70 / growth rate. Country X: 70 / 7 = 10 years. Country Y: 70 / 1 = 70 years. Country X's GDP per capita doubles from $5,000 to $10,000 in 10 years, while Country Y takes 70 years to go from $40,000 to $80,000. This illustrates why growth rate differences matter far more than initial wealth levels over time. Option B miscalculates Country X's doubling time — 70/7 = 10, not 7. Option C reverses the two countries entirely. Option D ignores the Rule of 70 altogether — starting GDP is irrelevant to doubling time, but the growth rate is everything.",
+      "Rule of 70: doubling time = 70 / growth rate. Country X: 70 / 7 = 10 years. Country Y: 70 / 1 = 70 years. Country X's GDP per capita doubles from $5,000 to $10,000 in 10 years, while Country Y takes 70 years to go from $40,000 to $80,000. This illustrates why growth rate differences matter far more than initial wealth levels over time. Option B miscalculates Country X's doubling time: 70/7 = 10, not 7. Option C reverses the two countries entirely. Option D ignores the Rule of 70 altogether. Starting GDP is irrelevant to doubling time, but the growth rate is everything.",
   },
   {
     id: "eg-9",
@@ -209,7 +209,7 @@ export const economicGrowthQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Education builds skills, vaccination improves worker health and productivity, and broadband connectivity enables knowledge sharing and remote work — all three enhance human capital, which is the knowledge, skills, and health embodied in workers. A healthier, more educated, better-connected workforce produces more output per hour. Option A is wrong because none of these are physical capital investments like factories or machinery — they invest in people, not things. Option C describes monetary policy, which has nothing to do with education or health infrastructure. Option D describes exchange rate strategy, which is completely unrelated to these domestic development policies.",
+      "Education builds skills, vaccination improves worker health and productivity, and broadband connectivity enables knowledge sharing and remote work. All three enhance human capital, which is the knowledge, skills, and health embodied in workers. A healthier, more educated, better-connected workforce produces more output per hour. Option A is wrong because none of these are physical capital investments like factories or machinery; they invest in people, not things. Option C describes monetary policy, which has nothing to do with education or health infrastructure. Option D describes exchange rate strategy, which is completely unrelated to these domestic development policies.",
   },
   {
     id: "eg-11",
@@ -223,7 +223,7 @@ export const economicGrowthQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Technological improvement in agriculture expands the economy's productive capacity for food. The PPC shifts outward along the food axis, indicating that more food can now be produced at every level of the other good. If the technology has spillover effects (like freeing labor for manufacturing), both axes may expand. Option A describes an economy moving from inefficiency to efficiency, not an expansion of capacity — the PPC itself does not change. Option C represents a loss of productive capacity (like a natural disaster), the opposite of technological progress. Option D describes a tradeoff along the existing frontier, which represents reallocation, not growth.",
+      "Technological improvement in agriculture expands the economy's productive capacity for food. The PPC shifts outward along the food axis, indicating that more food can now be produced at every level of the other good. If the technology has spillover effects (like freeing labor for manufacturing), both axes may expand. Option A describes an economy moving from inefficiency to efficiency, not an expansion of capacity; the PPC itself does not change. Option C represents a loss of productive capacity (like a natural disaster), the opposite of technological progress. Option D describes a tradeoff along the existing frontier, which represents reallocation, not growth.",
   },
   {
     id: "eg-12",
@@ -237,7 +237,7 @@ export const economicGrowthQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The convergence (or catch-up) hypothesis holds that poor countries can grow faster than rich ones because they can adopt existing technologies rather than inventing them, and because diminishing returns to capital mean that each unit of new investment has a larger marginal impact in capital-scarce countries. However, convergence is conditional — it requires sound institutions, openness to trade, and investment in human capital. South Korea converged toward rich-country income levels; many others did not. Option A overstates the claim — convergence is conditional on good policies, not automatic for all countries. Option C describes divergence, which contradicts the hypothesis entirely. Option D ignores the strong empirical pattern linking initial poverty to faster growth rates among countries with sound institutions.",
+      "The convergence (or catch-up) hypothesis holds that poor countries can grow faster than rich ones because they can adopt existing technologies rather than inventing them, and because diminishing returns to capital mean that each unit of new investment has a larger marginal impact in capital-scarce countries. However, convergence is conditional: it requires sound institutions, openness to trade, and investment in human capital. South Korea converged toward rich-country income levels; many others did not. Option A overstates the claim: convergence is conditional on good policies, not automatic for all countries. Option C describes divergence, which contradicts the hypothesis entirely. Option D ignores the strong empirical pattern linking initial poverty to faster growth rates among countries with sound institutions.",
   },
   {
     id: "eg-13",
@@ -251,7 +251,7 @@ export const economicGrowthQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Institutional economists like Acemoglu argue that property rights, rule of law, and political stability are the deepest drivers of growth differences across countries. Without secure property rights, no one builds a factory that could be seized. Without reliable courts, contracts are meaningless. Without political stability, firms cannot plan beyond the next election or coup. These institutional failures discourage both domestic and foreign investment, suppress innovation, and trap countries in poverty. Option A ignores decades of research showing institutions are central to economic outcomes. Option B romanticizes corruption — navigating obstacles wastes resources rather than spurring productive innovation. Option D understates the damage — institutional failures compound over decades and permanently lower the growth trajectory.",
+      "Institutional economists like Acemoglu argue that property rights, rule of law, and political stability are the deepest drivers of growth differences across countries. Without secure property rights, no one builds a factory that could be seized. Without reliable courts, contracts are meaningless. Without political stability, firms cannot plan beyond the next election or coup. These institutional failures discourage both domestic and foreign investment, suppress innovation, and trap countries in poverty. Option A ignores decades of research showing institutions are central to economic outcomes. Option B romanticizes corruption; navigating obstacles wastes resources rather than spurring productive innovation. Option D understates the damage; institutional failures compound over decades and permanently lower the growth trajectory.",
   },
   {
     id: "eg-14",
@@ -265,6 +265,6 @@ export const economicGrowthQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Both labor and capital face diminishing returns — each additional unit contributes less to output when other inputs are held constant. Technology breaks this constraint by enabling the same inputs to produce more output. A better algorithm, a more efficient engine, or a new drug does not simply add another unit of input; it raises the productivity of all existing units. This is why TFP growth is the only sustainable engine for rich countries that are already capital-saturated. Option A is irrelevant — the cost of technology has nothing to do with why it drives growth. Option C is wrong because advanced economies can and do accumulate more capital; the issue is that additional capital yields less and less. Option D overstates the case — technology complements human and physical capital rather than replacing them.",
+      "Both labor and capital face diminishing returns: each additional unit contributes less to output when other inputs are held constant. Technology breaks this constraint by enabling the same inputs to produce more output. A better algorithm, a more efficient engine, or a new drug does not simply add another unit of input; it raises the productivity of all existing units. This is why TFP growth is the only sustainable engine for rich countries that are already capital-saturated. Option A is irrelevant; the cost of technology has nothing to do with why it drives growth. Option C is wrong because advanced economies can and do accumulate more capital; the issue is that additional capital yields less and less. Option D overstates the case; technology complements human and physical capital rather than replacing them.",
   },
 ];

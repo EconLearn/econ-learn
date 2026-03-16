@@ -2,21 +2,21 @@ import type { PracticeQuestion } from "@/data/supply-demand-content";
 
 export const exchangeRatesContent = {
   title: "Exchange Rates",
-  subtitle: "How currencies are priced in the foreign exchange market and why those prices matter for trade and capital flows",
+  subtitle: "How currencies get priced in the foreign exchange market, and why those prices matter for trade and capital flows",
   sections: [
     {
       heading: "The Foreign Exchange Market",
-      content: `Over $7 trillion changes hands daily in the **foreign exchange (forex) market**, dwarfing every stock exchange on the planet combined. The **exchange rate** is a price: how much of one currency trades for another.
+      content: `Over $7 trillion changes hands daily in the **foreign exchange (forex) market**, dwarfing every stock exchange on the planet combined. The **exchange rate** is simply a price: how much of one currency trades for another.
 
 Foreigners demand dollars. A BMW plant in Munich importing American microchips needs dollars to pay the supplier. A Japanese pension fund buying U.S. Treasury bonds needs dollars to settle the trade. Every foreign purchase of American goods, services, or assets creates demand for dollars.
 
 Americans supply dollars. Buying a German car, Korean electronics, or a vacation in Mexico sends dollars into the forex market in exchange for euros, won, or pesos.
 
-Standard supply-and-demand logic applies. Equilibrium occurs where the quantity of dollars demanded equals the quantity supplied, and that intersection determines the exchange rate. On the graph, the vertical axis shows the dollar's price in foreign currency (euros per dollar) and the horizontal axis tracks the quantity of dollars traded.`,
+Standard supply-and-demand logic applies here. Equilibrium occurs where the quantity of dollars demanded equals the quantity supplied, and that intersection determines the exchange rate. On the graph, the vertical axis shows the dollar's price in foreign currency (euros per dollar) and the horizontal axis tracks the quantity of dollars traded.`,
     },
     {
       heading: "Appreciation and Depreciation",
-      content: `In 2022 the dollar surged against nearly every major currency. The euro fell below parity for the first time in twenty years: one dollar bought more than one euro. That is **appreciation**, where each dollar commands more foreign currency than before.
+      content: `In 2022 the dollar surged against nearly every major currency. The euro fell below parity for the first time in twenty years: one dollar bought more than one euro. That's **appreciation**, where each dollar commands more foreign currency than before.
 
 With numbers: the rate moves from 1.00 to 1.20 euros per dollar. A $100 American product that cost Europeans 100 euros now costs 120 euros. U.S. exports get more expensive abroad, and foreigners buy fewer of them. Meanwhile, a 100-euro German product drops from $100 to about $83 for American buyers. Imports get cheaper, so Americans buy more.
 
@@ -32,7 +32,7 @@ With numbers: the rate moves from 1.00 to 1.20 euros per dollar. A $100 American
 
 **Inflation differentials.** Higher U.S. inflation makes American exports pricier. Foreigners buy less (demand for dollars shifts left) while Americans pivot to cheaper imports (supply of dollars shifts right). Both forces depreciate the dollar. The 1970s stagflation era demonstrated this clearly.
 
-**Speculation and expectations.** Currency traders do not wait for data. If markets expect the dollar to strengthen, traders buy dollars now, pushing up demand and actually causing the appreciation they predicted. Self-fulfilling prophecy is built into forex.
+**Speculation and expectations.** Currency traders don't wait for data. If markets expect the dollar to strengthen, traders buy dollars now, pushing up demand and actually causing the appreciation they predicted. Self-fulfilling prophecy is built into forex.
 
 **Tastes and preferences.** A global craze for American tech products increases foreign demand for dollars. A shift by American consumers toward European luxury goods increases the supply of dollars. Preferences move curves.`,
     },
@@ -44,7 +44,7 @@ When the dollar appreciates, U.S. goods cost more in foreign currency. Exports d
 
 When the dollar depreciates, exports become cheaper abroad and imports become more expensive at home. Exports rise, imports fall, NX increases.
 
-Connect this to AD. AD = C + I + G + **NX**. Dollar appreciation that lowers NX shifts aggregate demand left, a contractionary force. Dollar depreciation that raises NX shifts AD right, an expansionary force. The forex market is not isolated from the domestic economy; exchange rate swings feed straight into GDP.`,
+Here's how it connects to AD. AD = C + I + G + **NX**. Dollar appreciation that lowers NX shifts aggregate demand left, a contractionary force. Dollar depreciation that raises NX shifts AD right, an expansionary force. The forex market isn't isolated from the domestic economy. Exchange rate swings feed straight into GDP.`,
     },
     {
       heading: "Exchange Rates and Capital Flows",
@@ -86,7 +86,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "0.85 to 1.10 euros per dollar — each dollar grabs more euros than before, so the dollar appreciated. A $100 American product that cost Europeans 85 euros now costs 110 euros. U.S. exports got pricier for foreign buyers. Option A and D are wrong because they say the dollar depreciated — the math shows the opposite. Option C is the sneakiest trap: it correctly identifies appreciation but flips the import effect. Appreciation makes imports cheaper for Americans (a 100-euro item now costs fewer dollars), not more expensive.",
+      "0.85 to 1.10 euros per dollar: each dollar grabs more euros than before, so the dollar appreciated. A $100 American product that cost Europeans 85 euros now costs 110 euros. U.S. exports got pricier for foreign buyers. Option A and D are wrong because they say the dollar depreciated, but the math shows the opposite. Option C is the sneakiest trap: it correctly identifies appreciation but flips the import effect. Appreciation makes imports cheaper for Americans (a 100-euro item now costs fewer dollars), not more expensive.",
   },
   {
     id: "er-2",
@@ -100,7 +100,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "When an American buys a Toyota, she exchanges dollars for yen — those dollars flow into the forex market as supply. Any American purchase of foreign goods, services, or assets puts dollars into the market. Option A confuses the money supply (Fed printing currency) with forex supply — two completely different concepts. Option B gets the direction backwards: foreign governments buying U.S. Treasuries need dollars to make that purchase, so they demand dollars, not supply them. Option D also describes demand for dollars — foreign tourists spending money in the U.S. are exchanging their currency for dollars, which is dollar demand.",
+      "When an American buys a Toyota, she exchanges dollars for yen, and those dollars flow into the forex market as supply. Any American purchase of foreign goods, services, or assets puts dollars into the market. Option A confuses the money supply (Fed printing currency) with forex supply; two completely different concepts. Option B gets the direction backwards: foreign governments buying U.S. Treasuries need dollars to make that purchase, so they demand dollars, not supply them. Option D also describes demand for dollars. Foreign tourists spending money in the U.S. are exchanging their currency for dollars, which is dollar demand.",
   },
   {
     id: "er-3",
@@ -114,7 +114,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Higher U.S. rates mean better returns on American bonds. European investors want in, so they need dollars — demand for dollars shifts right, and the dollar appreciates. This played out visibly during the Fed's 2022-2023 rate hikes as the dollar surged against the euro. Option A flips the curve: higher U.S. rates trigger capital inflows (foreigners buying U.S. assets), which is demand for dollars, not supply. Option C gets both direction and curve wrong. Option D is wrong because the supply curve isn't what's moving — foreign investors buying U.S. assets don't supply dollars; they demand them.",
+      "Higher U.S. rates mean better returns on American bonds. European investors want in, so they need dollars, and demand for dollars shifts right, and the dollar appreciates. This played out visibly during the Fed's 2022-2023 rate hikes as the dollar surged against the euro. Option A flips the curve: higher U.S. rates trigger capital inflows (foreigners buying U.S. assets), which is demand for dollars, not supply. Option C gets both direction and curve wrong. Option D is wrong because the supply curve isn't what's moving. Foreign investors buying U.S. assets don't supply dollars; they demand them.",
   },
   {
     id: "er-4",
@@ -128,7 +128,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Weaker dollar = U.S. goods cheaper in foreign currency (exports rise) + foreign goods pricier in dollars (imports fall). Both effects push net exports higher. When the yen weakened in 2022, Japan's export sector boomed for exactly this reason. Option A reverses the outcome — depreciation increases net exports, not decreases them. Option C ignores decades of evidence that currency movements affect trade flows. Option D gets it completely backwards: depreciation makes imports more expensive, so Americans buy fewer imports, not more. Don't confuse 'more expensive' with 'buy more.'",
+      "Weaker dollar = U.S. goods cheaper in foreign currency (exports rise) + foreign goods pricier in dollars (imports fall). Both effects push net exports higher. When the yen weakened in 2022, Japan's export sector boomed for exactly this reason. Option A reverses the outcome: depreciation increases net exports, not decreases them. Option C ignores decades of evidence that currency movements affect trade flows. Option D gets it completely backwards: depreciation makes imports more expensive, so Americans buy fewer imports, not more. Don't confuse 'more expensive' with 'buy more.'",
   },
   {
     id: "er-5",
@@ -142,7 +142,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Rising U.S. incomes mean Americans buy more of everything, including Japanese imports — more Toyotas, more Sony products, more sushi-grade tuna. To pay for Japanese goods, Americans swap dollars for yen, increasing the supply of dollars in the forex market. More supply, same demand: the dollar depreciates. Option A is the classic student mistake — assuming a 'stronger economy' means a 'stronger currency.' The income channel works through imports, not confidence. Higher income drives more import spending, which floods the forex market with dollars and weakens the currency. Option C is wrong because the yen would appreciate (not depreciate) as demand for yen rises. Option D ignores the well-documented link between income and currency markets.",
+      "Rising U.S. incomes mean Americans buy more of everything, including Japanese imports: more Toyotas, more Sony products, more sushi-grade tuna. To pay for Japanese goods, Americans swap dollars for yen, increasing the supply of dollars in the forex market. More supply, same demand: the dollar depreciates. Option A is the classic student mistake, assuming a 'stronger economy' means a 'stronger currency.' The income channel works through imports, not confidence. Higher income drives more import spending, which floods the forex market with dollars and weakens the currency. Option C is wrong because the yen would appreciate (not depreciate) as demand for yen rises. Option D ignores the well-documented link between income and currency markets.",
   },
   {
     id: "er-6",
@@ -156,7 +156,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Trace the chain: Fed raises rates, foreign capital flows in, demand for dollars rises, dollar appreciates, U.S. exports become expensive, imports become cheap, net exports fall, AD shifts left. That's contractionary — same direction as the rate hike itself. The two channels (investment and exchange rate) reinforce each other. Option A gets the exchange rate direction wrong — higher rates appreciate the dollar, they don't depreciate it. If you picked A, you broke the chain at link two. Option C also gets the exchange rate wrong (depreciation instead of appreciation). Option D gets the exchange rate right but flips the net export effect — a stronger dollar hurts exports and boosts imports, so net exports fall, not rise.",
+      "Trace the chain: Fed raises rates, foreign capital flows in, demand for dollars rises, dollar appreciates, U.S. exports become expensive, imports become cheap, net exports fall, AD shifts left. That's contractionary, the same direction as the rate hike itself. The two channels (investment and exchange rate) reinforce each other. Option A gets the exchange rate direction wrong: higher rates appreciate the dollar, they don't depreciate it. If you picked A, you broke the chain at link two. Option C also gets the exchange rate wrong (depreciation instead of appreciation). Option D gets the exchange rate right but flips the net export effect: a stronger dollar hurts exports and boosts imports, so net exports fall, not rise.",
   },
   {
     id: "er-7",
@@ -170,7 +170,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Fewer foreign buyers of American exports = fewer foreigners needing dollars = demand for dollars shifts left. Straightforward. Option A is backwards — higher U.S. interest rates attract foreign investment, which shifts demand right, not left. Option C is the trap most students fall into: Americans buying European vacations do involve international currency exchange, but Americans are supplying dollars (swapping them for euros), not demanding them. That shifts the supply curve, not the demand curve. Always ask: who needs dollars? Foreigners demand dollars. Americans supply them. Option D shifts demand right (foreigners buying U.S. stocks need dollars), not left.",
+      "Fewer foreign buyers of American exports = fewer foreigners needing dollars = demand for dollars shifts left. Straightforward. Option A is backwards: higher U.S. interest rates attract foreign investment, which shifts demand right, not left. Option C is the trap most students fall into: Americans buying European vacations do involve international currency exchange, but Americans are supplying dollars (swapping them for euros), not demanding them. That shifts the supply curve, not the demand curve. Always ask: who needs dollars? Foreigners demand dollars. Americans supply them. Option D shifts demand right (foreigners buying U.S. stocks need dollars), not left.",
   },
   {
     id: "er-8",
@@ -184,7 +184,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 3,
     explanation:
-      "U.S. inflation running hotter than trading partners makes American goods relatively expensive. Two forex effects hit simultaneously: foreigners buy fewer U.S. exports (demand for dollars shifts left) and Americans pivot to cheaper foreign goods (supply of dollars shifts right). Both depreciate the dollar. But here's the catch — normally depreciation boosts net exports, yet the inflation that caused the depreciation also makes U.S. goods less competitive. Prices rose faster than the currency fell, so American products remain relatively expensive even after depreciation. Net exports decline. Option A gets both directions wrong. Option B correctly identifies depreciation but wrongly assumes it overcomes the inflation penalty — when inflation causes the depreciation, the competitiveness loss dominates the currency adjustment.",
+      "U.S. inflation running hotter than trading partners makes American goods relatively expensive. Two forex effects hit simultaneously: foreigners buy fewer U.S. exports (demand for dollars shifts left) and Americans pivot to cheaper foreign goods (supply of dollars shifts right). Both depreciate the dollar. But here's the catch: normally depreciation boosts net exports, yet the inflation that caused the depreciation also makes U.S. goods less competitive. Prices rose faster than the currency fell, so American products remain relatively expensive even after depreciation. Net exports decline. Option A gets both directions wrong. Option B correctly identifies depreciation but wrongly assumes it overcomes the inflation penalty. When inflation causes the depreciation, the competitiveness loss dominates the currency adjustment.",
   },
   {
     id: "er-9",
@@ -198,7 +198,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "When the dollar appreciates from 110 to 130 yen, each dollar buys more yen. A $100 American product now costs Japanese buyers 13,000 yen instead of 11,000 yen — American exports become more expensive in Japan. Conversely, a 10,000-yen Japanese product falls from about $91 to about $77 for Americans — Japanese imports get cheaper. Option A reverses the import effect: appreciation of the dollar makes Japanese goods cheaper (not more expensive) for Americans because each dollar stretches further. Option C reverses the export effect: dollar appreciation makes U.S. goods more expensive abroad, not cheaper. Option D ignores the well-established link between exchange rates and trade flows — currency movements directly alter the relative prices of exports and imports.",
+      "When the dollar appreciates from 110 to 130 yen, each dollar buys more yen. A $100 American product now costs Japanese buyers 13,000 yen instead of 11,000 yen, so American exports become more expensive in Japan. Conversely, a 10,000-yen Japanese product falls from about $91 to about $77 for Americans, so Japanese imports get cheaper. Option A reverses the import effect: appreciation of the dollar makes Japanese goods cheaper (not more expensive) for Americans because each dollar stretches further. Option C reverses the export effect: dollar appreciation makes U.S. goods more expensive abroad, not cheaper. Option D ignores the well-established link between exchange rates and trade flows; currency movements directly alter the relative prices of exports and imports.",
   },
   {
     id: "er-10",
@@ -212,7 +212,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 0,
     explanation:
-      "Purchasing power parity says exchange rates should adjust so identical goods cost the same in both countries. If the basket costs $100 in the U.S. and 90 euros in Europe, then $100 = 90 euros, which means 1 euro = $100/90 = approximately $1.11. The PPP rate is about 1.11 dollars per euro. Option B expresses the rate in the wrong direction — 0.90 euros per dollar would mean $100 buys 90 euros, which is the same relationship but expressed from the dollar side; the question asks for dollars per euro. Option C assumes the currencies have equal value, which contradicts the given prices. Option D incorrectly divides in the wrong direction — 90/100 gives euros per dollar, not dollars per euro.",
+      "Purchasing power parity says exchange rates should adjust so identical goods cost the same in both countries. If the basket costs $100 in the U.S. and 90 euros in Europe, then $100 = 90 euros, which means 1 euro = $100/90 = approximately $1.11. The PPP rate is about 1.11 dollars per euro. Option B expresses the rate in the wrong direction: 0.90 euros per dollar would mean $100 buys 90 euros, which is the same relationship but expressed from the dollar side; the question asks for dollars per euro. Option C assumes the currencies have equal value, which contradicts the given prices. Option D incorrectly divides in the wrong direction: 90/100 gives euros per dollar, not dollars per euro.",
   },
   {
     id: "er-11",
@@ -226,7 +226,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "When European rates rise relative to U.S. rates, European bonds become more attractive. Investors (including Americans) shift capital toward Europe, which means selling dollars to buy euros. In the dollar forex market, this reduces demand for dollars (fewer foreigners buying U.S. assets) and increases supply of dollars (more Americans buying European assets). Both forces push the dollar to depreciate and the euro to appreciate. Option A reverses the flow — higher European rates attract capital away from the U.S., not toward it. Option C ignores that exchange rates respond to relative interest rates between countries, not just one central bank's actions. Option D gets the euro direction wrong — higher European rates attract capital inflows that strengthen the euro, not weaken it.",
+      "When European rates rise relative to U.S. rates, European bonds become more attractive. Investors (including Americans) shift capital toward Europe, which means selling dollars to buy euros. In the dollar forex market, this reduces demand for dollars (fewer foreigners buying U.S. assets) and increases supply of dollars (more Americans buying European assets). Both forces push the dollar to depreciate and the euro to appreciate. Option A reverses the flow: higher European rates attract capital away from the U.S., not toward it. Option C ignores that exchange rates respond to relative interest rates between countries, not just one central bank's actions. Option D gets the euro direction wrong: higher European rates attract capital inflows that strengthen the euro, not weaken it.",
   },
   {
     id: "er-12",
@@ -240,7 +240,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The J-curve captures a timing mismatch. When a currency depreciates, import prices rise and export prices fall immediately, but the quantities of imports and exports take time to adjust because firms have existing contracts, supply chains need reconfiguring, and consumers respond slowly to price changes. In the short run, the country pays more for the same volume of imports (worsening the trade deficit). Over time, the quantity effects dominate — exports increase and imports decrease — and the trade balance improves, tracing a J-shaped path. Option A ignores the short-run lag in quantity adjustment. Option C is wrong in two ways: appreciation tends to worsen the trade balance (correct direction), but the effect is not necessarily permanent — trade flows eventually adjust. Option D fabricates a meaning for the J-curve that has no basis in trade economics.",
+      "The J-curve captures a timing mismatch. When a currency depreciates, import prices rise and export prices fall immediately, but the quantities of imports and exports take time to adjust because firms have existing contracts, supply chains need reconfiguring, and consumers respond slowly to price changes. In the short run, the country pays more for the same volume of imports (worsening the trade deficit). Over time, the quantity effects dominate (exports increase and imports decrease) and the trade balance improves, tracing a J-shaped path. Option A ignores the short-run lag in quantity adjustment. Option C is wrong in two ways: appreciation tends to worsen the trade balance (correct direction), but the effect is not necessarily permanent, as trade flows eventually adjust. Option D fabricates a meaning for the J-curve that has no basis in trade economics.",
   },
   {
     id: "er-13",
@@ -254,7 +254,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "When market pressure pushes a currency below its fixed rate, the central bank must defend the peg by buying its own currency in the forex market using foreign reserves (dollars, euros, gold). This increases demand for the domestic currency (pushing its value back up) while simultaneously draining domestic money supply (a contractionary side effect). This is why fixed exchange rates limit monetary policy independence. Option A would worsen the problem — printing more currency increases supply and pushes the value down further. Option C is a trade policy response that does not directly defend the exchange rate peg in the forex market. Option D contradicts the premise of a fixed system — floating freely is what happens when the peg is abandoned, not when it is defended.",
+      "When market pressure pushes a currency below its fixed rate, the central bank must defend the peg by buying its own currency in the forex market using foreign reserves (dollars, euros, gold). This increases demand for the domestic currency (pushing its value back up) while simultaneously draining domestic money supply (a contractionary side effect). This is why fixed exchange rates limit monetary policy independence. Option A would worsen the problem: printing more currency increases supply and pushes the value down further. Option C is a trade policy response that does not directly defend the exchange rate peg in the forex market. Option D contradicts the premise of a fixed system. Floating freely is what happens when the peg is abandoned, not when it is defended.",
   },
   {
     id: "er-14",
@@ -268,7 +268,7 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The balance of payments must balance: current account + financial account = 0 (approximately). A $300 billion current account deficit (spending more abroad than earning) must be matched by a $300 billion financial account surplus (foreign investors buying domestic assets — stocks, bonds, real estate — to cover the gap). The U.S. runs this pattern consistently: trade deficits financed by massive foreign purchases of Treasury securities. Option A violates the balance of payments identity — both accounts cannot be in deficit simultaneously. Option C confuses the government budget deficit (fiscal concept) with the current account deficit (international concept); they are related through the twin deficits hypothesis but are not mechanically equal. Option D invents a nonexistent relationship — exchange rates adjust to equilibrate markets, but there is no formula linking deficit size to a specific depreciation amount.",
+      "The balance of payments must balance: current account + financial account = 0 (approximately). A $300 billion current account deficit (spending more abroad than earning) must be matched by a $300 billion financial account surplus (foreign investors buying domestic assets like stocks, bonds, and real estate to cover the gap). The U.S. runs this pattern consistently: trade deficits financed by massive foreign purchases of Treasury securities. Option A violates the balance of payments identity; both accounts cannot be in deficit simultaneously. Option C confuses the government budget deficit (fiscal concept) with the current account deficit (international concept); they are related through the twin deficits hypothesis but are not mechanically equal. Option D invents a nonexistent relationship: exchange rates adjust to equilibrate markets, but there is no formula linking deficit size to a specific depreciation amount.",
   },
   {
     id: "er-15",
@@ -282,6 +282,6 @@ export const exchangeRatesQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Lower interest rates reduce the return on domestic assets. Foreign investors pull capital out (or invest less), reducing demand for the domestic currency. Domestic investors seek higher returns abroad, increasing the supply of domestic currency in forex markets. Both forces depreciate the currency. A weaker currency makes exports cheaper for foreigners (exports rise) and imports more expensive domestically (imports fall), so net exports increase. Higher net exports shift AD right — reinforcing the original expansionary intent of the rate cut. The exchange rate channel and the domestic investment channel work in the same direction. Option A gets the exchange rate direction wrong — lower rates depreciate the currency, not appreciate it. Option C also gets the exchange rate wrong and then compounds the error with an incorrect net export prediction. Option D ignores the open-economy dimension of monetary policy — interest rate differentials are one of the most powerful exchange rate determinants.",
+      "Lower interest rates reduce the return on domestic assets. Foreign investors pull capital out (or invest less), reducing demand for the domestic currency. Domestic investors seek higher returns abroad, increasing the supply of domestic currency in forex markets. Both forces depreciate the currency. A weaker currency makes exports cheaper for foreigners (exports rise) and imports more expensive domestically (imports fall), so net exports increase. Higher net exports shift AD right, reinforcing the original expansionary intent of the rate cut. The exchange rate channel and the domestic investment channel work in the same direction. Option A gets the exchange rate direction wrong: lower rates depreciate the currency, not appreciate it. Option C also gets the exchange rate wrong and then compounds the error with an incorrect net export prediction. Option D ignores the open-economy dimension of monetary policy; interest rate differentials are one of the most powerful exchange rate determinants.",
   },
 ];

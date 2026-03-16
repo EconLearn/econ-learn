@@ -1,7 +1,27 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { macroCourse } from "@/data/courses";
 
 export const dynamicParams = true;
+
+export function generateMetadata({
+  params,
+}: {
+  params: { moduleId: string };
+}): Metadata {
+  const mod = macroCourse.modules.find((m) => m.id === params.moduleId);
+  if (!mod) return { title: "Module Not Found" };
+  return {
+    title: `${mod.title} - AP Macroeconomics Study Guide`,
+    description: `${mod.description} Free interactive lesson with practice questions and detailed explanations.`,
+    alternates: { canonical: `https://econlearn.org${mod.href}` },
+    openGraph: {
+      title: `${mod.title} - AP Macro | EconLearn`,
+      description: mod.description,
+      url: `https://econlearn.org${mod.href}`,
+    },
+  };
+}
 
 // Modules that have dedicated pages (not handled by this dynamic route)
 const DEDICATED_MODULES = ["aggregate-demand", "fiscal-policy", "monetary-policy", "international-trade", "unemployment-inflation", "exchange-rates", "basic-macro-concepts", "gdp", "aggregate-supply", "economic-growth", "loanable-funds", "business-cycle"];

@@ -69,27 +69,6 @@ function ArrowRight({ className = "" }: { className?: string }) {
   );
 }
 
-/* ─── Testimonial data ─── */
-const testimonials = [
-  {
-    quote: "The interactive graphs made supply and demand click in a way my textbook never could.",
-    name: "Sarah K.",
-    detail: "AP Micro — Score: 5",
-    emoji: "📈",
-  },
-  {
-    quote: "I went from struggling with fiscal policy to acing the FRQs. The practice questions are spot-on.",
-    name: "Marcus T.",
-    detail: "AP Macro — Score: 5",
-    emoji: "🎯",
-  },
-  {
-    quote: "Flashcards + timed quizzes made my study sessions way more efficient. Highly recommend.",
-    name: "Priya R.",
-    detail: "AP Micro & Macro — Score: 5/5",
-    emoji: "⚡",
-  },
-];
 
 export default function HomePage() {
   const microModulePreview = microCourse.modules.slice(0, 4);
@@ -122,7 +101,7 @@ export default function HomePage() {
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                 <span className="text-xs font-medium" style={{ color: "var(--color-ink-muted)" }}>
-                  Free forever — no credit card needed
+                  Free forever. No credit card needed.
                 </span>
               </motion.div>
 
@@ -145,7 +124,7 @@ export default function HomePage() {
                 style={{ color: "var(--color-ink-muted)" }}
               >
                 Interactive graphs, {totalModules} modules, flashcards, and AP-style
-                quizzes — everything you need to score a 5.
+                quizzes. Everything you need to score a 5.
               </motion.p>
 
               <motion.div
@@ -271,7 +250,7 @@ export default function HomePage() {
               </h2>
               <p className="text-lg max-w-2xl mx-auto" style={{ color: "var(--color-ink-muted)" }}>
                 No more passive reading. Learn economics the way it was meant to
-                be learned — by doing.
+                be learned: by doing.
               </p>
             </div>
           </ScrollReveal>
@@ -301,41 +280,6 @@ export default function HomePage() {
               description="Achievements, study streaks, quiz scores, and an AP exam countdown to keep you on track."
               delay={0.24}
             />
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-          SECTION 3.5 — TESTIMONIALS
-          ══════════════════════════════════════════════════ */}
-      <section className="py-20 sm:py-28" style={{ background: "var(--color-surface-raised)" }}>
-        <div className="max-w-6xl mx-auto px-5 sm:px-6">
-          <ScrollReveal>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3" style={{ color: "var(--color-ink)" }}>
-                Students love learning here
-              </h2>
-              <p className="text-lg" style={{ color: "var(--color-ink-muted)" }}>
-                Real results from real AP students.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid md:grid-cols-3 gap-5">
-            {testimonials.map((t, i) => (
-              <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="testimonial-card h-full flex flex-col">
-                  <div className="text-2xl mb-3">{t.emoji}</div>
-                  <p className="text-[15px] leading-relaxed flex-1 mb-4" style={{ color: "var(--color-ink-light)" }}>
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                  <div>
-                    <p className="text-sm font-semibold" style={{ color: "var(--color-ink)" }}>{t.name}</p>
-                    <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>{t.detail}</p>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
           </div>
         </div>
       </section>
@@ -464,8 +408,8 @@ export default function HomePage() {
                 Ready to earn your 5?
               </h2>
               <p className="text-lg max-w-lg mx-auto mb-8" style={{ color: "var(--color-ink-muted)" }}>
-                Join thousands of AP students studying smarter with
-                interactive lessons and real-time feedback.
+                Start studying smarter with interactive lessons,
+                detailed explanations, and real-time feedback.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Link

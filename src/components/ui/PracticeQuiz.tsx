@@ -28,16 +28,23 @@ function shuffleAndSlice<T>(arr: T[], count: number): T[] {
 export default function PracticeQuiz({ questions: allQuestions, moduleId }: PracticeQuizProps) {
   const { user } = useAuth();
   const { preferences } = usePreferencesStore();
-  const [questions, setQuestions] = useState<PracticeQuestion[]>(() =>
-    allQuestions.length > preferences.quizLength
-      ? shuffleAndSlice(allQuestions, preferences.quizLength)
-      : allQuestions
-  );
+  const [mounted, setMounted] = useState(false);
+  const [questions, setQuestions] = useState<PracticeQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
   const [completed, setCompleted] = useState(false);
+
+  // Initialize questions on client only to avoid hydration mismatch
+  useEffect(() => {
+    setQuestions(
+      allQuestions.length > preferences.quizLength
+        ? shuffleAndSlice(allQuestions, preferences.quizLength)
+        : [...allQuestions]
+    );
+    setMounted(true);
+  }, []);
   const [personalBest, setPersonalBest] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const [timedMode, setTimedMode] = useState(preferences.timedModeDefault);
@@ -134,6 +141,23 @@ export default function PracticeQuiz({ questions: allQuestions, moduleId }: Prac
   }, [currentIndex, timedMode, showExplanation, completed, handleTimeout]);
 
   const current = questions[currentIndex];
+
+  // Show skeleton until client-side mount to prevent hydration mismatch
+  if (!mounted || questions.length === 0) {
+    return (
+      <div className="card overflow-hidden">
+        <div className="p-6 space-y-4 animate-pulse">
+          <div className="h-3 w-24 rounded bg-gray-200" />
+          <div className="h-5 w-3/4 rounded bg-gray-200" />
+          <div className="space-y-2">
+            {[0, 1, 2, 3].map((i) => (
+              <div key={i} className="h-12 rounded-lg bg-gray-100" />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const handleSelect = (optionIndex: number) => {
     if (selectedAnswer !== null) return;

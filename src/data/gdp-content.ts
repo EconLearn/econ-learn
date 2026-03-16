@@ -3,17 +3,17 @@ import type { PracticeQuestion } from "@/data/supply-demand-content";
 export const gdpContent = {
   title: "GDP",
   subtitle:
-    "Measuring the total value of everything an economy produces -- and understanding what that number misses",
+    "Measuring the total value of everything an economy produces, and understanding what that number misses",
   sections: [
     {
       heading: "What GDP Actually Measures (and What It Misses)",
-      content: `How rich is a country? You cannot just count factories or acres of farmland. You need a single number that captures total economic activity across an entire nation. That number is **Gross Domestic Product**.
+      content: `How rich is a country? You can't just count factories or acres of farmland. You need a single number that captures total economic activity across an entire nation. That number is **Gross Domestic Product**.
 
 **GDP** is the total market value of all *final* goods and services produced *within a country's borders* during a specific time period, usually a year or a quarter. Every bakery loaf, every haircut, every new car off the assembly line, every hour of legal counsel counts.
 
-The word "final" carries weight. Tires sold to Ford are an *intermediate good*, and their value is already embedded in the car's price. Counting both the tires and the car would be **double counting**. GDP only captures the finished product reaching the end user.
+The word "final" carries weight here. Tires sold to Ford are an *intermediate good*, and their value is already embedded in the car's price. Counting both the tires and the car would be **double counting**. GDP only captures the finished product reaching the end user.
 
-"Domestic" is equally important. A Japanese-owned Honda factory in Ohio contributes to *U.S.* GDP because the production happens on American soil. An American-owned Apple factory in China contributes to *Chinese* GDP. Location of production, not ownership, determines which country claims the output.`,
+"Domestic" is equally important. A Japanese-owned Honda factory in Ohio contributes to *U.S.* GDP because the production happens on American soil. An American-owned Apple factory in China contributes to *Chinese* GDP. It's the location of production, not ownership, that determines which country claims the output.`,
     },
     {
       heading: "The Expenditure Approach: C + I + G + NX",
@@ -21,7 +21,7 @@ The word "final" carries weight. Tires sold to Ford are an *intermediate good*, 
 
 **Consumption (C)** accounts for roughly 68-70% of U.S. GDP. Groceries, rent, Netflix, dentist visits. Anything households buy.
 
-**Investment (I)** covers business spending on capital goods (factories, machinery, software), residential construction, and changes in inventories. A common misconception: this is *not* financial investment like buying stocks. In GDP accounting, "investment" means physical or productive assets.
+**Investment (I)** covers business spending on capital goods (factories, machinery, software), residential construction, and changes in inventories. This trips people up: "investment" in GDP accounting is *not* financial investment like buying stocks. It means physical or productive assets.
 
 **Government purchases (G)** includes federal, state, and local spending on goods and services. Teacher salaries, military equipment, highway construction all count. Transfer payments like Social Security are excluded because the government receives no new good or service in return.
 
@@ -35,7 +35,7 @@ This is an accounting identity, not a theory. Every dollar of final output gets 
       heading: "Nominal vs Real GDP and the GDP Deflator",
       content: `GDP rises from $20 trillion to $21 trillion. Did the economy actually produce more, or did prices just climb? That question is the entire reason we distinguish nominal from real GDP.
 
-**Nominal GDP** uses *current-year prices*. If both quantities and prices rise, nominal GDP rises, but you have no way to separate the two effects.
+**Nominal GDP** uses *current-year prices*. If both quantities and prices rise, nominal GDP rises, but you can't separate the two effects.
 
 **Real GDP** uses *constant base-year prices*, stripping out inflation. It answers a cleaner question: did the economy produce more goods and services? Real GDP is the number that matters for growth calculations and recession calls.
 
@@ -61,7 +61,7 @@ Tacos: 120 units at $3 each = $360
 Textbooks: 25 units at $60 each = $1,500
 **Nominal GDP (current year) = $1,860**
 
-That is a 55% nominal increase. How much reflects real growth versus inflation?
+That's a 55% nominal increase. But how much reflects real growth versus inflation?
 
 **Calculate Real GDP** using base-year prices for current-year quantities:
 Tacos: 120 x $2 = $240
@@ -74,13 +74,13 @@ So real output grew from $1,200 to $1,490, a **24.2% increase**. The deflator te
     },
     {
       heading: "Limitations of GDP",
-      content: `GDP is the most cited economic statistic on Earth, but it has blind spots that matter.
+      content: `GDP is the most cited economic statistic on Earth, but it has blind spots that matter. Not the most exciting topic, but understanding these gaps is important.
 
 **Unpaid work is invisible.** A parent raising children at home produces real value, but GDP records none of it. If that parent hires a nanny and takes a paid job, GDP rises even though total productive activity may be unchanged. Household production, volunteering, and caregiving all fall outside the count.
 
 **The underground economy is missing.** Cash-paid labor, unreported income, and illegal transactions never appear. In some developing countries the informal economy may reach 30-40% of total output, which means GDP systematically understates their economic activity.
 
-**GDP ignores inequality.** A country with $10 trillion in GDP could have most of that income concentrated among a handful of billionaires while the median citizen struggles. **GDP per capita** helps, but it is still just an average that says nothing about distribution.
+**GDP ignores inequality.** A country with $10 trillion in GDP could have most of that income concentrated among a handful of billionaires while the median citizen struggles. **GDP per capita** helps, but it's still just an average that says nothing about distribution.
 
 **Environmental destruction can boost GDP.** An oil spill generates paid economic activity: cleanup crews, equipment manufacturers, lawyers. Clear-cutting a rainforest and selling the timber adds to GDP. The natural capital destroyed never subtracts from it.
 

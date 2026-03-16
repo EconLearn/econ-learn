@@ -3,7 +3,7 @@ import type { PracticeQuestion } from "@/data/supply-demand-content";
 export const basicMacroContent = {
   title: "Basic Macroeconomic Concepts",
   subtitle:
-    "Why economists zoom out from individual markets to study the economy as a whole",
+    "Zooming out from individual markets to understand the economy as a whole",
   sections: [
     {
       heading: "Why Zoom Out? Micro vs Macro",
@@ -11,7 +11,7 @@ export const basicMacroContent = {
 
 That gap between individual market performance and economy-wide forces is why **macroeconomics** exists as a separate field. Microeconomics studies one firm, one consumer, one product at a time. Macro tackles the bigger questions: why do entire economies boom and bust? Why were 10 million Americans unemployed simultaneously in 2009? Why did prices across *every* market rise 9% in 2022?
 
-**Microeconomics** gives you tools for the coffee market. **Macroeconomics** gives you tools for the ocean every market floats on. The AP exam tests whether you know which lens applies to a given problem.`,
+Think of it this way. **Microeconomics** gives you tools for the coffee market. **Macroeconomics** gives you tools for the ocean every market floats on. The AP exam tests whether you know which lens applies to a given problem.`,
     },
     {
       heading: "The Circular Flow Model",
@@ -19,7 +19,7 @@ That gap between individual market performance and economy-wide forces is why **
 
 Two more players complicate things. The **government** collects taxes from households and firms, then pushes revenue back out through public goods, transfers (Social Security, unemployment insurance), and subsidies. The **foreign sector** brings exports (money in from abroad) and imports (money out to other countries).
 
-Every dollar one party spends becomes income for another. When households suddenly stop buying, firms lose revenue and lay off workers, and those workers cut their own spending. The 2008 financial crisis showed how fast this loop can seize up: fear froze spending, and the whole circular flow nearly stalled.
+Here's the key insight: every dollar one party spends becomes income for another. When households suddenly stop buying, firms lose revenue and lay off workers, and those workers cut their own spending. The 2008 financial crisis showed how fast this loop can seize up. Fear froze spending, and the whole circular flow nearly stalled.
 
 **Leakages** drain money from the flow: saving, taxes, imports. **Injections** add money back: investment, government spending, exports. When leakages outpace injections, the economy contracts.`,
     },
@@ -33,11 +33,11 @@ Every dollar one party spends becomes income for another. When households sudden
 
 **3. Stable prices.** Rapid inflation and deflation both wreck economic planning. Zimbabwe's hyperinflation in 2008 reached an estimated 79.6 billion percent per month. Prices doubled every 24 hours. People abandoned currency altogether and bartered. Price stability is what allows saving and long-term investment to function.
 
-These goals conflict with each other more than politicians admit. Policies that push unemployment very low can spark inflation. Aggressive inflation-fighting can trigger a recession. That tension sits at the center of every major macroeconomic policy debate.`,
+These goals conflict with each other more than politicians like to admit. Policies that push unemployment very low can spark inflation. Aggressive inflation-fighting can trigger a recession. That tension sits at the center of every major macroeconomic policy debate.`,
     },
     {
       heading: "Business Cycle Phases",
-      content: `Economies do not grow in straight lines. Output expands, overshoots, contracts, and recovers in a recurring pattern called the **business cycle**.
+      content: `Economies don't grow in straight lines. Output expands, overshoots, contracts, and recovers in a recurring pattern called the **business cycle**.
 
 **Expansion.** Real GDP rises, unemployment falls, businesses invest, consumer confidence is high. The U.S. experienced its longest expansion on record from June 2009 to February 2020, nearly 11 years of uninterrupted growth.
 
@@ -47,7 +47,7 @@ These goals conflict with each other more than politicians admit. Policies that 
 
 **Trough.** The low point. Output has bottomed out and the economy begins stabilizing before the next expansion.
 
-A useful diagnostic: if unemployment is falling and GDP is rising, the economy is in expansion. If unemployment is rising and GDP is falling, it is contracting.`,
+A useful diagnostic: if unemployment is falling and GDP is rising, the economy is in expansion. If unemployment is rising and GDP is falling, it's contracting.`,
     },
     {
       heading: "Economic Systems",
@@ -57,7 +57,7 @@ A **market economy** relies on private individuals and firms making decisions th
 
 A **command economy** puts the government in charge. The Soviet Union planned production targets for everything from steel to shoes. The state can mobilize resources quickly toward a specific goal, but without price signals, planners consistently overproduce what nobody wants and underproduce what everyone does.
 
-Every modern economy is really a **mixed economy**, blending market forces with government intervention. The U.S. layers public schools, Medicare, and environmental regulations on top of private enterprise. China runs state-owned enterprises alongside a massive private sector. The real debate is never "market vs. command" but *how much* of each.`,
+In practice, every modern economy is really a **mixed economy**, blending market forces with government intervention. The U.S. layers public schools, Medicare, and environmental regulations on top of private enterprise. China runs state-owned enterprises alongside a massive private sector. The real debate is never "market vs. command" but *how much* of each.`,
     },
     {
       heading: "Worked Example: Identifying the Business Cycle",
@@ -76,7 +76,7 @@ Year 4: Real GDP = $830B, Unemployment = 6.1%
 
 **Year 3 to Year 4:** GDP fell from $870B to $830B (a 4.6% decline), unemployment jumped to 6.1%. This is a **contraction**. Output is shrinking and firms are cutting workers.
 
-You identify the cycle by watching the *direction* of real GDP and unemployment, not their levels. A high GDP figure does not mean expansion if GDP is falling.`,
+The thing to watch is the *direction* of real GDP and unemployment, not their levels. A high GDP figure doesn't mean expansion if GDP is falling.`,
     },
   ],
 };

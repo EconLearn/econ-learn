@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { microCourse } from "@/data/courses";
+
+export const metadata: Metadata = {
+  title: "AP Microeconomics - Free Study Guide & Practice Questions",
+  description:
+    "Study all 12 AP Microeconomics topics: supply and demand, elasticity, market structures, factor markets, and more. Interactive graphs and 175+ practice questions.",
+  alternates: { canonical: "https://econlearn.org/micro" },
+  openGraph: {
+    title: "AP Microeconomics Study Guide - EconLearn",
+    description:
+      "Free interactive AP Micro study guide with 12 modules covering every topic on the AP exam.",
+    url: "https://econlearn.org/micro",
+  },
+};
 
 export default function MicroPage() {
   return (

@@ -72,8 +72,8 @@ export default function SupplyAndDemandPage() {
             </p>
             <ul className="space-y-2">
               {[
-                "Demand slopes downward — raise the price and people buy less.",
-                "Supply slopes upward — raise the price and producers supply more.",
+                "Demand slopes downward: raise the price and people buy less.",
+                "Supply slopes upward: raise the price and producers supply more.",
                 "Equilibrium is where the curves cross. No surplus, no shortage.",
                 "Shifts happen because of non-price factors (income, technology, tastes).",
                 "A shift is not the same as a movement along the curve.",

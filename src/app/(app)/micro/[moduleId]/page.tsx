@@ -1,7 +1,27 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { microCourse } from "@/data/courses";
 
 export const dynamicParams = true;
+
+export function generateMetadata({
+  params,
+}: {
+  params: { moduleId: string };
+}): Metadata {
+  const mod = microCourse.modules.find((m) => m.id === params.moduleId);
+  if (!mod) return { title: "Module Not Found" };
+  return {
+    title: `${mod.title} - AP Microeconomics Study Guide`,
+    description: `${mod.description} Free interactive lesson with practice questions and detailed explanations.`,
+    alternates: { canonical: `https://econlearn.org${mod.href}` },
+    openGraph: {
+      title: `${mod.title} - AP Micro | EconLearn`,
+      description: mod.description,
+      url: `https://econlearn.org${mod.href}`,
+    },
+  };
+}
 
 // Modules that have dedicated pages (not handled by this dynamic route)
 const DEDICATED_MODULES = ["supply-and-demand", "monopoly", "elasticity", "perfect-competition", "production-costs", "factor-markets", "basic-concepts", "consumer-choice", "monopolistic-competition", "oligopoly", "market-failure", "public-goods-externalities"];

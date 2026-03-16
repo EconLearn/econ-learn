@@ -3,13 +3,13 @@ import type { PracticeQuestion } from "@/data/supply-demand-content";
 export const publicGoodsContent = {
   title: "Public Goods & Externalities",
   subtitle:
-    "Why markets sometimes get it wrong, and what governments can do about it",
+    "The cases where markets misfire, and the tools governments use to fix them",
   sections: [
     {
       heading: "Negative Externalities",
       content: `A coal plant generates electricity for its customers and dumps sulfur dioxide into the air, causing asthma in communities downwind. The people breathing that air never agreed to bear that cost. They bear it anyway.
 
-The uncompensated cost imposed on third parties is a **negative externality**. The factory considers its own production costs (labor, fuel, machinery) when deciding output levels, but ignores the health damage it inflicts on others. The factory's own costs are the **marginal private cost (MPC)**. The full cost to society, private costs plus external damage, is the **marginal social cost (MSC)**.
+That uncompensated cost imposed on third parties is a **negative externality**. The factory considers its own production costs (labor, fuel, machinery) when deciding output levels, but ignores the health damage it inflicts on others. The factory's own costs are the **marginal private cost (MPC)**. The full cost to society, private costs plus external damage, is the **marginal social cost (MSC)**.
 
 Because MSC > MPC, the market price is too low and the quantity produced is too high. The market **overproduces** relative to the socially optimal level. On the graph, the Social Cost curve sits above the private Supply curve, and the gap between them is the external cost per unit.
 
@@ -17,13 +17,13 @@ Other examples: carbon emissions from driving, noise pollution from late-night c
     },
     {
       heading: "Positive Externalities",
-      content: `When you get a flu vaccine, you protect yourself. You also protect the coworker sitting next to you, the elderly neighbor you pass on the street, and the immunocompromised stranger on the bus. They benefit from your decision without paying a cent.
+      content: `When you get a flu vaccine, you protect yourself. But you also protect the coworker sitting next to you, the elderly neighbor you pass on the street, and the immunocompromised stranger on the bus. They benefit from your decision without paying a cent.
 
 That spillover benefit to third parties is a **positive externality**. The buyer considers only their own benefit (avoiding a week of misery) but ignores the broader social gain. The buyer's benefit is the **marginal private benefit (MPB)**. Add the benefit to others and you get the **marginal social benefit (MSB)**.
 
 Because MSB > MPB, the market price is too high and the quantity consumed is too low. The market **underproduces** relative to the socially optimal level. On the graph, the Social Benefit curve sits above the private Demand curve, with the gap representing the external benefit per unit.
 
-Education is the classic example. A more educated person earns more (private benefit) and also contributes to a more productive workforce, lower crime rates, and better civic engagement (social benefits). Research and development, pollination by beekeepers, and home renovations that improve a neighborhood are other cases.`,
+Education is the classic example here. A more educated person earns more (private benefit) and also contributes to a more productive workforce, lower crime rates, and better civic engagement (social benefits). Research and development, pollination by beekeepers, and home renovations that improve a neighborhood are other cases.`,
     },
     {
       heading: "Pigouvian Taxes and Subsidies",
@@ -33,37 +33,37 @@ A **Pigouvian tax** is a per-unit tax set equal to the external cost. If a facto
 
 A **Pigouvian subsidy** works in reverse for positive externalities. If vaccines generate $15 of external benefit per dose, give buyers a $15 subsidy. Effective demand rises to match social benefit, shifting the demand curve up to overlap with the Social Benefit curve.
 
-The elegance of Pigouvian corrections is that they use the market itself to fix the market. No banning pollution. No mandating vaccinations. Just adjust prices so that self-interested decisions lead to the right outcome.`,
+What's elegant about Pigouvian corrections is that they use the market itself to fix the market. No banning pollution. No mandating vaccinations. Just adjust prices so that self-interested decisions lead to the right outcome.`,
     },
     {
       heading: "Public Goods and the Free-Rider Problem",
-      content: `A lighthouse beams light across the ocean. Every ship benefits, whether or not the captain paid for the lighthouse. You cannot stop a passing vessel from seeing the light. One ship using it does not diminish the light available to others.
+      content: `A lighthouse beams light across the ocean. Every ship benefits, whether or not the captain paid for the lighthouse. You can't stop a passing vessel from seeing the light. One ship using it doesn't diminish the light available to others.
 
 **Public goods** have two defining properties:
-- **Non-excludable** — you cannot prevent non-payers from consuming the good
-- **Non-rival** — one person's consumption does not reduce availability for others
+- **Non-excludable** -- you can't prevent non-payers from consuming the good
+- **Non-rival** -- one person's consumption doesn't reduce availability for others
 
-National defense is the textbook example. The military protects every person in the country simultaneously (non-rival), and there is no way to defend some citizens while leaving others exposed (non-excludable). Street lighting, public fireworks displays, open-source software, and basic scientific research also qualify.
+National defense is the textbook example. The military protects every person in the country simultaneously (non-rival), and there's no way to defend some citizens while leaving others exposed (non-excludable). Street lighting, public fireworks displays, open-source software, and basic scientific research also qualify.
 
-If you cannot be excluded from the benefit, why would you voluntarily pay? That is the **free-rider problem**. Everyone wants the good, but everyone has an incentive to let someone else foot the bill. If everyone free-rides, the good never gets produced, even though society collectively values it far more than it costs.
+If you can't be excluded from the benefit, why would you voluntarily pay? That's the **free-rider problem**. Everyone wants the good, but everyone has an incentive to let someone else foot the bill. If everyone free-rides, the good never gets produced, even though society collectively values it far more than it costs.
 
-Private markets fail to provide public goods efficiently. Governments typically fund them through taxation instead. Your tax dollars pay for national defense, public parks, and flood control whether you asked for them or not. That is precisely the point.`,
+Private markets fail to provide public goods efficiently. Governments typically fund them through taxation instead. Your tax dollars pay for national defense, public parks, and flood control whether you asked for them or not. That's precisely the point.`,
     },
     {
       heading: "The Coase Theorem and Property Rights",
-      content: `A rancher's cattle trample a neighboring farmer's crops. The rancher profits, the farmer suffers. A clear negative externality. Ronald Coase argued that under the right conditions, the government does not need to intervene at all.
+      content: `A rancher's cattle trample a neighboring farmer's crops. The rancher profits, the farmer suffers. A clear negative externality. Ronald Coase argued that under the right conditions, the government doesn't need to intervene at all.
 
 The **Coase theorem** states that if property rights are well-defined and transaction costs are low, private parties can negotiate their way to the efficient outcome regardless of who initially holds the rights.
 
 Suppose the farmer has the legal right to untrammeled crops. The rancher will offer to pay for the right to let cattle graze, but only up to the amount the rancher gains. If the rancher's profit from grazing exceeds the farmer's crop damage, a deal happens and both are better off. If not, the cattle stay penned. Either way, the outcome is efficient.
 
-Reverse the assignment: the rancher has the right to let cattle roam. The farmer will offer to pay the rancher to pen them, up to the value of crop damage avoided. Same efficient result, different distribution of money.
+Now reverse the assignment: the rancher has the right to let cattle roam. The farmer will offer to pay the rancher to pen them, up to the value of crop damage avoided. Same efficient result, different distribution of money.
 
-In practice, the Coase theorem hits limits. **Transaction costs** are often high. Negotiating with millions of pollution sources is not realistic. Property rights are sometimes unclear, and power imbalances can distort bargaining. Pigouvian taxes and regulation remain essential for large-scale externalities like climate change.`,
+In practice, the Coase theorem hits real limits. **Transaction costs** are often high. Negotiating with millions of pollution sources just isn't realistic. Property rights are sometimes unclear, and power imbalances can distort bargaining. So Pigouvian taxes and regulation remain essential for large-scale externalities like climate change.`,
     },
     {
       heading: "Worked Example: Calculating the Optimal Pigouvian Tax",
-      content: `A factory produces widgets. Private supply (MPC) is **P = 10 + 0.7Q** and market demand is **P = 90 - 0.8Q**. Each widget generates $15 of pollution damage to surrounding communities. Find the market equilibrium, the socially optimal outcome, the deadweight loss, and the correct Pigouvian tax.
+      content: `A factory produces widgets. Private supply (MPC) is **P = 10 + 0.7Q** and market demand is **P = 90 - 0.8Q**. Each widget generates $15 of pollution damage to surrounding communities. Let's find the market equilibrium, the socially optimal outcome, the deadweight loss, and the correct Pigouvian tax.
 
 **Market equilibrium.** Set MPC = Demand:
 
@@ -101,14 +101,14 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     question:
       "A chemical plant dumps waste into a river, harming downstream fisheries. This is an example of:",
     options: [
-      "A positive externality — the plant creates jobs",
-      "A negative externality — third parties bear uncompensated costs",
-      "A public good — the river is non-excludable",
-      "The free-rider problem — fishers are free-riding on the plant",
+      "A positive externality, because the plant creates jobs",
+      "A negative externality, because third parties bear uncompensated costs",
+      "A public good, because the river is non-excludable",
+      "The free-rider problem, because fishers are free-riding on the plant",
     ],
     correctIndex: 1,
     explanation:
-      "The fisheries bear a real cost (damaged catch) from the plant's production, and they were not part of the transaction. That is a textbook negative externality — a cost imposed on third parties. Option A confuses job creation (a private market outcome) with the pollution spillover. Option C describes a property of the river itself, not the pollution problem. Option D gets it backward — the fishers are victims, not free-riders.",
+      "The fisheries bear a real cost (damaged catch) from the plant's production, and they were not part of the transaction. That is a textbook negative externality, a cost imposed on third parties. Option A confuses job creation (a private market outcome) with the pollution spillover. Option C describes a property of the river itself, not the pollution problem. Option D gets it backward; the fishers are victims, not free-riders.",
   },
   {
     id: "pg-2",
@@ -149,7 +149,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "National defense is both non-rival (protecting one citizen does not reduce protection for others) and non-excludable (you cannot selectively leave some citizens undefended). A toll road is excludable — non-payers are blocked. Netflix is excludable via password. Bread is both rival and excludable — a private good.",
+      "National defense is both non-rival (protecting one citizen does not reduce protection for others) and non-excludable (you cannot selectively leave some citizens undefended). A toll road is excludable, since non-payers are blocked. Netflix is excludable via password. Bread is both rival and excludable, making it a private good.",
   },
   {
     id: "pg-5",
@@ -163,7 +163,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Because public goods are non-excludable, individuals can enjoy the benefit without paying. If enough people free-ride, no private firm can profitably produce the good, so it is underproduced or not produced at all. Option A describes the result of a negative externality, not a public good. Option C has no logical connection — monopolies do not solve the excludability problem.",
+      "Because public goods are non-excludable, individuals can enjoy the benefit without paying. If enough people free-ride, no private firm can profitably produce the good, so it is underproduced or not produced at all. Option A describes the result of a negative externality, not a public good. Option C has no logical connection; monopolies do not solve the excludability problem.",
   },
   {
     id: "pg-6",
@@ -177,7 +177,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Coase showed that if property rights are clear and bargaining is cheap, the affected parties will negotiate to the efficient outcome on their own. Option A describes Pigou's solution, not Coase's. Option C actually undermines the Coase theorem — many parties means high transaction costs, which prevent efficient bargaining. Option D is irrelevant; the theorem applies to both positive and negative externalities.",
+      "Coase showed that if property rights are clear and bargaining is cheap, the affected parties will negotiate to the efficient outcome on their own. Option A describes Pigou's solution, not Coase's. Option C actually undermines the Coase theorem, since many parties means high transaction costs, which prevent efficient bargaining. Option D is irrelevant; the theorem applies to both positive and negative externalities.",
   },
   {
     id: "pg-7",
@@ -191,7 +191,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The Pigouvian tax shifts the supply curve up by exactly the external cost, making the private cost curve identical to the social cost curve. The market equilibrium now matches the socially optimal outcome, eliminating the deadweight loss entirely. Option A applies to taxes on goods without externalities — a Pigouvian tax corrects an existing distortion rather than creating a new one.",
+      "The Pigouvian tax shifts the supply curve up by exactly the external cost, making the private cost curve identical to the social cost curve. The market equilibrium now matches the socially optimal outcome, eliminating the deadweight loss entirely. Option A applies to taxes on goods without externalities. A Pigouvian tax corrects an existing distortion rather than creating a new one.",
   },
   {
     id: "pg-8",
@@ -219,7 +219,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "A club good (also called a natural monopoly good or toll good) is non-rival in consumption up to a congestion point but excludable — providers can restrict access to payers. Examples include cable television, streaming services, and private golf courses. Option A (public good) requires both non-rivalry and non-excludability; excludability disqualifies it. Option B (private good) requires both rivalry and excludability; non-rivalry disqualifies it. Option D (common resource) is rival but non-excludable — the opposite combination of a club good.",
+      "A club good (also called a natural monopoly good or toll good) is non-rival in consumption up to a congestion point but excludable, meaning providers can restrict access to payers. Examples include cable television, streaming services, and private golf courses. Option A (public good) requires both non-rivalry and non-excludability; excludability disqualifies it. Option B (private good) requires both rivalry and excludability; non-rivalry disqualifies it. Option D (common resource) is rival but non-excludable, the opposite combination of a club good.",
   },
   {
     id: "pg-10",
@@ -233,7 +233,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Common resources are rival (one cow grazing reduces the grass available for others) but non-excludable (herders cannot be prevented from using the open pasture). Each herder captures the full private benefit of adding another cow but shares the cost of overgrazing with everyone. This asymmetry drives each individual to overuse the resource even though collective restraint would make everyone better off. Option A describes a public good — if the pasture were non-rival, overgrazing would not be a problem. Option B describes a private good, which can be efficiently allocated by markets. Option D describes a club good, which does not suffer from the commons problem because access can be restricted.",
+      "Common resources are rival (one cow grazing reduces the grass available for others) but non-excludable (herders cannot be prevented from using the open pasture). Each herder captures the full private benefit of adding another cow but shares the cost of overgrazing with everyone. This asymmetry drives each individual to overuse the resource even though collective restraint would make everyone better off. Option A describes a public good; if the pasture were non-rival, overgrazing would not be a problem. Option B describes a private good, which can be efficiently allocated by markets. Option D describes a club good, which does not suffer from the commons problem because access can be restricted.",
   },
   {
     id: "pg-11",
@@ -247,7 +247,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The lighthouse is the classic public good: non-rival (one ship using the light does not diminish it for others) and non-excludable (you cannot prevent passing ships from seeing the beam). Because the firm cannot exclude non-payers, ships have no incentive to pay voluntarily — they free-ride. Without revenue, the firm cannot cover costs. Option A is wrong because lighthouse light is non-rival — multiple ships benefit simultaneously without reducing the resource. Option C is a factual claim not related to the economic concept; the issue is the inherent non-excludability, not regulation. Option D is irrelevant — lighthouses are not consumer goods with income elasticity concerns.",
+      "The lighthouse is the classic public good: non-rival (one ship using the light does not diminish it for others) and non-excludable (you cannot prevent passing ships from seeing the beam). Because the firm cannot exclude non-payers, ships have no incentive to pay voluntarily, so they free-ride. Without revenue, the firm cannot cover costs. Option A is wrong because lighthouse light is non-rival, as multiple ships benefit simultaneously without reducing the resource. Option C is a factual claim not related to the economic concept; the issue is the inherent non-excludability, not regulation. Option D is irrelevant; lighthouses are not consumer goods with income elasticity concerns.",
   },
   {
     id: "pg-12",
@@ -261,7 +261,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The economic rationale for government provision of public goods is market failure caused by the free-rider problem. Because public goods are non-excludable, private firms cannot charge users and therefore underprovide (or do not provide at all) goods that society collectively values above their cost. Governments solve this by funding public goods through compulsory taxation. Option A is incorrect — governments are not necessarily cheaper producers; the issue is revenue collection, not production cost. Option C is a preference claim with no economic basis. Option D confuses public goods with externalities — public goods are defined by non-rivalry and non-excludability, not by the presence of externalities.",
+      "The economic rationale for government provision of public goods is market failure caused by the free-rider problem. Because public goods are non-excludable, private firms cannot charge users and therefore underprovide (or do not provide at all) goods that society collectively values above their cost. Governments solve this by funding public goods through compulsory taxation. Option A is incorrect; governments are not necessarily cheaper producers; the issue is revenue collection, not production cost. Option C is a preference claim with no economic basis. Option D confuses public goods with externalities; public goods are defined by non-rivalry and non-excludability, not by the presence of externalities.",
   },
   {
     id: "pg-13",
@@ -275,7 +275,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Cost-benefit analysis compares total social benefits to total social costs. Since $14 million > $10 million, the project generates $4 million in net social benefit, so it should be built. Option A focuses on affordability per person, which is a distributional concern, not the efficiency criterion used in cost-benefit analysis. Option C is too broad — not all parks are worth building; the decision depends on whether benefits exceed costs in each specific case. Option D invokes a jobs argument that ignores opportunity cost — the $10 million could create jobs elsewhere too; what matters is whether this particular use of resources maximizes social welfare.",
+      "Cost-benefit analysis compares total social benefits to total social costs. Since $14 million > $10 million, the project generates $4 million in net social benefit, so it should be built. Option A focuses on affordability per person, which is a distributional concern, not the efficiency criterion used in cost-benefit analysis. Option C is too broad; not all parks are worth building; the decision depends on whether benefits exceed costs in each specific case. Option D invokes a jobs argument that ignores opportunity cost; the $10 million could create jobs elsewhere too; what matters is whether this particular use of resources maximizes social welfare.",
   },
   {
     id: "pg-14",
@@ -289,7 +289,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Because public goods are non-rival, every consumer enjoys the same unit simultaneously. To find total social benefit at any given quantity, you add up what each individual is willing to pay for that unit — this is vertical summation of individual demand (marginal benefit) curves. This contrasts with private goods, where market demand is found by horizontal summation (adding quantities at each price). Option A only captures one person's valuation, ignoring the rest of society. Option B is a statistical measure that does not reflect the correct aggregation method. Option D describes how market demand for private goods is derived — for public goods, because all consumers consume the same quantity, you sum willingness to pay (vertically), not quantities (horizontally).",
+      "Because public goods are non-rival, every consumer enjoys the same unit simultaneously. To find total social benefit at any given quantity, you add up what each individual is willing to pay for that unit, and this is vertical summation of individual demand (marginal benefit) curves. This contrasts with private goods, where market demand is found by horizontal summation (adding quantities at each price). Option A only captures one person's valuation, ignoring the rest of society. Option B is a statistical measure that does not reflect the correct aggregation method. Option D describes how market demand for private goods is derived. For public goods, because all consumers consume the same quantity, you sum willingness to pay (vertically), not quantities (horizontally).",
   },
   {
     id: "pg-15",
@@ -303,6 +303,6 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Two forces drive undersupply. First, non-excludability means firms cannot charge non-payers, so they cannot capture revenue. Second, consumers strategically understate how much they value the good (since they can free-ride on others' payments), so even voluntary contribution schemes fall short. Together, the private market provides far less than the socially optimal quantity. Option A is wrong because the problem is not about production capability but about revenue collection and incentive revelation. Option B states the opposite of reality — consumers hide their true preferences for public goods precisely because they can benefit without paying. Option D is factually incorrect in most cases; the issue is economic incentives, not legal barriers.",
+      "Two forces drive undersupply. First, non-excludability means firms cannot charge non-payers, so they cannot capture revenue. Second, consumers strategically understate how much they value the good (since they can free-ride on others' payments), so even voluntary contribution schemes fall short. Together, the private market provides far less than the socially optimal quantity. Option A is wrong because the problem is not about production capability but about revenue collection and incentive revelation. Option B states the opposite of reality; consumers hide their true preferences for public goods precisely because they can benefit without paying. Option D is factually incorrect in most cases; the issue is economic incentives, not legal barriers.",
   },
 ];

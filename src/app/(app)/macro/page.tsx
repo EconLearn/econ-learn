@@ -1,5 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { macroCourse } from "@/data/courses";
+
+export const metadata: Metadata = {
+  title: "AP Macroeconomics - Free Study Guide & Practice Questions",
+  description:
+    "Study all 12 AP Macroeconomics topics: GDP, fiscal policy, monetary policy, international trade, and more. Interactive graphs and 175+ practice questions.",
+  alternates: { canonical: "https://econlearn.org/macro" },
+  openGraph: {
+    title: "AP Macroeconomics Study Guide - EconLearn",
+    description:
+      "Free interactive AP Macro study guide with 12 modules covering every topic on the AP exam.",
+    url: "https://econlearn.org/macro",
+  },
+};
 
 export default function MacroPage() {
   return (

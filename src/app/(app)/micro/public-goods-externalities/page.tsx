@@ -90,11 +90,11 @@ export default function PublicGoodsExternalitiesPage() {
               </p>
               <ul className="space-y-2">
                 {[
-                  "Negative externalities cause overproduction — the social cost exceeds the private cost.",
-                  "Positive externalities cause underproduction — the social benefit exceeds the private benefit.",
+                  "Negative externalities cause overproduction because the social cost exceeds the private cost.",
+                  "Positive externalities cause underproduction because the social benefit exceeds the private benefit.",
                   "A Pigouvian tax equal to the external cost corrects a negative externality.",
                   "A Pigouvian subsidy equal to the external benefit corrects a positive externality.",
-                  "Public goods are non-rival and non-excludable — private markets underprovide them.",
+                  "Public goods are non-rival and non-excludable, so private markets underprovide them.",
                   "The free-rider problem explains why voluntary funding of public goods fails.",
                   "The Coase theorem works when transaction costs are low and property rights are clear.",
                 ].map((takeaway, i) => (

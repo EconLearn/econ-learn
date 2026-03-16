@@ -52,7 +52,7 @@ export default function ConsumerChoicePage() {
           </p>
         </div>
 
-        {/* Content — single column, no graph */}
+        {/* Content - single column, no graph */}
         <div className="prose-econ">
           {consumerChoiceContent.sections.map((section, i) => (
             <ScrollReveal key={i}>
