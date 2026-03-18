@@ -11,10 +11,10 @@ export async function GET(request: NextRequest) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {
-      return NextResponse.redirect(new URL("/dashboard", requestUrl.origin));
+      return NextResponse.redirect(new URL("/dashboard", "https://econlearn.org"));
     }
   }
 
   // If no code or exchange failed, redirect to login
-  return NextResponse.redirect(new URL("/login", requestUrl.origin));
+  return NextResponse.redirect(new URL("/login", "https://econlearn.org"));
 }
