@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { useRouter } from "next/navigation";
-import { courses } from "@/data/courses";
 
 interface StudentClassroom {
   id: string;
@@ -28,8 +27,6 @@ interface StudentAssignment {
 }
 
 type FilterTab = "all" | "pending" | "completed" | "overdue";
-
-const allModules = [...courses[0].modules, ...courses[1].modules];
 
 export default function StudentAssignmentsPage() {
   const { user, loading: authLoading } = useAuth();
@@ -170,16 +167,14 @@ export default function StudentAssignmentsPage() {
           <div className="card overflow-hidden">
             {filtered.map((assignment, i) => {
               const classroomName = classroomMap[assignment.classroom_id] || "";
-              const moduleLink = assignment.module_ids?.[0]
-                ? allModules.find(m => m.id === assignment.module_ids[0])?.href
-                : null;
               const urgencyColor = getUrgencyColor(assignment.due_date, assignment.status);
               const typeLabel = assignment.type === "quiz" ? "Quiz" : assignment.type === "practice_test" ? "Practice Test" : "Lesson";
 
               return (
-                <div
+                <Link
                   key={assignment.id}
-                  className="flex items-center gap-4 px-5 py-4"
+                  href={`/assignments/${assignment.id}`}
+                  className="flex items-center gap-4 px-5 py-4 transition-colors hover:bg-black/[0.02]"
                   style={i > 0 ? { borderTop: '1px solid var(--color-border-subtle)' } : undefined}
                 >
                   {/* Status indicator */}
@@ -203,19 +198,9 @@ export default function StudentAssignmentsPage() {
                   {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      {moduleLink ? (
-                        <Link
-                          href={moduleLink}
-                          className="text-sm font-medium hover:text-blue-600 transition-colors truncate"
-                          style={{ color: 'var(--color-ink)' }}
-                        >
-                          {assignment.title}
-                        </Link>
-                      ) : (
-                        <p className="text-sm font-medium truncate" style={{ color: 'var(--color-ink)' }}>
-                          {assignment.title}
-                        </p>
-                      )}
+                      <p className="text-sm font-medium truncate" style={{ color: 'var(--color-ink)' }}>
+                        {assignment.title}
+                      </p>
                       <span
                         className="text-[10px] font-medium px-1.5 py-0.5 rounded flex-shrink-0"
                         style={{ background: 'var(--color-surface-sunken)', color: 'var(--color-ink-faint)' }}
@@ -238,36 +223,27 @@ export default function StudentAssignmentsPage() {
                         <p className="text-sm font-bold tabular-nums text-emerald-600">
                           {assignment.score != null ? `${assignment.score}%` : "Done"}
                         </p>
-                        {assignment.completed_at && (
-                          <p className="text-[10px]" style={{ color: 'var(--color-ink-faint)' }}>
-                            {new Date(assignment.completed_at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
-                          </p>
-                        )}
+                        <p className="text-[10px] font-medium text-emerald-500">
+                          View Results
+                        </p>
                       </div>
                     ) : assignment.status === "overdue" ? (
                       <div>
                         <p className="text-xs font-semibold text-red-500">Overdue</p>
-                        {moduleLink && (
-                          <Link href={moduleLink} className="text-[10px] font-medium text-blue-500 hover:text-blue-600">
-                            Start now
-                          </Link>
-                        )}
+                        <p className="text-[10px] font-medium text-blue-500">
+                          Start now
+                        </p>
                       </div>
                     ) : (
-                      moduleLink ? (
-                        <Link
-                          href={moduleLink}
-                          className="text-xs font-medium px-3 py-1.5 rounded-md transition-colors"
-                          style={{ background: 'var(--accent)', color: 'white' }}
-                        >
-                          Start
-                        </Link>
-                      ) : (
-                        <span className="text-xs" style={{ color: 'var(--color-ink-faint)' }}>Pending</span>
-                      )
+                      <span
+                        className="text-xs font-medium px-3 py-1.5 rounded-md"
+                        style={{ background: 'var(--accent)', color: 'white' }}
+                      >
+                        Start
+                      </span>
                     )}
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

@@ -54,6 +54,24 @@ export default function TermsPage() {
         </section>
 
         <section>
+          <h2>Intellectual Property</h2>
+          <p>
+            All interactive graphs, educational content, question banks, and
+            software available on EconLearn are the intellectual property of
+            EconLearn. Users may not reproduce, reverse-engineer, or create
+            derivative works from the interactive graph components or any other
+            proprietary elements of the platform.
+          </p>
+          <p className="mt-3">
+            Schools and teachers who subscribe to EconLearn receive a license to
+            use the platform for educational purposes within their institution.
+            This license does not transfer intellectual property ownership of any
+            kind. All rights, title, and interest in the platform and its
+            content remain with EconLearn.
+          </p>
+        </section>
+
+        <section>
           <h2>Acceptable Use</h2>
           <p>You agree not to:</p>
           <ul className="list-disc pl-5 space-y-1.5 mt-2">

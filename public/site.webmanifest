@@ -1,0 +1,10 @@
+{
+  "name": "EconLearn",
+  "short_name": "EconLearn",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" }
+  ],
+  "theme_color": "#1E293B",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

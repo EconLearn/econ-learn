@@ -76,7 +76,9 @@ export const metadata: Metadata = {
       { url: '/favicon.svg', type: 'image/svg+xml' },
     ],
     apple: '/apple-icon.png',
+    shortcut: '/favicon.svg',
   },
+  manifest: '/site.webmanifest',
   verification: {},
 };
 

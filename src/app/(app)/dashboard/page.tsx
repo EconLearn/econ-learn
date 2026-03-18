@@ -158,6 +158,42 @@ export default function DashboardPage() {
 
   const firstName = profile?.display_name?.split(" ")[0] || "there";
 
+  // Compute urgent assignments for notification banner
+  const nowDate = new Date();
+  const urgentAssignments = studentAssignments.filter((a) => {
+    if (a.status === "completed") return false;
+    if (a.status === "overdue") return true;
+    if (a.due_date) {
+      const dueDate = new Date(a.due_date);
+      const diffMs = dueDate.getTime() - nowDate.getTime();
+      const diffHours = diffMs / (1000 * 60 * 60);
+      return diffHours > 0 && diffHours <= 48;
+    }
+    return false;
+  });
+  const overdueAssignments = urgentAssignments.filter((a) => a.status === "overdue");
+  const dueSoonAssignments = urgentAssignments.filter((a) => a.status !== "overdue");
+  const bannerDismissKey = `dismiss-assignment-banner-${nowDate.toISOString().split("T")[0]}`;
+  const [bannerDismissed, setBannerDismissed] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem(bannerDismissKey) === "true";
+    }
+    return false;
+  });
+
+  const dismissBanner = () => {
+    setBannerDismissed(true);
+    if (typeof window !== "undefined") {
+      localStorage.setItem(bannerDismissKey, "true");
+    }
+  };
+
+  // Find the most urgent assignment for the CTA link
+  const mostUrgent = overdueAssignments[0] || dueSoonAssignments[0] || null;
+  const urgentModLink = mostUrgent?.module_ids?.[0]
+    ? allModules.find((m) => m.id === mostUrgent.module_ids[0])?.href || "/classrooms"
+    : "/classrooms";
+
   return (
     <div className="max-w-4xl mx-auto px-6 py-10 lg:py-14">
       <motion.div
@@ -165,6 +201,74 @@ export default function DashboardPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
+        {/* Assignment Notification Banner */}
+        {!bannerDismissed && urgentAssignments.length > 0 && (
+          <div
+            className="mb-6 rounded-xl px-4 py-3 flex items-center justify-between gap-3"
+            style={{
+              background: overdueAssignments.length > 0 ? "rgba(239, 68, 68, 0.06)" : "rgba(245, 158, 11, 0.06)",
+              border: `1px solid ${overdueAssignments.length > 0 ? "rgba(239, 68, 68, 0.15)" : "rgba(245, 158, 11, 0.15)"}`,
+            }}
+          >
+            <div className="flex items-center gap-3 min-w-0">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                style={{
+                  background: overdueAssignments.length > 0
+                    ? "rgba(239, 68, 68, 0.12)"
+                    : "rgba(245, 158, 11, 0.12)",
+                }}
+              >
+                <svg
+                  className="w-4 h-4"
+                  style={{ color: overdueAssignments.length > 0 ? "#dc2626" : "#d97706" }}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-medium" style={{ color: overdueAssignments.length > 0 ? "#dc2626" : "#d97706" }}>
+                  {overdueAssignments.length > 0
+                    ? `${overdueAssignments.length} overdue assignment${overdueAssignments.length !== 1 ? "s" : ""}`
+                    : `${dueSoonAssignments.length} assignment${dueSoonAssignments.length !== 1 ? "s" : ""} due soon`}
+                </p>
+                <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>
+                  {overdueAssignments.length > 0 && dueSoonAssignments.length > 0
+                    ? `Plus ${dueSoonAssignments.length} due within 48 hours`
+                    : overdueAssignments.length > 0
+                      ? "Complete these as soon as possible"
+                      : "Due within the next 48 hours"}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <Link
+                href={urgentModLink}
+                className="text-xs font-medium px-3 py-1.5 rounded-md transition-all duration-150"
+                style={{
+                  background: overdueAssignments.length > 0 ? "#dc2626" : "#d97706",
+                  color: "white",
+                }}
+              >
+                Go
+              </Link>
+              <button
+                onClick={dismissBanner}
+                className="p-1 rounded-md transition-colors hover:opacity-70"
+                style={{ color: "var(--color-ink-faint)" }}
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Welcome Header */}
         <div className="flex items-start justify-between mb-10">
           <div>
@@ -289,16 +393,19 @@ export default function DashboardPage() {
               {studentAssignments.slice(0, 5).map((assignment, i) => {
                 const classroomName = studentClassrooms.find(c => c.id === assignment.classroom_id)?.name || "";
                 const urgencyColor = getAssignmentUrgencyColor(assignment.due_date, assignment.status);
-                const allMods = [...courses[0].modules, ...courses[1].modules];
-                const moduleLink = assignment.module_ids?.[0]
-                  ? allMods.find(m => m.id === assignment.module_ids[0])?.href
-                  : null;
+                const dueDate = assignment.due_date ? new Date(assignment.due_date) : null;
+                const hoursUntilDue = dueDate ? (dueDate.getTime() - Date.now()) / (1000 * 60 * 60) : Infinity;
+                const isDueSoon = hoursUntilDue > 0 && hoursUntilDue < 48 && assignment.status !== "completed";
 
                 return (
-                  <div
+                  <Link
                     key={assignment.id}
-                    className="flex items-center justify-between px-5 py-3.5"
-                    style={i > 0 ? { borderTop: '1px solid var(--color-border-subtle)' } : undefined}
+                    href={`/assignments/${assignment.id}`}
+                    className="flex items-center justify-between px-5 py-3.5 transition-colors hover:bg-black/[0.02]"
+                    style={{
+                      ...(i > 0 ? { borderTop: '1px solid var(--color-border-subtle)' } : {}),
+                      ...(isDueSoon ? { background: 'rgba(245, 158, 11, 0.03)' } : {}),
+                    }}
                   >
                     <div className="flex items-center gap-3 flex-1 min-w-0">
                       <div
@@ -306,18 +413,13 @@ export default function DashboardPage() {
                         style={{ background: urgencyColor }}
                       />
                       <div className="min-w-0">
-                        {moduleLink ? (
-                          <Link href={moduleLink} className="text-sm font-medium hover:text-blue-600 transition-colors truncate block" style={{ color: 'var(--color-ink)' }}>
-                            {assignment.title}
-                          </Link>
-                        ) : (
-                          <p className="text-sm font-medium truncate" style={{ color: 'var(--color-ink)' }}>
-                            {assignment.title}
-                          </p>
-                        )}
-                        <p className="text-[11px]" style={{ color: 'var(--color-ink-faint)' }}>
+                        <p className="text-sm font-medium truncate" style={{ color: 'var(--color-ink)' }}>
+                          {assignment.title}
+                        </p>
+                        <p className="text-[11px]" style={{ color: isDueSoon ? '#d97706' : 'var(--color-ink-faint)' }}>
                           {classroomName}
                           {assignment.due_date ? ` · Due ${new Date(assignment.due_date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}` : ""}
+                          {isDueSoon && " (due soon)"}
                         </p>
                       </div>
                     </div>
@@ -337,7 +439,7 @@ export default function DashboardPage() {
                         </span>
                       )}
                     </div>
-                  </div>
+                  </Link>
                 );
               })}
             </div>

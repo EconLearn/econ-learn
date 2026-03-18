@@ -4,8 +4,7 @@ import { useEffect, useState, useMemo, useCallback } from "react";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { useRouter } from "next/navigation";
 
-/* ─── Config ─── */
-const ADMIN_EMAIL = "judewallis@gmail.com";
+import { isAdmin as checkIsAdmin } from "@/lib/auth/is-admin";
 
 /* ─── Types ─── */
 interface TeacherSubscription {
@@ -83,7 +82,7 @@ export default function AdminPage() {
   const [trialDays, setTrialDays] = useState(14);
 
   /* ─── Access check ─── */
-  const isAdmin = user?.email === ADMIN_EMAIL;
+  const isAdmin = user ? checkIsAdmin({ id: user.id, email: user.email }) : false;
 
   /* ─── Fetch teachers ─── */
   const fetchTeachers = useCallback(async () => {

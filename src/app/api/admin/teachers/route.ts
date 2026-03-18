@@ -26,7 +26,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
-const ADMIN_EMAIL = "judewallis@gmail.com";
+import { isAdmin } from "@/lib/auth/is-admin";
 
 // GET /api/admin/teachers — list all teachers with subscription + student info
 export async function GET() {
@@ -35,7 +35,7 @@ export async function GET() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user || user.email !== ADMIN_EMAIL) {
+  if (!user || !isAdmin({ id: user.id, email: user.email })) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
