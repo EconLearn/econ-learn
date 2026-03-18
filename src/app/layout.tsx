@@ -85,18 +85,18 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLd = {
+  const websiteJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "EconLearn",
     url: BASE_URL,
     description:
-      "Free interactive AP Economics study guide with graphs, practice questions, and flashcards.",
+      "Free interactive AP Economics study tools with graphs, practice questions, flashcards, and free-response tips for AP Micro and Macro exam prep.",
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${BASE_URL}/micro/{search_term_string}`,
+        urlTemplate: `${BASE_URL}/search?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -104,11 +104,18 @@ export default function RootLayout({
 
   const orgJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "EducationalOrganization"],
     name: "EconLearn",
     url: BASE_URL,
+    logo: `${BASE_URL}/favicon.svg`,
     description:
-      "Free AP Economics learning platform with interactive graphs and practice questions.",
+      "Free AP Economics learning platform with interactive graphs, practice questions, flashcards, and comprehensive study guides for AP Micro and Macro.",
+    sameAs: [],
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "contact@econlearn.org",
+      contactType: "customer support",
+    },
   };
 
   return (
@@ -132,14 +139,6 @@ export default function RootLayout({
             __html: `(function(){try{var t=localStorage.getItem('econ-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');else if(t==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.setAttribute('data-theme','dark');}catch(e){}})()`,
           }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
-        />
       </head>
       <body className="antialiased">
         <ThemeInitializer />
@@ -149,6 +148,14 @@ export default function RootLayout({
           </a>
           {children}
         </AuthProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
+        />
       </body>
     </html>
   );
