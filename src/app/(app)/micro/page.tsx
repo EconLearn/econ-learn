@@ -3,14 +3,14 @@ import Link from "next/link";
 import { microCourse } from "@/data/courses";
 
 export const metadata: Metadata = {
-  title: "AP Microeconomics - Free Study Guide & Practice Questions",
+  title: "AP Microeconomics Study Guide - Free Review & Practice",
   description:
-    "Study all 12 AP Microeconomics topics: supply and demand, elasticity, market structures, factor markets, and more. Interactive graphs and 175+ practice questions.",
+    "Free AP Micro study guide with 12 modules: supply and demand, monopoly graphs, elasticity, market structures, and more. 175+ practice questions and interactive graphs.",
   alternates: { canonical: "https://econlearn.org/micro" },
   openGraph: {
-    title: "AP Microeconomics Study Guide - EconLearn",
+    title: "AP Microeconomics Study Guide | EconLearn",
     description:
-      "Free interactive AP Micro study guide with 12 modules covering every topic on the AP exam.",
+      "Free AP Micro study guide covering all 12 topics with interactive graphs, practice questions, and flashcards.",
     url: "https://econlearn.org/micro",
   },
 };

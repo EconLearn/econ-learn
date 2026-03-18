@@ -11,22 +11,26 @@ const BASE_URL = "https://econlearn.org";
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "EconLearn - Free AP Economics Study Guide with Interactive Graphs",
+    default: "AP Economics Study Guide - Free Interactive Graphs & Questions",
     template: "%s | EconLearn",
   },
   description:
-    "Free AP Microeconomics and Macroeconomics study guide. Interactive supply and demand graphs, 350+ practice questions, flashcards, and detailed explanations for every topic on the AP exam.",
+    "Free AP Micro & Macro study guide with interactive graphs, 350+ practice questions, flashcards, and free-response tips. Study supply and demand, monopoly, fiscal policy, and every AP exam topic.",
   keywords: [
     "AP Economics",
     "AP Microeconomics",
     "AP Macroeconomics",
-    "AP Econ study guide",
+    "AP microeconomics study guide",
+    "AP macro review",
     "AP Economics practice questions",
-    "supply and demand graph",
+    "supply and demand explained",
+    "monopoly graph AP econ",
+    "AP econ flashcards",
+    "AP micro free response tips",
+    "economics graphs interactive",
+    "AP economics teacher resources",
+    "classroom economics tools",
     "interactive economics",
-    "AP Micro review",
-    "AP Macro review",
-    "economics flashcards",
     "AP exam prep",
     "free AP Economics",
     "fiscal policy",
@@ -54,18 +58,24 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: BASE_URL,
     siteName: "EconLearn",
-    title: "EconLearn - Free AP Economics Study Guide with Interactive Graphs",
+    title: "AP Economics Study Guide - Free Interactive Graphs & Questions",
     description:
-      "Master AP Micro and Macro with interactive graphs, 350+ practice questions, and flashcards. 100% free.",
+      "Free AP Micro & Macro study guide with interactive graphs, 350+ practice questions, and flashcards for every exam topic.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "EconLearn - Free AP Economics Study Guide",
+    title: "AP Economics Study Guide - Free Graphs & Questions",
     description:
-      "Interactive graphs, 350+ AP-style questions, flashcards, and detailed explanations. Free forever.",
+      "Interactive economics graphs, 350+ AP-style questions, flashcards, and free-response tips. 100% free.",
   },
   alternates: {
     canonical: BASE_URL,
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-icon.png',
   },
   verification: {},
 };

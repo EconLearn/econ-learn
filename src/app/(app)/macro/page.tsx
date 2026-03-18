@@ -3,14 +3,14 @@ import Link from "next/link";
 import { macroCourse } from "@/data/courses";
 
 export const metadata: Metadata = {
-  title: "AP Macroeconomics - Free Study Guide & Practice Questions",
+  title: "AP Macroeconomics Review - Free Study Guide & Practice",
   description:
-    "Study all 12 AP Macroeconomics topics: GDP, fiscal policy, monetary policy, international trade, and more. Interactive graphs and 175+ practice questions.",
+    "Free AP Macro review with 12 modules: GDP, fiscal policy, monetary policy, AD/AS model, and more. 175+ practice questions and interactive economics graphs.",
   alternates: { canonical: "https://econlearn.org/macro" },
   openGraph: {
-    title: "AP Macroeconomics Study Guide - EconLearn",
+    title: "AP Macroeconomics Review & Study Guide | EconLearn",
     description:
-      "Free interactive AP Macro study guide with 12 modules covering every topic on the AP exam.",
+      "Free AP Macro study guide covering all 12 topics with interactive graphs, practice questions, and flashcards.",
     url: "https://econlearn.org/macro",
   },
 };

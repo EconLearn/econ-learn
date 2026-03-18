@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Graph Sandbox | EconLearn",
+  title: "Interactive Economics Graphs - AP Econ Sandbox",
   description:
-    "Explore interactive economics graphs with full control over every parameter. No lesson content — just the graphs.",
+    "17 interactive economics graphs for AP Micro & Macro. Supply and demand, monopoly, AD/AS, fiscal policy, and more. Drag curves and explore freely.",
+  alternates: { canonical: "https://econlearn.org/sandbox" },
 };
 
 const GRAPHS = [

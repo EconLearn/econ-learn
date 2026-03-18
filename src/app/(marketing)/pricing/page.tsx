@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Pricing - EconLearn",
-  description: "EconLearn pricing for teachers and schools. Free for students, affordable classroom plans for educators.",
+  title: "AP Economics Teacher Pricing - Classroom Tools",
+  description: "Free for students, $3/student for classroom tools. Teacher dashboards, assignable quizzes, student progress tracking, and interactive graph demos.",
   alternates: { canonical: "https://econlearn.org/pricing" },
 };
 
