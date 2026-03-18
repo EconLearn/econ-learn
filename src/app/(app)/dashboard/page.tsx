@@ -63,6 +63,7 @@ export default function DashboardPage() {
   const [studentClassrooms, setStudentClassrooms] = useState<StudentClassroom[]>([]);
   const [studentAssignments, setStudentAssignments] = useState<StudentAssignment[]>([]);
   const [loading, setLoading] = useState(true);
+  const [challengeStatus, setChallengeStatus] = useState<{ answered: boolean; score?: number; streak?: number } | null>(null);
   const { achievements, unlockedCount, totalCount } = useAchievements();
   const { recommendations, weakAreas } = useStudyRecommendations();
 
@@ -109,6 +110,21 @@ export default function DashboardPage() {
         }
       } catch {
         // Silently fail — classroom data is supplementary
+      }
+
+      // Fetch daily challenge status
+      try {
+        const challengeRes = await fetch("/api/challenge/today");
+        if (challengeRes.ok) {
+          const challengeData = await challengeRes.json();
+          setChallengeStatus({
+            answered: challengeData.answered,
+            score: challengeData.attempt?.score,
+            streak: challengeData.attempt?.streak,
+          });
+        }
+      } catch {
+        // Silently fail
       }
 
       setLoading(false);
@@ -172,6 +188,52 @@ export default function DashboardPage() {
         {/* AP Countdown */}
         <div className="mb-8">
           <APCountdown />
+        </div>
+
+        {/* Daily Challenge Card */}
+        <div className="mb-8">
+          <Link
+            href="/challenge"
+            className="card-interactive group flex items-center justify-between p-5"
+            style={{
+              background: challengeStatus?.answered
+                ? 'rgba(34, 197, 94, 0.04)'
+                : 'linear-gradient(135deg, rgba(245, 158, 11, 0.06), rgba(239, 68, 68, 0.06))',
+              border: challengeStatus?.answered
+                ? '1px solid rgba(34, 197, 94, 0.15)'
+                : '1px solid rgba(245, 158, 11, 0.15)',
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <div
+                className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ background: 'linear-gradient(135deg, #f59e0b, #ef4444)' }}
+              >
+                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-semibold group-hover:text-blue-600 transition-colors" style={{ color: 'var(--color-ink)' }}>
+                  {challengeStatus?.answered ? 'Challenge Completed!' : 'Daily Challenge'}
+                </p>
+                <p className="text-xs mt-0.5" style={{ color: 'var(--color-ink-faint)' }}>
+                  {challengeStatus?.answered
+                    ? `Score: ${challengeStatus.score}${challengeStatus.streak && challengeStatus.streak > 0 ? ` \u00b7 ${challengeStatus.streak} day streak` : ''}`
+                    : 'Test your econ knowledge \u2014 new question every day'}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium" style={{ color: challengeStatus?.answered ? '#15803d' : 'var(--color-ink-faint)' }}>
+                {challengeStatus?.answered ? 'View' : 'Play'}
+              </span>
+              <svg className="w-4 h-4 group-hover:text-blue-500 transition-colors" style={{ color: 'var(--color-border)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </div>
+          </Link>
         </div>
 
         {/* My Classrooms */}
