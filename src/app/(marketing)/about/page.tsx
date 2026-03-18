@@ -20,52 +20,54 @@ export default function AboutPage() {
 
       <div className="prose-custom space-y-6">
         <p className="text-lg leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
-          EconLearn exists because economics makes more sense when you can see
-          it. Textbook graphs are static. Lectures are linear. Neither gives
-          you the chance to drag a supply curve and watch surplus appear in real
-          time.
+          Most AP Econ study tools hand you a wall of text and hope for the
+          best. EconLearn is different — you can actually drag the supply curve,
+          watch deadweight loss show up on the graph, and then answer
+          AP-style questions about what you just saw.
         </p>
 
-        <h2>Why We Built This</h2>
+        <h2>Why This Exists</h2>
         <p>
-          AP Economics has some of the most visual content of any AP course,
-          but most study resources treat it like a reading assignment. Students
-          memorize definitions without building the intuition that carries them
-          through free-response questions. EconLearn flips that around.
+          AP Economics is one of the most graph-heavy AP exams. The FRQ section
+          practically lives on diagrams — AD/AS, supply and demand, cost curves,
+          Phillips curve. But most prep materials give you a static image and
+          a paragraph. That disconnect between how you study and how you get
+          tested is the whole reason EconLearn was built.
         </p>
         <p>
-          Every module pairs written explanations with interactive graphs you
-          can manipulate. Shift demand, adjust a tax, change the money supply.
-          The immediate visual feedback makes abstract concepts stick in a way
-          that highlighting a textbook never will.
-        </p>
-
-        <h2>What You Get</h2>
-        <p>
-          24 modules covering AP Microeconomics and AP Macroeconomics. 350+
-          multiple-choice questions with detailed explanations. 144+ flashcards
-          for quick review. 15 interactive graphs you can drag, toggle, and
-          explore. Study streaks, achievements, and a personal dashboard to
-          track your progress.
-        </p>
-        <p>
-          All of it free. No premium tier, no paywall, no trial period.
+          Each module has written content alongside an interactive graph.
+          You move the curves, the numbers update, and the explanation
+          on the left connects to what you see on the right. It sticks
+          better than re-reading highlighted notes at 1 AM.
         </p>
 
-        <h2>Who It&apos;s For</h2>
+        <h2>What&apos;s Included</h2>
         <p>
-          High school students preparing for the AP Micro or AP Macro exam.
-          College freshmen taking introductory economics. Self-learners who
-          want to understand how markets, governments, and international trade
-          actually work. If you learn better by doing than by reading, this
-          was built for you.
+          24 modules across AP Micro and AP Macro. Over 350 multiple-choice
+          questions — each one has an explanation, not just the right answer.
+          144+ flashcards if you want something quick before the test. 15 graphs
+          you can actually interact with. A dashboard that tracks quiz scores,
+          streaks, and how far along you are.
+        </p>
+        <p>
+          There&apos;s no paywall. Everything is open.
         </p>
 
-        <h2>Open &amp; Improving</h2>
+        <h2>Who Uses EconLearn</h2>
         <p>
-          EconLearn is a work in progress. New content, better graphs, and
-          additional features are added regularly. If you find an error, have a
-          suggestion, or want to contribute, reach out at{" "}
+          Mostly high schoolers studying for the AP Micro or Macro exam — that&apos;s
+          who it was built for. But it also works for college intro econ students
+          or anyone who wants to actually understand how markets function beyond
+          the textbook definition. If you&apos;re the kind of person who learns
+          by messing with things rather than reading about them, this should
+          click for you.
+        </p>
+
+        <h2>Still Building</h2>
+        <p>
+          New modules, better graphs, and more practice questions get added on
+          a rolling basis. Found a mistake? Have an idea for a graph?
+          Email{" "}
           <span style={{ color: "var(--color-ink)" }}>
             hello@econlearn.org
           </span>

@@ -1,6 +1,7 @@
 "use client";
 
 import GraphAxes from "./GraphAxes";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import { usePPCStore, yOnPPC } from "@/lib/stores/ppc-store";
 import { dataToSvg, pointsToSmoothPath, type GraphArea, type Domain } from "@/lib/graph-math";
 
@@ -47,6 +48,7 @@ export default function PPCGraph() {
   const statusColor = isEfficient ? "text-emerald-600" : isAttainable ? "text-amber-600" : "text-red-500";
 
   return (
+    <FullscreenWrapper title="Production Possibilities Curve">
     <div className="space-y-3">
       <div className="graph-container overflow-hidden">
         <div className="px-4 pt-3 pb-1">
@@ -241,5 +243,6 @@ export default function PPCGraph() {
         Reset
       </button>
     </div>
+    </FullscreenWrapper>
   );
 }

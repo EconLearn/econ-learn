@@ -1,6 +1,7 @@
 "use client";
 
 import EconGraph from "./EconGraph";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import { useInternationalTradeStore } from "@/lib/stores/international-trade-store";
 import { dataToSvg, quantityAt, type GraphArea, type Domain } from "@/lib/graph-math";
 
@@ -60,7 +61,20 @@ export default function InternationalTradeGraph() {
   const trBotLeft = dataToSvg({ x: qSupplied, y: worldPrice }, GA, DOMAIN);
   const tariffRectPoints = `${trTopLeft.x},${trTopLeft.y} ${trTopRight.x},${trTopRight.y} ${trBotRight.x},${trBotRight.y} ${trBotLeft.x},${trBotLeft.y}`;
 
+  // Consumer surplus triangle: from demand intercept on y-axis, to (0, effectivePrice), to (qDemanded, effectivePrice)
+  const csTop = dataToSvg({ x: 0, y: domesticDemand.intercept }, GA, DOMAIN);
+  const csLeft = dataToSvg({ x: 0, y: effectivePrice }, GA, DOMAIN);
+  const csRight = dataToSvg({ x: qDemanded, y: effectivePrice }, GA, DOMAIN);
+  const csPoints = `${csTop.x},${csTop.y} ${csLeft.x},${csLeft.y} ${csRight.x},${csRight.y}`;
+
+  // Producer surplus triangle: from supply intercept on y-axis, to (0, effectivePrice), to (qSupplied, effectivePrice)
+  const psBot = dataToSvg({ x: 0, y: domesticSupply.intercept }, GA, DOMAIN);
+  const psLeft = dataToSvg({ x: 0, y: effectivePrice }, GA, DOMAIN);
+  const psRight = dataToSvg({ x: qSupplied, y: effectivePrice }, GA, DOMAIN);
+  const psPoints = `${psBot.x},${psBot.y} ${psLeft.x},${psLeft.y} ${psRight.x},${psRight.y}`;
+
   return (
+    <FullscreenWrapper title="International Trade">
     <div className="space-y-3">
       <div className="graph-container overflow-hidden">
         <div className="px-4 pt-3 pb-1">
@@ -82,32 +96,92 @@ export default function InternationalTradeGraph() {
           />
           {/* Overlay: world price, effective price, imports shading, DWL */}
           <svg viewBox="0 0 600 450" className="absolute inset-0 w-full h-full pointer-events-none">
-            {/* Import shading between S and D at effective price */}
-            {imports > 0 && (
-              <rect
-                x={importLeft.x}
-                y={importLeft.y}
-                width={importRight.x - importLeft.x}
-                height={importBottom.y - importLeft.y}
-                fill="#14B8A6"
-                opacity={0.06}
-              />
+            {/* Consumer surplus triangle */}
+            <polygon points={csPoints} fill="#3B82F6" opacity={0.15} />
+            <text
+              x={(csTop.x + csLeft.x + csRight.x) / 3}
+              y={(csTop.y + csLeft.y + csRight.y) / 3 + 3}
+              textAnchor="middle"
+              fontSize={9}
+              fontWeight={600}
+              fill="#3B82F6"
+              opacity={0.7}
+              fontFamily="DM Sans, system-ui, sans-serif"
+            >
+              CS
+            </text>
+
+            {/* Producer surplus triangle */}
+            {qSupplied > 0.5 && (
+              <>
+                <polygon points={psPoints} fill="#EF4444" opacity={0.15} />
+                <text
+                  x={(psBot.x + psLeft.x + psRight.x) / 3}
+                  y={(psBot.y + psLeft.y + psRight.y) / 3 + 3}
+                  textAnchor="middle"
+                  fontSize={9}
+                  fontWeight={600}
+                  fill="#EF4444"
+                  opacity={0.7}
+                  fontFamily="DM Sans, system-ui, sans-serif"
+                >
+                  PS
+                </text>
+              </>
             )}
 
             {/* Tariff revenue rectangle */}
             {showDWL && (
-              <polygon
-                points={tariffRectPoints}
-                fill="#8B5CF6"
-                opacity={0.1}
-              />
+              <>
+                <polygon
+                  points={tariffRectPoints}
+                  fill="#10B981"
+                  opacity={0.2}
+                />
+                <text
+                  x={(trTopLeft.x + trTopRight.x) / 2}
+                  y={(trTopLeft.y + trBotLeft.y) / 2 + 3}
+                  textAnchor="middle"
+                  fontSize={9}
+                  fontWeight={600}
+                  fill="#10B981"
+                  opacity={0.8}
+                  fontFamily="DM Sans, system-ui, sans-serif"
+                >
+                  Gov. Rev.
+                </text>
+              </>
             )}
 
             {/* DWL triangles */}
             {showDWL && (
               <>
-                <polygon points={dwlProdPoints} fill="#F59E0B" opacity={0.18} />
-                <polygon points={dwlConsPoints} fill="#F59E0B" opacity={0.18} />
+                <polygon points={dwlProdPoints} fill="#F59E0B" opacity={0.22} />
+                <text
+                  x={(dwlProd1.x + dwlProd2.x + dwlProd3.x) / 3}
+                  y={(dwlProd1.y + dwlProd2.y + dwlProd3.y) / 3 + 3}
+                  textAnchor="middle"
+                  fontSize={8}
+                  fontWeight={600}
+                  fill="#F59E0B"
+                  opacity={0.8}
+                  fontFamily="DM Sans, system-ui, sans-serif"
+                >
+                  DWL
+                </text>
+                <polygon points={dwlConsPoints} fill="#F59E0B" opacity={0.22} />
+                <text
+                  x={(dwlCons1.x + dwlCons2.x + dwlCons3.x) / 3}
+                  y={(dwlCons1.y + dwlCons2.y + dwlCons3.y) / 3 + 3}
+                  textAnchor="middle"
+                  fontSize={8}
+                  fontWeight={600}
+                  fill="#F59E0B"
+                  opacity={0.8}
+                  fontFamily="DM Sans, system-ui, sans-serif"
+                >
+                  DWL
+                </text>
               </>
             )}
 
@@ -192,6 +266,26 @@ export default function InternationalTradeGraph() {
             <div className="graph-legend-dot" style={{ background: '#14B8A6' }} />
             World Price
           </div>
+          <div className="graph-legend-item">
+            <div className="graph-legend-dot" style={{ background: '#3B82F6', borderRadius: 2 }} />
+            CS
+          </div>
+          <div className="graph-legend-item">
+            <div className="graph-legend-dot" style={{ background: '#EF4444', borderRadius: 2 }} />
+            PS
+          </div>
+          {showDWL && (
+            <>
+              <div className="graph-legend-item">
+                <div className="graph-legend-dot" style={{ background: '#10B981', borderRadius: 2 }} />
+                Gov. Rev.
+              </div>
+              <div className="graph-legend-item">
+                <div className="graph-legend-dot" style={{ background: '#F59E0B', borderRadius: 2 }} />
+                DWL
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -261,5 +355,6 @@ export default function InternationalTradeGraph() {
         </button>
       </div>
     </div>
+    </FullscreenWrapper>
   );
 }

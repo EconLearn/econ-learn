@@ -44,7 +44,9 @@ export async function updateSession(request: NextRequest) {
   // Redirect unauthenticated users from protected pages
   const isProtectedPage =
     request.nextUrl.pathname.startsWith("/dashboard") ||
-    request.nextUrl.pathname.startsWith("/profile");
+    request.nextUrl.pathname.startsWith("/profile") ||
+    request.nextUrl.pathname.startsWith("/teacher") ||
+    request.nextUrl.pathname.startsWith("/join");
 
   if (!user && isProtectedPage) {
     const url = request.nextUrl.clone();

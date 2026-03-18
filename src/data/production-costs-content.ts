@@ -6,82 +6,82 @@ export const productionCostsContent = {
   sections: [
     {
       heading: "The Short-Run Production Function",
-      content: `A bakery has 3 ovens. Each oven can bake 50 loaves per hour at full capacity. With 1 baker running all 3 ovens, output is 40 loaves (the baker can't keep up). Add a 2nd baker and output jumps to 100. A 3rd baker pushes it to 140. A 4th only gets it to 155. That pattern -- fast gains early, diminishing gains later -- is the **short-run production function** in action.
+      content: `A bakery with 3 ovens can bake 50 loaves per hour at full tilt if someone is actually running them properly. Put 1 baker on all 3 ovens and output hits about 40 loaves -- she's stretched too thin, constantly running between stations. Bring in a 2nd baker and output jumps to 100 because they can split the workload. A 3rd pushes production to 140, and a 4th only gets you to 155 because at that point there just aren't enough ovens to keep everyone busy. That pattern of rapid early gains tapering off is the **short-run production function**.
 
-The **short run** means at least one input is fixed. The bakery cannot install a 4th oven by tomorrow. Ovens, lease agreements, equipment -- all locked in. The only lever is labor.
+**Short run** in economics has a specific technical meaning: at least one input is fixed. The bakery can't install a 4th oven by tomorrow morning. The lease is signed, the equipment is bolted down, the square footage is what it is. Labor is the only thing management can adjust quickly.
 
-**Total product (TP)** tracks output as workers are added. **Marginal product (MP)** measures extra output per additional worker. Baker 2 added 60 loaves (MP = 60). Baker 3 added 40 (MP = 40). Baker 4 added 15 (MP = 15). MP rose initially through specialization, then fell as the fixed ovens became a bottleneck. That rise-then-fall pattern drives every cost curve in this module.`,
+**Total product (TP)** is just total output at each level of labor. **Marginal product (MP)** measures the extra output from one more worker -- baker 2 added 60 loaves (MP = 60), baker 3 added 40 (MP = 40), baker 4 added only 15 (MP = 15). MP went up initially because of specialization gains, then dropped once the fixed ovens became a bottleneck. That rise-then-fall in MP is what shapes every cost curve you'll see in this unit.`,
     },
     {
       heading: "The Law of Diminishing Marginal Returns",
-      content: `The **law of diminishing marginal returns** is not a theory. It is a physical constraint. Pack enough workers into a fixed space with fixed equipment and each additional hire contributes less than the one before.
+      content: `**Diminishing marginal returns** is not a theoretical claim -- it's a physical constraint that kicks in whenever you keep cramming more of one input into a fixed set of other inputs.
 
-The word "eventually" matters. Early on, specialization boosts MP. Two workers on an assembly line outperform two solo operators because one wires and the other solders. A third running quality control adds even more. MP rises during this phase.
+The qualifier "eventually" does real work in that sentence. Early on, adding workers actually raises MP because people can specialize. Two assemblers on a line beat two people each doing the whole job solo, since one can wire while the other solders. A third doing quality checks might boost output even further per person. MP climbs during this specialization phase.
 
-Crowd twenty workers onto that same three-station line and they wait for equipment, bump into each other, and slow production down.
+But put twenty workers on that same three-station line and they're tripping over each other waiting for equipment.
 
-The link to costs is direct. If worker 8 adds 15 units and worker 9 adds only 10, those last 10 units each cost more to produce than the previous 15. Diminishing marginal returns cause **marginal cost (MC)** to rise. That is why the MC curve eventually slopes upward.`,
+The connection to costs is mechanical and direct -- if worker 8 adds 15 units and worker 9 adds only 10, those last 10 units each required more labor per unit, so they cost more to produce. Diminishing marginal returns cause **marginal cost (MC)** to rise, which is exactly why the MC curve eventually slopes upward. The College Board loves testing whether students can trace that link from the production side to the cost side.`,
     },
     {
       heading: "From Production to Cost Curves",
-      content: `Production curves and cost curves are mirror images. Rising MP means falling MC. Falling MP means rising MC.
+      content: `Production and cost curves are mirror images of each other. When MP is rising, MC is falling. When MP falls, MC rises.
 
-**Total cost (TC)** has two components. **Total fixed cost (TFC)** covers rent, insurance, equipment leases -- bills that arrive whether the firm produces zero units or ten thousand. **Total variable cost (TVC)** covers wages, raw materials, electricity on the production line. These scale with output.
+**Total cost (TC)** breaks into two pieces. **Total fixed cost (TFC)** covers things like rent, insurance premiums, equipment leases -- the bills that show up whether you produce zero units or ten thousand. **Total variable cost (TVC)** covers wages, raw materials, electricity consumed on the production floor. These move with output.
 
 TC = TFC + TVC.
 
-Four per-unit curves appear on the standard cost graph. **Marginal Cost (MC)** = change in TC / change in Q. **Average Total Cost (ATC)** = TC / Q. **Average Variable Cost (AVC)** = TVC / Q. **Average Fixed Cost (AFC)** = TFC / Q.
+Four per-unit cost curves show up on the standard graph that appears on basically every AP exam. **Marginal Cost (MC)** = change in TC / change in Q. **Average Total Cost (ATC)** = TC / Q. **Average Variable Cost (AVC)** = TVC / Q. **Average Fixed Cost (AFC)** = TFC / Q. You need to know all four cold, plus how they relate to each other.
 
-AFC falls continuously. A $5,000 monthly lease divided by 100 units is $50 each. Divided by 1,000 units, $5 each. It never stops declining. ATC and AVC converge at high output levels because the shrinking AFC wedge between them approaches zero.`,
+AFC falls continuously -- it mathematically has to. A $5,000 monthly lease spread over 100 units is $50 per unit; spread it over 1,000 units and it drops to $5. It never bottoms out or turns around. As output gets very large, ATC and AVC get closer and closer together because that AFC wedge between them is shrinking toward zero.`,
     },
     {
       heading: "MC Crosses ATC and AVC at Their Minimums",
-      content: `Consider your GPA. If this semester's grades come in below your cumulative average, the cumulative drops. Above it, the cumulative rises. The marginal pulls the average in its direction.
+      content: `The GPA analogy is genuinely the best way to understand this. If your semester GPA comes in below your cumulative, the cumulative drops. If it comes in above, the cumulative rises. The marginal always pulls the average toward itself.
 
-Cost curves follow identical math. While MC sits below ATC, every additional unit is cheaper than the current average, so ATC falls. Once MC climbs above ATC, each new unit costs more than the average, and ATC rises. **MC must cross ATC at its minimum point.** Same logic applies to AVC.
+Cost curves work on the exact same math. When MC sits below ATC, every additional unit is cheaper than the current average, dragging ATC down. The moment MC climbs above ATC, each new unit costs more than average, and ATC starts rising. **MC must intersect ATC at ATC's minimum point.** The identical logic holds for AVC -- MC crosses through AVC's minimum too.
 
-AVC bottoms out at a lower quantity than ATC. The reason is arithmetic: ATC = AVC + AFC, and AFC is still declining at the point where AVC starts climbing. That declining AFC component keeps pulling ATC downward for a stretch even after AVC has turned upward. ATC's minimum therefore comes later.`,
+AVC bottoms out at a lower quantity than ATC does, and the reason is pure arithmetic. ATC = AVC + AFC. Even after AVC has started climbing, AFC is still declining (remember, it always declines). That declining AFC component keeps tugging ATC downward for a while longer -- so ATC doesn't reach its minimum until later, at a higher output level than where AVC bottomed. I've seen students lose FRQ points for drawing these minimums at the same quantity, so get the ordering right on your graphs.`,
     },
     {
       heading: "Economies and Diseconomies of Scale",
-      content: `In the **long run**, nothing is fixed. A firm can triple its factory floor, replace every machine, or relocate to another state. The question shifts from "how many workers?" to "what size should this entire operation be?"
+      content: `The **long run** is the planning horizon where nothing is fixed. A firm can triple its factory floor, replace every machine, move to a different state entirely. The question changes from "how many workers should we hire?" to "what size should this whole operation be?"
 
-The **long-run average total cost (LRATC)** curve answers that question across three zones.
+**Long-run average total cost (LRATC)** maps out the answer across three zones.
 
-**Economies of scale** occupy the downward-sloping left portion. Toyota producing 500,000 Camrys a year can afford robotic welding systems, negotiate steel at bulk rates, and spread a $1.8 billion R&D budget across more units. Per-unit cost falls as scale grows.
+**Economies of scale** show up on the downward-sloping left side. Toyota cranking out 500,000 Camrys a year can justify robotic welding systems that a 5,000-car-a-year shop never could -- and can negotiate steel prices at bulk rates and spread a $1.8 billion R&D budget across far more units. Per-unit cost drops as scale grows.
 
-**Diseconomies of scale** occupy the upward-sloping right portion. A company with 200,000 employees drowns in management layers, duplicated departments, and slow internal communication. Per-unit cost creeps back up.
+**Diseconomies of scale** are the upward-sloping right side. A company with 200,000 employees tends to drown in management layers, duplicated departments, and meetings about meetings. Communication slows down, decisions take forever, and per-unit cost starts climbing again.
 
-**Constant returns to scale** fill the flat middle. Doubling all inputs doubles output. Average cost holds steady. The output level where LRATC first reaches this floor is called **minimum efficient scale**. Industries where that number is enormous (semiconductor fabrication, commercial aircraft manufacturing) naturally end up dominated by a handful of firms.`,
+**Constant returns to scale** fill the flat middle section where doubling all inputs doubles output and average cost holds steady. The output level where LRATC first hits this floor is **minimum efficient scale**. In industries where that number is massive -- semiconductor fabs cost $20+ billion to build, Boeing spent roughly $32 billion developing the 787 -- you end up with only a handful of firms because nobody else can reach the scale needed to compete on cost.`,
     },
     {
       heading: "Connecting Costs to Market Structure",
-      content: `Every output decision traces back to these cost curves. A competitive firm produces where P = MC. A monopolist produces where MR = MC. The MC curve is the backbone of the production decision regardless of market structure.
+      content: `Every output decision a firm makes traces back to these cost curves. A competitive firm produces where P = MC. A monopolist produces where MR = MC. Regardless of market structure, MC is the backbone of the production decision.
 
-Deciding how much to produce is only half the question. The other half: should the firm produce at all?
+The other half of the question: should the firm produce at all?
 
-Price above ATC means economic profit. AVC below price but price below ATC means the firm loses money, but operating still beats shutting down. Revenue covers variable costs and chips away at fixed costs. Shutting down means eating the entire fixed cost bill with zero revenue coming in. Price below AVC means each unit produced makes losses worse. Shut down. That threshold is the **shutdown point**.
+If price sits above ATC, the firm earns economic profit. If price is below ATC but above AVC, the firm is losing money -- but operating still beats shutting down because revenue covers all variable costs and chips away at the fixed cost bill. Shutting down means zero revenue while those fixed costs (the lease, the insurance) keep coming due. Price below AVC is where it gets ugly: every additional unit produced actually makes total losses worse than just closing the doors. That's the **shutdown point**, and students mix it up with the break-even point constantly on the AP exam.
 
-Stitch those rules together and a competitive firm supplies output along its MC curve, but only at prices above minimum AVC. Below that, quantity supplied is zero. The **short-run supply curve** is the segment of MC above AVC.`,
+Stitch those rules together for a competitive firm: it supplies output along its MC curve, but only at prices at or above minimum AVC. Below that threshold, quantity supplied is zero. So the **short-run supply curve** is the segment of MC that sits above AVC. This is a standard multiple-choice question -- the 2019 AP Micro exam had a version of it.`,
     },
     {
       heading: "Worked Example",
       content: `A screen-printing shop pays $120/day in rent and equipment leases. Today it printed 8 shirts at a total cost of $280.
 
-TVC = TC - TFC = $280 - $120 = $160. That covers ink, blank shirts, and labor.
+TVC = TC - TFC = $280 - $120 = $160. That $160 covers ink, blank shirts, and the labor to print them.
 
-Per-unit averages:
+Per-unit breakdown:
 - AFC = $120 / 8 = **$15** per shirt
 - AVC = $160 / 8 = **$20** per shirt
 - ATC = $280 / 8 = **$35** per shirt
 
-Check: AVC + AFC = $20 + $15 = $35 = ATC. Always holds.
+Sanity check: AVC + AFC = $20 + $15 = $35 = ATC. This relationship always holds -- if your numbers don't add up, something went wrong.
 
-The shop prints a 9th shirt. That shirt costs $42 to produce. MC = $42. What happens to ATC?
+The shop prints a 9th shirt, and that extra shirt costs $42 to produce. MC = $42. What happens to ATC?
 
-New TC = $280 + $42 = $322. New ATC = $322 / 9 = $35.78. ATC rose from $35 to $35.78 because MC ($42) exceeded the old ATC ($35), pulling the average up.
+New TC = $280 + $42 = $322. New ATC = $322 / 9 = $35.78. ATC went up from $35 to $35.78 because the MC of $42 exceeded the old ATC of $35, pulling the average upward. This is the marginal-pulls-the-average logic at work with actual numbers.
 
-Flip the scenario. If the 9th shirt cost $28 (MC = $28, below ATC = $35), new ATC = $308 / 9 = $34.22. The average falls. MC below ATC pulls it down. MC above ATC pushes it up. That tug-of-war is why MC intersects ATC at ATC's lowest point.`,
+Flip it around -- if the 9th shirt had only cost $28 to produce (MC = $28, which is below the $35 ATC), new ATC = $308 / 9 = $34.22. The average drops. MC below ATC pulls it down; MC above ATC pushes it up. That tug-of-war is why MC intersects ATC at its lowest point.`,
     },
   ],
 };
@@ -99,7 +99,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Each additional worker still adds output, just less than the previous one. Total product keeps climbing; it climbs more slowly. Option A confuses diminishing returns with negative returns, which is a separate and more extreme situation where MP goes below zero. Option C gets the direction wrong: total cost rises with output. Option D is backward; AFC always declines because a fixed dollar amount gets divided by a larger quantity.",
+      "Each additional worker still adds to output -- just less than the previous one did. Total product keeps climbing, it just climbs more slowly. Option A mixes up diminishing returns with negative returns, which is the more extreme case where MP actually drops below zero. Option C has the direction wrong since total cost rises as you produce more. Option D is backward because AFC always falls -- a fixed dollar amount divided by more units can only get smaller.",
   },
   {
     id: "pc-2",
@@ -113,7 +113,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "While MC sits below ATC, each new unit is cheaper than the average, dragging ATC down. Once MC exceeds ATC, each new unit is pricier, pushing ATC up. The crossover is ATC's minimum. Option A has no practical meaning on a U-shaped curve. Option C happens at zero variable cost, which is not a meaningful intersection. Option D confuses MC's own minimum with where MC crosses ATC; MC bottoms out at a lower quantity, then climbs to eventually cross through ATC's minimum.",
+      "When MC is below ATC, each new unit is cheaper than the current average, so ATC falls. Once MC rises above ATC, each new unit costs more than average, pushing ATC up. The crossover happens right at ATC's minimum -- same logic as your GPA being pulled up or down by this semester's grades. Option A doesn't really apply to a U-shaped curve in any meaningful way. Option C occurs only at zero variable cost, which isn't a useful production point. Option D confuses where MC bottoms out with where MC crosses ATC; MC reaches its minimum at a lower quantity and then climbs up to eventually pass through ATC's minimum.",
   },
   {
     id: "pc-3",
@@ -127,7 +127,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 3,
     explanation:
-      "Below AVC, every unit sold fails to cover the wages and materials that went into it. Producing makes losses worse than simply shutting down and paying fixed costs with zero revenue. Price below ATC does mean losses, but the firm is still better off operating as long as revenue covers variable costs and partially offsets fixed costs. AFC is not a meaningful shutdown threshold. MC tells the firm how much to produce, not whether to produce at all.",
+      "When price drops below AVC, each unit sold fails to cover even the wages and materials that went into making it. Producing actively makes losses worse compared to just shutting down and paying fixed costs with zero revenue coming in. Price below ATC does mean losses, sure -- but the firm should still operate as long as revenue covers variable costs and partially offsets fixed costs. AFC isn't a meaningful threshold for shutdown decisions. MC tells you how much to produce, not whether to produce at all.",
   },
   {
     id: "pc-4",
@@ -141,7 +141,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "AFC = TFC / Q. Divide a constant $1,000 by 10 units and AFC is $100. Divide by 100 units and it drops to $10. It never stops falling. Option A would require fixed costs to rise, contradicting their definition. Option B confuses total fixed cost (constant) with average fixed cost (declining). Option D describes a U-shaped curve like ATC or AVC, not AFC.",
+      "AFC = TFC / Q. Take a constant $1,000 and divide it by 10 units -- that's $100 per unit. Divide it by 100 units and AFC drops to $10. It never stops falling; it just approaches zero without ever reaching it. Option A would require fixed costs themselves to increase, which contradicts the definition of fixed. Option B confuses total fixed cost (which is constant) with average fixed cost (which declines as output rises). Option D describes a U-shaped curve like ATC or AVC, but AFC doesn't have that shape.",
   },
   {
     id: "pc-5",
@@ -155,7 +155,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Economies of scale are a long-run concept. The firm scales up its entire operation and average cost per unit drops. Bulk purchasing, assembly-line specialization, and R&D spread over millions of units are typical sources. Falling MC is a short-run pattern from increasing marginal returns, which can happen without changing the firm's overall scale. Short-run ATC at its minimum describes efficient production at a given plant size. TC less than TR describes profitability, an entirely separate question.",
+      "Economies of scale are strictly a long-run concept about what happens when a firm scales up its entire operation -- bigger plant, more equipment, the works. LRATC falls because of things like bulk purchasing, deeper specialization, and spreading R&D over millions of units. Falling MC is a short-run pattern tied to increasing marginal returns, which can happen without any change to the firm's overall size. Short-run ATC at its minimum just means the firm is producing efficiently at its current plant size. TC below TR means the firm is profitable, which is a completely different question.",
   },
   {
     id: "pc-6",
@@ -169,7 +169,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "MP and MC are mirror images. If worker 5 produces 20 units and worker 6 produces 25, the cost per additional unit is falling because each wage dollar yields more output. Option A flips the relationship. Option B would require each worker to add exactly the same output. Option D would mean extra units cost nothing, which does not occur in any real production process.",
+      "MP and MC move in opposite directions. If worker 5 produces 20 units and worker 6 produces 25, each wage dollar is yielding more output -- so the cost per additional unit of output is falling. Option A flips the relationship backward. Option B would require each successive worker to add exactly the same output, which doesn't match increasing MP. Option D would mean additional units are free, which doesn't happen in any real production setting.",
   },
   {
     id: "pc-7",
@@ -183,7 +183,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "ATC = AVC + AFC. Even after AVC starts rising, the declining AFC component keeps pulling ATC downward for a range of output. Only when the AVC increase overwhelms the AFC decline does ATC finally bottom out. Option A is true but does not explain why the minimums occur at different quantities. Option C describes the result, not the cause. Option D contradicts the definition of fixed costs; they do not change with output.",
+      "Since ATC = AVC + AFC, the still-declining AFC keeps dragging ATC downward even after AVC has started to rise. ATC doesn't bottom out until the upward pull from rising AVC finally overwhelms the downward pull from declining AFC. Option A is a true statement but doesn't explain why their minimums occur at different quantities. Option C describes the consequence (MC hits AVC first) rather than the underlying reason. Option D contradicts what fixed costs are -- they don't change with output by definition.",
   },
   {
     id: "pc-8",
@@ -197,7 +197,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "A competitive firm picks output where P = MC, but only when price covers variable costs. Below minimum AVC the firm shuts down. Above it, the firm traces along MC. So the supply curve is the portion of MC sitting above minimum AVC. Option A includes the range below AVC where the firm would not produce. Options B and D describe the wrong curves entirely.",
+      "A competitive firm sets output where P = MC, but it only produces when price covers variable costs. Below minimum AVC the firm shuts down entirely. Above it, the firm traces along its MC curve. So the supply curve is the portion of MC at or above minimum AVC. Option A includes the region below AVC where the firm wouldn't operate -- that's the most common wrong answer on this type of question. Options B and D reference the wrong curves altogether.",
   },
   {
     id: "pc-9",
@@ -211,7 +211,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "MC ($30) exceeds ATC ($25). The next unit costs more than the current average, so producing it pulls ATC up. New ATC = ($25 x 100 + $30) / 101 = $2,530 / 101 = $25.05. A clear increase. Option A is wrong because while spreading fixed costs does lower AFC, the $30 MC exceeding $25 ATC is the dominant force. Option C is wrong because every additional unit affects the average. Option D inverts the direction entirely.",
+      "MC ($30) exceeds ATC ($25), so producing that 101st unit pulls the average up. You can verify: new TC = ($25 x 100 + $30) = $2,530. New ATC = $2,530 / 101 = $25.05. It went up. Option A is partially true -- spreading fixed costs does lower AFC -- but the $30 MC exceeding the $25 ATC is the dominant force here. Option C is wrong because every single additional unit affects the average; one unit can absolutely change it. Option D has the direction completely backward.",
   },
   {
     id: "pc-10",
@@ -225,7 +225,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "All inputs double and output more than doubles, so LRATC is falling. Economies of scale. Bulk purchasing, deeper specialization, and spreading large fixed costs like R&D drive this. Diminishing marginal returns is a short-run concept applying when only one input varies; here all inputs change. Diseconomies would mean output less than doubles. Constant returns would mean output exactly doubles.",
+      "All inputs doubled and output more than doubled, which means LRATC is falling. That's economies of scale -- bulk purchasing, deeper specialization, and spreading large upfront investments across more units. Diminishing marginal returns is a short-run concept about adding one variable input to fixed inputs; here all inputs changed proportionally. Diseconomies of scale would mean output less than doubles. Constant returns would mean output exactly doubles.",
   },
   {
     id: "pc-11",
@@ -239,7 +239,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 0,
     explanation:
-      "The short run has at least one fixed input (creating fixed costs). In the long run every input is variable, so the firm can resize its plant, renegotiate leases, and find the least-cost combination for any output level. Option B is wrong because firms produce where P = MC, which may be above or below the ATC minimum. Option C is wrong because long-run costs can actually be lower when the firm optimizes scale; inflation is unrelated. Option D is backward; the short run is defined by the presence of fixed costs.",
+      "The short run is defined by having at least one fixed input, which creates fixed costs and constrains how the firm can adjust. In the long run every input is variable, so the firm can resize its plant, renegotiate its lease, swap equipment -- whatever finds the lowest-cost combination for any given output. Option B is wrong because firms produce where P = MC, which may or may not line up with minimum ATC. Option C is wrong because long-run costs can actually be lower when the firm optimizes its scale; inflation is a separate issue. Option D is completely backward -- the short run is specifically where fixed costs exist.",
   },
   {
     id: "pc-12",
@@ -253,7 +253,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "MC = wage / MP. Worker 5 costs $80 and produces 8 loaves. $80 / 8 = $10.00. Note the pattern: Worker 3's MC = $80/15 = $5.33, Worker 4's MC = $80/12 = $6.67. MC rises as MP falls. Option A is Worker 3's MC. Option B is Worker 4's MC. Option D implies only 5 loaves produced, which does not match the data.",
+      "MC = wage / MP. Worker 5 costs $80 and produces 8 loaves, so $80 / 8 = $10.00 per loaf. Notice the pattern as diminishing returns set in: worker 3's MC = $80/15 = $5.33, worker 4's MC = $80/12 = $6.67. MC rises as MP falls. Option A is worker 3's MC. Option B is worker 4's MC. Option D would imply only 5 loaves from that worker, which contradicts the given data.",
   },
   {
     id: "pc-13",
@@ -267,7 +267,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "MP and MC are mirror images. Maximum MP means each additional worker adds the most output, so each additional unit is cheapest to produce. MC is at its minimum. ATC reaches its minimum later, when MC crosses ATC from below, at a higher output level. AVC is minimized where MC = AVC, which also comes at a higher output than MC's minimum. Total product is maximized when MP = 0, far beyond the point of maximum MP.",
+      "Since MP and MC are mirror images, maximum MP -- where each additional worker adds the most output -- corresponds to minimum MC, where each additional unit is cheapest. ATC hits its minimum later, at the higher output where MC crosses up through ATC. AVC minimizes where MC = AVC, also at a higher output than MC's own minimum. Total product maxes out where MP = 0, which is way beyond the point of maximum MP.",
   },
   {
     id: "pc-14",
@@ -281,7 +281,7 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "TC = TFC + TVC. At Q = 4: $200 + $200 = $400. Option A counts only fixed costs, as if the firm produced nothing. Option C likely uses TVC from a different quantity or an incorrect TFC figure. Option D uses TVC at Q = 5 ($280) plus TFC ($200), which gives TC at 5 units, not 4.",
+      "TC = TFC + TVC. At Q = 4, that's $200 + $200 = $400. Option A counts only fixed costs as if the firm produced nothing at all. Option C likely results from using the wrong quantity's TVC or an incorrect TFC value. Option D uses TVC at Q = 5 ($280) plus TFC ($200), which gives $480 -- the total cost of 5 units, not 4.",
   },
   {
     id: "pc-15",
@@ -295,6 +295,6 @@ export const productionCostsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "LRATC falls at first through economies of scale: specialization, bulk discounts, spreading setup costs. It rises eventually through diseconomies of scale: coordination problems, bureaucracy, communication breakdowns. That combination creates the U shape. Diminishing marginal returns is a short-run concept requiring a fixed input; in the long run all inputs vary. There are no fixed costs in the long run by definition. Option D describes a property of the curves but does not explain why the U shape exists.",
+      "LRATC falls on the left side through economies of scale -- specialization, volume discounts, spreading setup costs over more units. It rises on the right through diseconomies of scale -- coordination problems, bureaucratic bloat, communication breakdowns in huge organizations. That combination produces the U shape. Diminishing marginal returns requires a fixed input, and in the long run everything is variable, so that concept doesn't apply here. Fixed costs don't exist in the long run by definition. Option D describes a property of the curves but doesn't explain the underlying cause of the shape.",
   },
 ];

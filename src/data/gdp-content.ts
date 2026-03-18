@@ -7,45 +7,45 @@ export const gdpContent = {
   sections: [
     {
       heading: "What GDP Actually Measures (and What It Misses)",
-      content: `Before 1934, no country on Earth had a reliable way to measure its total economic output. The Great Depression was devastating the United States, and policymakers were flying blind. Congress commissioned economist Simon Kuznets to build a system of national income accounts, and by 1937, the framework that would become **Gross Domestic Product** was taking shape.
+      content: `Before 1934, nobody had a reliable way to measure an entire country's economic output. The Great Depression was tearing through the United States and policymakers were basically guessing about how bad things were. Congress hired an economist named Simon Kuznets to build a system of national income accounts, and by 1937 the framework we now call **Gross Domestic Product** was starting to take shape.
 
-**GDP** is the total market value of all *final* goods and services produced *within a country's borders* during a specific time period — usually a year or a quarter. Every bakery loaf, every haircut, every new Toyota Camry off the Georgetown, Kentucky assembly line, every hour of legal counsel counts toward the total. U.S. GDP reached approximately $27.4 trillion in 2023.
+**GDP** is the total market value of all *final* goods and services produced *within a country's borders* during a specific time period — usually a year or a quarter. Every loaf of bread from a bakery, every haircut, every Toyota Camry rolling off the assembly line in Georgetown, Kentucky, every hour of legal advice — it all counts. U.S. GDP hit roughly $27.4 trillion in 2023.
 
-The word "final" carries significant weight. Tires sold to Ford are an *intermediate good* — their value is already embedded in the finished car's price. Counting both the tires and the car would be **double counting**, inflating the GDP figure beyond true output. GDP captures only the finished product reaching the end user.
+The word "final" does a lot of work in that definition. Tires that Goodyear sells to Ford are an *intermediate good* — their value is already baked into the price of the finished car. If you counted both the tires and the car, you'd be **double counting**, and GDP would look bigger than actual output. Only the finished product reaching the end buyer gets tallied.
 
-"Domestic" matters equally. A Japanese-owned Honda factory in Marysville, Ohio contributes to *U.S.* GDP because production happens on American soil. An American-owned Apple supplier in Shenzhen contributes to *Chinese* GDP. Location of production, not ownership, determines which nation claims the output. That boundary distinction was formally standardized by the United Nations System of National Accounts in 1953.`,
+"Domestic" matters just as much. A Honda factory in Marysville, Ohio — Japanese-owned — counts toward *U.S.* GDP because the production happens on American soil. An Apple supplier factory in Shenzhen counts toward *Chinese* GDP. It's about where the output is produced, not who owns the company. The United Nations System of National Accounts formalized this boundary rule in 1953, and it's been the international standard ever since.`,
     },
     {
       heading: "The Expenditure Approach: C + I + G + NX",
-      content: `The most common method for measuring GDP adds up all spending on final goods and services. The **expenditure approach** sorts this spending into four categories, a framework that became standard in U.S. national accounting by the late 1940s.
+      content: `The most common way to measure GDP is to add up all spending on final goods and services. The **expenditure approach** sorts that spending into four buckets, and this framework became standard in U.S. national accounting by the late 1940s.
 
-**Consumption (C)** is the largest component — roughly 68-70% of U.S. GDP in recent decades. Groceries, rent, Netflix subscriptions, dental visits. Everything households purchase.
+**Consumption (C)** is the big one — roughly 68-70% of U.S. GDP in recent years. Groceries, rent, your Netflix subscription, a trip to the dentist. Basically anything households buy.
 
-**Investment (I)** covers business spending on capital goods (factories, machinery, software), residential construction, and changes in business inventories. A persistent source of confusion on AP exams: "investment" in GDP accounting does not mean buying shares of Apple stock. It means physical or productive assets. When Intel broke ground on its $20 billion semiconductor fabrication plant in Ohio in 2022, that was investment.
+**Investment (I)** means business spending on capital goods (factories, machines, software), new residential construction, and changes in business inventories. This trips people up on exams constantly: "investment" in GDP accounting has nothing to do with buying shares of Apple stock. It means real productive assets. When Intel broke ground on a $20 billion chip fabrication plant in Ohio in 2022, that was investment. When your uncle bought 100 shares of Intel — not investment in the GDP sense.
 
-**Government purchases (G)** includes federal, state, and local spending on goods and services — teacher salaries, military equipment, highway construction. Transfer payments like Social Security checks are excluded because the government receives no new good or service in return.
+**Government purchases (G)** covers federal, state, and local spending on actual goods and services — paying teachers, buying military equipment, building highways. Transfer payments like Social Security are excluded because the government isn't getting a new good or service in return for those checks.
 
-**Net exports (NX)** equals exports minus imports (X − M). Boeing selling a 787 Dreamliner to a Japanese airline adds to U.S. GDP. An American buying a Samsung television subtracts from it. The U.S. has run a trade deficit almost every year since 1976, so NX is typically negative.
+**Net exports (NX)** equals exports minus imports (X − M). Boeing selling a 787 Dreamliner to a Japanese airline adds to U.S. GDP. An American buying a Samsung TV subtracts. The U.S. has run a trade deficit in almost every year since 1976, so NX is typically a negative number.
 
 **GDP = C + I + G + NX**
 
-This is an accounting identity, not a theory. Every dollar of final output gets purchased by someone, and that buyer falls into one of these four buckets.`,
+This is an accounting identity — not a theory, not a prediction. Every dollar of final output gets bought by somebody, and that buyer falls into one of these four categories.`,
     },
     {
       heading: "Nominal vs Real GDP and the GDP Deflator",
-      content: `GDP rises from $20 trillion to $21 trillion. Did the economy actually produce more goods and services, or did prices simply climb? That question haunted economic measurement from the start, and the distinction between nominal and real GDP is the answer the profession developed.
+      content: `GDP goes from $20 trillion to $21 trillion. Great news? Maybe. Or maybe prices just went up 5% and the economy barely grew at all. Separating real growth from price increases was a problem from the start of national income accounting, and the nominal-vs.-real distinction is how economists solved it.
 
-**Nominal GDP** uses *current-year prices*. If both output quantities and prices rise, nominal GDP rises — but the two effects are tangled together.
+**Nominal GDP** uses current-year prices. If both the quantity of stuff produced and the prices of that stuff go up, nominal GDP rises — but you can't tell which effect is doing the heavy lifting.
 
-**Real GDP** uses *constant base-year prices*, stripping out inflation to isolate actual changes in production. Real GDP is the figure that matters for growth calculations and recession calls. When the NBER declared a recession in 2008, it was tracking real GDP, not nominal.
+**Real GDP** uses constant base-year prices, which strips out inflation so you can see whether the economy actually produced more. Real GDP is the number that matters for growth calculations and for determining whether the economy is in a recession. When the NBER called the 2008 recession, they were tracking real GDP.
 
-The **GDP deflator** bridges the two:
+The **GDP deflator** connects the two:
 
 GDP Deflator = (Nominal GDP / Real GDP) x 100
 
-Unlike the Consumer Price Index (which the Bureau of Labor Statistics has published since 1913 and which tracks a basket of consumer goods), the deflator covers the price level of *everything* produced domestically. A deflator moving from 100 to 105 means the overall domestic price level rose 5%.
+It's different from the Consumer Price Index (which the BLS has been publishing since 1913 and which tracks a fixed basket of consumer goods). The deflator covers the price level of *everything* produced domestically — consumer goods, business equipment, government purchases, all of it. A deflator that moves from 100 to 105 means the domestic price level rose 5%.
 
-The 2021-2022 COVID recovery exposed this distinction starkly. Nominal U.S. GDP surged, partly on the back of rapid price increases that pushed annual inflation above 9% by June 2022. Real GDP growth was considerably weaker. The economy was producing more, but not nearly as much as the nominal headlines implied.`,
+The 2021-2022 recovery from COVID made this distinction painfully obvious. Nominal U.S. GDP surged, but a big chunk of that was just prices climbing — annual inflation topped 9% in June 2022. Real GDP growth was much weaker than the headline numbers suggested.`,
     },
     {
       heading: "Worked Example: Calculating Real GDP",
@@ -61,32 +61,32 @@ Tacos: 120 units at $3 each = $360
 Textbooks: 25 units at $60 each = $1,500
 **Nominal GDP (current year) = $1,860**
 
-A 55% nominal increase. But how much reflects real growth versus price inflation?
+That's a 55% nominal increase. Sounds impressive — but how much is real growth versus prices going up?
 
-**Calculate Real GDP** using base-year prices applied to current-year quantities:
+**Calculate Real GDP** by applying base-year prices to current-year quantities:
 Tacos: 120 x $2 = $240
 Textbooks: 25 x $50 = $1,250
 **Real GDP (current year) = $1,490**
 
 **GDP Deflator** = ($1,860 / $1,490) x 100 = **124.8**
 
-Real output grew from $1,200 to $1,490 — a **24.2% increase**. The deflator reveals prices rose **24.8%**. The 55% nominal gain splits into roughly equal parts real growth and inflation. Skipping the real GDP calculation would have overstated actual output gains by more than double. Kuznets himself warned Congress in the 1930s that raw dollar figures could be deeply misleading without price adjustments.`,
+So real output went from $1,200 to $1,490 — a **24.2% increase**. The deflator tells us prices rose about **24.8%**. The 55% nominal gain splits roughly in half between actual growth and inflation. Without doing the real GDP calculation, you'd overstate how much the economy actually grew by more than double. Kuznets warned Congress about exactly this kind of thing back in the 1930s — raw dollar figures without price adjustments are misleading.`,
     },
     {
       heading: "Limitations of GDP",
-      content: `GDP became the world's most-cited economic statistic after World War II, when the Bretton Woods institutions adopted it as the standard yardstick for national economic performance. Kuznets himself cautioned that the metric had blind spots. He was right.
+      content: `GDP became the go-to economic statistic after WWII, when the Bretton Woods institutions adopted it as the standard measure of national economic performance. Kuznets himself said it had blind spots. He was right, and the blind spots haven't gone away.
 
-**Unpaid work is invisible.** A parent raising children at home produces real economic value, but GDP records none of it. If that same parent hires a nanny and takes a paid job, GDP rises — even though total productive activity may be unchanged. Household production, volunteering, and caregiving all fall outside the count. Economists have estimated that unpaid household labor in the U.S. would add trillions to GDP if it were included.
+**Unpaid work doesn't show up.** A parent raising kids at home is doing real economic work, but GDP counts none of it. If that same parent hires a nanny and goes back to a paid job, GDP goes up — even though the total amount of productive work happening may not have changed at all. Volunteering, caregiving, household chores — all invisible to GDP. Some economists have estimated that unpaid household labor in the U.S. would add trillions to GDP if it were measured.
 
-**The underground economy is missing.** Cash-paid labor, unreported income, illegal transactions — none of it appears. In some developing countries, the informal economy may account for 30-40% of actual economic activity, meaning GDP systematically understates their true output.
+**The underground economy is missing.** Off-the-books labor, unreported income, illegal transactions — none of it gets counted. In some developing countries the informal economy might be 30-40% of real economic activity, which means GDP seriously understates what's actually going on.
 
-**GDP ignores inequality.** A country with $10 trillion in GDP could have most income concentrated among a tiny elite while the median citizen struggles. **GDP per capita** is still just an average. It says nothing about distribution. The Gini coefficient and income quintile data exist to fill that gap, but they rarely make front pages.
+**GDP says nothing about who gets what.** A country with $10 trillion GDP could have most of that income concentrated in a handful of families while the median person struggles to get by. **GDP per capita** is just an average, and averages can hide enormous disparities. The Gini coefficient exists to measure inequality, but it rarely gets the same attention GDP does.
 
-**Environmental destruction can boost GDP.** The Deepwater Horizon oil spill in 2010 generated billions in paid cleanup activity — crews, equipment, lawyers — all of which counted as GDP. The ecological damage to the Gulf of Mexico was never subtracted. Clear-cutting a rainforest and selling the timber adds to GDP. The destroyed natural capital does not register as a loss.
+**Destruction can raise GDP.** The Deepwater Horizon oil spill in 2010 generated billions of dollars in cleanup spending — crews, equipment, lawyers — and all of it counted as GDP. The ecological devastation in the Gulf of Mexico? Never subtracted. Logging a rainforest adds to GDP when you sell the timber. The lost ecosystem doesn't register as a cost anywhere in the national accounts.
 
-**Quality of life goes unmeasured.** Leisure time, mental health, personal safety, political freedom, life satisfaction. None of it appears in GDP. The U.S. has the largest GDP on Earth but ranks below many smaller economies on life expectancy and self-reported happiness indices.
+**Quality of life is unmeasured.** Leisure time, mental health, how safe people feel walking around at night, political freedom, life satisfaction — GDP ignores all of it. The U.S. has the largest GDP on earth but falls behind a number of smaller countries on life expectancy and self-reported happiness.
 
-GDP remains the best single measure of market production. But it measures *output*, not *well-being*. Kuznets warned about conflating the two in 1934. Ninety years later, the warning still applies.`,
+GDP is still probably the best single number we have for measuring market production. But it measures *output*, not *well-being* — and Kuznets was saying that in 1934. Ninety years later, the warning still applies.`,
     },
   ],
 };

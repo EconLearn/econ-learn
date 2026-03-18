@@ -6,69 +6,65 @@ export const factorMarketsContent = {
   sections: [
     {
       heading: "Derived Demand",
-      content: `A coal mine employs 400 workers. Natural gas prices drop 30%, utilities switch fuel sources, and coal demand collapses. The mine lays off 250 people. Not because the miners forgot how to dig. Because nobody is buying coal.
+      content: `A coal mine in West Virginia employs 400 workers. Then natural gas prices drop 30% over eighteen months, utilities start switching fuel sources, and coal demand collapses. The mine lays off 250 people. Those miners didn't suddenly become worse at digging -- the problem was that nobody wanted to buy what they were digging up.
 
-That chain -- product demand drives hiring decisions -- is **derived demand**. The demand for any factor of production (labor, capital, land) traces back to demand in the product market.
+That chain is **derived demand**. The demand for any factor of production (labor, capital, land) exists only because there's demand for whatever that factor helps produce.
 
-Consumers want iPhones, Apple contracts with Foxconn, Foxconn hires assembly workers in Shenzhen. If iPhone sales crater, those jobs vanish. The hiring decision was never about the workers themselves. It was about what they produce and whether anyone wants to buy it.
-
-When the labor demand curve shifts, ask one question: what changed in the **product market**? The tech boom raised demand for software engineers not because firms suddenly liked coders, but because consumers were spending billions on apps and cloud services.`,
+Consumers want iPhones, so Apple contracts with Foxconn, and Foxconn hires assembly workers in Shenzhen. If iPhone sales crater, those assembly jobs disappear. The hiring was never really about the workers themselves -- it was about the product they build and whether customers will pay for it. When you see the labor demand curve shift, your first question should be: what changed in the **product market**? The tech boom raised demand for software engineers not because HR departments developed a sudden appreciation for people who write code, but because consumers were pouring billions into apps, cloud storage, and streaming services.`,
     },
     {
       heading: "Marginal Revenue Product",
-      content: `A firm hires one more worker. Does that worker earn the firm more than the worker costs? That comparison drives every hiring decision.
+      content: `Every hiring decision boils down to one comparison: does the next worker bring in more revenue than they cost?
 
 **Marginal Revenue Product (MRP)** = MR x MPL
 
-For a firm in a competitive output market, MR equals price, so MRP = P x MPL.
+For a competitive firm, MR equals the market price, so MRP = P x MPL. A bakery sells loaves at $4. A new baker produces 25 extra loaves per day. MRP = $4 x 25 = $100. If the going wage is $85, hire that baker -- the firm nets $15. At a wage of $110, don't. The math doesn't work.
 
-Run the numbers. A bakery sells loaves at $4 each. A new baker produces 25 extra loaves per day. MRP = $4 x 25 = $100. The wage is $85. Hire that baker. The firm nets $15. If the wage were $110, the answer flips. Don't hire.
+The firm keeps adding workers until MRP = wage. That's the profit-maximizing rule.
 
-The firm keeps adding workers until MRP = wage.
-
-The **labor demand curve** slopes downward because of diminishing marginal returns. Baker 3 adds 25 loaves, baker 4 adds 18, baker 5 adds 11. Since MPL shrinks, MRP drops with each hire. Plot MRP against the number of workers and you have the firm's demand curve for labor.`,
+The **labor demand curve** slopes downward because of diminishing marginal returns. Baker 3 adds 25 loaves, baker 4 adds 18, baker 5 adds 11. Since MPL shrinks with each additional hire, MRP drops too. If you plot MRP against the number of workers, that downward-sloping line is the firm's demand curve for labor. On AP free-response questions they sometimes give you a table of output data and ask you to derive the demand curve -- it's just MRP at each employment level.`,
     },
     {
       heading: "Labor Supply",
-      content: `Would you work a warehouse shift for $8/hour? Probably not. At $35/hour? You might rearrange your weekend. Every hour worked is an hour of **leisure** given up. That trade-off sits at the core of labor supply.
+      content: `Would you work a warehouse shift for $8/hour? Most people wouldn't bother. At $35/hour you might rearrange your Saturday plans. Every hour worked is an hour of **leisure** sacrificed, and that trade-off sits at the center of labor supply.
 
-The **market labor supply curve** slopes upward. Higher wages pull more people into the workforce. At $12/hour, only the most motivated applicants show up. At $28/hour, the pool grows substantially.
+The **market labor supply curve** slopes upward -- higher wages pull more people into the workforce and convince existing workers to put in more hours. At $12/hour only the most eager applicants show up; at $28/hour the applicant pool grows considerably.
 
-Several forces shift the entire curve. Immigration is a major one. A wave of trained nurses entering the U.S. shifts nursing labor supply rightward at every wage, pushing equilibrium wages down. Changes in worker preferences matter too. The surge of interest in tech careers from roughly 2012-2022 shifted supply rightward for software roles. Competition across occupations also plays a role. When JPMorgan raises starting analyst pay to $110,000, consulting firms lose applicants and their labor supply curve shifts left.`,
+What shifts the whole curve? Immigration is a big one. A wave of trained nurses entering the U.S. from the Philippines shifts the nursing labor supply curve rightward at every wage level, which puts downward pressure on equilibrium nursing wages. Changes in career preferences matter too -- the surge of interest in tech careers from roughly 2012 to 2022 shifted supply rightward for software roles, which is part of why entry-level developer salaries didn't rise as fast as senior engineer salaries during that period. Competition between occupations also shifts things around. When JPMorgan raised starting analyst pay to $110,000 in 2021, consulting firms like McKinsey and BCG saw their applicant pools thin out -- their labor supply curves shifted left.`,
     },
     {
       heading: "Wage Determination",
-      content: `A software engineer's $155,000 salary comes from the same place any price comes from: where supply meets demand. The **equilibrium wage** sits at the intersection of labor supply and labor demand. At that wage, every firm willing to hire at that rate can, and every worker willing to work at that rate does.
+      content: `A software engineer's $155,000 salary comes from the same place any price comes from: supply meeting demand. The **equilibrium wage** sits at the intersection of labor supply and labor demand. At that wage, every firm willing to hire at that rate finds workers, and every worker willing to accept that rate finds a job.
 
-Say AI investment doubles. Firms scramble for ML engineers, MRP jumps, labor demand shifts right. Wages rise. Employment rises. That is roughly the story of Silicon Valley from 2015-2024 compressed into one graph.
+When AI investment ramped up, firms scrambled for ML engineers, MRP jumped, and labor demand shifted right. Wages went up. Employment went up. That's roughly the story of Silicon Valley from 2015 through 2024, compressed into one supply-and-demand graph.
 
-Now consider the opposite. A coding bootcamp graduates 10,000 new junior web developers. **Labor supply** shifts right. Wages for entry-level developers drop, but total employment rises as firms snap up cheaper talent.
+The reverse works the same way. A coding bootcamp graduating 10,000 new junior web developers pushes **labor supply** right. Entry-level developer wages fall, but total employment rises as firms scoop up the cheaper talent for projects that weren't worth staffing at the old wage.
 
-Same supply-and-demand framework as product markets. The good is labor. The price is the wage.`,
+Same framework as product markets, just with different labels. The good being traded is labor. The price is the wage.`,
     },
     {
       heading: "Monopsony",
-      content: `One employer in town. A rural hospital, the sole hirer of nurses within 50 miles. Those nurses cannot just "go work somewhere else" without uprooting their lives. That employer is a **monopsony**, a single buyer of labor, and it holds power a competitive employer does not.
+      content: `One employer in town -- a rural hospital that's the only place hiring nurses within 50 miles. Those nurses can't just "go work somewhere else" without uprooting their families, selling their houses, pulling kids out of school. That employer is a **monopsony** (single buyer of labor), and it has leverage that a competitive employer doesn't have.
 
-A competitive firm takes the market wage as given. The monopsonist faces the entire supply curve alone. To attract one more nurse, it must raise the wage -- not just for the new hire, but for every nurse already on staff. The **marginal factor cost (MFC)** of hiring one more worker therefore exceeds the wage shown on the supply curve. The MFC curve sits above the supply curve.
+A competitive firm takes the market wage as given and hires as many workers as it wants at that rate. The monopsonist faces the entire upward-sloping supply curve alone. To attract one more nurse, it has to raise the wage -- and not just for the new hire, but for every nurse already on payroll. That's why the **marginal factor cost (MFC)** of hiring one more worker exceeds the wage on the supply curve. The MFC curve sits above the supply curve, and the gap between them represents those extra costs of raising everyone's pay.
 
-The monopsonist hires where MRP = MFC, then pays the wage read off the supply curve at that quantity. Fewer workers get hired and wages are lower compared to a competitive outcome.
+The monopsonist hires where MRP = MFC, then pays the wage read off the supply curve at that quantity. Result: fewer workers hired and lower wages compared to a competitive market.
 
-A **minimum wage** set above the monopsony wage but below the competitive wage can actually fix this distortion. It flattens the supply curve up to the mandated wage, collapses MFC down to equal that wage, and closes the gap. The firm hires more workers at a higher wage. One of the rare cases where a price floor increases employment instead of creating a surplus.`,
+A well-placed **minimum wage** -- set above the monopsony wage but below where the competitive equilibrium would be -- can actually fix this. It flattens the supply curve up to the mandated wage, which collapses MFC down to equal that wage, and the gap disappears. The firm ends up hiring more workers at a higher wage. This is one of the rare cases where a price floor can increase both employment and wages rather than creating a surplus, and the AP exam tests it specifically because students expect minimum wages to always cause unemployment.`,
     },
     {
       heading: "Worked Example",
-      content: `A small furniture shop sells chairs at P = $12 each. The daily wage is $72 per worker. Should the shop hire a 5th worker?
+      content: `A small furniture shop sells chairs in a competitive market at P = $12 each. The daily wage is $72 per worker. Should the shop hire a 5th worker?
 
-Worker 5 has MPL = 8 chairs.
+Worker 5 has MPL = 8 chairs per day.
 
 MRP = P x MPL = $12 x 8 = **$96**
 
-$96 in revenue versus $72 in cost. Yes. Hire. The firm nets $24 from that decision.
+That's $96 in revenue against $72 in wage cost. Yes -- hire. The firm nets $24 from adding that worker.
 
-What about worker 6? MPL drops to 5 chairs. MRP = $12 x 5 = **$60**. The worker brings in $60 but costs $72. That is a $12 loss. Do not hire.
+Worker 6? MPL drops to 5 chairs. MRP = $12 x 5 = **$60**. The worker generates $60 but costs $72. That's a $12 loss on net. Don't hire.
 
-**Optimal employment: 5 workers.** Keep hiring as long as MRP >= wage. Stop the moment the next worker's MRP falls below the wage. Compare two numbers. Done.`,
+**Optimal employment: 5 workers.** The rule is straightforward -- keep hiring as long as MRP >= wage, stop the moment the next worker's MRP drops below the wage. Two numbers, one comparison.`,
     },
   ],
 };
@@ -86,7 +82,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Firms hire workers to make things customers will buy. When product demand drops, hiring drops with it. That is derived demand. Option A confuses two separate schedules; labor demand and labor supply are independent. Option C is off-track; minimum wage is policy, not a source of labor demand. Option D mixes up a supply-side concept with the demand for labor.",
+      "Firms hire workers because customers want to buy what those workers make. When product demand drops, hiring drops right along with it -- that's the derivation. Option A confuses two independent schedules; labor demand and labor supply are determined by totally different factors. Option C is off base since minimum wage is a policy tool, not a source of demand for workers. Option D mixes a supply-side cost concept into what is fundamentally a demand-side question.",
   },
   {
     id: "fm-2",
@@ -100,7 +96,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "MRP = P x MPL = $20 x 6 = $120. Straight multiplication. Option A looks like someone added the two numbers. Option B plugs in the wrong MPL or price. Option D is another addition error.",
+      "MRP = P x MPL = $20 x 6 = $120. Straight multiplication. Option A looks like an addition error ($20 + something). Option B plugs in the wrong MPL or wrong price somewhere. Option D seems to come from adding the numbers rather than multiplying them.",
   },
   {
     id: "fm-3",
@@ -114,7 +110,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "If a worker brings in $90 and costs $70, that is $20 in profit. Hire. Keep going until MRP = wage. Option A has it backward; MRP below the wage means the worker costs more than they generate. Option B would mean the worker produces nothing of value. Option D confuses the goal; maximizing total product ignores costs entirely and is not profit-maximizing.",
+      "If a worker brings in $90 in revenue and costs $70, that's $20 in additional profit. Keep hiring until MRP = wage. Option A has it backward -- MRP below the wage means the worker costs more than they generate, which loses money. Option B would mean the worker produces nothing of value, so there's no reason to hire them. Option D confuses the goal; maximizing total product ignores costs entirely and is not the same thing as maximizing profit.",
   },
   {
     id: "fm-4",
@@ -128,7 +124,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "More qualified workers entering the country means more people willing to work at every wage. Rightward shift in labor supply. Option A boosts MRP, which shifts labor demand, not supply. Keep the two curves straight: supply is about workers showing up, demand is about firms wanting to hire. Fewer firms shifts labor demand left. Lower MPL hits demand through MRP.",
+      "More qualified workers entering the country means more people willing to work at every wage level -- rightward shift of labor supply. Option A would boost MRP, which shifts labor demand, not supply. Keep the two curves straight: supply is about how many people show up wanting to work, demand is about how many workers firms want to hire. Fewer firms reduces demand for labor. Lower MPL hits demand through the MRP calculation.",
   },
   {
     id: "fm-5",
@@ -142,7 +138,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Say the monopsonist employs 10 nurses at $30/hour. To attract an 11th, it offers $31/hour to everyone, not just the new hire. The 11th nurse costs $31 in direct wage plus $1 x 10 = $10 in raises for the existing staff. Total MFC: $41. That gap between $41 and $31 is why MFC sits above supply. Option A is wrong because the monopsonist pays a single wage. Option C describes a tax, unrelated to the MFC-supply gap. Option D confuses productivity with hiring cost structure.",
+      "If the monopsonist has 10 nurses at $30/hour and needs an 11th, it has to offer $31/hour -- to everyone, not just the new hire. The 11th nurse costs $31 in direct wages plus $1 x 10 = $10 in raises for existing staff. Total MFC = $41, which is well above the $31 supply curve wage. That gap is the whole reason MFC sits above supply. Option A is wrong because the monopsonist pays a single wage to all workers. Option C describes a tax, which is unrelated to the structural MFC-supply gap. Option D confuses productivity with hiring cost mechanics.",
   },
   {
     id: "fm-6",
@@ -156,7 +152,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "The monopsonist hires where MRP = MFC, then reads the wage off the supply curve at that lower quantity. Because MFC sits above supply, the profit-maximizing hire count falls below the competitive level. Fewer workers means a lower wage on the supply curve. Both employment and wages fall relative to competition. Options A and B both claim a higher wage, but the entire point of monopsony power is suppressing wages through restricted hiring. Option D gets the wage right but the employment wrong.",
+      "The monopsonist hires where MRP = MFC, then reads the actual wage paid off the supply curve at that lower employment quantity. Because MFC sits above supply, the profit-maximizing hire count falls below competitive levels. Fewer workers on the supply curve means a lower wage. Both employment and wages are suppressed relative to competition -- that's the whole distortion. Options A and B both claim higher wages, but monopsony power is specifically about the ability to suppress wages through restricted hiring. Option D gets the wage direction right but the employment direction wrong.",
   },
   {
     id: "fm-7",
@@ -170,7 +166,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "This is the monopsony twist. A minimum wage in the right range flattens the supply curve and collapses MFC down to the mandated wage. The gap that let the employer underpay disappears. Hiring becomes profitable at higher quantities, so both wages and employment rise. Option A applies competitive-market logic (price floor creates surplus), but here the minimum wage corrects a distortion rather than creating one. Option B is absurd. Option D overstates the effect; the firm still earns profit, just less monopsony rent.",
+      "This is the counterintuitive monopsony result that trips students up. A minimum wage in the right range flattens the supply curve and pulls MFC down to the mandated wage. The gap that allowed the employer to underpay vanishes. Hiring becomes profitable at higher quantities, so both wages and employment rise toward where they'd be in a competitive market. Option A applies the standard competitive-market logic (price floor creates surplus), but that doesn't apply here because the minimum wage is correcting an existing distortion rather than creating a new one. Option B is absurd. Option D overstates things -- the firm still earns profit, just with less monopsony rent.",
   },
   {
     id: "fm-8",
@@ -184,7 +180,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Derived demand at work. Product demand rises, so price or quantity sold increases, MRP goes up at every employment level, and labor demand shifts right. Both wages and employment rise. Option A confuses the curves; product demand affects labor demand, not supply. Option C reverses the direction. Option D ignores derived demand entirely, since MRP = P x MPL directly ties product markets to labor markets.",
+      "Derived demand in action. Product demand rises, which means price or quantity sold goes up, MRP increases at every employment level, and labor demand shifts right. Wages and employment both rise. Option A confuses which curve is affected -- product demand changes hit labor demand, not supply. Option C has the direction backward. Option D flatly contradicts derived demand, since MRP = P x MPL directly links product markets to labor markets.",
   },
   {
     id: "fm-9",
@@ -198,7 +194,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Worker 3: MRP = $15 x 10 = $150. Exceeds $90. Hire. Worker 4: MRP = $15 x 7 = $105. Exceeds $90. Hire. Worker 5: MRP = $15 x 3 = $45. Below $90. Do not hire. The firm hires 4 workers. Option A stops too early and leaves $15 in profit on the table from worker 4. Option C goes too far; worker 5 loses $45. Option D quits far too early.",
+      "Worker 3: MRP = $15 x 10 = $150, which exceeds the $90 wage. Hire. Worker 4: MRP = $15 x 7 = $105, still above $90. Hire. Worker 5: MRP = $15 x 3 = $45, well below $90. Do not hire -- the firm would lose $45 on that worker. So hire 4 workers. Option A stops too early and leaves $15 in profit on the table from worker 4. Option C goes one worker too far and loses $45. Option D quits way too early.",
   },
   {
     id: "fm-10",
@@ -212,7 +208,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Coal demand falls, coal prices fall, coal firms' revenue drops, and MRP of coal miners declines at every employment level. Labor demand shifts left. Wages and employment both fall. Option A confuses the direction. Option B describes a supply change, but the shock originates in the product market and hits demand. Option D is wrong; even unionized wages depend on employer willingness to pay, which is driven by MRP.",
+      "Coal demand falls, coal prices fall, revenue for coal companies drops, and MRP of coal miners declines at every employment level. Labor demand shifts left, and both wages and employment fall. Option A confuses the direction entirely. Option B describes a supply change, but the shock originates in the product market and therefore hits the demand side. Option D is wrong because even unionized wages ultimately depend on the employer's willingness and ability to pay, which is driven by MRP.",
   },
   {
     id: "fm-11",
@@ -226,7 +222,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Higher MPL means higher MRP at every level of employment. Labor demand shifts right. With an upward-sloping supply curve, the new equilibrium has both a higher wage and more workers. Option A reverses the effect. Option C would only hold if labor supply were perfectly elastic (horizontal). Option D could only happen with a simultaneous leftward supply shift, which the question does not describe.",
+      "Higher MPL means higher MRP at every employment level, which shifts labor demand right. With an upward-sloping supply curve, the new equilibrium has a higher wage and more workers employed. Option A reverses the effect completely. Option C would only be possible if labor supply were perfectly elastic -- a horizontal line -- which is not the standard assumption. Option D could only happen with a simultaneous leftward shift of supply, and the question doesn't describe anything that would cause that.",
   },
   {
     id: "fm-12",
@@ -240,7 +236,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "MFC = new worker's wage + the raise applied to all existing workers. The 51st worker earns $20.50. The $0.50 raise hits all 50 existing workers: 50 x $0.50 = $25. Total MFC = $20.50 + $25.00 = $45.50. Option A only counts the new worker's wage and ignores the raise for existing staff. This is the most frequent error on monopsony questions. Option C appears to add $5 instead of $25. Option D uses the old wage.",
+      "MFC = new worker's wage + the raise applied to all existing workers. The 51st worker earns $20.50. The $0.50 raise hits all 50 existing workers: 50 x $0.50 = $25.00. Total MFC = $20.50 + $25.00 = $45.50. Option A only counts the new worker's wage and ignores the raise for existing staff -- this is by far the most common mistake on monopsony MFC calculations. Option C seems to add $5 instead of $25 somewhere. Option D uses the old wage before the raise.",
   },
   {
     id: "fm-13",
@@ -254,7 +250,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 0,
     explanation:
-      "MPL of worker 4 = 36 - 30 = 6 units. MRP = $10 x 6 = $60. Option B confuses total output (36) with marginal product. Option C uses worker 2's MPL (10 units x $10). Option D multiplies total output by price, giving total revenue at 4 workers instead of the marginal contribution of the 4th.",
+      "MPL of worker 4 = 36 - 30 = 6 additional units. MRP = $10 x 6 = $60. Option B confuses total output at 4 workers (36 units) with the marginal product -- a common table-reading mistake. Option C uses worker 2's MPL (10 units x $10 = $100). Option D multiplies total output by price ($36 x $10 = $360), which gives total revenue at 4 workers, not the marginal contribution of the 4th worker.",
   },
   {
     id: "fm-14",
@@ -268,7 +264,7 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "A binding minimum wage above equilibrium is a price floor. Firms demand fewer workers (move up along demand), while more workers want jobs at the higher wage (move up along supply). The gap creates a labor surplus: unemployment. Option A describes the monopsony result, not the competitive one. Option C confuses surplus with shortage. Option D oversimplifies; the immediate labor market effect is still a surplus.",
+      "A binding minimum wage above equilibrium works like any price floor -- it creates a surplus. Firms demand fewer workers at the higher wage (moving up along demand), while more people want jobs at that higher wage (moving up along supply). The gap between quantity supplied and quantity demanded is unemployment. Option A describes what happens in a monopsony, not in a competitive market. Option C has surplus and shortage mixed up. Option D oversimplifies the mechanics; even if some costs get passed through, the immediate labor market effect is still a surplus of workers.",
   },
   {
     id: "fm-15",
@@ -282,6 +278,6 @@ export const factorMarketsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Education and training make workers more productive. Higher MPL means higher MRP (since MRP = P x MPL), making each worker more valuable and justifying a higher wage. Option A has a plausible mechanism but the primary economic rationale is productivity, not supply restriction. Option C attributes the wage premium to legal mandates rather than the actual productivity gains. Option D describes an indirect effect on a different market and does not explain why the educated worker specifically earns more.",
+      "Education and training make a worker more productive at their job. Higher MPL feeds directly into higher MRP (since MRP = P x MPL), which makes the worker more valuable to employers and justifies a higher wage. Option A has a plausible-sounding mechanism -- fewer qualified workers could push wages up through supply restriction -- but the primary economic explanation is the productivity channel, not artificial scarcity. Option C attributes the wage premium to legal requirements rather than actual productivity gains. Option D describes an indirect effect on an entirely different labor market segment and doesn't explain why this specific worker earns more.",
   },
 ];

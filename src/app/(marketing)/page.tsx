@@ -102,7 +102,7 @@ export default function HomePage() {
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                 <span className="text-xs font-medium" style={{ color: "var(--color-ink-muted)" }}>
-                  Free forever. No credit card needed.
+                  AP Micro &amp; Macro — {totalModules} interactive modules
                 </span>
               </motion.div>
 
@@ -124,8 +124,8 @@ export default function HomePage() {
                 className="text-lg sm:text-xl leading-relaxed mb-8 max-w-md"
                 style={{ color: "var(--color-ink-muted)" }}
               >
-                Interactive graphs, {totalModules} modules, flashcards, and AP-style
-                quizzes. Everything you need to score a 5.
+                Drag the curves. See what happens to surplus. Then test
+                yourself with real AP-style questions.
               </motion.p>
 
               <motion.div
@@ -136,7 +136,7 @@ export default function HomePage() {
                   href="/micro/basic-concepts"
                   className="btn-primary px-7 py-3.5 text-base"
                 >
-                  Start Learning Free
+                  Start Learning
                   <ArrowRight className="inline ml-2 -mt-0.5" />
                 </Link>
                 <a
@@ -187,8 +187,8 @@ export default function HomePage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.1, duration: 0.5 }}
                 >
-                  <p className="text-xs font-semibold text-emerald-700">
-                    100% Free
+                  <p className="text-xs font-semibold" style={{ color: "var(--color-ink)" }}>
+                    AP-Style Qs
                   </p>
                 </motion.div>
               </div>
@@ -247,11 +247,10 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="text-center mb-14">
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4" style={{ color: "var(--color-ink)" }}>
-                Everything you need to ace the AP exam
+                Built around how AP Econ actually works
               </h2>
               <p className="text-lg max-w-2xl mx-auto" style={{ color: "var(--color-ink-muted)" }}>
-                No more passive reading. Learn economics the way it was meant to
-                be learned: by doing.
+                The tools AP Econ students actually use before the test.
               </p>
             </div>
           </ScrollReveal>
@@ -260,25 +259,25 @@ export default function HomePage() {
             <FeatureCard
               icon={<ChartIcon />}
               title="Interactive Graphs"
-              description="Drag curves, watch equilibrium shift in real time. Build the intuition textbooks can't give you."
+              description="Drag the demand curve and watch surplus change. 15 graphs across micro and macro topics."
               delay={0}
             />
             <FeatureCard
               icon={<QuizIcon />}
               title="AP-Style Quizzes"
-              description="350+ questions with detailed explanations. Timed mode to simulate exam pressure."
+              description="350+ questions modeled on actual AP exam format. Every answer has a full explanation."
               delay={0.08}
             />
             <FeatureCard
               icon={<FlashcardIcon />}
               title="Flashcard Decks"
-              description="144+ flashcards across every module. Flip, sort, and master key concepts fast."
+              description="144+ cards covering key terms and concepts. Sorted by module so you can target weak spots."
               delay={0.16}
             />
             <FeatureCard
               icon={<ProgressIcon />}
               title="Track Progress"
-              description="Achievements, study streaks, quiz scores, and an AP exam countdown to keep you on track."
+              description="Quiz scores, study streaks, and module completion — all in one dashboard with an exam countdown."
               delay={0.24}
             />
           </div>
@@ -293,11 +292,11 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="text-center mb-14">
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4" style={{ color: "var(--color-ink)" }}>
-                Two courses. {totalModules} modules. Zero cost.
+                AP Micro &amp; AP Macro, start to finish
               </h2>
               <p className="text-lg max-w-xl mx-auto" style={{ color: "var(--color-ink-muted)" }}>
-                Everything for the AP Microeconomics and AP Macroeconomics
-                exams, completely free.
+                {totalModules} modules covering every unit on both exams.
+                Pick a topic and go.
               </p>
             </div>
           </ScrollReveal>
@@ -399,7 +398,40 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          SECTION 4.5 — EMAIL CAPTURE
+          SECTION 4.5 — FOR TEACHERS CALLOUT
+          ══════════════════════════════════════════════════ */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6">
+          <ScrollReveal>
+            <div
+              className="rounded-2xl p-8 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+              style={{
+                background: "var(--color-surface)",
+                border: "1px solid var(--color-border)",
+              }}
+            >
+              <div>
+                <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--color-ink)" }}>
+                  For Teachers
+                </h3>
+                <p className="text-sm leading-relaxed max-w-lg" style={{ color: "var(--color-ink-muted)" }}>
+                  Used by AP teachers to demo concepts in class. Fullscreen graphs, assignable quizzes, student progress tracking.
+                </p>
+              </div>
+              <Link
+                href="/pricing"
+                className="btn-secondary inline-flex items-center px-6 py-2.5 text-sm shrink-0"
+              >
+                View Pricing
+                <ArrowRight className="ml-1.5" />
+              </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          SECTION 4.75 — EMAIL CAPTURE
           ══════════════════════════════════════════════════ */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-5 sm:px-6">
@@ -425,30 +457,26 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="text-center">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4" style={{ color: "var(--color-ink)" }}>
-                Ready to earn your 5?
+                The exam is in May.
               </h2>
               <p className="text-lg max-w-lg mx-auto mb-8" style={{ color: "var(--color-ink-muted)" }}>
-                Start studying smarter with interactive lessons,
-                detailed explanations, and real-time feedback.
+                Everything you&apos;d actually want open the night before the test.
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Link
                   href="/signup"
                   className="btn-primary inline-flex items-center px-8 py-3.5 text-base"
                 >
-                  Create Free Account
+                  Create Account
                   <ArrowRight className="ml-2" />
                 </Link>
                 <Link
-                  href="/micro/basic-concepts"
+                  href="#courses"
                   className="btn-secondary inline-flex items-center px-8 py-3.5 text-base"
                 >
-                  Try Without Account
+                  Browse Modules
                 </Link>
               </div>
-              <p className="text-sm mt-5" style={{ color: "var(--color-ink-faint)" }}>
-                No account required to browse. Jump in and start learning.
-              </p>
             </div>
           </ScrollReveal>
         </div>
@@ -475,6 +503,8 @@ export default function HomePage() {
                 <li><Link href="/login" className="text-sm">Sign In</Link></li>
                 <li><Link href="/signup" className="text-sm">Create Account</Link></li>
                 <li><Link href="/blog" className="text-sm">Blog</Link></li>
+                <li><Link href="/pricing" className="text-sm">Pricing</Link></li>
+                <li><Link href="/pricing" className="text-sm">For Teachers</Link></li>
               </ul>
             </div>
             <div>

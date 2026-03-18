@@ -1,6 +1,7 @@
 "use client";
 
 import EconGraph from "./EconGraph";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import { useExchangeRateStore } from "@/lib/stores/exchange-rate-store";
 
 const DOMAIN = { xMin: 0, xMax: 120, yMin: 0, yMax: 2 };
@@ -14,6 +15,7 @@ export default function ExchangeRateGraph() {
   } = useExchangeRateStore();
 
   return (
+    <FullscreenWrapper title="Foreign Exchange Market">
     <div className="space-y-3">
       <div className="graph-container overflow-hidden">
         <div className="px-4 pt-3 pb-1">
@@ -110,5 +112,6 @@ export default function ExchangeRateGraph() {
         Reset
       </button>
     </div>
+    </FullscreenWrapper>
   );
 }

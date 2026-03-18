@@ -1,6 +1,7 @@
 "use client";
 
 import EconGraph, { GRAPH_AREA } from "./EconGraph";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import { usePhillipsCurveStore } from "@/lib/stores/phillips-curve-store";
 import { dataToSvg, type Domain } from "@/lib/graph-math";
 
@@ -25,6 +26,7 @@ export default function PhillipsCurveGraph() {
   const currentYAxis = dataToSvg({ x: DOMAIN.xMin, y: Math.max(DOMAIN.yMin, currentInflation) }, GA, DOMAIN);
 
   return (
+    <FullscreenWrapper title="Phillips Curve">
     <div className="space-y-3">
       <div className="graph-container overflow-hidden">
         <div className="px-4 pt-3 pb-1">
@@ -187,5 +189,6 @@ export default function PhillipsCurveGraph() {
         Reset
       </button>
     </div>
+    </FullscreenWrapper>
   );
 }

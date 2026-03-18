@@ -41,11 +41,46 @@ export default function MicroPage() {
     },
   };
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What topics are covered on the AP Microeconomics exam?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The AP Microeconomics exam covers basic economic concepts, supply and demand, elasticity, consumer choice, production and costs, perfect competition, monopoly, monopolistic competition, oligopoly, factor markets, market failure, and public goods and externalities.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How hard is AP Microeconomics?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "AP Microeconomics is considered moderately difficult. The exam relies heavily on graph analysis and the ability to connect concepts across market structures. Students who practice with graphs and free-response questions tend to score well.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How many units are in AP Microeconomics?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The College Board organizes AP Microeconomics into 6 units, but EconLearn breaks these into 12 focused modules for more targeted study — covering everything from supply and demand to market failure and public goods.",
+        },
+      },
+    ],
+  };
+
   return (
     <div className="max-w-3xl mx-auto px-6 py-14">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <div className="mb-10">
         <div className="flex items-center gap-2 mb-3">
@@ -58,6 +93,21 @@ export default function MicroPage() {
           {microCourse.title}
         </h1>
         <p className="text-[15px]" style={{ color: 'var(--color-ink-muted)' }}>{microCourse.description}</p>
+      </div>
+
+      {/* SEO intro prose */}
+      <div className="mb-10 text-[14px] leading-relaxed space-y-3" style={{ color: 'var(--color-ink-light)' }}>
+        <p>
+          AP Microeconomics covers how individual markets work — from the basic supply and demand model
+          through market structures like monopoly and oligopoly, then into factor markets and market
+          failure. The exam is split between multiple choice (66% of your score) and free-response
+          questions (34%), and both sections lean heavily on graph analysis.
+        </p>
+        <p>
+          Each module below includes written explanations, interactive graphs where available, AP-style
+          practice questions with detailed answer breakdowns, and flashcards for key terms. The modules
+          follow the sequence most AP Econ teachers use in class, but you can jump to any topic.
+        </p>
       </div>
 
       <div className="space-y-0.5">

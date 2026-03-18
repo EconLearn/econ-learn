@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import EconGraph, { GRAPH_AREA } from "./EconGraph";
 import EquilibriumMarker from "./EquilibriumMarker";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import { useExternalityStore } from "@/lib/stores/externality-store";
 import { dataToSvg, type Domain } from "@/lib/graph-math";
 
@@ -36,58 +37,55 @@ export default function ExternalityGraph() {
   const displayEquilibrium = showTax ? socialEquilibrium : marketEquilibrium;
 
   // DWL polygon: triangle between market Q and social Q
-  const dwlPolygon = useMemo(() => {
+  const dwlData = useMemo(() => {
     if (showTax || !marketEquilibrium || !socialEquilibrium) return null;
 
     if (mode === "negative") {
-      // Triangle vertices: social optimum on D, market eq on D, and market eq on MSC
-      // The DWL triangle is bounded by Demand and Social Cost between Qoptimal and Qmarket
       const qOpt = socialEquilibrium.quantity;
       const qMkt = marketEquilibrium.quantity;
       if (Math.abs(qOpt - qMkt) < 0.5) return null;
 
-      // Three corners of the DWL triangle:
-      // 1. Where D and MSC intersect (social optimum point)
       const p1 = dataToSvg(
         { x: qOpt, y: socialEquilibrium.price },
         GRAPH_AREA,
         domain
       );
-      // 2. Market equilibrium (where D and MPC intersect)
       const p2 = dataToSvg(
         { x: qMkt, y: marketEquilibrium.price },
         GRAPH_AREA,
         domain
       );
-      // 3. Point on MSC at market quantity
       const mscAtQmkt = socialCost.intercept + socialCost.slope * qMkt;
       const p3 = dataToSvg({ x: qMkt, y: mscAtQmkt }, GRAPH_AREA, domain);
 
-      return `${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}`;
+      return {
+        points: `${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}`,
+        cx: (p1.x + p2.x + p3.x) / 3,
+        cy: (p1.y + p2.y + p3.y) / 3,
+      };
     } else {
-      // Positive externality: triangle between S and MSB from Qmarket to Qoptimal
       const qMkt = marketEquilibrium.quantity;
       const qOpt = socialEquilibrium.quantity;
       if (Math.abs(qOpt - qMkt) < 0.5) return null;
 
-      // Three corners:
-      // 1. Market equilibrium (where D and S intersect)
       const p1 = dataToSvg(
         { x: qMkt, y: marketEquilibrium.price },
         GRAPH_AREA,
         domain
       );
-      // 2. Social optimum (where MSB and S intersect)
       const p2 = dataToSvg(
         { x: qOpt, y: socialEquilibrium.price },
         GRAPH_AREA,
         domain
       );
-      // 3. Point on MSB at market quantity
       const msbAtQmkt = socialBenefit.intercept + socialBenefit.slope * qMkt;
       const p3 = dataToSvg({ x: qMkt, y: msbAtQmkt }, GRAPH_AREA, domain);
 
-      return `${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}`;
+      return {
+        points: `${p1.x},${p1.y} ${p2.x},${p2.y} ${p3.x},${p3.y}`,
+        cx: (p1.x + p2.x + p3.x) / 3,
+        cy: (p1.y + p2.y + p3.y) / 3,
+      };
     }
   }, [
     showTax,
@@ -181,6 +179,7 @@ export default function ExternalityGraph() {
   const dwlDisplay = showTax ? "$0" : `$${deadweightLoss.toFixed(0)}`;
 
   return (
+    <FullscreenWrapper title="Externalities">
     <div className="space-y-3">
       {/* Graph container */}
       <div className="graph-container overflow-hidden">
@@ -220,15 +219,29 @@ export default function ExternalityGraph() {
           domain={domain}
         >
           {/* DWL triangle */}
-          {dwlPolygon && (
-            <polygon
-              points={dwlPolygon}
-              fill="#F59E0B"
-              opacity={0.18}
-              stroke="#F59E0B"
-              strokeWidth={1}
-              strokeOpacity={0.3}
-            />
+          {dwlData && (
+            <>
+              <polygon
+                points={dwlData.points}
+                fill="#F59E0B"
+                opacity={0.22}
+                stroke="#F59E0B"
+                strokeWidth={1}
+                strokeOpacity={0.3}
+              />
+              <text
+                x={dwlData.cx}
+                y={dwlData.cy + 3}
+                textAnchor="middle"
+                fontSize={9}
+                fontWeight={600}
+                fill="#F59E0B"
+                opacity={0.8}
+                fontFamily="DM Sans, system-ui, sans-serif"
+              >
+                DWL
+              </text>
+            </>
           )}
 
           {/* Show social equilibrium marker when tax is off */}
@@ -265,6 +278,12 @@ export default function ExternalityGraph() {
             <div className="graph-legend-dot" style={{ background: mode === "negative" ? '#F97316' : '#22C55E' }} />
             {mode === "negative" ? "MSC" : "MSB"}
           </div>
+          {dwlData && (
+            <div className="graph-legend-item">
+              <div className="graph-legend-dot" style={{ background: '#F59E0B', borderRadius: 2 }} />
+              DWL
+            </div>
+          )}
         </div>
       </div>
 
@@ -365,5 +384,6 @@ export default function ExternalityGraph() {
         </p>
       </div>
     </div>
+    </FullscreenWrapper>
   );
 }

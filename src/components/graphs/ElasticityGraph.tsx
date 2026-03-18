@@ -1,6 +1,7 @@
 "use client";
 
 import EconGraph, { GRAPH_AREA, SVG_WIDTH, SVG_HEIGHT } from "./EconGraph";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import { useElasticityStore } from "@/lib/stores/elasticity-store";
 import { dataToSvg, type Domain } from "@/lib/graph-math";
 
@@ -38,6 +39,7 @@ export default function ElasticityGraph() {
   const maxPrice = Math.min(Math.floor(demand.intercept) - 1, 119);
 
   return (
+    <FullscreenWrapper title="Elasticity of Demand">
     <div className="space-y-3">
       <div className="graph-container overflow-hidden">
         <div className="px-4 pt-3 pb-1">
@@ -254,5 +256,6 @@ export default function ElasticityGraph() {
         </div>
       </div>
     </div>
+    </FullscreenWrapper>
   );
 }

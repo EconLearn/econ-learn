@@ -2,6 +2,7 @@
 
 import { useCallback } from "react";
 import EconGraph from "./EconGraph";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import { useSupplyDemandStore, ECONOMIC_SHOCKS } from "@/lib/stores/supply-demand-store";
 
 export default function SupplyDemandGraph() {
@@ -23,6 +24,7 @@ export default function SupplyDemandGraph() {
   const domain = { xMin: 0, xMax: 100, yMin: 0, yMax: 100 };
 
   return (
+    <FullscreenWrapper title="Supply & Demand">
     <div className="space-y-3">
       {/* Graph */}
       <div className="graph-container">
@@ -194,5 +196,6 @@ export default function SupplyDemandGraph() {
         )}
       </div>
     </div>
+    </FullscreenWrapper>
   );
 }

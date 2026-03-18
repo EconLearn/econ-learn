@@ -1,6 +1,7 @@
 "use client";
 
 import EconGraph from "./EconGraph";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import {
   useFiscalPolicyStore,
   spendingMultiplier,
@@ -71,6 +72,7 @@ export default function FiscalPolicyGraph() {
   ];
 
   return (
+    <FullscreenWrapper title="Fiscal Policy">
     <div className="space-y-3">
       <div className="graph-container overflow-hidden">
         <div className="px-4 pt-3 pb-1">
@@ -294,5 +296,6 @@ export default function FiscalPolicyGraph() {
         Reset
       </button>
     </div>
+    </FullscreenWrapper>
   );
 }

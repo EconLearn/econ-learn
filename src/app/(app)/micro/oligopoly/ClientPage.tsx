@@ -71,6 +71,42 @@ export default function OligopolyClientPage() {
             <FlashcardDeck cards={oligopolyFlashcards} moduleId="oligopoly" />
           </div>
 
+          {/* Related Topics */}
+          <div className="mb-10">
+            <h2 style={{ color: "var(--color-ink)" }} className="text-lg font-semibold mb-3">
+              Related Topics
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <Link href="/micro/monopolistic-competition" className="card-interactive group flex items-center gap-3 p-3.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Monopolistic Competition</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Product differentiation, short-run profits, and long-run zero-profit.</p>
+                </div>
+                <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link href="/micro/monopoly" className="card-interactive group flex items-center gap-3 p-3.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Monopoly</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Single-firm markets, MR below price, and deadweight loss.</p>
+                </div>
+                <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link href="/micro/market-failure" className="card-interactive group flex items-center gap-3 p-3.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Market Failure</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Externalities, public goods, and government intervention.</p>
+                </div>
+                <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
           <ModuleNav courseId="micro" currentModuleId="oligopoly" />
       </div>
     </PageTransition>

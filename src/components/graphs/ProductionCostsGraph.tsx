@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import { useProductionCostsStore, type CostPoint } from "@/lib/stores/production-costs-store";
 
 const VIEWBOX_W = 600;
@@ -102,6 +103,7 @@ export default function ProductionCostsGraph() {
   const lastVisibleAFC = [...costPoints].reverse().find((p) => p.afc <= Y_MAX && p.afc >= 0);
 
   return (
+    <FullscreenWrapper title="Short-Run Cost Curves">
     <div className="space-y-3">
       <div className="graph-container overflow-hidden">
         <div className="px-4 pt-3 pb-1">
@@ -414,5 +416,6 @@ export default function ProductionCostsGraph() {
         </div>
       </div>
     </div>
+    </FullscreenWrapper>
   );
 }

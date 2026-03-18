@@ -7,78 +7,78 @@ export const oligopolyContent = {
   sections: [
     {
       heading: "When a Few Firms Run the Show",
-      content: `You might assume that having three or four competitors in a market produces something close to competition. Prices should be driven down, consumers should benefit, firms should fight tooth and nail for every sale. That assumption is wrong — and the U.S. wireless industry proves it. Verizon, AT&T, and T-Mobile all charge roughly the same for unlimited plans, hovering within a few dollars of each other month after month. When Delta raises fares on the Atlanta-to-Chicago route, United matches within hours. The textbook explanation is one word: *mutual interdependence*.
+      content: `Three or four firms in a market doesn't mean competition works the way you'd expect. Verizon, AT&T, and T-Mobile all charge within a few bucks of each other for unlimited plans — month after month, year after year. Delta bumps fares on Atlanta-to-Chicago and United matches before lunch. The reason is **mutual interdependence**, and it changes everything about how these firms behave.
 
-An **oligopoly** is a market dominated by a small number of large firms. Cell carriers. Airlines. Auto manufacturers. Streaming services. Unlike perfect competition (where your firm is too small to move the needle) or monopoly (where you *are* the market), oligopoly sits in the messy, strategic middle ground. You have real market power, but so do your rivals. Every pricing decision, every ad campaign, every product launch sends ripples through the entire industry.
+An **oligopoly** is a market structure where a small number of large firms dominate. Cell carriers, airlines, auto manufacturers, streaming platforms. You have real pricing power, but so do the other guys, and that tension sits at the core of every strategic choice — ad spending, product launches, whether to undercut on price or hold the line. This is fundamentally different from perfect competition (where your firm is a speck and can't move the market price) or monopoly (where you are the market, full stop). Oligopoly lives in the middle, and the middle is messy.
 
-That interdependence is what separates oligopoly from everything else. A monopolist worries about consumer demand and nothing more. A perfectly competitive firm takes the market price and moves on. An oligopolist plays chess. If Coca-Cola slashes prices by 15%, Pepsi must decide: match the cut, undercut further, or hold firm and hope brand loyalty carries the day? Each response triggers another round of decisions.
+That interdependence is the thing the AP exam cares about most. A monopolist only worries about consumer demand. A perfectly competitive firm takes the price and goes home. An oligopolist has to think three moves ahead, like chess — if Coca-Cola drops prices 15%, does Pepsi match? Undercut? Hold and bet on brand loyalty? Each response triggers a counter-response.
 
-**Barriers to entry** keep the club small. Building a 5G network costs tens of billions of dollars. Pharmaceutical patents last 20 years. Brand loyalty built over decades — think Nike, Apple, Boeing — is nearly impossible for a startup to replicate overnight. New firms *want* in because oligopoly profits can be enormous, but the barriers make entry brutally difficult.
+**Barriers to entry** keep the number of firms small. Building out a 5G network runs tens of billions of dollars (T-Mobile spent over $80 billion acquiring Sprint in 2020 partly just to get spectrum). Pharma patents lock out competitors for 20 years. Decades of brand equity at Nike or Apple can't be replicated by a startup over a weekend. New firms would love to get in — oligopoly profits can be enormous — but the barriers are brutal.
 
-Products can be identical (steel, aluminum — a **homogeneous oligopoly**) or differentiated (Samsung Galaxy vs. iPhone). Strategic interdependence remains either way.`,
+Products can be identical (steel, aluminum — **homogeneous oligopoly**) or differentiated (Galaxy vs. iPhone). The strategic interdependence is there regardless.`,
     },
     {
       heading: "Game Theory and the Prisoner's Dilemma",
-      content: `Picture yourself as a pricing executive at American Airlines. You could slash fares on the Chicago-to-Miami route by 20% and steal passengers from United. Sounds like a win — until United retaliates with a 25% cut, Southwest jumps in, and everyone's margins are destroyed. Both airlines would have earned more by keeping prices high.
+      content: `You're a pricing executive at American Airlines, looking at the Chicago-to-Miami route. Cutting fares 20% would steal passengers from United — sounds great until United retaliates at 25% off, Southwest piles on, and everybody's margins are wrecked. Both airlines would have been better off keeping prices where they were.
 
-This is why economists use **game theory**: the study of strategic decision-making when your outcome depends on what the other player does. In oligopoly, firms don't just react to supply and demand curves. They anticipate each other's moves, bluffs, and retaliations.
+Economists formalize this kind of situation with **game theory**: the study of strategic decision-making when your payoff depends on what somebody else does. In oligopoly, firms don't just respond to supply and demand. They anticipate moves, bluffs, retaliations.
 
-The classic illustration is the **prisoner's dilemma**. Applied to airline pricing:
+The **prisoner's dilemma** is the classic setup. Applied to airline pricing, it works like this:
 
-*Setup:* American and United each choose between keeping fares high or cutting low.
-- Both keep fares high → each earns $10 million
-- Both cut fares → price war, each earns $4 million
-- One cuts while the other holds high → the cutter grabs market share and earns $12 million; the holdout earns just $2 million
+American and United each pick between keeping fares high or slashing them low.
+- Both keep fares high — each pockets $10 million
+- Both slash — price war, $4 million apiece
+- One slashes while the other holds high — the cutter grabs share and gets $12 million, the holdout limps away with $2 million
 
-Each airline individually gains by cutting fares *regardless* of what the other does. If United holds high, American earns $12M by cutting versus $10M by holding. If United cuts, American earns $4M by cutting versus $2M by holding. Cutting is the **dominant strategy** for both players. Yet when both cut, they land at $4M each — far worse than the $10M they'd each pocket through cooperation.
+Look at American's options. If United holds high, American earns $12M by cutting vs. $10M by holding. If United cuts, American earns $4M by cutting vs. $2M by holding. Cutting wins either way. That makes it the **dominant strategy** for both players. But when both cut, they end up at $4M each — way worse than the $10M they could have had by cooperating.
 
-The tension between individual rationality and collective interest is the beating heart of oligopoly. Firms desperately want to cooperate and keep prices high, but the temptation to cheat is overwhelming.`,
+The gap between what's individually rational and what's collectively smart is where all the interesting oligopoly behavior comes from. Firms want desperately to cooperate, but the temptation to cheat keeps pulling them apart.`,
     },
     {
       heading: "Nash Equilibrium and Dominant Strategies",
-      content: `Where do the airlines actually end up? The answer comes from John Nash, the Princeton mathematician made famous by the 2001 film *A Beautiful Mind*.
+      content: `So where do the airlines actually land? John Nash — the Princeton mathematician, subject of the 2001 film *A Beautiful Mind* — gave us the framework.
 
-A **Nash equilibrium** occurs when no player can improve their payoff by *unilaterally* switching strategy, given what the other player is doing. In the airline example, both cutting fares is the Nash equilibrium. Once both are cutting, neither benefits from switching alone to high fares — they'd just hemorrhage market share.
+A **Nash equilibrium** is an outcome where no player can do better by switching strategy on their own, given what the other player is doing. In the airline example above, both cutting is the Nash equilibrium. Once they're both cutting, neither gains anything by unilaterally moving to high fares. You'd just hemorrhage passengers while the other guy keeps prices low.
 
-The painful part: the Nash equilibrium is *not* the best collective outcome. Both firms stuck at $4M is strictly worse than both earning $10M. But it's stable. Neither has incentive to deviate on its own.
+The frustrating part: the Nash equilibrium here is not the best collective outcome. Both stuck at $4M is objectively worse than both at $10M. But it's stable — nobody has a reason to move.
 
-A **dominant strategy** exists when one choice beats the alternative no matter what the opponent does. In the prisoner's dilemma, cutting fares is dominant for both airlines. Not every game has dominant strategies, though. In more complex scenarios with three or four options, the best move genuinely depends on your read of the competition, and no single choice dominates across all possibilities.
+A **dominant strategy** is one that beats the alternative no matter what the opponent does. In the prisoner's dilemma, cutting fares is dominant for both airlines. Not every game has a dominant strategy, though. Once you get into scenarios with three or four options per player, the best choice might genuinely depend on your read of the competition, and no single option wins across all possibilities.
 
-For the AP exam: *Nash equilibrium is where rational, self-interested firms end up, not where they'd like to be.* That gap between the Nash outcome and the cooperative outcome is precisely what tempts firms toward collusion.`,
+AP exam tip: Nash equilibrium is where rational, self-interested firms end up, not where they wish they were. That difference — Nash outcome vs. cooperative outcome — is exactly what drives firms toward collusion.`,
     },
     {
       heading: "Cartels and Collusion",
-      content: `If cutting prices makes everyone worse off, the obvious question is: why not just agree to keep them high? That logic drives **collusion** — rival firms secretly or openly coordinating on pricing, output, or market territory to maximize joint profits.
+      content: `If both firms cutting prices leaves everyone worse off, the obvious move is to agree not to cut. That's **collusion** — rival firms coordinating on prices, output, or territory to boost joint profits.
 
-**OPEC** (Organization of the Petroleum Exporting Countries) is the most famous example. Saudi Arabia, Iraq, the UAE, and other member nations meet regularly to set production quotas. Restricting oil output pushes the global price above the competitive level. When OPEC coordination is tight — as it was in the 1973 embargo that quadrupled oil prices — members split enormous profits. When discipline collapses, prices crater.
+**OPEC** is the textbook case. Saudi Arabia, Iraq, the UAE, and the other members meet to set production quotas. Less oil on the market means higher global prices. When coordination holds — as during the 1973 embargo that quadrupled oil prices overnight — the profits are staggering. When discipline falls apart, prices crater and members start pointing fingers.
 
-A **cartel** is collusion made formal: firms explicitly agree on prices or output. When it works, a cartel mimics a monopoly outcome — restricted quantity, monopoly-level prices, deadweight loss. That's why cartels are illegal in most countries. The Sherman Antitrust Act of 1890 made price-fixing a federal crime in the United States.
+A **cartel** is collusion with a formal structure: explicit agreements on prices or output levels. A well-functioning cartel mimics monopoly — restricted quantity, jacked-up prices, deadweight loss for consumers. That's why most countries ban them. The Sherman Antitrust Act of 1890 made price-fixing a federal crime in the U.S., and the DOJ still prosecutes cases regularly (the lysine cartel of the 1990s, the LCD price-fixing conspiracy of 2006-2010).
 
-Every cartel faces the same fatal flaw, though. Cheating is irresistible. If American and United agree to keep fares high and each earns $10M, American knows it could secretly discount flights, grab extra passengers, and jump to $12M while United naively holds the line. Every cartel member faces this exact temptation. Cartels are therefore inherently unstable.
+Every cartel has the same Achilles' heel, though. If American and United agree to keep fares high at $10M each, American knows it could quietly discount a few routes, grab extra passengers, and jump to $12M while United sits there trusting the deal. Every single cartel member faces that temptation. Cartels are inherently unstable for this reason.
 
-OPEC demonstrates the instability constantly. Member countries routinely exceed their production quotas, pumping extra oil for additional revenue and hoping nobody notices. When enough members cheat, discipline collapses and prices fall.
+OPEC proves it constantly — member countries routinely pump above their quotas, hoping the extra revenue slides under the radar.
 
-Collusion is easier to maintain when:
-- Fewer firms are involved, making monitoring simpler
-- The product is homogeneous, so secret discounting is hard to hide
-- Demand conditions are stable rather than volatile
-- Firms interact repeatedly over time, because the threat of future punishment keeps everyone honest (the so-called "grim trigger" strategy in repeated games)
+Collusion is easier to sustain when:
+- There are fewer firms (monitoring is simpler with 3 players than 30)
+- The product is homogeneous, which makes secret discounting harder to hide since buyers would notice
+- Demand conditions stay relatively stable
+- Firms interact repeatedly over long periods, so the threat of future punishment — economists call it the "grim trigger" strategy — keeps cheating in check
 
-Even without explicit agreements, firms sometimes engage in **tacit collusion** — coordinating behavior without direct communication. One airline raises fares and others follow within hours. Proving a secret agreement is nearly impossible, so it's technically legal, but the economic effects mirror those of an outright cartel.`,
+Firms sometimes coordinate without ever talking directly. **Tacit collusion** is when one airline raises fares and others follow within hours. No secret meeting, no paper trail. Prosecutors can't prove an agreement exists, so it's technically legal, but the economic effect is basically the same as a cartel.`,
     },
     {
       heading: "The Kinked Demand Curve",
-      content: `Oligopoly prices are often remarkably sticky. Gas stations on the same intersection hold identical prices for weeks. Airlines lock fares on popular routes. The **kinked demand curve** model offers an explanation rooted in one simple assumption about how rivals react.
+      content: `Gas stations on the same intersection charge the same price for weeks straight. Airlines lock in fares on popular routes and nobody budges. Oligopoly prices are weirdly sticky, and the **kinked demand curve** model explains why through one assumption about rival behavior.
 
-*If you raise your price, competitors won't follow.* They happily watch your customers defect to them. Demand above the current price is therefore very elastic — a small price increase triggers a large drop in your sales.
+If you raise your price, competitors don't follow — they're happy to watch your customers walk over to them. So demand above the current price is very elastic. A small hike means a big drop in your sales.
 
-*If you cut your price, competitors match immediately.* They refuse to lose market share. Demand below the current price is relatively inelastic, because a price cut barely boosts your sales when rivals neutralize it.
+If you cut your price, competitors match right away. They're not going to sit there losing market share. So demand below the current price is relatively inelastic — your price cut barely gains you anything because rivals neutralize it immediately.
 
-This asymmetry creates a *kink* in the demand curve at the current price. The kink produces a vertical gap in the marginal revenue curve. Even if a firm's MC shifts up or down within that gap, the profit-maximizing quantity — and therefore the price — *doesn't change*.
+That asymmetry puts a *kink* in the demand curve at the going price. The kink creates a vertical gap in the marginal revenue curve, and this is the key insight for the AP exam: even if a firm's MC shifts up or down within that gap, the profit-maximizing quantity and price don't change. Prices stay put.
 
-So prices are sticky because firms resist raising them (you lose customers) and resist cutting them (rivals match, leaving everyone with thinner margins and roughly the same market share). Prices cluster together and stay put until costs or demand shift dramatically enough to push MC outside the gap.
+So firms avoid raising prices (lose customers) and avoid cutting them (rivals match, margins shrink, market share stays the same). Everyone clusters at the same price and it stays there until something big enough — a major cost shock, a demand shift — pushes MC outside that gap.
 
-The model has real limitations. It explains *why* prices are rigid but not *how* the initial price got set. Economists like George Stigler criticized it back in the 1940s for exactly that reason. Still, it captures something genuine about oligopoly behavior, and it appears on the AP exam regularly enough that you need to know it.`,
+The model has legitimate weaknesses. It explains why prices are sticky but doesn't explain how the initial price got established in the first place. George Stigler pointed this out back in the 1940s and the criticism stuck. Still, it captures something real about oligopoly behavior, and it shows up on AP exams consistently.`,
     },
     {
       heading: "Worked Example: 2-Firm Payoff Matrix",
@@ -91,18 +91,18 @@ Samsung: High Ads         (5, 5)             (9, 2)
 Samsung: Low Ads          (2, 9)             (7, 7)
 
 **Samsung's dominant strategy:**
-- If Apple chooses High Ads: Samsung earns $5M (High) vs. $2M (Low). High Ads wins.
-- If Apple chooses Low Ads: Samsung earns $9M (High) vs. $7M (Low). High Ads wins again.
-- Samsung's dominant strategy: **High Ads** regardless of Apple's choice.
+- If Apple picks High Ads: Samsung gets $5M (High) vs. $2M (Low). High Ads wins.
+- If Apple picks Low Ads: Samsung gets $9M (High) vs. $7M (Low). High Ads wins.
+- Dominant strategy for Samsung: **High Ads**, regardless of what Apple does.
 
 **Apple's dominant strategy:**
-- If Samsung chooses High Ads: Apple earns $5M (High) vs. $2M (Low). High Ads wins.
-- If Samsung chooses Low Ads: Apple earns $9M (High) vs. $7M (Low). High Ads wins again.
-- Apple's dominant strategy: **High Ads**.
+- If Samsung picks High Ads: Apple gets $5M (High) vs. $2M (Low). High Ads wins.
+- If Samsung picks Low Ads: Apple gets $9M (High) vs. $7M (Low). High Ads wins.
+- Dominant strategy for Apple: **High Ads**.
 
-**Nash equilibrium:** Both firms choose High Ads, earning ($5M, $5M). Neither can improve by switching alone. If Samsung moves to Low Ads while Apple stays at High Ads, Samsung drops from $5M to $2M. Same logic for Apple.
+**Nash equilibrium:** Both go High Ads, earning ($5M, $5M). Neither firm can improve by switching alone — if Samsung moves to Low Ads while Apple stays at High Ads, Samsung drops from $5M to $2M. Same logic applies to Apple.
 
-**Cooperative outcome:** If both committed to Low Ads, they'd each earn $7M — $2M more per firm. But the agreement is unstable. If Apple trusts Samsung to keep ads low, Samsung can defect to High Ads and jump from $7M to $9M. The incentive to cheat destroys cooperation, which is the prisoner's dilemma in action. Rational self-interest pushes both firms to the Nash equilibrium ($5M each), even though mutual restraint ($7M each) would be collectively superior.`,
+**Cooperative outcome:** If both committed to Low Ads, each would earn $7M, which is $2M more per firm. But the agreement falls apart under pressure. If Apple trusts Samsung to keep ads low, Samsung can defect to High Ads and jump from $7M to $9M. That incentive to cheat is the whole prisoner's dilemma dynamic. Self-interest pushes both to the Nash equilibrium ($5M each) even though mutual restraint ($7M each) would leave them collectively better off.`,
     },
   ],
 };
@@ -120,7 +120,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Mutual interdependence is the hallmark — each firm's pricing and output decisions directly affect its rivals and are shaped by what those rivals might do in return. (A) is wrong because oligopolies can involve either identical or differentiated products. (C) is the opposite of reality; significant barriers to entry are what keep the number of firms small. (D) describes perfect competition; oligopolists have genuine pricing power.",
+      "Mutual interdependence is the hallmark of oligopoly — each firm's pricing and output decisions directly shape what rivals do and vice versa. (A) is wrong because oligopolies can sell identical or differentiated products. (C) is backwards; high barriers to entry are what keep the number of firms small. (D) describes perfect competition, not oligopoly — these firms have real pricing power.",
   },
   {
     id: "olig-2",
@@ -134,7 +134,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Both choosing low prices is Nash because neither can improve its payoff by unilaterally switching to high — doing so would mean losing market share to the rival who stays low. (A) is the cooperative outcome both firms *prefer*, but it's unstable because each is tempted to undercut. (C) isn't an equilibrium because the high-price firm would immediately want to switch. (D) describes a repeated-game dynamic, not the one-shot prisoner's dilemma.",
+      "Both choosing low prices is the Nash equilibrium because neither firm can improve its payoff by unilaterally switching to high prices — doing so would just mean losing customers to the rival who stays low. (A) is the cooperative outcome both firms would prefer, but it's unstable since each firm is tempted to undercut. (C) isn't stable because the high-price firm would immediately want to switch. (D) describes repeated-game dynamics, not a one-shot prisoner's dilemma.",
   },
   {
     id: "olig-3",
@@ -148,7 +148,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Exceeding quotas is textbook cartel cheating. Each member can boost its own revenue by pumping more oil than agreed, even though collective overproduction undermines the cartel's high-price strategy. (A) is about price stickiness, not cartel behavior. (C) gets it backwards — OPEC involves explicit agreements, not tacit coordination. (D) is wrong because OPEC exists specifically to avoid competitive pricing.",
+      "Exceeding quotas is the classic example of cartel cheating. Each member boosts its own revenue by pumping more oil than agreed, even though collective overproduction undermines the high price the cartel worked to establish. (A) deals with price stickiness, not cartels. (C) gets it backwards — OPEC involves explicit agreements, the opposite of tacit coordination. (D) is wrong because OPEC exists precisely to avoid competitive pricing.",
   },
   {
     id: "olig-4",
@@ -162,7 +162,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The kink creates a vertical discontinuity in the MR curve. MC can shift within that gap without changing the profit-maximizing output or price. Prices stay put. (A) has nothing to do with the model — no government regulation is involved. (C) is inaccurate; demand is more elastic *above* the kink and less elastic *below* it, not perfectly elastic throughout. (D) conflates two different models; the kinked demand curve explains stickiness without any collusion agreement.",
+      "The kink in the demand curve produces a vertical discontinuity in the MR curve. When MC shifts within that gap, the profit-maximizing quantity and price don't budge. (A) is irrelevant — the model has nothing to do with government regulation. (C) is inaccurate; demand is more elastic above the kink and less elastic below it, not perfectly elastic throughout. (D) mixes up two different models; the kinked demand curve explains stickiness without requiring any collusion.",
   },
   {
     id: "olig-5",
@@ -176,7 +176,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Low Price dominates. If B goes High, A earns 10 (Low) vs. 8 (High). If B goes Low, A earns 3 (Low) vs. 1 (High). Low wins in both scenarios. (A) yields a lower payoff in every case. (C) is factually wrong — the dominant strategy is clear. (D) misunderstands what \"dominant\" means; the entire point is that A's best choice does *not* depend on B's decision.",
+      "Low Price dominates for Firm A. If B picks High, A earns 10 (Low) vs. 8 (High). If B picks Low, A earns 3 (Low) vs. 1 (High). Low Price wins in both cases. (A) yields less in every scenario. (C) is factually incorrect — the dominant strategy is clearly Low. (D) misunderstands what dominant means; the whole point of a dominant strategy is that A's best choice does not depend on B.",
   },
   {
     id: "olig-6",
@@ -190,7 +190,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Repeated interactions allow firms to punish cheaters in future rounds. The threat of retaliation — \"if you undercut me today, I'll undercut you for the next six months\" — keeps everyone honest. (A) makes collusion harder because coordination and monitoring grow exponentially more difficult with more participants. (B) complicates things because differentiated products make it harder to agree on a common price or detect secret discounts. (D) creates uncertainty about whether a rival's price cut is cheating or a legitimate response to demand shifts, which destabilizes trust.",
+      "Repeated interactions let firms credibly threaten punishment — something like 'undercut me today and I'll undercut you for the next six months' — which keeps everyone in line. (A) makes collusion harder because coordinating and monitoring behavior becomes exponentially more difficult with more players. (B) complicates agreements because differentiated products make it tougher to agree on a single price or detect when someone is secretly discounting. (D) makes it hard to tell whether a rival's price cut is cheating or just a response to shifting demand, which erodes trust.",
   },
   {
     id: "olig-7",
@@ -204,7 +204,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "The core asymmetric assumption: rivals ignore price increases (they're happy to absorb your defecting customers) but match price decreases (to protect their own share). (A) describes cooperative or cartel behavior, not the kinked demand model. (B) is too extreme — rivals don't need to aggressively cut prices when the other firm is already losing customers on its own. (D) makes no sense for large oligopolists with billions in sunk costs.",
+      "The key asymmetry in the model: rivals ignore your price increase because they're perfectly happy picking up the customers you lose. They only match price decreases, to protect their own share. (A) describes cooperative or cartel-type behavior, not what the kinked demand model predicts. (B) is too extreme — rivals don't need to aggressively cut when the price-raiser is already bleeding customers on its own. (D) makes no sense for large firms with billions in sunk costs.",
   },
   {
     id: "olig-8",
@@ -218,7 +218,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "(8, 8) is the cooperative optimum — both firms earn 8 by choosing High Price. It's unstable because either firm can defect to Low Price and jump from 8 to 10, while the cooperating firm crashes to 1. That temptation is why real-world cartels collapse. (A) identifies the Nash equilibrium, not the cooperative outcome, and both firms are trapped there rather than choosing it. (C) is just one cell in the matrix, not an equilibrium or cooperative result. (D) names the right outcome but the wrong mechanism — the question is about market incentives, not regulation.",
+      "(8, 8) is the cooperative optimum — both firms earn 8 by choosing High Price. It's unstable because either firm can defect to Low Price and jump from 8 to 10 while the cooperating firm crashes to 1. That temptation is exactly why real-world cartels collapse. (A) identifies the Nash equilibrium, not the cooperative outcome — firms are trapped there rather than choosing it voluntarily. (C) is just one cell in the matrix, not an equilibrium or cooperative result. (D) names the right outcome but the wrong mechanism entirely.",
   },
   {
     id: "olig-9",
@@ -232,7 +232,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Cheating dominates for both firms. If the rival colludes, cheating yields 15 vs. 12. If the rival cheats, cheating yields 5 vs. 2. Both cheating produces the Nash equilibrium at (5, 5). The collectively optimal outcome is (12, 12), where both collude and total profit is maximized — but it's unstable because either firm can defect for a higher individual payoff. (A) reverses the two. (C) picks asymmetric cells that aren't stable — if X cheats and Y colludes, Y would immediately switch to cheating. (D) wrongly labels an asymmetric outcome as the cooperative optimum.",
+      "Cheating dominates for both firms. If the rival colludes, cheating yields 15 vs. 12. If the rival cheats, cheating yields 5 vs. 2. So both cheating gives the Nash equilibrium at (5, 5). The collectively optimal outcome is (12, 12), where both collude and total profit maxes out — but it's unstable because either firm can defect for a higher individual payoff. (A) reverses them. (C) picks asymmetric cells that aren't stable — Y would immediately switch to cheating. (D) wrongly labels an asymmetric cell as the cooperative optimum.",
   },
   {
     id: "olig-10",
@@ -246,7 +246,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Nash equilibrium: a set of strategies, one per player, where no individual can do better by changing *only* their own strategy while the other holds constant. Individual stability, not collective optimality. (A) describes the cooperative or socially optimal outcome, which frequently differs from Nash. (C) is neither necessary nor sufficient — Nash equilibria exist whether or not dominant strategies are present. (D) describes a feature of repeated games that *may* facilitate cooperation, but the definition of Nash equilibrium applies to one-shot games too.",
+      "Nash equilibrium means each player's strategy is the best response to the other player's strategy — no one gains from changing their own choice while the other holds constant. It's about individual stability, not collective optimality. (A) describes the cooperative or socially optimal outcome, which is often different from Nash. (C) isn't necessary or sufficient — Nash equilibria can exist with or without dominant strategies. (D) describes a feature of repeated games that might help sustain cooperation, but Nash equilibrium applies to one-shot games just fine.",
   },
   {
     id: "olig-11",
@@ -260,7 +260,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "As long as MC passes through the vertical discontinuity in MR, the profit-maximizing quantity and price don't budge. That's the whole point of the model — it explains why oligopoly prices resist moderate cost changes. (A) ignores the asymmetric response assumption; raising price means losing customers to rivals who won't follow. (B) is unattractive because rivals would match any cut, leaving everyone with lower margins for roughly the same market share. (D) is an overreaction to a cost increase that falls within the gap.",
+      "As long as MC passes through the vertical discontinuity in MR, the profit-maximizing quantity and price stay exactly where they are. That's the whole model — it explains why oligopoly prices resist moderate cost swings. (A) ignores the asymmetric response assumption; raising price means losing customers to rivals who won't follow your increase. (B) is unattractive because rivals match any cut, leaving everyone with thinner margins and basically the same market share. (D) is a huge overreaction to a cost increase that falls within the gap.",
   },
   {
     id: "olig-12",
@@ -274,7 +274,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Once the cartel price is elevated, each member realizes it can boost its own revenue by secretly pumping beyond its quota. If only one member cheats, the price barely drops and that member profits handsomely. But when multiple members cheat simultaneously, supply floods the market and the cartel price collapses. Classic prisoner's dilemma. (A) is wrong — oil demand is notoriously inelastic, which is precisely why restricting supply is so effective at raising prices. (C) is the opposite of reality; non-OPEC producers like U.S. shale companies often *increase* output to exploit the higher price, further undermining the cartel. (D) describes effective enforcement, which is the exception in OPEC's history, not the rule.",
+      "Once the cartel pushes the price up, each member realizes it can boost its own revenue by quietly pumping beyond its quota. If only one member cheats, the price barely moves and that member profits handsomely. But when multiple members cheat at once, supply floods the market and the cartel price collapses. Prisoner's dilemma in real life. (A) is wrong — oil demand is famously inelastic, which is exactly why restricting supply works so well. (C) is the opposite of what happens; non-OPEC producers like U.S. shale companies ramp up output to capitalize on higher prices, further undermining the cartel. (D) describes effective enforcement, which is the exception in OPEC's history, not the norm.",
   },
   {
     id: "olig-13",
@@ -288,7 +288,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Boeing and Airbus produce virtually all large commercial aircraft worldwide. Two firms, enormous barriers to entry (billions in R&D, decades of certification processes), deep mutual interdependence in pricing and design decisions. Textbook oligopoly. (A) is perfect competition — thousands of sellers, identical product. (B) is monopolistic competition — many firms, differentiated products, low barriers. (D) has minimal capital requirements and easy entry, the opposite of oligopoly conditions.",
+      "Boeing and Airbus produce virtually all large commercial aircraft worldwide — two firms, massive barriers to entry (billions in R&D, years of certification), deep mutual interdependence on pricing and design. Textbook oligopoly. (A) describes perfect competition — thousands of sellers with an identical product. (B) is monopolistic competition — many firms, differentiated products, low barriers. (D) has minimal capital requirements and easy entry, the opposite of oligopoly conditions.",
   },
   {
     id: "olig-14",
@@ -302,7 +302,7 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The four-firm concentration ratio sums the market shares of the four largest firms. At 92%, the market is highly concentrated — classic oligopoly territory. (A) draws the opposite conclusion; 92% concentration is about as far from competitive as you can get. (C) assumes equal shares, but the ratio is a sum — one firm could hold 60% while three others split the remaining 32%. (D) contradicts the high concentration; industries with no entry barriers tend toward many firms and low concentration ratios.",
+      "The four-firm concentration ratio adds up the market shares of the four biggest firms. At 92%, the market is highly concentrated — solidly in oligopoly territory. (A) draws the exact wrong conclusion; 92% concentration is about as far from competitive as it gets. (C) assumes equal shares, but the ratio is a sum — one firm might hold 60% while the other three split 32%. (D) contradicts the high concentration; industries without entry barriers tend toward many firms and low concentration.",
   },
   {
     id: "olig-15",
@@ -316,6 +316,6 @@ export const oligopolyQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Tacit collusion means firms reach mutually beneficial pricing without any direct communication. One firm raises its price and others follow — price leadership. No meetings, no signed agreements, just observed behavior and an unspoken understanding. (A) describes explicit collusion, and even explicit agreements are rarely binding since they're illegal. (B) is the definition of explicit collusion, the exact opposite. (D) reverses the legal status: explicit collusion (price-fixing, bid-rigging) is what prosecutors go after under antitrust law, while tacit collusion is nearly impossible to prosecute because there's no provable agreement.",
+      "Tacit collusion is coordination without direct communication. One firm raises prices and the others follow — price leadership. No meetings, no written agreements, just observed behavior and an implicit understanding. (A) describes explicit collusion, and even explicit agreements are rarely binding since they're illegal to begin with. (B) is the definition of explicit collusion, the exact opposite of what's being asked. (D) flips the legal status: explicit collusion (price-fixing, bid-rigging) is what the DOJ prosecutes, while tacit collusion is nearly impossible to go after because there's no provable agreement.",
   },
 ];

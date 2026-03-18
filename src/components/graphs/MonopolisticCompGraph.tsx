@@ -1,6 +1,7 @@
 "use client";
 
 import EconGraph, { GRAPH_AREA } from "./EconGraph";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import { useMonoCompStore } from "@/lib/stores/monopolistic-comp-store";
 import { dataToSvg, pointsToSmoothPath, type Domain } from "@/lib/graph-math";
 
@@ -83,8 +84,19 @@ export default function MonopolisticCompGraph() {
     .join(" ");
 
   const showProfit = profitMaxQ > 0.5 && Math.abs(profit) > 1;
+  const profitFill = profit > 0 ? "#8B5CF6" : "#EF4444";
+
+  // DWL triangle: between demand and MC from Qm to competitive Q (where D = MC)
+  const competitiveQ = Math.max(0, (demand.intercept - mc.intercept) / (mc.slope - demand.slope));
+  const competitiveP = demand.intercept + demand.slope * competitiveQ;
+  const compPt = dataToSvg({ x: competitiveQ, y: competitiveP }, GA, DOMAIN);
+  const dwlPoints = [qmOnDemand, compPt, qmOnMC]
+    .map((p) => `${p.x},${p.y}`)
+    .join(" ");
+  const showDWL = profitMaxQ > 0.5 && competitiveQ > profitMaxQ + 0.5;
 
   return (
+    <FullscreenWrapper title="Monopolistic Competition">
     <div className="space-y-3">
       <div className="graph-container overflow-hidden">
         <div className="px-4 pt-3 pb-1 flex items-center justify-between">
@@ -156,11 +168,44 @@ export default function MonopolisticCompGraph() {
 
           {/* Profit/loss rectangle (short run only) */}
           {showProfit && !isLongRun && (
-            <polygon
-              points={profitRectPts}
-              fill={profit > 0 ? "#8B5CF6" : "#EF4444"}
-              opacity={0.08}
-            />
+            <>
+              <polygon
+                points={profitRectPts}
+                fill={profitFill}
+                opacity={0.18}
+              />
+              <text
+                x={(profitTopLeft.x + profitTopRight.x) / 2}
+                y={(profitTopLeft.y + profitBotLeft.y) / 2 + 3}
+                textAnchor="middle"
+                fontSize={9}
+                fontWeight={600}
+                fill={profitFill}
+                opacity={0.8}
+                fontFamily="DM Sans, system-ui, sans-serif"
+              >
+                {profit > 0 ? "Economic Profit" : "Economic Loss"}
+              </text>
+            </>
+          )}
+
+          {/* DWL triangle */}
+          {showDWL && !isLongRun && (
+            <>
+              <polygon points={dwlPoints} fill="#F59E0B" opacity={0.22} />
+              <text
+                x={(qmOnDemand.x + compPt.x + qmOnMC.x) / 3}
+                y={(qmOnDemand.y + compPt.y + qmOnMC.y) / 3 + 3}
+                textAnchor="middle"
+                fontSize={9}
+                fontWeight={600}
+                fill="#F59E0B"
+                opacity={0.8}
+                fontFamily="DM Sans, system-ui, sans-serif"
+              >
+                DWL
+              </text>
+            </>
           )}
 
           {/* Vertical dashed: Qm to x-axis */}
@@ -371,6 +416,18 @@ export default function MonopolisticCompGraph() {
             <div className="graph-legend-dot" style={{ background: '#14B8A6' }} />
             ATC
           </div>
+          {showProfit && !isLongRun && (
+            <div className="graph-legend-item">
+              <div className="graph-legend-dot" style={{ background: profitFill, borderRadius: 2 }} />
+              {profit > 0 ? "Profit" : "Loss"}
+            </div>
+          )}
+          {showDWL && !isLongRun && (
+            <div className="graph-legend-item">
+              <div className="graph-legend-dot" style={{ background: '#F59E0B', borderRadius: 2 }} />
+              DWL
+            </div>
+          )}
         </div>
       </div>
 
@@ -433,5 +490,6 @@ export default function MonopolisticCompGraph() {
         </p>
       </div>
     </div>
+    </FullscreenWrapper>
   );
 }

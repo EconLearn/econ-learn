@@ -110,6 +110,42 @@ export default function BasicConceptsClientPage() {
             <FlashcardDeck cards={basicConceptsFlashcards} moduleId="basic-concepts" />
           </div>
 
+          {/* Related Topics */}
+          <div className="mb-10">
+            <h2 style={{ color: "var(--color-ink)" }} className="text-lg font-semibold mb-3">
+              Related Topics
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <Link href="/micro/supply-and-demand" className="card-interactive group flex items-center gap-3 p-3.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Supply and Demand</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Market equilibrium, curve shifts, price controls, and economic shocks.</p>
+                </div>
+                <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link href="/micro/production-costs" className="card-interactive group flex items-center gap-3 p-3.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Production and Costs</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Short-run production, cost curves, and diminishing returns.</p>
+                </div>
+                <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link href="/micro/consumer-choice" className="card-interactive group flex items-center gap-3 p-3.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Consumer Choice</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Utility, indifference curves, budget constraints, and optimal choice.</p>
+                </div>
+                <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
           <ModuleNav courseId="micro" currentModuleId="basic-concepts" />
         </div>
 

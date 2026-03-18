@@ -1,6 +1,7 @@
 "use client";
 
 import EconGraph from "./EconGraph";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import { useFactorMarketsStore } from "@/lib/stores/factor-markets-store";
 
 const DOMAIN = { xMin: 0, xMax: 80, yMin: 0, yMax: 40 };
@@ -14,6 +15,7 @@ export default function FactorMarketsGraph() {
   } = useFactorMarketsStore();
 
   return (
+    <FullscreenWrapper title="Labor Market">
     <div className="space-y-3">
       <div className="graph-container overflow-hidden">
         <div className="px-4 pt-3 pb-1">
@@ -111,5 +113,6 @@ export default function FactorMarketsGraph() {
         Reset
       </button>
     </div>
+    </FullscreenWrapper>
   );
 }

@@ -41,11 +41,46 @@ export default function MacroPage() {
     },
   };
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What topics are on the AP Macroeconomics exam?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "AP Macroeconomics covers basic macro concepts, GDP measurement, unemployment and inflation, aggregate demand and supply, fiscal policy, monetary policy, the loanable funds market, economic growth, the business cycle, international trade, and exchange rates.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is AP Macroeconomics harder than AP Microeconomics?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Most students find the two exams similar in difficulty. AP Macro has more policy-related content (fiscal and monetary policy), while AP Micro focuses more on firm-level graph analysis. Many students take both in the same year.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How many units are in AP Macroeconomics?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The College Board organizes AP Macroeconomics into 6 units. EconLearn covers these across 12 focused modules — from GDP measurement through international trade and exchange rates — for more targeted review.",
+        },
+      },
+    ],
+  };
+
   return (
     <div className="macro-page max-w-3xl mx-auto px-6 py-14">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(courseJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <div className="mb-10">
         <div className="flex items-center gap-2 mb-3">
@@ -58,6 +93,22 @@ export default function MacroPage() {
           {macroCourse.title}
         </h1>
         <p className="text-[15px]" style={{ color: 'var(--color-ink-muted)' }}>{macroCourse.description}</p>
+      </div>
+
+      {/* SEO intro prose */}
+      <div className="mb-10 text-[14px] leading-relaxed space-y-3" style={{ color: 'var(--color-ink-light)' }}>
+        <p>
+          AP Macroeconomics is about the economy as a whole — GDP, unemployment, inflation, and the
+          policy tools governments and central banks use to manage them. The exam format mirrors AP
+          Micro: 60 multiple choice questions plus 3 free-response questions, with heavy emphasis
+          on the AD/AS model and monetary/fiscal policy graphs.
+        </p>
+        <p>
+          The modules below cover every topic on the exam in the order most classes teach them.
+          Each one has written content, practice questions with full explanations, and flashcards.
+          Several modules include interactive graphs — especially useful for AD/AS, monetary
+          policy, and exchange rates.
+        </p>
       </div>
 
       <div className="space-y-0.5">

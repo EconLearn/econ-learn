@@ -8,32 +8,32 @@ export const loanableFundsContent = {
     {
       heading: "What Are Loanable Funds?",
       content:
-        "A household earns $80,000 and spends $65,000. The remaining $15,000 enters the financial system -- a bank account, a bond purchase, a mutual fund. Somewhere else, a firm borrows $15,000 to buy new equipment. That transaction is the loanable funds market in miniature.\n\nEvery dollar someone saves becomes a dollar someone else can borrow. On the supply side, households and the government provide funds by saving. On the demand side, firms and the government borrow to finance investment and spending.\n\nThe **real interest rate** is the price that balances the two sides. When it rises, saving becomes more attractive and borrowing less so. When it falls, the reverse happens. The market clears at the rate where quantity saved equals quantity borrowed.",
+        "A household earns $80,000 and spends $65,000. The leftover $15,000 goes somewhere -- a savings account, a bond purchase, a mutual fund contribution. Meanwhile, a firm across town borrows $15,000 to buy a new CNC machine. That transaction, scaled up across millions of households and firms, is the loanable funds market.\n\nEvery dollar saved becomes a dollar available for someone else to borrow. Households and the government supply funds by saving. Firms and the government demand funds to finance investment and spending.\n\nThe **real interest rate** is the price that brings the two sides into balance. When it rises, saving looks more attractive and borrowing gets more expensive, so less borrowing happens. When it falls, borrowing gets cheaper and saving pays less, so borrowing picks up. The market clears where the quantity saved equals the quantity borrowed.",
     },
     {
       heading: "Supply: National Saving",
       content:
-        "The supply of loanable funds comes from **national saving**: private saving by households plus public saving by the government. When households spend less than they earn, that money flows into the financial system through banks, bonds, and other instruments.\n\nThe supply curve slopes upward. At a 2% real interest rate, a household might leave cash in a checking account earning nothing. At 6%, that same household is far more likely to buy a savings bond or a certificate of deposit. Higher rates reward patience.\n\n**Public saving** is the other component. When the government runs a budget surplus (tax revenue exceeds spending), it adds to the supply. A deficit does the opposite. The government becomes a net borrower, absorbing funds that would otherwise be available for private investment.",
+        "The supply of loanable funds comes from **national saving** -- that's private saving by households plus public saving by the government. When households spend less than they earn, that surplus flows into the financial system through bank deposits, bond purchases, and other instruments.\n\nThe supply curve slopes upward. At a 2% real interest rate, a household might just leave cash sitting in a checking account earning basically nothing -- why bother locking it up? At 6%, that same household is much more likely to buy a savings bond or a 12-month CD. Higher rates reward the patience of deferring consumption.\n\n**Public saving** is the other piece. When the government runs a budget surplus (tax revenue exceeds spending), it adds to the supply of loanable funds. A deficit flips that around -- the government becomes a net borrower, soaking up funds that would otherwise be available for private investment. The Clinton-era surpluses of 1998-2001 were a textbook example of the government contributing positively to national saving.",
     },
     {
       heading: "Demand: Investment",
       content:
-        "The demand for loanable funds comes primarily from **business investment**: firms borrowing to purchase equipment, construct factories, or fund research. The government also borrows when running a deficit, but the AP exam focuses on investment demand.\n\nThe demand curve slopes downward. A factory expansion earns an 8% return. If the interest rate is 10%, the firm will not borrow. Drop the rate to 5% and the project suddenly clears the profitability hurdle.\n\nEconomists call this the **marginal efficiency of investment**. At lower rates, more projects become viable. At higher rates, fewer pass the test. Each firm ranks its potential projects by expected return and borrows only for those that beat the interest rate.",
+        "Demand for loanable funds comes primarily from **business investment** -- firms borrowing to buy equipment, build factories, fund R&D. The government also borrows when running a deficit, but for AP purposes the focus is on investment demand.\n\nThe demand curve slopes downward, and the intuition is concrete. A factory expansion project earns an expected 8% return. If the interest rate is 10%, the firm won't borrow because the project loses money on net. Drop the rate to 5% and suddenly that expansion clears the profitability bar.\n\nEconomists call this the **marginal efficiency of investment**. Firms internally rank their potential projects by expected return -- the warehouse expansion at 12%, the new software system at 9%, the office renovation at 4%. They borrow for every project that beats the interest rate and skip the rest. Lower rates mean more projects pass the test; higher rates thin out the list.",
     },
     {
       heading: "Equilibrium and Crowding Out",
       content:
-        "Where supply crosses demand, the market sets the **equilibrium real interest rate**. At that rate, every dollar saved finds a borrower and every profitable investment project gets funded.\n\nSuppose the federal government runs a $800 billion **budget deficit** in a given year. It must borrow heavily. That borrowing reduces the supply of loanable funds available to the private sector (shifts supply left). The real interest rate rises.\n\nHigher rates discourage private investment. Firms abandon projects that no longer beat the higher borrowing cost. That displacement is **crowding out**: government borrowing pushes private investment aside. The larger the deficit, the more severe the crowding out.\n\nTry it in the graph: click \"Budget Deficit ↑\" and watch the equilibrium interest rate climb while the quantity of investment falls.",
+        "Where supply meets demand, the market settles on the **equilibrium real interest rate**. At that rate, every dollar saved finds a borrower and every investment project worth funding gets funded.\n\nSuppose the federal government runs an $800 billion **budget deficit** in a given year. It has to borrow heavily, and that borrowing absorbs saving that would otherwise be available to private firms. In the graph, supply shifts left. The real interest rate rises.\n\nHigher rates kill off private investment projects. A firm that was planning to borrow for a 7% return project won't do it if the rate jumps to 8%. That displacement is **crowding out** -- government borrowing elbowing private investment out of the way. The bigger the deficit, the more severe the crowding out. This was a major concern during the post-2008 stimulus debates and has come up repeatedly in AP free-response questions since then.\n\nTry it in the graph: click \"Budget Deficit \\u2191\" and watch the equilibrium interest rate climb while the quantity of investment falls.",
     },
     {
       heading: "Policy Shifts and Open Economies",
       content:
-        "**Saving incentives** like 401(k) tax advantages or Roth IRA expansions shift supply right, lowering the real interest rate and boosting investment. **Investment tax credits** shift demand right, raising the rate and pulling in more saving.\n\nIn an **open economy**, loanable funds flow across borders. If the domestic real interest rate exceeds the world rate, foreign capital flows in, supplementing domestic saving. If the domestic rate falls below the world rate, capital flows out seeking better returns. The AP exam sometimes tests whether a specific policy change attracts or repels international capital.\n\nThe loanable funds model connects directly to **fiscal policy** and the **money market**. Deficit-financed fiscal expansion raises interest rates in this market, which appreciates the currency in the foreign exchange market and worsens the trade balance. The 2024 AP Macroeconomics free-response section tested exactly this chain of reasoning.",
+        "**Saving incentives** like 401(k) tax advantages or Roth IRA contribution limit increases shift supply right, which lowers the real interest rate and boosts investment. **Investment tax credits** shift demand right, which raises the rate and pulls in more saving from people responding to that higher return.\n\nIn an **open economy**, loanable funds cross borders. If the U.S. real interest rate exceeds rates in Europe or Japan, foreign capital flows in -- supplementing domestic saving and putting downward pressure on the rate. If the domestic rate drops below the world rate, capital flows out chasing better returns elsewhere. The AP exam occasionally tests whether a specific policy change attracts or repels international capital, and students tend to get the direction wrong.\n\nThe loanable funds model connects directly to **fiscal policy** and the **money market**. Deficit-financed government spending raises interest rates here, which appreciates the dollar in the foreign exchange market (because foreign investors want higher-yielding U.S. assets), which makes American exports more expensive and imports cheaper. Net exports fall. The 2024 AP Macroeconomics free-response section tested exactly this chain of reasoning -- deficit to interest rate to exchange rate to trade balance.",
     },
     {
       heading: "Common AP Mistakes",
       content:
-        "The loanable funds market determines the **real** interest rate, adjusted for inflation. The money market determines the **nominal** rate through Federal Reserve operations. Mixing these two models is a frequent source of lost points on the AP exam. They answer different questions using different frameworks.\n\nA government deficit reduces the supply of loanable funds (shifts left). It does not shift demand. The government is borrowing, absorbing saving that would otherwise go to private investment. Getting the curve wrong on a free-response question costs full credit on that section.\n\nHigher real interest rates attract foreign capital, which causes the domestic currency to appreciate, making exports more expensive and imports cheaper. Net exports fall. That full chain -- from interest rate to capital flow to exchange rate to net exports -- appears regularly on AP Macroeconomics free-response prompts.",
+        "The loanable funds market determines the **real** interest rate -- that's the rate adjusted for inflation. The money market determines the **nominal** rate through Federal Reserve operations. Mixing up these two models is probably the single most common way students lose points on AP Macro free-response questions. They answer different questions using different mechanisms, and writing about the Fed in a loanable funds problem (or vice versa) will cost you.\n\nA government deficit reduces the supply of loanable funds by shifting the curve left. It does not shift demand. The government is borrowing, which absorbs saving that would otherwise go to private investment -- that's a supply-side event. Getting the wrong curve on a free-response costs you full credit for that section of the problem.\n\nHigher real interest rates attract foreign capital inflows, which increases demand for the domestic currency and causes it to appreciate. A stronger dollar makes U.S. exports more expensive for foreign buyers and makes imports cheaper for Americans. Net exports fall. That full chain -- interest rate to capital flow to exchange rate to net exports -- shows up on AP Macro free-response prompts almost every year in some form.",
     },
   ],
 };
@@ -51,7 +51,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "A larger deficit means the government saves less or borrows more, pulling funds out of the supply side. Supply shifts left. With less available saving, the real interest rate rises.",
+      "A larger deficit means the government is saving less (or borrowing more), which pulls funds out of the supply side. Supply shifts left. With less saving available, the real interest rate gets pushed up.",
   },
   {
     id: "lf-2",
@@ -65,7 +65,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Government borrowing competes with private borrowers for the same pool of saving. The real interest rate gets pushed up, and firms abandon investment projects that no longer beat the higher borrowing cost. Private investment falls. That displacement is crowding out.",
+      "Government borrowing competes with private firms for the same pool of saving. That competition pushes the real interest rate up, and firms shelve investment projects that no longer beat the higher borrowing cost. Private investment drops -- that's crowding out.",
   },
   {
     id: "lf-3",
@@ -79,7 +79,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "An investment tax credit makes capital purchases more profitable, so firms want to borrow more at every interest rate. Demand for loanable funds shifts right. Supply is not affected because the credit targets investment spending, not saving behavior.",
+      "An investment tax credit makes capital purchases more profitable for firms, so they want to borrow more at every interest rate. Demand for loanable funds shifts right. Supply isn't affected because the credit targets investment spending, not saving behavior.",
   },
   {
     id: "lf-4",
@@ -93,7 +93,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The loanable funds market determines the real interest rate at the point where the supply of saving equals the demand for investment. The Fed controls the nominal rate through the money market. Congress does not set interest rates directly. Option D reverses the Fisher equation; the real rate equals the nominal rate minus inflation, not the other way around.",
+      "The loanable funds market determines the real interest rate where the supply of saving equals the demand for investment. The Fed controls the nominal rate through the money market -- different model, different rate. Congress doesn't set interest rates directly. Option D has the Fisher equation backward; real rate = nominal rate minus inflation, not the other direction.",
   },
   {
     id: "lf-5",
@@ -107,7 +107,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "More saving at every interest rate shifts supply right. The equilibrium real interest rate falls, making more investment projects profitable. Investment rises.",
+      "More saving at every interest rate means supply shifts right. The equilibrium real interest rate falls, which makes more investment projects profitable. Investment rises. This is the classical economics argument for why thrift benefits the economy through cheaper capital.",
   },
   {
     id: "lf-6",
@@ -121,7 +121,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "A surplus means tax revenue exceeds spending. The government saves rather than borrows, adding to the pool of national saving. Supply of loanable funds increases.",
+      "A surplus means the government collects more in taxes than it spends. The government is saving rather than borrowing, which adds to the total pool of national saving. Supply of loanable funds increases.",
   },
   {
     id: "lf-7",
@@ -135,7 +135,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Foreign investors chase higher returns. Capital flows into the country, increasing demand for the domestic currency. The currency appreciates. Option A reverses the direction of capital flow. Option D gets the currency movement wrong; inflows increase demand for the currency, which makes it appreciate, not depreciate.",
+      "Foreign investors chase higher returns. Capital flows into the country, increasing demand for the domestic currency, and the currency appreciates. Option A has the capital flow direction backward. Option D gets the currency movement wrong -- inflows increase demand for the currency, which pushes its value up, not down.",
   },
   {
     id: "lf-8",
@@ -149,7 +149,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "A higher real interest rate means savers earn more on their deposits and bonds. The increased return encourages households to save more and consume less today. That positive relationship between the interest rate and quantity of saving produces an upward slope.",
+      "A higher real interest rate means savers earn a better return on their deposits and bonds. That increased reward encourages households to save more and consume less today. The positive relationship between the interest rate and the quantity of saving is what gives the supply curve its upward slope.",
   },
   {
     id: "lf-9",
@@ -163,7 +163,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Government borrowing pushes the real interest rate up. Higher rates attract foreign capital. Capital inflows increase demand for the dollar, which appreciates. A stronger dollar makes exports pricier and imports cheaper. Net exports fall. This chain appears on AP Macroeconomics free-response sections regularly.",
+      "Government borrowing pushes the real interest rate up. Higher rates attract foreign capital looking for better returns. Capital inflows increase demand for the dollar, which appreciates. A stronger dollar makes U.S. exports pricier for foreign buyers and imports cheaper for Americans. Net exports fall. This chain shows up on AP Macro free-response questions with remarkable regularity.",
   },
   {
     id: "lf-10",
@@ -177,7 +177,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Two separate models, two separate rates. The loanable funds market sets the real interest rate (adjusted for inflation). The money market, where the Fed operates, sets the nominal interest rate. The Fisher equation links them: nominal rate = real rate + expected inflation.",
+      "Two separate models for two separate rates. The loanable funds market sets the real interest rate (adjusted for inflation). The money market, where the Fed conducts open market operations and sets the federal funds rate, determines the nominal interest rate. The Fisher equation connects them: nominal rate = real rate + expected inflation.",
   },
   {
     id: "lf-11",
@@ -191,7 +191,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Borrowing $500 billion absorbs national saving that would otherwise go to private borrowers. Supply shifts left. The real interest rate rises. Higher rates make investment projects less profitable, so firms cut back. Textbook crowding out. Option A reverses the supply shift direction. Option C moves the wrong curve in the wrong direction. Option D shifts demand right but incorrectly predicts a falling rate; a rightward demand shift would raise the rate, not lower it.",
+      "Borrowing $500 billion absorbs national saving that would otherwise go to private borrowers. Supply shifts left, the real interest rate rises, and higher rates make investment projects less profitable -- so firms cut back. Textbook crowding out. Option A reverses the supply shift. Option C moves the wrong curve in the wrong direction. Option D shifts demand right but then incorrectly predicts a falling rate; a rightward demand shift would push the rate up.",
   },
   {
     id: "lf-12",
@@ -205,7 +205,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Real rate = nominal rate - expected inflation = 8% - 3% = 5%. This is the rate that matters in the loanable funds market because it captures the true purchasing-power return for savers and cost for borrowers. Option A adds instead of subtracting. Option C confuses the inflation rate with the real rate. Option D multiplies the two numbers, which has no meaning in this context.",
+      "Real rate = nominal rate - expected inflation = 8% - 3% = 5%. This is the rate that matters in the loanable funds market because it captures the actual purchasing-power return for savers and cost for borrowers. Option A adds instead of subtracting. Option C confuses the inflation rate itself with the real rate. Option D multiplies the two numbers, which produces a meaningless result.",
   },
   {
     id: "lf-13",
@@ -219,7 +219,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Tax-advantaged savings programs incentivize more saving at every interest rate. Supply shifts right. Greater supply drives the real interest rate down, which makes more investment projects profitable. Option A moves the wrong curve; savings incentives affect supply. Option B shifts supply the wrong direction; the program increases saving, not decreases it. Option D targets the wrong curve entirely.",
+      "Tax-advantaged savings programs incentivize more saving at every interest rate, shifting supply right. More supply drives the real interest rate down, and a lower rate makes more investment projects profitable. Option A targets the wrong curve -- savings incentives affect supply. Option B shifts supply the wrong direction since the program encourages more saving, not less. Option D also targets the wrong curve.",
   },
   {
     id: "lf-14",
@@ -233,7 +233,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Foreign capital supplements domestic saving. More funds available for borrowing means supply shifts right, the real interest rate falls, and more domestic investment projects become viable. The U.S. has historically attracted large capital inflows, helping keep real rates lower than domestic saving alone would permit. Option A shifts supply the wrong direction. Option B moves the wrong curve. Option D is factually wrong; international capital flows are a major part of the loanable funds market in open economies.",
+      "Foreign capital supplements domestic saving -- there's simply more money available for borrowing. Supply shifts right, the real interest rate drops, and more domestic investment projects become viable at the lower rate. The U.S. has historically attracted enormous capital inflows, which has helped keep real rates lower than domestic saving alone would support. Option A shifts supply the wrong direction. Option B moves the wrong curve entirely. Option D is factually wrong; international capital flows are a huge part of how the loanable funds market works in open economies.",
   },
   {
     id: "lf-15",
@@ -247,7 +247,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 0,
     explanation:
-      "Demand shifts right. The equilibrium real interest rate rises. A higher rate moves the economy up along the existing supply curve, inducing more saving. Both the rate and the quantity of saving increase. Option B gets saving wrong; a higher rate encourages more saving, not less, since the supply curve slopes upward. Options C and D both predict a falling rate, which contradicts a rightward demand shift with no supply change.",
+      "Demand shifts right. The equilibrium real interest rate rises. That higher rate moves the economy up along the existing supply curve, which induces more saving (since saving increases when the return on it goes up). Both the rate and the quantity of saving increase. Option B gets saving wrong -- a higher rate encourages more saving, not less, because the supply curve slopes upward. Options C and D both predict a falling rate, which contradicts a rightward demand shift with no change in supply.",
   },
   {
     id: "lf-16",
@@ -261,7 +261,7 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "National saving = private saving + public saving. A deficit means public saving goes negative. With private saving held constant, national saving falls. Since S = I in a closed economy, investment must fall by the same amount. This is the mathematical identity behind crowding out. Option A reverses the direction. Option C ignores the deficit entirely. Option D confuses government spending with investment; the borrowing absorbs funds that would have financed private investment.",
+      "National saving = private saving + public saving. A deficit means public saving goes negative (the government spends more than it collects). With private saving held constant, national saving falls. In a closed economy S = I, so investment must fall by the same amount. This is the accounting identity behind crowding out. Option A reverses the direction. Option C ignores the deficit. Option D confuses government spending with private investment -- the borrowing absorbs funds that would have financed private investment.",
   },
   {
     id: "lf-17",
@@ -275,6 +275,6 @@ export const loanableFundsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Two opposing forces. The surplus shifts supply right (downward pressure on the rate). Increased business confidence shifts demand right (upward pressure). The net effect depends on which shift is larger. If demand dominates, the rate rises. If supply dominates, it falls. Without magnitudes, the outcome is indeterminate. Options A and B each assume one shift dominates without justification. Option D assumes exact cancellation, which is a special case with no reason to assume it as the default.",
+      "Two opposing forces are at work. The surplus shifts supply right, putting downward pressure on the rate. Higher business confidence shifts demand right, putting upward pressure on the rate. Which one wins depends on which shift is bigger -- and the question doesn't give you that information. If demand dominates, the rate rises; if supply dominates, it falls. Options A and B each assume one shift dominates without any basis for that assumption. Option D assumes exact cancellation, which is a special case that would require a very specific coincidence.",
   },
 ];

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import {
   useBusinessCycleStore,
   phases,
@@ -119,6 +120,7 @@ export default function BusinessCycleGraph() {
   const activeInfo = phases.find((p) => p.id === activePhase);
 
   return (
+    <FullscreenWrapper title="Business Cycle">
     <div className="graph-container">
       <div className="p-1">
         <svg
@@ -462,5 +464,6 @@ export default function BusinessCycleGraph() {
         </div>
       </div>
     </div>
+    </FullscreenWrapper>
   );
 }

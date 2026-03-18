@@ -107,6 +107,42 @@ export default function MonopolisticCompetitionClientPage() {
             <FlashcardDeck cards={monopolisticCompetitionFlashcards} moduleId="monopolistic-competition" />
           </div>
 
+          {/* Related Topics */}
+          <div className="mb-10">
+            <h2 style={{ color: "var(--color-ink)" }} className="text-lg font-semibold mb-3">
+              Related Topics
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <Link href="/micro/perfect-competition" className="card-interactive group flex items-center gap-3 p-3.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Perfect Competition</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Price-taking firms, profit maximization at P = MC, and long-run equilibrium.</p>
+                </div>
+                <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link href="/micro/oligopoly" className="card-interactive group flex items-center gap-3 p-3.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Oligopoly</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Game theory, Nash equilibrium, cartels, and strategic behavior.</p>
+                </div>
+                <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link href="/micro/monopoly" className="card-interactive group flex items-center gap-3 p-3.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Monopoly</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Single-firm markets, MR below price, and deadweight loss.</p>
+                </div>
+                <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
           <ModuleNav courseId="micro" currentModuleId="monopolistic-competition" />
         </div>
 

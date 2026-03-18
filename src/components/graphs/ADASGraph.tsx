@@ -1,6 +1,7 @@
 "use client";
 
 import EconGraph from "./EconGraph";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import { useADASStore, MACRO_SHOCKS } from "@/lib/stores/adas-store";
 import { dataToSvg, type GraphArea, type Domain } from "@/lib/graph-math";
 
@@ -22,6 +23,7 @@ export default function ADASGraph() {
   const gapColor = gap.includes("Inflationary") ? "text-red-600" : gap.includes("Recessionary") ? "text-blue-600" : "text-slate-900";
 
   return (
+    <FullscreenWrapper title="AD / AS Model">
     <div className="space-y-3">
       <div className="graph-container overflow-hidden">
         <div className="px-4 pt-3 pb-1">
@@ -161,5 +163,6 @@ export default function ADASGraph() {
         )}
       </div>
     </div>
+    </FullscreenWrapper>
   );
 }

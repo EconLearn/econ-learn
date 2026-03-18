@@ -1,0 +1,80 @@
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
+
+// GET /api/assignments?classroom_id=xxx — list assignments for a classroom
+export async function GET(req: NextRequest) {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  }
+
+  const classroomId = req.nextUrl.searchParams.get("classroom_id");
+
+  if (!classroomId) {
+    return NextResponse.json({ error: "classroom_id is required" }, { status: 400 });
+  }
+
+  const { data: assignments, error } = await supabase
+    .from("assignments")
+    .select("*, assignment_completions(count)")
+    .eq("classroom_id", classroomId)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ assignments });
+}
+
+// POST /api/assignments — create a new assignment
+export async function POST(req: NextRequest) {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  }
+
+  const { classroom_id, title, type, module_ids, due_date, config } = await req.json();
+
+  if (!classroom_id || !title || !type || !module_ids?.length) {
+    return NextResponse.json(
+      { error: "classroom_id, title, type, and module_ids are required" },
+      { status: 400 }
+    );
+  }
+
+  // Verify teacher owns the classroom
+  const { data: classroom } = await supabase
+    .from("classrooms")
+    .select("teacher_id")
+    .eq("id", classroom_id)
+    .single();
+
+  if (!classroom || classroom.teacher_id !== user.id) {
+    return NextResponse.json({ error: "Not authorized" }, { status: 403 });
+  }
+
+  const { data: assignment, error } = await supabase
+    .from("assignments")
+    .insert({
+      classroom_id,
+      teacher_id: user.id,
+      title: title.trim(),
+      type,
+      module_ids,
+      due_date: due_date || null,
+      config: config || {},
+    })
+    .select()
+    .single();
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ assignment }, { status: 201 });
+}

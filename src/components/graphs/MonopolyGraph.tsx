@@ -1,6 +1,7 @@
 "use client";
 
 import EconGraph, { GRAPH_AREA } from "./EconGraph";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import { useMonopolyStore } from "@/lib/stores/monopoly-store";
 import { dataToSvg, pointsToSmoothPath, type Domain } from "@/lib/graph-math";
 
@@ -64,6 +65,7 @@ export default function MonopolyGraph() {
   const profitFill = monopolyProfit > 0 ? "#8B5CF6" : "#EF4444";
 
   return (
+    <FullscreenWrapper title="Monopoly">
     <div className="space-y-3">
       <div className="graph-container overflow-hidden">
         <div className="px-4 pt-3 pb-1">
@@ -98,12 +100,40 @@ export default function MonopolyGraph() {
 
           {/* Profit rectangle */}
           {showProfit && (
-            <polygon points={profitRectPts} fill={profitFill} opacity={0.08} />
+            <>
+              <polygon points={profitRectPts} fill={profitFill} opacity={0.18} />
+              <text
+                x={(profitTopLeft.x + profitTopRight.x) / 2}
+                y={(profitTopLeft.y + profitBotLeft.y) / 2 + 3}
+                textAnchor="middle"
+                fontSize={9}
+                fontWeight={600}
+                fill={profitFill}
+                opacity={0.8}
+                fontFamily="DM Sans, system-ui, sans-serif"
+              >
+                {monopolyProfit > 0 ? "Economic Profit" : "Economic Loss"}
+              </text>
+            </>
           )}
 
           {/* DWL triangle */}
           {profitMaxQ > 0.5 && dwl > 0 && (
-            <polygon points={dwlPoints} fill="#F59E0B" opacity={0.15} />
+            <>
+              <polygon points={dwlPoints} fill="#F59E0B" opacity={0.22} />
+              <text
+                x={(qmOnDemand.x + compPt.x + qmOnMC.x) / 3}
+                y={(qmOnDemand.y + compPt.y + qmOnMC.y) / 3 + 3}
+                textAnchor="middle"
+                fontSize={9}
+                fontWeight={600}
+                fill="#F59E0B"
+                opacity={0.8}
+                fontFamily="DM Sans, system-ui, sans-serif"
+              >
+                DWL
+              </text>
+            </>
           )}
 
           {/* Vertical dashed line from demand at Qm down to x-axis */}
@@ -221,6 +251,18 @@ export default function MonopolyGraph() {
             <div className="graph-legend-dot" style={{ background: '#14B8A6' }} />
             ATC
           </div>
+          {showProfit && (
+            <div className="graph-legend-item">
+              <div className="graph-legend-dot" style={{ background: profitFill, borderRadius: 2 }} />
+              {monopolyProfit > 0 ? "Profit" : "Loss"}
+            </div>
+          )}
+          {profitMaxQ > 0.5 && dwl > 0 && (
+            <div className="graph-legend-item">
+              <div className="graph-legend-dot" style={{ background: '#F59E0B', borderRadius: 2 }} />
+              DWL
+            </div>
+          )}
         </div>
       </div>
 
@@ -281,5 +323,6 @@ export default function MonopolyGraph() {
         </div>
       </div>
     </div>
+    </FullscreenWrapper>
   );
 }

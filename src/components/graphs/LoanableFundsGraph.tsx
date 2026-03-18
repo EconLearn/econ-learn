@@ -2,6 +2,7 @@
 
 import { useCallback } from "react";
 import EconGraph from "./EconGraph";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import {
   useLoanableFundsStore,
   lfShocks,
@@ -37,6 +38,7 @@ export default function LoanableFundsGraph() {
   );
 
   return (
+    <FullscreenWrapper title="Loanable Funds">
     <div className="graph-container">
       <div className="p-1">
         <EconGraph
@@ -264,5 +266,6 @@ export default function LoanableFundsGraph() {
         </div>
       </div>
     </div>
+    </FullscreenWrapper>
   );
 }

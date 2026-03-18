@@ -2,6 +2,7 @@
 
 import EconGraph from "./EconGraph";
 import GraphAxes from "./GraphAxes";
+import FullscreenWrapper from "@/components/ui/FullscreenWrapper";
 import {
   usePerfectCompetitionStore,
   FIRM_FC,
@@ -177,6 +178,7 @@ export default function PerfectCompetitionGraph() {
         : "text-gray-500";
 
   return (
+    <FullscreenWrapper title="Perfect Competition">
     <div className="space-y-3">
       {/* Two-panel graph */}
       <div className="graph-container overflow-hidden">
@@ -245,14 +247,28 @@ export default function PerfectCompetitionGraph() {
 
               {/* Profit/loss rectangle */}
               {showProfit && (
-                <rect
-                  x={rectTopLeft.x}
-                  y={Math.min(rectTopLeft.y, rectBottomLeft.y)}
-                  width={rectTopRight.x - rectTopLeft.x}
-                  height={Math.abs(rectTopLeft.y - rectBottomLeft.y)}
-                  fill={profitFill}
-                  opacity={0.1}
-                />
+                <>
+                  <rect
+                    x={rectTopLeft.x}
+                    y={Math.min(rectTopLeft.y, rectBottomLeft.y)}
+                    width={rectTopRight.x - rectTopLeft.x}
+                    height={Math.abs(rectTopLeft.y - rectBottomLeft.y)}
+                    fill={profitFill}
+                    opacity={0.2}
+                  />
+                  <text
+                    x={(rectTopLeft.x + rectTopRight.x) / 2}
+                    y={(Math.min(rectTopLeft.y, rectBottomLeft.y) + Math.max(rectTopLeft.y, rectBottomLeft.y)) / 2 + 3}
+                    textAnchor="middle"
+                    fontSize={9}
+                    fontWeight={600}
+                    fill={profitFill}
+                    opacity={0.85}
+                    fontFamily="DM Sans, system-ui, sans-serif"
+                  >
+                    {profitPerUnit > 0 ? "Profit" : "Loss"}
+                  </text>
+                </>
               )}
 
               {/* Horizontal price line: P = MR = D */}
@@ -435,6 +451,12 @@ export default function PerfectCompetitionGraph() {
             <div className="graph-legend-dot" style={{ background: '#14B8A6' }} />
             P = MR
           </div>
+          {showProfit && (
+            <div className="graph-legend-item">
+              <div className="graph-legend-dot" style={{ background: profitFill, borderRadius: 2 }} />
+              {profitPerUnit > 0 ? "Profit" : "Loss"}
+            </div>
+          )}
         </div>
       </div>
 
@@ -544,5 +566,6 @@ export default function PerfectCompetitionGraph() {
         </button>
       </div>
     </div>
+    </FullscreenWrapper>
   );
 }
