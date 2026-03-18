@@ -22,7 +22,7 @@ export interface Assignment {
   classroom_id: string;
   teacher_id: string;
   title: string;
-  type: "lesson" | "quiz" | "practice_test";
+  type: "lesson" | "quiz" | "practice_test" | "exam";
   module_ids: string[];
   due_date: string | null;
   created_at: string;
@@ -34,6 +34,12 @@ export interface AssignmentConfig {
   time_limit_minutes?: number | null; // null = no limit
   retakes_allowed?: boolean;
   passing_score?: number; // 0-100
+  // Exam-specific config
+  question_ids?: string[]; // UUIDs of teacher_questions
+  lockdown?: boolean; // lock student browser during exam
+  shuffle_questions?: boolean;
+  shuffle_options?: boolean;
+  show_results?: boolean; // teacher controls when to release results
 }
 
 export interface AssignmentCompletion {
@@ -67,6 +73,48 @@ export interface Subscription {
   trial_ends_at: string | null;
   current_period_end: string | null;
   created_at: string;
+}
+
+export interface TeacherQuestion {
+  id: string;
+  teacher_id: string;
+  module_id: string;
+  course: "micro" | "macro";
+  question: string;
+  options: string[];
+  correct_index: number;
+  explanation: string | null;
+  difficulty: "easy" | "medium" | "hard";
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ExamSession {
+  id: string;
+  assignment_id: string;
+  student_id: string;
+  started_at: string;
+  ends_at: string;
+  submitted_at: string | null;
+  tab_switches: number;
+  fullscreen_exits: number;
+  status: "in_progress" | "submitted" | "expired" | "force_submitted";
+  answers: ExamAnswer[] | null;
+  score: number | null;
+}
+
+export interface ExamAnswer {
+  question_id: string;
+  selected_index: number;
+}
+
+export interface ExamQuestion {
+  id: string;
+  module_id: string;
+  course: string;
+  question: string;
+  options: string[];
+  difficulty: string;
 }
 
 export function generateJoinCode(): string {

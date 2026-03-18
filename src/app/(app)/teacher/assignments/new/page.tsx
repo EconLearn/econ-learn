@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useEffect, Suspense, useMemo } from "react";
+import { useState, useEffect, Suspense, useMemo, useCallback } from "react";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { microCourse, macroCourse } from "@/data/courses";
+import type { TeacherQuestion } from "@/lib/types/teacher";
 
-type AssignmentType = "lesson" | "quiz" | "custom_quiz";
+type AssignmentType = "lesson" | "quiz" | "custom_quiz" | "exam";
 
 interface Classroom {
   id: string;
@@ -50,6 +51,16 @@ function NewAssignmentContent() {
   const [dueDate, setDueDate] = useState("");
   const [availableFrom, setAvailableFrom] = useState("");
 
+  // ── Exam-specific state ──
+  const [teacherQuestions, setTeacherQuestions] = useState<TeacherQuestion[]>([]);
+  const [questionsLoading, setQuestionsLoading] = useState(false);
+  const [selectedQuestionIds, setSelectedQuestionIds] = useState<string[]>([]);
+  const [examTimeLimit, setExamTimeLimit] = useState<number>(45);
+  const [lockdown, setLockdown] = useState(true);
+  const [shuffleQuestions, setShuffleQuestions] = useState(true);
+  const [shuffleOptions, setShuffleOptions] = useState(true);
+  const [showResults, setShowResults] = useState(false);
+
   // ── UI state ──
   const [classrooms, setClassrooms] = useState<Classroom[]>([]);
   const [classroomsLoading, setClassroomsLoading] = useState(true);
@@ -77,6 +88,26 @@ function NewAssignmentContent() {
     }
     fetchClassrooms();
   }, [preselectedClassroom]);
+
+  // ── Fetch teacher questions when exam type is selected ──
+  useEffect(() => {
+    if (type !== "exam") return;
+    setQuestionsLoading(true);
+    async function fetchQuestions() {
+      try {
+        const res = await fetch("/api/teacher/questions");
+        if (res.ok) {
+          const data = await res.json();
+          setTeacherQuestions(data.questions || []);
+        }
+      } catch {
+        // fail silently
+      } finally {
+        setQuestionsLoading(false);
+      }
+    }
+    fetchQuestions();
+  }, [type]);
 
   // ── Module helpers ──
   const microModules = microCourse.modules;
@@ -108,6 +139,33 @@ function NewAssignmentContent() {
     }
   };
 
+  // ── Group questions by module ──
+  const questionsByModule = useMemo(() => {
+    const map: Record<string, TeacherQuestion[]> = {};
+    for (const q of teacherQuestions) {
+      if (!map[q.module_id]) map[q.module_id] = [];
+      map[q.module_id].push(q);
+    }
+    return map;
+  }, [teacherQuestions]);
+
+  const toggleQuestion = useCallback((id: string) => {
+    setSelectedQuestionIds((prev) =>
+      prev.includes(id) ? prev.filter((qid) => qid !== id) : [...prev, id]
+    );
+  }, []);
+
+  const toggleAllForModule = useCallback((moduleId: string) => {
+    const moduleQs = questionsByModule[moduleId] || [];
+    const moduleQIds = moduleQs.map((q) => q.id);
+    const allSelected = moduleQIds.every((id) => selectedQuestionIds.includes(id));
+    if (allSelected) {
+      setSelectedQuestionIds((prev) => prev.filter((id) => !moduleQIds.includes(id)));
+    } else {
+      setSelectedQuestionIds((prev) => Array.from(new Set([...prev, ...moduleQIds])));
+    }
+  }, [questionsByModule, selectedQuestionIds]);
+
   // ── Date presets ──
   const setDatePreset = (preset: "tomorrow" | "friday" | "next_week") => {
     const today = new Date();
@@ -137,7 +195,8 @@ function NewAssignmentContent() {
     type !== null &&
     type !== "custom_quiz" &&
     selectedClassroom &&
-    selectedModules.length > 0 &&
+    (type === "exam" ? selectedQuestionIds.length > 0 : selectedModules.length > 0) &&
+    (type === "exam" ? examTimeLimit > 0 : true) &&
     status !== "loading";
 
   // ── Submit ──
@@ -148,10 +207,36 @@ function NewAssignmentContent() {
     setError("");
 
     try {
-      const res = await fetch("/api/assignments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      let body: Record<string, unknown>;
+
+      if (type === "exam") {
+        // Gather unique module_ids from the selected questions
+        const examModuleIds = Array.from(
+          new Set(
+            teacherQuestions
+              .filter((q) => selectedQuestionIds.includes(q.id))
+              .map((q) => q.module_id)
+          )
+        );
+
+        body = {
+          classroom_id: selectedClassroom,
+          title: title.trim(),
+          type: "exam",
+          module_ids: examModuleIds,
+          due_date: dueDate || null,
+          config: {
+            available_from: availableFrom || undefined,
+            question_ids: selectedQuestionIds,
+            lockdown,
+            time_limit_minutes: examTimeLimit,
+            shuffle_questions: shuffleQuestions,
+            shuffle_options: shuffleOptions,
+            show_results: showResults,
+          },
+        };
+      } else {
+        body = {
           classroom_id: selectedClassroom,
           title: title.trim(),
           type: type === "quiz" ? "quiz" : "lesson",
@@ -162,7 +247,13 @@ function NewAssignmentContent() {
             quiz_length: type === "quiz" ? quizLength : undefined,
             time_limit_minutes: type === "quiz" ? timeLimit : undefined,
           },
-        }),
+        };
+      }
+
+      const res = await fetch("/api/assignments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
       });
 
       const data = await res.json();
@@ -200,7 +291,9 @@ function NewAssignmentContent() {
         ? "Practice Quiz"
         : type === "custom_quiz"
           ? "Custom Quiz"
-          : null;
+          : type === "exam"
+            ? "Formal Exam"
+            : null;
 
   // ── Minimum date (today) ──
   const today = new Date().toISOString().split("T")[0];
@@ -229,7 +322,7 @@ function NewAssignmentContent() {
           className="text-sm mt-1"
           style={{ color: "var(--color-ink-muted)" }}
         >
-          Build and assign lessons or quizzes for your students.
+          Build and assign lessons, quizzes, or formal exams for your students.
         </motion.p>
       </div>
 
@@ -264,7 +357,7 @@ function NewAssignmentContent() {
               <label className="block text-sm font-medium mb-3" style={{ color: "var(--color-ink)" }}>
                 Assignment Type <span className="text-red-400">*</span>
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                 <TypeCard
                   selected={type === "lesson"}
                   onClick={() => setType("lesson")}
@@ -286,6 +379,17 @@ function NewAssignmentContent() {
                   }
                   title="Practice Quiz"
                   description="Timed quiz from selected modules"
+                />
+                <TypeCard
+                  selected={type === "exam"}
+                  onClick={() => setType("exam")}
+                  icon={
+                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                    </svg>
+                  }
+                  title="Formal Exam"
+                  description="Lockdown browser, timed, from your question bank"
                 />
                 <TypeCard
                   selected={type === "custom_quiz"}
@@ -356,180 +460,386 @@ function NewAssignmentContent() {
             </div>
           </FormSection>
 
-          {/* STEP 2: CONTENT SELECTION */}
-          <FormSection number={2} title="Content Selection">
-            {/* Microeconomics */}
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <span
-                    className="inline-block w-2.5 h-2.5 rounded-full"
-                    style={{ background: "#3B82F6" }}
-                  />
-                  <span className="text-sm font-semibold" style={{ color: "var(--color-ink)" }}>
-                    Microeconomics
-                  </span>
-                  <span className="text-xs" style={{ color: "var(--color-ink-faint)" }}>
-                    {microModules.filter((m) => selectedModules.includes(m.id)).length}/{microModules.length}
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={selectAllMicro}
-                  className="text-xs font-medium px-2.5 py-1 rounded-md transition-colors hover:bg-blue-50"
-                  style={{ color: "#3B82F6" }}
-                >
-                  {microModules.every((m) => selectedModules.includes(m.id)) ? "Deselect All" : "Select All Micro"}
-                </button>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {microModules.map((m) => (
-                  <ModuleCard
-                    key={m.id}
-                    title={m.title}
-                    description={m.description}
-                    selected={selectedModules.includes(m.id)}
-                    onClick={() => toggleModule(m.id)}
-                    accentColor="#3B82F6"
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Macroeconomics */}
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <span
-                    className="inline-block w-2.5 h-2.5 rounded-full"
-                    style={{ background: "#8B5CF6" }}
-                  />
-                  <span className="text-sm font-semibold" style={{ color: "var(--color-ink)" }}>
-                    Macroeconomics
-                  </span>
-                  <span className="text-xs" style={{ color: "var(--color-ink-faint)" }}>
-                    {macroModules.filter((m) => selectedModules.includes(m.id)).length}/{macroModules.length}
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={selectAllMacro}
-                  className="text-xs font-medium px-2.5 py-1 rounded-md transition-colors hover:bg-violet-50"
-                  style={{ color: "#8B5CF6" }}
-                >
-                  {macroModules.every((m) => selectedModules.includes(m.id)) ? "Deselect All" : "Select All Macro"}
-                </button>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {macroModules.map((m) => (
-                  <ModuleCard
-                    key={m.id}
-                    title={m.title}
-                    description={m.description}
-                    selected={selectedModules.includes(m.id)}
-                    onClick={() => toggleModule(m.id)}
-                    accentColor="#8B5CF6"
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Quiz Settings */}
-            <AnimatePresence>
-              {type === "quiz" && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="overflow-hidden"
-                >
+          {/* STEP 2: CONTENT SELECTION — differs for exam vs lesson/quiz */}
+          {type === "exam" ? (
+            <FormSection number={2} title="Exam Questions">
+              {questionsLoading ? (
+                <div className="flex items-center gap-2 py-8">
                   <div
-                    className="p-5 rounded-xl space-y-5"
-                    style={{
-                      background: "var(--color-surface)",
-                      border: "1px solid var(--color-border)",
-                    }}
+                    className="w-4 h-4 border-2 rounded-full animate-spin"
+                    style={{ borderColor: "var(--color-border)", borderTopColor: "var(--color-ink)" }}
+                  />
+                  <span className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
+                    Loading your question bank...
+                  </span>
+                </div>
+              ) : teacherQuestions.length === 0 ? (
+                <div
+                  className="p-5 rounded-xl text-center"
+                  style={{ background: "var(--color-surface-sunken)", border: "1px solid var(--color-border-subtle)" }}
+                >
+                  <p className="text-sm mb-2" style={{ color: "var(--color-ink-muted)" }}>
+                    No questions in your question bank yet.
+                  </p>
+                  <Link href="/teacher/questions" className="text-sm text-blue-500 hover:underline font-medium">
+                    Create questions first
+                  </Link>
+                </div>
+              ) : (
+                <>
+                  {/* Selected count */}
+                  <div
+                    className="flex items-center justify-between p-3 rounded-lg"
+                    style={{ background: "var(--color-surface-sunken)", border: "1px solid var(--color-border-subtle)" }}
                   >
-                    <p className="text-sm font-semibold" style={{ color: "var(--color-ink)" }}>
-                      Quiz Settings
-                    </p>
+                    <span className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>
+                      {selectedQuestionIds.length} question{selectedQuestionIds.length !== 1 ? "s" : ""} selected
+                    </span>
+                    {selectedQuestionIds.length > 0 && (
+                      <button
+                        type="button"
+                        onClick={() => setSelectedQuestionIds([])}
+                        className="text-xs font-medium text-red-500 hover:text-red-600"
+                      >
+                        Clear All
+                      </button>
+                    )}
+                  </div>
 
-                    {/* Question Count Slider */}
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <label className="text-xs font-medium" style={{ color: "var(--color-ink-muted)" }}>
-                          Number of Questions
-                        </label>
-                        <span
-                          className="text-xs font-semibold px-2 py-0.5 rounded-md"
-                          style={{
-                            background: "var(--color-surface-sunken)",
-                            color: "var(--color-ink)",
-                          }}
-                        >
-                          {quizLength}
-                        </span>
-                      </div>
-                      <input
-                        type="range"
-                        min={5}
-                        max={20}
-                        step={5}
-                        value={quizLength}
-                        onChange={(e) => setQuizLength(Number(e.target.value))}
-                        className="w-full"
-                      />
-                      <div className="flex justify-between mt-1">
-                        {[5, 10, 15, 20].map((n) => (
-                          <span
-                            key={n}
-                            className="text-[10px]"
-                            style={{ color: quizLength === n ? "var(--color-ink)" : "var(--color-ink-faint)" }}
-                          >
-                            {n}
+                  {/* Questions grouped by module */}
+                  {Object.entries(questionsByModule).map(([moduleId, questions]) => {
+                    const moduleName = allModules.find((m) => m.id === moduleId)?.title || moduleId;
+                    const moduleQIds = questions.map((q) => q.id);
+                    const allModuleSelected = moduleQIds.every((id) => selectedQuestionIds.includes(id));
+
+                    return (
+                      <div key={moduleId}>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-ink-faint)" }}>
+                            {moduleName} ({questions.length})
                           </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Time Limit */}
-                    <div>
-                      <label className="block text-xs font-medium mb-2" style={{ color: "var(--color-ink-muted)" }}>
-                        Time Limit
-                      </label>
-                      <div className="flex flex-wrap gap-2">
-                        {[
-                          { value: null, label: "No Limit" },
-                          { value: 15, label: "15 min" },
-                          { value: 30, label: "30 min" },
-                          { value: 45, label: "45 min" },
-                          { value: 60, label: "60 min" },
-                        ].map((opt) => (
                           <button
-                            key={opt.label}
                             type="button"
-                            onClick={() => setTimeLimit(opt.value)}
-                            className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
+                            onClick={() => toggleAllForModule(moduleId)}
+                            className="text-xs font-medium px-2 py-0.5 rounded transition-colors hover:bg-blue-50"
+                            style={{ color: "#3B82F6" }}
+                          >
+                            {allModuleSelected ? "Deselect All" : "Select All"}
+                          </button>
+                        </div>
+                        <div className="space-y-1.5">
+                          {questions.map((q) => {
+                            const isSelected = selectedQuestionIds.includes(q.id);
+                            return (
+                              <button
+                                key={q.id}
+                                type="button"
+                                onClick={() => toggleQuestion(q.id)}
+                                className="w-full text-left p-3 rounded-lg transition-all"
+                                style={{
+                                  background: isSelected ? "rgba(59, 130, 246, 0.06)" : "var(--color-surface)",
+                                  border: isSelected ? "1.5px solid rgba(59, 130, 246, 0.3)" : "1.5px solid var(--color-border-subtle)",
+                                }}
+                              >
+                                <div className="flex items-start gap-2.5">
+                                  <div
+                                    className="mt-0.5 flex-shrink-0 w-4 h-4 rounded flex items-center justify-center transition-all"
+                                    style={{
+                                      background: isSelected ? "#3B82F6" : "transparent",
+                                      border: isSelected ? "none" : "1.5px solid var(--color-ink-faint)",
+                                    }}
+                                  >
+                                    {isSelected && (
+                                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                      </svg>
+                                    )}
+                                  </div>
+                                  <div className="min-w-0 flex-1">
+                                    <p
+                                      className="text-xs font-medium leading-snug"
+                                      style={{ color: isSelected ? "#3B82F6" : "var(--color-ink)" }}
+                                    >
+                                      {q.question}
+                                    </p>
+                                    <div className="flex items-center gap-2 mt-1">
+                                      <span
+                                        className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
+                                        style={{
+                                          background: q.difficulty === "easy" ? "rgba(16,185,129,0.1)" : q.difficulty === "hard" ? "rgba(239,68,68,0.1)" : "rgba(245,158,11,0.1)",
+                                          color: q.difficulty === "easy" ? "#059669" : q.difficulty === "hard" ? "#dc2626" : "#d97706",
+                                        }}
+                                      >
+                                        {q.difficulty}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </>
+              )}
+
+              {/* Exam Settings */}
+              <AnimatePresence>
+                {selectedQuestionIds.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
+                  >
+                    <div
+                      className="p-5 rounded-xl space-y-5"
+                      style={{
+                        background: "var(--color-surface)",
+                        border: "1px solid var(--color-border)",
+                      }}
+                    >
+                      <p className="text-sm font-semibold" style={{ color: "var(--color-ink)" }}>
+                        Exam Settings
+                      </p>
+
+                      {/* Time Limit (required for exams) */}
+                      <div>
+                        <label className="block text-xs font-medium mb-2" style={{ color: "var(--color-ink-muted)" }}>
+                          Time Limit <span className="text-red-400">*</span>
+                        </label>
+                        <div className="flex flex-wrap gap-2">
+                          {[15, 30, 45, 60, 90].map((mins) => (
+                            <button
+                              key={mins}
+                              type="button"
+                              onClick={() => setExamTimeLimit(mins)}
+                              className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
+                              style={{
+                                background: examTimeLimit === mins ? "var(--color-ink)" : "var(--color-surface-sunken)",
+                                color: examTimeLimit === mins ? "white" : "var(--color-ink-muted)",
+                              }}
+                            >
+                              {mins} min
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Lockdown toggle */}
+                      <ToggleSetting
+                        label="Lock student browser during exam"
+                        description="Enforces fullscreen and detects tab switches"
+                        enabled={lockdown}
+                        onToggle={() => setLockdown(!lockdown)}
+                      />
+
+                      {/* Shuffle questions */}
+                      <ToggleSetting
+                        label="Shuffle questions"
+                        description="Randomize question order for each student"
+                        enabled={shuffleQuestions}
+                        onToggle={() => setShuffleQuestions(!shuffleQuestions)}
+                      />
+
+                      {/* Shuffle options */}
+                      <ToggleSetting
+                        label="Shuffle options"
+                        description="Randomize answer option order"
+                        enabled={shuffleOptions}
+                        onToggle={() => setShuffleOptions(!shuffleOptions)}
+                      />
+
+                      {/* Show results after submit */}
+                      <ToggleSetting
+                        label="Show results after submit"
+                        description="Let students see their score immediately (otherwise you release manually)"
+                        enabled={showResults}
+                        onToggle={() => setShowResults(!showResults)}
+                      />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </FormSection>
+          ) : (
+            <FormSection number={2} title="Content Selection">
+              {/* Microeconomics */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="inline-block w-2.5 h-2.5 rounded-full"
+                      style={{ background: "#3B82F6" }}
+                    />
+                    <span className="text-sm font-semibold" style={{ color: "var(--color-ink)" }}>
+                      Microeconomics
+                    </span>
+                    <span className="text-xs" style={{ color: "var(--color-ink-faint)" }}>
+                      {microModules.filter((m) => selectedModules.includes(m.id)).length}/{microModules.length}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={selectAllMicro}
+                    className="text-xs font-medium px-2.5 py-1 rounded-md transition-colors hover:bg-blue-50"
+                    style={{ color: "#3B82F6" }}
+                  >
+                    {microModules.every((m) => selectedModules.includes(m.id)) ? "Deselect All" : "Select All Micro"}
+                  </button>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {microModules.map((m) => (
+                    <ModuleCard
+                      key={m.id}
+                      title={m.title}
+                      description={m.description}
+                      selected={selectedModules.includes(m.id)}
+                      onClick={() => toggleModule(m.id)}
+                      accentColor="#3B82F6"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Macroeconomics */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="inline-block w-2.5 h-2.5 rounded-full"
+                      style={{ background: "#8B5CF6" }}
+                    />
+                    <span className="text-sm font-semibold" style={{ color: "var(--color-ink)" }}>
+                      Macroeconomics
+                    </span>
+                    <span className="text-xs" style={{ color: "var(--color-ink-faint)" }}>
+                      {macroModules.filter((m) => selectedModules.includes(m.id)).length}/{macroModules.length}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={selectAllMacro}
+                    className="text-xs font-medium px-2.5 py-1 rounded-md transition-colors hover:bg-violet-50"
+                    style={{ color: "#8B5CF6" }}
+                  >
+                    {macroModules.every((m) => selectedModules.includes(m.id)) ? "Deselect All" : "Select All Macro"}
+                  </button>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {macroModules.map((m) => (
+                    <ModuleCard
+                      key={m.id}
+                      title={m.title}
+                      description={m.description}
+                      selected={selectedModules.includes(m.id)}
+                      onClick={() => toggleModule(m.id)}
+                      accentColor="#8B5CF6"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Quiz Settings */}
+              <AnimatePresence>
+                {type === "quiz" && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
+                  >
+                    <div
+                      className="p-5 rounded-xl space-y-5"
+                      style={{
+                        background: "var(--color-surface)",
+                        border: "1px solid var(--color-border)",
+                      }}
+                    >
+                      <p className="text-sm font-semibold" style={{ color: "var(--color-ink)" }}>
+                        Quiz Settings
+                      </p>
+
+                      {/* Question Count Slider */}
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <label className="text-xs font-medium" style={{ color: "var(--color-ink-muted)" }}>
+                            Number of Questions
+                          </label>
+                          <span
+                            className="text-xs font-semibold px-2 py-0.5 rounded-md"
                             style={{
-                              background:
-                                timeLimit === opt.value
-                                  ? "var(--color-ink)"
-                                  : "var(--color-surface-sunken)",
-                              color:
-                                timeLimit === opt.value ? "white" : "var(--color-ink-muted)",
+                              background: "var(--color-surface-sunken)",
+                              color: "var(--color-ink)",
                             }}
                           >
-                            {opt.label}
-                          </button>
-                        ))}
+                            {quizLength}
+                          </span>
+                        </div>
+                        <input
+                          type="range"
+                          min={5}
+                          max={20}
+                          step={5}
+                          value={quizLength}
+                          onChange={(e) => setQuizLength(Number(e.target.value))}
+                          className="w-full"
+                        />
+                        <div className="flex justify-between mt-1">
+                          {[5, 10, 15, 20].map((n) => (
+                            <span
+                              key={n}
+                              className="text-[10px]"
+                              style={{ color: quizLength === n ? "var(--color-ink)" : "var(--color-ink-faint)" }}
+                            >
+                              {n}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Time Limit */}
+                      <div>
+                        <label className="block text-xs font-medium mb-2" style={{ color: "var(--color-ink-muted)" }}>
+                          Time Limit
+                        </label>
+                        <div className="flex flex-wrap gap-2">
+                          {[
+                            { value: null, label: "No Limit" },
+                            { value: 15, label: "15 min" },
+                            { value: 30, label: "30 min" },
+                            { value: 45, label: "45 min" },
+                            { value: 60, label: "60 min" },
+                          ].map((opt) => (
+                            <button
+                              key={opt.label}
+                              type="button"
+                              onClick={() => setTimeLimit(opt.value)}
+                              className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
+                              style={{
+                                background:
+                                  timeLimit === opt.value
+                                    ? "var(--color-ink)"
+                                    : "var(--color-surface-sunken)",
+                                color:
+                                  timeLimit === opt.value ? "white" : "var(--color-ink-muted)",
+                              }}
+                            >
+                              {opt.label}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </FormSection>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </FormSection>
+          )}
 
           {/* STEP 3: SCHEDULE */}
           <FormSection number={3} title="Schedule">
@@ -631,7 +941,10 @@ function NewAssignmentContent() {
               dueDate={dueDate}
               availableFrom={availableFrom}
               quizLength={type === "quiz" ? quizLength : undefined}
-              timeLimit={type === "quiz" ? timeLimit : undefined}
+              timeLimit={type === "quiz" ? timeLimit : type === "exam" ? examTimeLimit : undefined}
+              isExam={type === "exam"}
+              examQuestionCount={type === "exam" ? selectedQuestionIds.length : undefined}
+              lockdown={type === "exam" ? lockdown : undefined}
             />
           </div>
         </div>
@@ -804,6 +1117,38 @@ function ModuleCard({
   );
 }
 
+function ToggleSetting({
+  label,
+  description,
+  enabled,
+  onToggle,
+}: {
+  label: string;
+  description: string;
+  enabled: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="flex items-center justify-between gap-4">
+      <div>
+        <p className="text-xs font-medium" style={{ color: "var(--color-ink)" }}>{label}</p>
+        <p className="text-[11px]" style={{ color: "var(--color-ink-faint)" }}>{description}</p>
+      </div>
+      <button
+        type="button"
+        onClick={onToggle}
+        className="relative flex-shrink-0 w-9 h-5 rounded-full transition-colors"
+        style={{ background: enabled ? "#3B82F6" : "var(--color-border)" }}
+      >
+        <span
+          className="absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white transition-transform"
+          style={{ transform: enabled ? "translateX(16px)" : "translateX(0)" }}
+        />
+      </button>
+    </div>
+  );
+}
+
 function PresetButton({ label, onClick }: { label: string; onClick: () => void }) {
   return (
     <button
@@ -830,6 +1175,9 @@ function PreviewPanel({
   availableFrom,
   quizLength,
   timeLimit,
+  isExam,
+  examQuestionCount,
+  lockdown,
 }: {
   title: string;
   type: string | null;
@@ -839,8 +1187,11 @@ function PreviewPanel({
   availableFrom: string;
   quizLength?: number;
   timeLimit?: number | null;
+  isExam?: boolean;
+  examQuestionCount?: number;
+  lockdown?: boolean;
 }) {
-  const hasContent = title || type || moduleNames.length > 0 || dueDate;
+  const hasContent = title || type || moduleNames.length > 0 || dueDate || (isExam && examQuestionCount);
 
   const formatDate = (dateStr: string) => {
     if (!dateStr) return "";
@@ -907,7 +1258,7 @@ function PreviewPanel({
         ) : (
           <AnimatePresence mode="wait">
             <motion.div
-              key={`${title}-${type}-${moduleNames.length}-${dueDate}`}
+              key={`${title}-${type}-${moduleNames.length}-${dueDate}-${examQuestionCount}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.2 }}
@@ -930,16 +1281,25 @@ function PreviewPanel({
                 <span
                   className="inline-block text-xs font-medium px-2.5 py-1 rounded-full"
                   style={{
-                    background: type === "Module Lesson" ? "#EFF6FF" : "#F3F0FF",
-                    color: type === "Module Lesson" ? "#2563EB" : "#7C3AED",
+                    background: isExam ? "#FEF2F2" : type === "Module Lesson" ? "#EFF6FF" : "#F3F0FF",
+                    color: isExam ? "#DC2626" : type === "Module Lesson" ? "#2563EB" : "#7C3AED",
                   }}
                 >
                   {type}
+                  {isExam && lockdown && " (Lockdown)"}
                 </span>
               )}
 
+              {/* Exam config */}
+              {isExam && examQuestionCount ? (
+                <div className="flex gap-3 text-xs" style={{ color: "var(--color-ink-muted)" }}>
+                  <span>{examQuestionCount} questions</span>
+                  {timeLimit && <span>{timeLimit} min time limit</span>}
+                </div>
+              ) : null}
+
               {/* Quiz config */}
-              {quizLength && (
+              {!isExam && quizLength && (
                 <div className="flex gap-3 text-xs" style={{ color: "var(--color-ink-muted)" }}>
                   <span>{quizLength} questions</span>
                   {timeLimit ? (

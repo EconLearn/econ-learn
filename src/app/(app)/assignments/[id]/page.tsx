@@ -18,7 +18,7 @@ interface AssignmentData {
   classroom_name: string;
   teacher_id: string;
   title: string;
-  type: "lesson" | "quiz" | "practice_test";
+  type: "lesson" | "quiz" | "practice_test" | "exam";
   module_ids: string[];
   due_date: string | null;
   created_at: string;
@@ -129,6 +129,19 @@ export default function AssignmentPage({ params }: { params: { id: string } }) {
         <Link href="/assignments" className="btn-primary text-sm py-2 px-5 inline-block">
           Back to Assignments
         </Link>
+      </div>
+    );
+  }
+
+  // If this is an exam, redirect to the exam page
+  if (assignment.type === "exam") {
+    router.push(`/exam/${assignment.id}`);
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div
+          className="w-6 h-6 border-2 rounded-full animate-spin"
+          style={{ borderColor: "var(--color-border)", borderTopColor: "var(--color-ink)" }}
+        />
       </div>
     );
   }

@@ -40,9 +40,24 @@ export async function POST(req: NextRequest) {
 
   const { classroom_id, title, type, module_ids, due_date, config } = await req.json();
 
-  if (!classroom_id || !title || !type || !module_ids?.length) {
+  if (!classroom_id || !title || !type) {
     return NextResponse.json(
-      { error: "classroom_id, title, type, and module_ids are required" },
+      { error: "classroom_id, title, and type are required" },
+      { status: 400 }
+    );
+  }
+
+  // Exam type uses question_ids from config instead of module_ids
+  if (type !== "exam" && (!module_ids || module_ids.length === 0)) {
+    return NextResponse.json(
+      { error: "module_ids are required for this assignment type" },
+      { status: 400 }
+    );
+  }
+
+  if (type === "exam" && (!config?.question_ids || config.question_ids.length === 0)) {
+    return NextResponse.json(
+      { error: "question_ids are required for exam assignments" },
       { status: 400 }
     );
   }
