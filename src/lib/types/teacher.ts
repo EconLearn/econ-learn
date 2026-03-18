@@ -63,7 +63,8 @@ export interface Subscription {
   stripe_subscription_id: string | null;
   plan: "free" | "classroom" | "school";
   student_limit: number;
-  status: "active" | "canceled" | "past_due";
+  status: "active" | "trial" | "canceled" | "past_due";
+  trial_ends_at: string | null;
   current_period_end: string | null;
   created_at: string;
 }
