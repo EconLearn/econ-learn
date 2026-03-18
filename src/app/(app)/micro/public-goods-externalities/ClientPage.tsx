@@ -155,10 +155,10 @@ export default function PublicGoodsExternalitiesClientPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <Link href="/macro/fiscal-policy" className="card-interactive group flex items-center gap-3 p-3.5">
+              <Link href="/micro/factor-markets" className="card-interactive group flex items-center gap-3 p-3.5">
                 <div className="flex-1">
-                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Fiscal Policy</p>
-                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Government spending, taxation, multipliers, and budget deficits.</p>
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Factor Markets</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Labor markets, wage determination, and marginal revenue product.</p>
                 </div>
                 <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

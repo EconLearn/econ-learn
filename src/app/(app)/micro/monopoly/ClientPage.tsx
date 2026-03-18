@@ -86,10 +86,10 @@ export default function MonopolyClientPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <Link href="/micro/oligopoly" className="card-interactive group flex items-center gap-3 p-3.5">
+              <Link href="/micro/monopolistic-competition" className="card-interactive group flex items-center gap-3 p-3.5">
                 <div className="flex-1">
-                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Oligopoly</p>
-                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Game theory, Nash equilibrium, cartels, and strategic behavior.</p>
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Monopolistic Competition</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Product differentiation, short-run profits, and long-run zero-profit.</p>
                 </div>
                 <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

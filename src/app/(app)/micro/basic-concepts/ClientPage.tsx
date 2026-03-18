@@ -125,19 +125,19 @@ export default function BasicConceptsClientPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <Link href="/micro/production-costs" className="card-interactive group flex items-center gap-3 p-3.5">
+              <Link href="/micro/elasticity" className="card-interactive group flex items-center gap-3 p-3.5">
                 <div className="flex-1">
-                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Production and Costs</p>
-                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Short-run production, cost curves, and diminishing returns.</p>
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Elasticity</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Price elasticity of demand, total revenue test, and cross-price elasticity.</p>
                 </div>
                 <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <Link href="/micro/consumer-choice" className="card-interactive group flex items-center gap-3 p-3.5">
+              <Link href="/micro/production-costs" className="card-interactive group flex items-center gap-3 p-3.5">
                 <div className="flex-1">
-                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Consumer Choice</p>
-                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Utility, indifference curves, budget constraints, and optimal choice.</p>
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Production and Costs</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Short-run production, cost curves, and diminishing returns.</p>
                 </div>
                 <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

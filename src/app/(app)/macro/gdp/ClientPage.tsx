@@ -105,19 +105,19 @@ export default function GDPClientPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <Link href="/macro/business-cycle" className="card-interactive group flex items-center gap-3 p-3.5">
+              <Link href="/macro/unemployment-inflation" className="card-interactive group flex items-center gap-3 p-3.5">
                 <div className="flex-1">
-                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>The Business Cycle</p>
-                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Expansions, peaks, contractions, troughs, and economic indicators.</p>
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Unemployment & Inflation</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Types of unemployment, CPI, and the Phillips curve.</p>
                 </div>
                 <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <Link href="/macro/unemployment-inflation" className="card-interactive group flex items-center gap-3 p-3.5">
+              <Link href="/macro/economic-growth" className="card-interactive group flex items-center gap-3 p-3.5">
                 <div className="flex-1">
-                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Unemployment & Inflation</p>
-                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Types of unemployment, CPI, and the Phillips curve.</p>
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Economic Growth</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Long-run growth, productivity, and expanding the PPC.</p>
                 </div>
                 <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

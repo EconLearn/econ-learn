@@ -121,10 +121,10 @@ export default function ConsumerChoiceClientPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
               </Link>
-              <Link href="/micro/basic-concepts" className="card-interactive group flex items-center gap-3 p-3.5">
+              <Link href="/micro/supply-and-demand" className="card-interactive group flex items-center gap-3 p-3.5">
                 <div className="flex-1">
-                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Basic Economic Concepts</p>
-                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Scarcity, opportunity cost, PPCs, and comparative advantage.</p>
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Supply and Demand</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Market equilibrium, curve shifts, price controls, and economic shocks.</p>
                 </div>
                 <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

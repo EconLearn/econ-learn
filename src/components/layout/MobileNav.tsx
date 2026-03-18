@@ -27,8 +27,12 @@ export default function MobileNav() {
         style={{ background: 'rgba(255,255,255,0.8)', borderBottom: '1px solid var(--color-border-subtle)' }}
       >
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: 'var(--color-ink)' }}>
-            <span className="text-white font-bold text-[11px]">E</span>
+          <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1E293B, #334155)" }}>
+            <svg width="16" height="16" viewBox="0 0 22 22" fill="none">
+              <path d="M3 5 L19 17" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" />
+              <path d="M3 17 L19 5" stroke="#F87171" strokeWidth="2.5" strokeLinecap="round" />
+              <circle cx="11" cy="11" r="2.5" fill="#34D399" />
+            </svg>
           </div>
           <span className="font-semibold text-sm" style={{ color: 'var(--color-ink)' }}>EconLearn</span>
         </Link>

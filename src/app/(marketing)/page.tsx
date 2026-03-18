@@ -95,17 +95,6 @@ export default function HomePage() {
               animate="show"
               className="max-w-xl"
             >
-              <motion.div
-                variants={fadeUp}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-6"
-                style={{ background: "rgba(59, 130, 246, 0.08)", border: "1px solid rgba(59, 130, 246, 0.12)" }}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                <span className="text-xs font-medium" style={{ color: "var(--color-ink-muted)" }}>
-                  AP Micro &amp; Macro — {totalModules} interactive modules
-                </span>
-              </motion.div>
-
               <motion.h1
                 variants={fadeUp}
                 className="text-[2.75rem] sm:text-[3.5rem] lg:text-[4rem] font-bold leading-[1.04] tracking-tight mb-5"
@@ -148,49 +137,15 @@ export default function HomePage() {
               </motion.div>
             </motion.div>
 
-            {/* Graph column with floating badges */}
+            {/* Graph column */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="relative flex justify-center lg:justify-end"
             >
-              <div className="w-full max-w-[400px] relative">
+              <div className="w-full max-w-[420px]">
                 <HeroGraph />
-
-                {/* Floating glass badges */}
-                <motion.div
-                  className="glass-badge absolute -top-4 -right-4 rounded-xl px-3.5 py-2 shadow-card animate-float"
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.7, duration: 0.5 }}
-                >
-                  <p className="text-xs font-semibold" style={{ color: "var(--color-ink)" }}>
-                    {totalModules} Modules
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  className="glass-badge absolute -bottom-4 -left-4 rounded-xl px-3.5 py-2 shadow-card animate-float-delayed"
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.9, duration: 0.5 }}
-                >
-                  <p className="text-xs font-semibold" style={{ color: "var(--color-ink)" }}>
-                    144+ Flashcards
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  className="glass-badge absolute top-1/2 -translate-y-1/2 -right-6 sm:-right-10 rounded-xl px-3.5 py-2 shadow-card animate-float-slow"
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.1, duration: 0.5 }}
-                >
-                  <p className="text-xs font-semibold" style={{ color: "var(--color-ink)" }}>
-                    AP-Style Qs
-                  </p>
-                </motion.div>
               </div>
             </motion.div>
           </div>
@@ -519,8 +474,12 @@ export default function HomePage() {
 
           <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-6 h-6 rounded bg-white/10 flex items-center justify-center">
-                <span className="text-white font-bold text-[10px]">E</span>
+              <div className="w-6 h-6 rounded flex items-center justify-center" style={{ background: "rgba(255,255,255,0.1)" }}>
+                <svg width="14" height="14" viewBox="0 0 22 22" fill="none">
+                  <path d="M3 5 L19 17" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" />
+                  <path d="M3 17 L19 5" stroke="#F87171" strokeWidth="2.5" strokeLinecap="round" />
+                  <circle cx="11" cy="11" r="2.5" fill="#34D399" />
+                </svg>
               </div>
               <span className="text-sm opacity-60">Built for AP Economics students</span>
             </div>

@@ -70,8 +70,12 @@ export default function MarketingNav() {
         >
           {/* Left: Logo */}
           <Link href="/" className="flex items-center gap-2.5 shrink-0">
-            <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: "var(--color-ink)" }}>
-              <span className="text-white font-bold text-xs">E</span>
+            <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: "linear-gradient(135deg, #1E293B, #334155)" }}>
+              <svg width="16" height="16" viewBox="0 0 22 22" fill="none">
+                <path d="M3 5 L19 17" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" />
+                <path d="M3 17 L19 5" stroke="#F87171" strokeWidth="2.5" strokeLinecap="round" />
+                <circle cx="11" cy="11" r="2.5" fill="#34D399" />
+              </svg>
             </div>
             <span className="text-[15px] font-semibold tracking-tight" style={{ color: "var(--color-ink)" }}>
               EconLearn

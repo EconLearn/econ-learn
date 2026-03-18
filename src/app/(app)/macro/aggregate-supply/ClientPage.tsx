@@ -93,6 +93,42 @@ export default function AggregateSupplyClientPage() {
             <FlashcardDeck cards={aggregateSupplyFlashcards} moduleId="aggregate-supply" />
           </div>
 
+          {/* Related Topics */}
+          <div className="mb-10">
+            <h2 style={{ color: "var(--color-ink)" }} className="text-lg font-semibold mb-3">
+              Related Topics
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <Link href="/macro/aggregate-demand" className="card-interactive group flex items-center gap-3 p-3.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Aggregate Demand & Supply</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>AD/AS model, macro equilibrium, output gaps, and macro shocks.</p>
+                </div>
+                <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link href="/macro/fiscal-policy" className="card-interactive group flex items-center gap-3 p-3.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Fiscal Policy</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Government spending, taxation, multipliers, and budget deficits.</p>
+                </div>
+                <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+              <Link href="/macro/economic-growth" className="card-interactive group flex items-center gap-3 p-3.5">
+                <div className="flex-1">
+                  <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>Economic Growth</p>
+                  <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>Long-run growth, productivity, and expanding the PPC.</p>
+                </div>
+                <svg className="w-4 h-4 flex-shrink-0" style={{ color: "var(--color-border)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+
           <ModuleNav courseId="macro" currentModuleId="aggregate-supply" />
       </div>
     </PageTransition>
