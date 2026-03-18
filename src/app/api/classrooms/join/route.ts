@@ -10,6 +10,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   }
 
+  // Check if user is a teacher (owns any classrooms) — teachers cannot join as students
+  const { data: ownedClassrooms } = await supabase
+    .from("classrooms")
+    .select("id")
+    .eq("teacher_id", user.id)
+    .limit(1);
+
+  if (ownedClassrooms && ownedClassrooms.length > 0) {
+    return NextResponse.json(
+      { error: "Teachers cannot join classrooms as students. Create your own classroom instead." },
+      { status: 403 }
+    );
+  }
+
   const { code } = await req.json();
 
   if (!code || typeof code !== "string") {

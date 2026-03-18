@@ -31,6 +31,24 @@ interface ActivityDay {
   activity_date: string;
 }
 
+interface StudentClassroom {
+  id: string;
+  name: string;
+  school_name: string | null;
+  teacher_name: string;
+}
+
+interface StudentAssignment {
+  id: string;
+  classroom_id: string;
+  title: string;
+  type: "lesson" | "quiz" | "practice_test";
+  module_ids: string[];
+  due_date: string | null;
+  status: "completed" | "pending" | "overdue";
+  score: number | null;
+}
+
 export default function DashboardPage() {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
@@ -42,6 +60,8 @@ export default function DashboardPage() {
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [activityDays, setActivityDays] = useState<string[]>([]);
   const [streak, setStreak] = useState(0);
+  const [studentClassrooms, setStudentClassrooms] = useState<StudentClassroom[]>([]);
+  const [studentAssignments, setStudentAssignments] = useState<StudentAssignment[]>([]);
   const [loading, setLoading] = useState(true);
   const { achievements, unlockedCount, totalCount } = useAchievements();
   const { recommendations, weakAreas } = useStudyRecommendations();
@@ -71,6 +91,24 @@ export default function DashboardPage() {
         const days = activityRes.data.map((a) => a.activity_date);
         setActivityDays(days);
         setStreak(calculateStreak(days));
+      }
+
+      // Fetch student classroom/assignment data
+      try {
+        const [classroomRes, assignmentRes] = await Promise.all([
+          fetch("/api/student/classrooms"),
+          fetch("/api/student/assignments"),
+        ]);
+        if (classroomRes.ok) {
+          const classroomData = await classroomRes.json();
+          setStudentClassrooms(classroomData.classrooms || []);
+        }
+        if (assignmentRes.ok) {
+          const assignmentData = await assignmentRes.json();
+          setStudentAssignments(assignmentData.assignments || []);
+        }
+      } catch {
+        // Silently fail — classroom data is supplementary
       }
 
       setLoading(false);
@@ -135,6 +173,114 @@ export default function DashboardPage() {
         <div className="mb-8">
           <APCountdown />
         </div>
+
+        {/* My Classrooms */}
+        {studentClassrooms.length > 0 && (
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--color-ink-faint)' }}>
+                My Classrooms
+              </h2>
+              <Link href="/join" className="text-[11px] font-medium transition-colors" style={{ color: 'var(--accent)' }}>
+                Join another
+              </Link>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {studentClassrooms.map((classroom) => (
+                <div
+                  key={classroom.id}
+                  className="card p-4"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(139, 92, 246, 0.08)" }}>
+                      <svg className="w-4 h-4 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold truncate" style={{ color: 'var(--color-ink)' }}>
+                        {classroom.name}
+                      </p>
+                      <p className="text-[11px]" style={{ color: 'var(--color-ink-faint)' }}>
+                        {classroom.teacher_name}{classroom.school_name ? ` · ${classroom.school_name}` : ""}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Upcoming Assignments */}
+        {studentAssignments.length > 0 && (
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--color-ink-faint)' }}>
+                Assignments
+              </h2>
+              <Link href="/assignments" className="text-[11px] font-medium transition-colors" style={{ color: 'var(--accent)' }}>
+                View all
+              </Link>
+            </div>
+            <div className="card overflow-hidden">
+              {studentAssignments.slice(0, 5).map((assignment, i) => {
+                const classroomName = studentClassrooms.find(c => c.id === assignment.classroom_id)?.name || "";
+                const urgencyColor = getAssignmentUrgencyColor(assignment.due_date, assignment.status);
+                const allMods = [...courses[0].modules, ...courses[1].modules];
+                const moduleLink = assignment.module_ids?.[0]
+                  ? allMods.find(m => m.id === assignment.module_ids[0])?.href
+                  : null;
+
+                return (
+                  <div
+                    key={assignment.id}
+                    className="flex items-center justify-between px-5 py-3.5"
+                    style={i > 0 ? { borderTop: '1px solid var(--color-border-subtle)' } : undefined}
+                  >
+                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                      <div
+                        className="w-2 h-2 rounded-full flex-shrink-0"
+                        style={{ background: urgencyColor }}
+                      />
+                      <div className="min-w-0">
+                        {moduleLink ? (
+                          <Link href={moduleLink} className="text-sm font-medium hover:text-blue-600 transition-colors truncate block" style={{ color: 'var(--color-ink)' }}>
+                            {assignment.title}
+                          </Link>
+                        ) : (
+                          <p className="text-sm font-medium truncate" style={{ color: 'var(--color-ink)' }}>
+                            {assignment.title}
+                          </p>
+                        )}
+                        <p className="text-[11px]" style={{ color: 'var(--color-ink-faint)' }}>
+                          {classroomName}
+                          {assignment.due_date ? ` · Due ${new Date(assignment.due_date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}` : ""}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex-shrink-0 ml-3">
+                      {assignment.status === "completed" ? (
+                        <span className="text-xs font-medium text-emerald-600 flex items-center gap-1">
+                          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                          {assignment.score != null ? `${assignment.score}%` : "Done"}
+                        </span>
+                      ) : assignment.status === "overdue" ? (
+                        <span className="text-xs font-medium text-red-500">Overdue</span>
+                      ) : (
+                        <span className="text-xs font-medium" style={{ color: 'var(--color-ink-faint)' }}>
+                          {assignment.type === "quiz" ? "Quiz" : assignment.type === "practice_test" ? "Test" : "Lesson"}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Continue Studying */}
         {lastModule && (
@@ -337,6 +483,19 @@ export default function DashboardPage() {
       </motion.div>
     </div>
   );
+}
+
+function getAssignmentUrgencyColor(dueDate: string | null, status: string): string {
+  if (status === "completed") return "#34d399"; // emerald
+  if (!dueDate) return "#9ca3af"; // gray
+  const now = new Date();
+  const due = new Date(dueDate);
+  const diffMs = due.getTime() - now.getTime();
+  const diffDays = diffMs / (1000 * 60 * 60 * 24);
+  if (diffDays < 0) return "#ef4444"; // red — overdue
+  if (diffDays < 1) return "#ef4444"; // red — due today
+  if (diffDays < 7) return "#f59e0b"; // amber — due this week
+  return "#22c55e"; // green — due later
 }
 
 function CourseProgressCard({
