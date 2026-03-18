@@ -1,22 +1,28 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import type { Classroom, Assignment } from "@/lib/types/teacher";
+import { courses } from "@/data/courses";
 
-type TabKey = "overview" | "students" | "assignments" | "settings";
+/* ────────────────────────── Types ────────────────────────── */
+
+type TabKey = "students" | "assignments" | "analytics" | "settings";
 
 interface StudentRow {
   student_id: string;
   display_name: string | null;
-  email: string | null;
   joined_at: string;
   modules_completed: number;
   avg_score: number;
   last_active: string | null;
+  quiz_scores: number[];
+  module_scores: Record<string, number[]>;
+  weekly_completions: Record<string, number>;
 }
 
 interface AssignmentWithStats extends Assignment {
@@ -25,45 +31,379 @@ interface AssignmentWithStats extends Assignment {
   avg_score: number;
 }
 
-interface ActivityItem {
-  id: string;
-  message: string;
-  timestamp: string;
-  type: "join" | "quiz" | "assignment";
+type SortField = "name" | "modules" | "score" | "last_active" | "status";
+type SortDir = "asc" | "desc";
+
+/* ────────────────────────── Helpers ────────────────────────── */
+
+const allModules = courses.flatMap((c) => c.modules);
+
+function getModuleTitle(id: string): string {
+  return allModules.find((m) => m.id === id)?.title ?? id;
 }
 
-type SortField = "name" | "score" | "activity";
-type SortDir = "asc" | "desc";
+function daysSince(date: string | null): number {
+  if (!date) return 999;
+  return Math.floor(
+    (Date.now() - new Date(date).getTime()) / (1000 * 60 * 60 * 24)
+  );
+}
+
+function getStatus(lastActive: string | null): "active" | "idle" | "inactive" {
+  const d = daysSince(lastActive);
+  if (d <= 7) return "active";
+  if (d <= 14) return "idle";
+  return "inactive";
+}
+
+function statusLabel(s: "active" | "idle" | "inactive") {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+function statusColor(s: "active" | "idle" | "inactive") {
+  switch (s) {
+    case "active":
+      return { bg: "rgba(22,163,74,0.08)", text: "#16A34A" };
+    case "idle":
+      return { bg: "rgba(217,119,6,0.08)", text: "#D97706" };
+    case "inactive":
+      return { bg: "rgba(239,68,68,0.08)", text: "#EF4444" };
+  }
+}
+
+function assignmentStatus(a: AssignmentWithStats): "upcoming" | "active" | "past_due" | "completed" {
+  const now = Date.now();
+  const pct = a.total_students > 0 ? a.completed_count / a.total_students : 0;
+  if (pct >= 1) return "completed";
+  if (!a.due_date) return "active";
+  const due = new Date(a.due_date).getTime();
+  if (due > now + 86400000 * 2) return "upcoming";
+  if (due < now) return "past_due";
+  return "active";
+}
+
+function assignmentStatusStyle(s: ReturnType<typeof assignmentStatus>) {
+  switch (s) {
+    case "upcoming":
+      return { bg: "rgba(59,130,246,0.08)", text: "#3B82F6", label: "Upcoming" };
+    case "active":
+      return { bg: "rgba(22,163,74,0.08)", text: "#16A34A", label: "Active" };
+    case "past_due":
+      return { bg: "rgba(239,68,68,0.08)", text: "#EF4444", label: "Past Due" };
+    case "completed":
+      return { bg: "rgba(107,114,128,0.08)", text: "#6B7280", label: "Completed" };
+  }
+}
+
+function gradeLabel(score: number): string {
+  if (score >= 90) return "A";
+  if (score >= 80) return "B";
+  if (score >= 70) return "C";
+  if (score >= 60) return "D";
+  return "F";
+}
+
+function relativeTime(date: string | null): string {
+  if (!date) return "Never";
+  const d = daysSince(date);
+  if (d === 0) return "Today";
+  if (d === 1) return "Yesterday";
+  if (d < 7) return `${d}d ago`;
+  if (d < 30) return `${Math.floor(d / 7)}w ago`;
+  return new Date(date).toLocaleDateString();
+}
+
+/* ────────────────────────── Animation ────────────────────────── */
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.06, duration: 0.4, ease: "easeOut" },
+  }),
+};
+
+const tabVariants = {
+  enter: { opacity: 0, x: 12 },
+  center: { opacity: 1, x: 0, transition: { duration: 0.3, ease: "easeOut" } },
+  exit: { opacity: 0, x: -12, transition: { duration: 0.15 } },
+};
+
+/* ────────────────────────── Skeleton ────────────────────────── */
+
+function Skeleton({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
+  return (
+    <div
+      className={`animate-pulse rounded-lg ${className}`}
+      style={{ background: "var(--color-border-subtle)", ...style }}
+    />
+  );
+}
+
+function HeaderSkeleton() {
+  return (
+    <div className="max-w-6xl mx-auto px-6 py-10">
+      <Skeleton className="w-24 h-4 mb-8" />
+      <div className="flex items-start justify-between mb-8">
+        <div>
+          <Skeleton className="w-64 h-8 mb-2" />
+          <Skeleton className="w-40 h-4" />
+        </div>
+        <Skeleton className="w-36 h-10 rounded-xl" />
+      </div>
+      <div className="grid grid-cols-4 gap-4 mb-8">
+        {[1, 2, 3, 4].map((i) => (
+          <Skeleton key={i} className="h-24 rounded-2xl" />
+        ))}
+      </div>
+      <Skeleton className="w-full h-12 rounded-xl mb-6" />
+      <div className="space-y-3">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <Skeleton key={i} className="h-16 rounded-xl" />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ────────────────────────── Bar Chart (SVG) ────────────────────────── */
+
+function HorizontalBarChart({
+  data,
+}: {
+  data: { label: string; value: number; max: number }[];
+}) {
+  if (data.length === 0)
+    return (
+      <p className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
+        No data yet.
+      </p>
+    );
+  const barH = 28;
+  const gap = 8;
+  const labelW = 180;
+  const totalH = data.length * (barH + gap);
+
+  return (
+    <svg width="100%" height={totalH} viewBox={`0 0 600 ${totalH}`} preserveAspectRatio="xMinYMin meet">
+      {data.map((d, i) => {
+        const y = i * (barH + gap);
+        const pct = d.max > 0 ? d.value / d.max : 0;
+        const barWidth = Math.max(2, pct * (600 - labelW - 60));
+        const color =
+          d.value >= 80 ? "#16A34A" : d.value >= 60 ? "#F59E0B" : "#EF4444";
+        return (
+          <g key={i}>
+            <text
+              x={0}
+              y={y + barH / 2 + 4}
+              fontSize={11}
+              fill="var(--color-ink-muted)"
+              fontFamily="system-ui"
+            >
+              {d.label.length > 22 ? d.label.slice(0, 22) + "..." : d.label}
+            </text>
+            <rect
+              x={labelW}
+              y={y + 4}
+              width={600 - labelW - 60}
+              height={barH - 8}
+              rx={4}
+              fill="var(--color-border-subtle)"
+            />
+            <motion.rect
+              x={labelW}
+              y={y + 4}
+              initial={{ width: 0 }}
+              animate={{ width: barWidth }}
+              transition={{ duration: 0.6, delay: i * 0.05 }}
+              height={barH - 8}
+              rx={4}
+              fill={color}
+            />
+            <text
+              x={600 - 50}
+              y={y + barH / 2 + 4}
+              fontSize={12}
+              fontWeight={600}
+              fill="var(--color-ink)"
+              fontFamily="system-ui"
+            >
+              {d.value}%
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+/* ────────────────────────── Weekly Bar Chart ────────────────────────── */
+
+function WeeklyBarChart({ data }: { data: { week: string; count: number }[] }) {
+  if (data.length === 0 || data.every((d) => d.count === 0))
+    return (
+      <p className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
+        No quiz completions yet.
+      </p>
+    );
+
+  const maxVal = Math.max(...data.map((d) => d.count), 1);
+  const barW = Math.min(40, Math.floor(500 / data.length) - 4);
+  const chartH = 120;
+  const totalW = data.length * (barW + 6);
+
+  return (
+    <svg
+      width="100%"
+      height={chartH + 30}
+      viewBox={`0 0 ${Math.max(totalW, 200)} ${chartH + 30}`}
+      preserveAspectRatio="xMinYMin meet"
+    >
+      {data.map((d, i) => {
+        const x = i * (barW + 6);
+        const h = (d.count / maxVal) * chartH;
+        return (
+          <g key={i}>
+            <motion.rect
+              x={x}
+              y={chartH - h}
+              width={barW}
+              initial={{ height: 0, y: chartH }}
+              animate={{ height: h, y: chartH - h }}
+              transition={{ duration: 0.5, delay: i * 0.04 }}
+              rx={3}
+              fill="#3B82F6"
+              opacity={0.8}
+            />
+            {d.count > 0 && (
+              <text
+                x={x + barW / 2}
+                y={chartH - h - 4}
+                textAnchor="middle"
+                fontSize={10}
+                fontWeight={600}
+                fill="var(--color-ink-muted)"
+                fontFamily="system-ui"
+              >
+                {d.count}
+              </text>
+            )}
+            <text
+              x={x + barW / 2}
+              y={chartH + 16}
+              textAnchor="middle"
+              fontSize={9}
+              fill="var(--color-ink-faint)"
+              fontFamily="system-ui"
+            >
+              {d.week}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
+/* ────────────────────────── Grade Distribution ────────────────────────── */
+
+function GradeDistribution({ distribution }: { distribution: Record<string, number> }) {
+  const grades = ["A", "B", "C", "D", "F"];
+  const colors: Record<string, string> = {
+    A: "#16A34A",
+    B: "#3B82F6",
+    C: "#F59E0B",
+    D: "#F97316",
+    F: "#EF4444",
+  };
+  const total = Object.values(distribution).reduce((a, b) => a + b, 0);
+
+  return (
+    <div className="flex items-end gap-3 h-40">
+      {grades.map((g) => {
+        const count = distribution[g] || 0;
+        const pct = total > 0 ? (count / total) * 100 : 0;
+        return (
+          <div key={g} className="flex flex-col items-center flex-1 h-full justify-end">
+            <span
+              className="text-xs font-semibold mb-1"
+              style={{ color: "var(--color-ink)" }}
+            >
+              {count}
+            </span>
+            <motion.div
+              className="w-full rounded-t-md"
+              style={{ background: colors[g] }}
+              initial={{ height: 0 }}
+              animate={{ height: `${Math.max(pct, count > 0 ? 8 : 0)}%` }}
+              transition={{ duration: 0.5 }}
+            />
+            <span
+              className="text-xs font-bold mt-2"
+              style={{ color: colors[g] }}
+            >
+              {g}
+            </span>
+            <span
+              className="text-[10px]"
+              style={{ color: "var(--color-ink-faint)" }}
+            >
+              {total > 0 ? Math.round(pct) : 0}%
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MAIN PAGE COMPONENT
+   ════════════════════════════════════════════════════════════════ */
 
 export default function ClassroomDetailPage() {
   const { user } = useAuth();
   const params = useParams();
+  const router = useRouter();
   const classroomId = params.id as string;
   const supabase = createClient();
 
+  /* ── Core state ── */
   const [classroom, setClassroom] = useState<Classroom | null>(null);
   const [students, setStudents] = useState<StudentRow[]>([]);
   const [assignments, setAssignments] = useState<AssignmentWithStats[]>([]);
-  const [recentActivity, setRecentActivity] = useState<ActivityItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<TabKey>("overview");
+  const [error, setError] = useState<string | null>(null);
+
+  /* ── Tab ── */
+  const [activeTab, setActiveTab] = useState<TabKey>("students");
+
+  /* ── Join code copy ── */
   const [codeCopied, setCodeCopied] = useState(false);
 
-  // Settings state
+  /* ── Students tab ── */
+  const [studentSearch, setStudentSearch] = useState("");
+  const [sortField, setSortField] = useState<SortField>("name");
+  const [sortDir, setSortDir] = useState<SortDir>("asc");
+
+  /* ── Settings ── */
   const [editName, setEditName] = useState("");
   const [editSchool, setEditSchool] = useState("");
   const [saving, setSaving] = useState(false);
   const [saveMsg, setSaveMsg] = useState("");
+  const [showRegenerateConfirm, setShowRegenerateConfirm] = useState(false);
+  const [showArchiveConfirm, setShowArchiveConfirm] = useState(false);
 
-  // Sort state
-  const [sortField, setSortField] = useState<SortField>("name");
-  const [sortDir, setSortDir] = useState<SortDir>("asc");
+  /* ────────────────── DATA LOADING ────────────────── */
 
   const loadData = useCallback(async () => {
     if (!user) return;
+    setError(null);
 
     try {
-      // Load classroom
+      // 1. Classroom
       const { data: classroomData } = await supabase
         .from("classrooms")
         .select("*")
@@ -71,53 +411,92 @@ export default function ClassroomDetailPage() {
         .eq("teacher_id", user.id)
         .single();
 
-      if (!classroomData) return;
+      if (!classroomData) {
+        setError("Classroom not found");
+        setLoading(false);
+        return;
+      }
       setClassroom(classroomData);
       setEditName(classroomData.name);
       setEditSchool(classroomData.school_name || "");
 
-      // Load members with profiles
+      // 2. Members
       const { data: members } = await supabase
         .from("classroom_members")
         .select("student_id, joined_at, profiles(display_name)")
         .eq("classroom_id", classroomId);
 
-      // Get quiz results for these students
       const studentIds = (members || []).map((m: any) => m.student_id);
-      let quizScoresMap: Record<string, { total: number; count: number }> = {};
+
+      // 3. Quiz results for analytics
+      let quizMap: Record<
+        string,
+        {
+          total: number;
+          count: number;
+          scores: number[];
+          modules: Set<string>;
+          lastActive: string;
+          moduleScores: Record<string, number[]>;
+          weeklyCompletions: Record<string, number>;
+        }
+      > = {};
 
       if (studentIds.length > 0) {
         const { data: quizResults } = await supabase
           .from("quiz_results")
-          .select("user_id, score_percent, created_at")
+          .select("user_id, module_id, score_percent, created_at")
           .in("user_id", studentIds);
 
         if (quizResults) {
           for (const q of quizResults) {
-            if (!quizScoresMap[q.user_id]) {
-              quizScoresMap[q.user_id] = { total: 0, count: 0 };
+            if (!quizMap[q.user_id]) {
+              quizMap[q.user_id] = {
+                total: 0,
+                count: 0,
+                scores: [],
+                modules: new Set(),
+                lastActive: q.created_at,
+                moduleScores: {},
+                weeklyCompletions: {},
+              };
             }
-            quizScoresMap[q.user_id].total += q.score_percent || 0;
-            quizScoresMap[q.user_id].count += 1;
+            const s = quizMap[q.user_id];
+            s.total += q.score_percent || 0;
+            s.count += 1;
+            s.scores.push(q.score_percent || 0);
+            s.modules.add(q.module_id);
+            if (q.created_at > s.lastActive) s.lastActive = q.created_at;
+
+            // Module scores
+            if (!s.moduleScores[q.module_id]) s.moduleScores[q.module_id] = [];
+            s.moduleScores[q.module_id].push(q.score_percent || 0);
+
+            // Weekly completions
+            const weekStart = getWeekKey(q.created_at);
+            s.weeklyCompletions[weekStart] = (s.weeklyCompletions[weekStart] || 0) + 1;
           }
         }
+
       }
 
       const studentRows: StudentRow[] = (members || []).map((m: any) => {
-        const scores = quizScoresMap[m.student_id];
+        const s = quizMap[m.student_id];
         return {
           student_id: m.student_id,
           display_name: m.profiles?.display_name || null,
-          email: null,
           joined_at: m.joined_at,
-          modules_completed: scores?.count || 0,
-          avg_score: scores ? Math.round(scores.total / scores.count) : 0,
-          last_active: m.joined_at,
+          modules_completed: s ? s.modules.size : 0,
+          avg_score: s && s.count > 0 ? Math.round(s.total / s.count) : 0,
+          last_active: s?.lastActive || m.joined_at,
+          quiz_scores: s?.scores || [],
+          module_scores: s?.moduleScores || {},
+          weekly_completions: s?.weeklyCompletions || {},
         };
       });
       setStudents(studentRows);
 
-      // Load assignments with completion stats
+      // 4. Assignments
       const res = await fetch(`/api/assignments?classroom_id=${classroomId}`);
       const assignData = await res.json();
       const rawAssignments: Assignment[] = assignData.assignments || [];
@@ -134,8 +513,10 @@ export default function ClassroomDetailPage() {
         const avgScore =
           completedCount > 0
             ? Math.round(
-                (completions || []).reduce((sum, c) => sum + (c.score || 0), 0) /
-                  completedCount
+                (completions || []).reduce(
+                  (sum, c) => sum + (c.score || 0),
+                  0
+                ) / completedCount
               )
             : 0;
 
@@ -147,25 +528,9 @@ export default function ClassroomDetailPage() {
         });
       }
       setAssignments(assignmentsWithStats);
-
-      // Build recent activity
-      const activity: ActivityItem[] = [];
-      for (const m of members || []) {
-        const name = (m as any).profiles?.display_name || "A student";
-        activity.push({
-          id: `join-${(m as any).student_id}`,
-          message: `${name} joined the classroom`,
-          timestamp: (m as any).joined_at,
-          type: "join",
-        });
-      }
-      activity.sort(
-        (a, b) =>
-          new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-      );
-      setRecentActivity(activity.slice(0, 10));
     } catch (err) {
       console.error("Failed to load classroom data:", err);
+      setError("Something went wrong loading classroom data.");
     } finally {
       setLoading(false);
     }
@@ -174,6 +539,8 @@ export default function ClassroomDetailPage() {
   useEffect(() => {
     loadData();
   }, [loadData]);
+
+  /* ────────────────── ACTIONS ────────────────── */
 
   const copyJoinCode = () => {
     if (!classroom) return;
@@ -211,37 +578,14 @@ export default function ClassroomDetailPage() {
     }
   };
 
-  const handleDeactivate = async () => {
-    if (!classroom) return;
-    if (!confirm("Are you sure you want to deactivate this classroom? Students will no longer be able to access it.")) return;
-
-    try {
-      const res = await fetch(`/api/classrooms/${classroomId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ active: false }),
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        setClassroom(data.classroom);
-      }
-    } catch (err) {
-      console.error("Failed to deactivate:", err);
-    }
-  };
-
   const handleRegenerateCode = async () => {
     if (!classroom) return;
-    if (!confirm("Regenerate join code? The current code will stop working.")) return;
-
     try {
       const res = await fetch(`/api/classrooms/${classroomId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ regenerate_code: true }),
       });
-
       if (res.ok) {
         const data = await res.json();
         setClassroom(data.classroom);
@@ -249,28 +593,28 @@ export default function ClassroomDetailPage() {
     } catch (err) {
       console.error("Failed to regenerate code:", err);
     }
+    setShowRegenerateConfirm(false);
   };
 
-  const sortedStudents = [...students].sort((a, b) => {
-    const dir = sortDir === "asc" ? 1 : -1;
-    switch (sortField) {
-      case "name":
-        return (
-          dir *
-          (a.display_name || "").localeCompare(b.display_name || "")
-        );
-      case "score":
-        return dir * (a.avg_score - b.avg_score);
-      case "activity":
-        return (
-          dir *
-          (new Date(a.joined_at).getTime() -
-            new Date(b.joined_at).getTime())
-        );
-      default:
-        return 0;
+  const handleArchive = async () => {
+    if (!classroom) return;
+    try {
+      const res = await fetch(`/api/classrooms/${classroomId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ active: false }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setClassroom(data.classroom);
+      }
+    } catch (err) {
+      console.error("Failed to archive:", err);
     }
-  });
+    setShowArchiveConfirm(false);
+  };
+
+  /* ────────────────── SORTING / FILTERING ────────────────── */
 
   const toggleSort = (field: SortField) => {
     if (sortField === field) {
@@ -281,23 +625,163 @@ export default function ClassroomDetailPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-gray-300 border-t-gray-900 rounded-full animate-spin" />
-      </div>
-    );
-  }
+  const sortArrow = (field: SortField) => {
+    if (sortField !== field) return "";
+    return sortDir === "asc" ? " \u2191" : " \u2193";
+  };
 
-  if (!classroom) {
+  const filteredStudents = useMemo(() => {
+    let list = [...students];
+    if (studentSearch.trim()) {
+      const q = studentSearch.toLowerCase();
+      list = list.filter(
+        (s) =>
+          (s.display_name || "").toLowerCase().includes(q) ||
+          s.student_id.toLowerCase().includes(q)
+      );
+    }
+
+    list.sort((a, b) => {
+      const dir = sortDir === "asc" ? 1 : -1;
+      switch (sortField) {
+        case "name":
+          return dir * (a.display_name || "").localeCompare(b.display_name || "");
+        case "modules":
+          return dir * (a.modules_completed - b.modules_completed);
+        case "score":
+          return dir * (a.avg_score - b.avg_score);
+        case "last_active":
+          return (
+            dir *
+            (new Date(a.last_active || 0).getTime() -
+              new Date(b.last_active || 0).getTime())
+          );
+        case "status": {
+          const order = { active: 0, idle: 1, inactive: 2 };
+          return dir * (order[getStatus(a.last_active)] - order[getStatus(b.last_active)]);
+        }
+        default:
+          return 0;
+      }
+    });
+
+    return list;
+  }, [students, studentSearch, sortField, sortDir]);
+
+  /* ────────────────── ANALYTICS COMPUTATIONS ────────────────── */
+
+  const analytics = useMemo(() => {
+    // Module performance: average score per module across all students
+    const moduleAgg: Record<string, { total: number; count: number }> = {};
+    for (const s of students) {
+      for (const [modId, scores] of Object.entries(s.module_scores)) {
+        if (!moduleAgg[modId]) moduleAgg[modId] = { total: 0, count: 0 };
+        for (const sc of scores) {
+          moduleAgg[modId].total += sc;
+          moduleAgg[modId].count += 1;
+        }
+      }
+    }
+    const modulePerformance = Object.entries(moduleAgg)
+      .map(([id, agg]) => ({
+        label: getModuleTitle(id),
+        value: Math.round(agg.total / agg.count),
+        max: 100,
+      }))
+      .sort((a, b) => b.value - a.value);
+
+    // Hardest modules: lowest average scores with at least 2 attempts
+    const hardestModules = Object.entries(moduleAgg)
+      .filter(([, agg]) => agg.count >= 2)
+      .map(([id, agg]) => ({
+        title: getModuleTitle(id),
+        avgScore: Math.round(agg.total / agg.count),
+        attempts: agg.count,
+      }))
+      .sort((a, b) => a.avgScore - b.avgScore)
+      .slice(0, 5);
+
+    // Grade distribution
+    const distribution: Record<string, number> = { A: 0, B: 0, C: 0, D: 0, F: 0 };
+    for (const s of students) {
+      if (s.avg_score > 0) {
+        distribution[gradeLabel(s.avg_score)] += 1;
+      }
+    }
+
+    // Weekly completions (last 8 weeks)
+    const weeklyAgg: Record<string, number> = {};
+    for (const s of students) {
+      for (const [week, count] of Object.entries(s.weekly_completions)) {
+        weeklyAgg[week] = (weeklyAgg[week] || 0) + count;
+      }
+    }
+    const weeks = getLast8Weeks();
+    const weeklyData = weeks.map((w) => ({
+      week: w.label,
+      count: weeklyAgg[w.key] || 0,
+    }));
+
+    return { modulePerformance, hardestModules, distribution, weeklyData };
+  }, [students]);
+
+  /* ────────────────── COMPUTED STATS ────────────────── */
+
+  const avgClassScore = useMemo(() => {
+    const withScores = students.filter((s) => s.avg_score > 0);
+    if (withScores.length === 0) return 0;
+    return Math.round(
+      withScores.reduce((sum, s) => sum + s.avg_score, 0) / withScores.length
+    );
+  }, [students]);
+
+  const activeAssignments = useMemo(
+    () => assignments.filter((a) => assignmentStatus(a) === "active").length,
+    [assignments]
+  );
+
+  const completionRate = useMemo(() => {
+    if (assignments.length === 0 || students.length === 0) return 0;
+    const totalPossible = assignments.length * students.length;
+    const totalCompleted = assignments.reduce((s, a) => s + a.completed_count, 0);
+    return Math.round((totalCompleted / totalPossible) * 100);
+  }, [assignments, students]);
+
+  /* ────────────────── RENDER ────────────────── */
+
+  if (loading) return <HeaderSkeleton />;
+
+  if (error || !classroom) {
     return (
       <div className="max-w-md mx-auto px-6 py-20 text-center">
+        <div
+          className="w-16 h-16 rounded-2xl mx-auto mb-6 flex items-center justify-center"
+          style={{ background: "rgba(239,68,68,0.08)" }}
+        >
+          <svg
+            className="w-8 h-8"
+            style={{ color: "#EF4444" }}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"
+            />
+          </svg>
+        </div>
         <h1
-          className="text-xl font-bold mb-4"
+          className="text-xl font-bold mb-2"
           style={{ color: "var(--color-ink)" }}
         >
-          Classroom not found
+          {error || "Classroom not found"}
         </h1>
+        <p className="text-sm mb-6" style={{ color: "var(--color-ink-muted)" }}>
+          This classroom may have been removed or you may not have access.
+        </p>
         <Link href="/teacher" className="btn-primary py-2.5 px-6 text-sm">
           Back to Dashboard
         </Link>
@@ -305,664 +789,1046 @@ export default function ClassroomDetailPage() {
     );
   }
 
-  const avgClassScore =
-    students.length > 0
-      ? Math.round(
-          students.reduce((sum, s) => sum + s.avg_score, 0) / students.length
-        )
-      : 0;
-
-  const tabs: { key: TabKey; label: string }[] = [
-    { key: "overview", label: "Overview" },
-    { key: "students", label: `Students (${students.length})` },
-    { key: "assignments", label: `Assignments (${assignments.length})` },
+  const tabs: { key: TabKey; label: string; count?: number }[] = [
+    { key: "students", label: "Students", count: students.length },
+    { key: "assignments", label: "Assignments", count: assignments.length },
+    { key: "analytics", label: "Analytics" },
     { key: "settings", label: "Settings" },
   ];
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10">
-      {/* Breadcrumb */}
-      <div className="mb-6">
+    <div className="max-w-6xl mx-auto px-6 py-10">
+      {/* ── Breadcrumb ── */}
+      <motion.div
+        className="mb-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      >
         <Link
           href="/teacher"
-          className="text-sm font-medium hover:text-blue-600 transition-colors"
+          className="text-sm font-medium hover:text-blue-600 transition-colors inline-flex items-center gap-1.5"
           style={{ color: "var(--color-ink-muted)" }}
         >
-          &larr; Teacher Dashboard
+          <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Teacher Dashboard
         </Link>
-      </div>
+      </motion.div>
 
-      {/* Header */}
-      <div className="flex items-start justify-between mb-6">
-        <div>
-          <div className="flex items-center gap-3">
+      {/* ── Header ── */}
+      <motion.div
+        className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-3 flex-wrap">
             <h1
-              className="text-2xl font-bold"
+              className="text-3xl font-bold tracking-tight"
               style={{ color: "var(--color-ink)" }}
             >
               {classroom.name}
             </h1>
             {!classroom.active && (
               <span
-                className="text-xs font-medium px-2 py-0.5 rounded-full"
+                className="text-xs font-semibold px-2.5 py-1 rounded-full"
                 style={{
                   background: "rgba(239, 68, 68, 0.08)",
                   color: "#EF4444",
                 }}
               >
-                Inactive
+                Archived
               </span>
             )}
           </div>
           {classroom.school_name && (
             <p
-              className="text-sm mt-0.5"
+              className="text-sm mt-1"
               style={{ color: "var(--color-ink-muted)" }}
             >
               {classroom.school_name}
             </p>
           )}
+
+          {/* Join Code Badge */}
+          <button
+            onClick={copyJoinCode}
+            className="mt-3 inline-flex items-center gap-2.5 px-4 py-2 rounded-xl text-sm font-medium transition-all hover:shadow-md group"
+            style={{
+              background: codeCopied ? "rgba(22,163,74,0.08)" : "rgba(59,130,246,0.06)",
+              border: codeCopied
+                ? "1px solid rgba(22,163,74,0.2)"
+                : "1px solid rgba(59,130,246,0.15)",
+              color: codeCopied ? "#16A34A" : "#3B82F6",
+            }}
+          >
+            <span className="font-mono font-bold text-base tracking-widest">
+              {classroom.join_code}
+            </span>
+            <span className="text-xs opacity-70">
+              {codeCopied ? "Copied!" : "Click to copy"}
+            </span>
+            <svg
+              className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+              />
+            </svg>
+          </button>
         </div>
+
         <Link
           href={`/teacher/assignments/new?classroom=${classroomId}`}
-          className="btn-primary py-2.5 px-5 text-sm"
+          className="btn-primary py-2.5 px-5 text-sm shrink-0"
         >
           + New Assignment
         </Link>
-      </div>
+      </motion.div>
 
-      {/* Share Join Code Card */}
-      <div
-        className="card p-6 mb-6"
-        style={{
-          background: "rgba(59, 130, 246, 0.04)",
-          border: "1px solid rgba(59, 130, 246, 0.12)",
-        }}
+      {/* ── Quick Stats ── */}
+      <motion.div
+        className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8"
+        initial="hidden"
+        animate="visible"
       >
-        <div className="flex items-center justify-between">
-          <div>
+        {[
+          {
+            label: "Students",
+            value: String(students.length),
+            accent: "#3B82F6",
+            bg: "rgba(59,130,246,0.06)",
+          },
+          {
+            label: "Avg Score",
+            value: avgClassScore > 0 ? `${avgClassScore}%` : "--",
+            accent:
+              avgClassScore >= 70
+                ? "#16A34A"
+                : avgClassScore >= 50
+                ? "#D97706"
+                : "#6B7280",
+            bg:
+              avgClassScore >= 70
+                ? "rgba(22,163,74,0.06)"
+                : avgClassScore >= 50
+                ? "rgba(217,119,6,0.06)"
+                : "rgba(107,114,128,0.06)",
+          },
+          {
+            label: "Active Assignments",
+            value: String(activeAssignments),
+            accent: "#8B5CF6",
+            bg: "rgba(139,92,246,0.06)",
+          },
+          {
+            label: "Completion Rate",
+            value: completionRate > 0 ? `${completionRate}%` : "--",
+            accent: "#D97706",
+            bg: "rgba(217,119,6,0.06)",
+          },
+        ].map((stat, i) => (
+          <motion.div
+            key={stat.label}
+            custom={i}
+            variants={fadeUp}
+            className="rounded-2xl p-4"
+            style={{
+              background: stat.bg,
+              border: `1px solid ${stat.accent}15`,
+            }}
+          >
             <p
-              className="text-xs font-medium uppercase tracking-wider mb-2"
+              className="text-[11px] font-semibold uppercase tracking-wider mb-1"
               style={{ color: "var(--color-ink-faint)" }}
             >
-              Share Join Code
+              {stat.label}
             </p>
             <p
-              className="text-4xl font-mono font-bold tracking-[0.2em]"
-              style={{ color: "var(--color-ink)" }}
+              className="text-2xl font-bold"
+              style={{ color: stat.accent }}
             >
-              {classroom.join_code}
+              {stat.value}
             </p>
-            <p
-              className="text-xs mt-2"
-              style={{ color: "var(--color-ink-muted)" }}
-            >
-              Students visit econlearn.org/join and enter this code.
-            </p>
-          </div>
-          <div className="flex flex-col items-center gap-3">
-            <button
-              onClick={copyJoinCode}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all hover:shadow-md"
-              style={{
-                background: "var(--color-surface)",
-                border: "1px solid var(--color-border)",
-                color: "var(--color-ink)",
-              }}
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                />
-              </svg>
-              {codeCopied ? "Copied!" : "Copy Code"}
-            </button>
-            {/* QR Code placeholder */}
-            <div
-              className="w-20 h-20 rounded-lg flex items-center justify-center"
-              style={{
-                background: "var(--color-surface)",
-                border: "1px solid var(--color-border)",
-              }}
-            >
-              <svg
-                className="w-10 h-10"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="var(--color-ink-faint)"
-                strokeWidth={1.5}
-              >
-                <rect x="3" y="3" width="7" height="7" rx="1" />
-                <rect x="14" y="3" width="7" height="7" rx="1" />
-                <rect x="3" y="14" width="7" height="7" rx="1" />
-                <rect x="14" y="14" width="3" height="3" rx="0.5" />
-                <rect x="18" y="14" width="3" height="3" rx="0.5" />
-                <rect x="14" y="18" width="3" height="3" rx="0.5" />
-                <rect x="18" y="18" width="3" height="3" rx="0.5" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        ))}
+      </motion.div>
 
-      {/* Tabs */}
+      {/* ── Tabs ── */}
       <div
-        className="flex gap-1 mb-6 p-1 rounded-xl"
-        style={{ background: "var(--color-surface)", border: "1px solid var(--color-border-subtle)" }}
+        className="flex gap-1 mb-8 p-1 rounded-xl overflow-x-auto"
+        style={{
+          background: "var(--color-surface-raised)",
+          border: "1px solid var(--color-border-subtle)",
+        }}
       >
         {tabs.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className="px-4 py-2 rounded-lg text-sm font-medium transition-all flex-1"
+            className="relative px-4 py-2.5 rounded-lg text-sm font-medium transition-all flex-1 whitespace-nowrap"
             style={{
-              background: activeTab === tab.key ? "var(--color-ink)" : "transparent",
-              color: activeTab === tab.key ? "white" : "var(--color-ink-muted)",
+              color:
+                activeTab === tab.key
+                  ? "white"
+                  : "var(--color-ink-muted)",
             }}
           >
-            {tab.label}
+            {activeTab === tab.key && (
+              <motion.div
+                layoutId="activeTab"
+                className="absolute inset-0 rounded-lg"
+                style={{ background: "var(--color-ink)" }}
+                transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+              />
+            )}
+            <span className="relative z-10">
+              {tab.label}
+              {tab.count !== undefined && (
+                <span className="ml-1.5 opacity-60">{tab.count}</span>
+              )}
+            </span>
           </button>
         ))}
       </div>
 
-      {/* Tab Content */}
-      {activeTab === "overview" && (
-        <div>
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            <div className="card p-5">
-              <p
-                className="text-xs font-medium uppercase tracking-wider"
-                style={{ color: "var(--color-ink-faint)" }}
-              >
-                Students
-              </p>
-              <p
-                className="text-3xl font-bold mt-1"
-                style={{ color: "var(--color-ink)" }}
-              >
-                {students.length}
-              </p>
-            </div>
-            <div className="card p-5">
-              <p
-                className="text-xs font-medium uppercase tracking-wider"
-                style={{ color: "var(--color-ink-faint)" }}
-              >
-                Assignments
-              </p>
-              <p
-                className="text-3xl font-bold mt-1"
-                style={{ color: "var(--color-ink)" }}
-              >
-                {assignments.length}
-              </p>
-            </div>
-            <div className="card p-5">
-              <p
-                className="text-xs font-medium uppercase tracking-wider"
-                style={{ color: "var(--color-ink-faint)" }}
-              >
-                Average Score
-              </p>
-              <p
-                className="text-3xl font-bold mt-1"
-                style={{
-                  color: avgClassScore >= 70 ? "#16A34A" : avgClassScore >= 50 ? "#D97706" : "var(--color-ink)",
-                }}
-              >
-                {avgClassScore > 0 ? `${avgClassScore}%` : "--"}
-              </p>
-            </div>
-          </div>
-
-          {/* Recent Activity */}
-          <div className="card p-5">
-            <h3
-              className="text-sm font-semibold mb-4 uppercase tracking-wider"
-              style={{ color: "var(--color-ink-faint)" }}
-            >
-              Recent Activity
-            </h3>
-            {recentActivity.length === 0 ? (
-              <p
-                className="text-sm"
-                style={{ color: "var(--color-ink-muted)" }}
-              >
-                No activity yet.
-              </p>
-            ) : (
-              <div className="space-y-3">
-                {recentActivity.map((item) => (
-                  <div key={item.id} className="flex items-start gap-3">
-                    <div
-                      className="w-2 h-2 rounded-full mt-1.5 shrink-0"
-                      style={{
-                        background:
-                          item.type === "join"
-                            ? "#16A34A"
-                            : item.type === "quiz"
-                            ? "#3B82F6"
-                            : "#8B5CF6",
-                      }}
+      {/* ── Tab Content ── */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          variants={tabVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+        >
+          {/* ═══════════ STUDENTS TAB ═══════════ */}
+          {activeTab === "students" && (
+            <div>
+              {/* Search */}
+              <div className="mb-4">
+                <div
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl"
+                  style={{
+                    background: "var(--color-surface)",
+                    border: "1px solid var(--color-border)",
+                  }}
+                >
+                  <svg
+                    className="w-4 h-4 shrink-0"
+                    style={{ color: "var(--color-ink-faint)" }}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                     />
-                    <div className="flex-1">
-                      <p
-                        className="text-sm"
-                        style={{ color: "var(--color-ink)" }}
-                      >
-                        {item.message}
-                      </p>
-                      <p
-                        className="text-xs mt-0.5"
-                        style={{ color: "var(--color-ink-faint)" }}
-                      >
-                        {new Date(item.timestamp).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+                  </svg>
+                  <input
+                    type="text"
+                    value={studentSearch}
+                    onChange={(e) => setStudentSearch(e.target.value)}
+                    placeholder="Search students..."
+                    className="flex-1 bg-transparent text-sm focus:outline-none"
+                    style={{ color: "var(--color-ink)" }}
+                  />
+                  {studentSearch && (
+                    <button
+                      onClick={() => setStudentSearch("")}
+                      className="text-xs"
+                      style={{ color: "var(--color-ink-faint)" }}
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
               </div>
-            )}
-          </div>
-        </div>
-      )}
 
-      {activeTab === "students" && (
-        <div>
-          {students.length === 0 ? (
-            <div className="card p-8 text-center">
-              <p
-                className="text-sm"
-                style={{ color: "var(--color-ink-muted)" }}
-              >
-                No students have joined yet. Share the join code{" "}
-                <strong className="font-mono">{classroom.join_code}</strong>{" "}
-                with your class.
-              </p>
-            </div>
-          ) : (
-            <div className="card overflow-hidden">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr
-                    style={{
-                      borderBottom: "1px solid var(--color-border-subtle)",
-                    }}
-                  >
-                    <th
-                      className="text-left px-4 py-3 font-medium text-xs uppercase tracking-wider cursor-pointer hover:text-blue-600 transition-colors select-none"
-                      style={{ color: "var(--color-ink-faint)" }}
-                      onClick={() => toggleSort("name")}
-                    >
-                      Student{" "}
-                      {sortField === "name" && (sortDir === "asc" ? "^" : "v")}
-                    </th>
-                    <th
-                      className="text-center px-4 py-3 font-medium text-xs uppercase tracking-wider"
-                      style={{ color: "var(--color-ink-faint)" }}
-                    >
-                      Modules
-                    </th>
-                    <th
-                      className="text-center px-4 py-3 font-medium text-xs uppercase tracking-wider cursor-pointer hover:text-blue-600 transition-colors select-none"
-                      style={{ color: "var(--color-ink-faint)" }}
-                      onClick={() => toggleSort("score")}
-                    >
-                      Avg Score{" "}
-                      {sortField === "score" &&
-                        (sortDir === "asc" ? "^" : "v")}
-                    </th>
-                    <th
-                      className="text-right px-4 py-3 font-medium text-xs uppercase tracking-wider cursor-pointer hover:text-blue-600 transition-colors select-none"
-                      style={{ color: "var(--color-ink-faint)" }}
-                      onClick={() => toggleSort("activity")}
-                    >
-                      Joined{" "}
-                      {sortField === "activity" &&
-                        (sortDir === "asc" ? "^" : "v")}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {sortedStudents.map((s) => (
-                    <tr
-                      key={s.student_id}
-                      className="hover:bg-gray-50/50 transition-colors"
-                      style={{
-                        borderBottom:
-                          "1px solid var(--color-border-subtle)",
-                      }}
-                    >
-                      <td className="px-4 py-3">
-                        <Link
-                          href={`/teacher/students/${s.student_id}`}
-                          className="font-medium hover:text-blue-600 transition-colors"
-                          style={{ color: "var(--color-ink)" }}
-                        >
-                          {s.display_name || "Student"}
-                        </Link>
-                      </td>
-                      <td
-                        className="px-4 py-3 text-center"
-                        style={{ color: "var(--color-ink-muted)" }}
-                      >
-                        {s.modules_completed}
-                      </td>
-                      <td
-                        className="px-4 py-3 text-center font-semibold"
-                        style={{
-                          color:
-                            s.avg_score >= 70
-                              ? "#16A34A"
-                              : s.avg_score >= 50
-                              ? "#D97706"
-                              : s.avg_score > 0
-                              ? "#EF4444"
-                              : "var(--color-ink-muted)",
-                        }}
-                      >
-                        {s.avg_score > 0 ? `${s.avg_score}%` : "--"}
-                      </td>
-                      <td
-                        className="px-4 py-3 text-right text-xs"
-                        style={{ color: "var(--color-ink-faint)" }}
-                      >
-                        {new Date(s.joined_at).toLocaleDateString()}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      )}
-
-      {activeTab === "assignments" && (
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <p
-              className="text-sm"
-              style={{ color: "var(--color-ink-muted)" }}
-            >
-              {assignments.length} assignment
-              {assignments.length !== 1 ? "s" : ""}
-            </p>
-            <Link
-              href={`/teacher/assignments/new?classroom=${classroomId}`}
-              className="btn-primary py-2 px-4 text-xs"
-            >
-              + New Assignment
-            </Link>
-          </div>
-
-          {assignments.length === 0 ? (
-            <div className="card p-8 text-center">
-              <p
-                className="text-sm mb-4"
-                style={{ color: "var(--color-ink-muted)" }}
-              >
-                No assignments yet. Create one to assign modules, quizzes, or
-                practice tests to your students.
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {assignments.map((a) => {
-                const pct =
-                  a.total_students > 0
-                    ? Math.round(
-                        (a.completed_count / a.total_students) * 100
-                      )
-                    : 0;
-                return (
+              {students.length === 0 ? (
+                <motion.div
+                  className="card p-12 text-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
                   <div
-                    key={a.id}
-                    className="card p-5"
+                    className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center"
+                    style={{ background: "rgba(59,130,246,0.06)" }}
                   >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <p
-                          className="font-medium text-sm"
-                          style={{ color: "var(--color-ink)" }}
-                        >
-                          {a.title}
-                        </p>
-                        <span
-                          className="text-xs px-2 py-0.5 rounded-full"
-                          style={{
-                            background: "rgba(59, 130, 246, 0.08)",
-                            color: "#3B82F6",
-                          }}
-                        >
-                          {a.type === "lesson"
-                            ? "Lesson"
-                            : a.type === "quiz"
-                            ? "Quiz"
-                            : "Practice Test"}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <span
-                          className="text-xs"
-                          style={{ color: "var(--color-ink-faint)" }}
-                        >
-                          {a.completed_count}/{a.total_students} completed
-                        </span>
-                        {a.avg_score > 0 && (
-                          <span
-                            className="text-xs font-semibold"
-                            style={{
-                              color:
-                                a.avg_score >= 70
-                                  ? "#16A34A"
-                                  : a.avg_score >= 50
-                                  ? "#D97706"
-                                  : "#EF4444",
-                            }}
-                          >
-                            Avg: {a.avg_score}%
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div
-                        className="flex-1 h-2 rounded-full overflow-hidden"
-                        style={{ background: "var(--color-border-subtle)" }}
-                      >
-                        <div
-                          className="h-full rounded-full transition-all"
-                          style={{
-                            width: `${pct}%`,
-                            background:
-                              pct >= 80
-                                ? "#16A34A"
-                                : pct >= 50
-                                ? "#F59E0B"
-                                : "#EF4444",
-                          }}
-                        />
-                      </div>
-                      <span
-                        className="text-xs font-medium"
-                        style={{ color: "var(--color-ink-faint)" }}
-                      >
-                        {pct}%
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3 mt-2">
-                      <span
-                        className="text-xs"
-                        style={{ color: "var(--color-ink-faint)" }}
-                      >
-                        {a.module_ids.length} module
-                        {a.module_ids.length !== 1 ? "s" : ""}
-                      </span>
-                      {a.due_date && (
-                        <span
-                          className="text-xs"
-                          style={{ color: "var(--color-ink-faint)" }}
-                        >
-                          Due{" "}
-                          {new Date(a.due_date).toLocaleDateString()}
-                        </span>
-                      )}
-                    </div>
+                    <svg
+                      className="w-8 h-8"
+                      style={{ color: "#3B82F6" }}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={1.5}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
                   </div>
-                );
-              })}
+                  <h3
+                    className="text-base font-semibold mb-1"
+                    style={{ color: "var(--color-ink)" }}
+                  >
+                    No students yet
+                  </h3>
+                  <p
+                    className="text-sm mb-4"
+                    style={{ color: "var(--color-ink-muted)" }}
+                  >
+                    Share the join code{" "}
+                    <button
+                      onClick={copyJoinCode}
+                      className="font-mono font-bold text-blue-600 hover:underline"
+                    >
+                      {classroom.join_code}
+                    </button>{" "}
+                    with your class to get started.
+                  </p>
+                </motion.div>
+              ) : filteredStudents.length === 0 ? (
+                <div className="card p-8 text-center">
+                  <p
+                    className="text-sm"
+                    style={{ color: "var(--color-ink-muted)" }}
+                  >
+                    No students match &quot;{studentSearch}&quot;
+                  </p>
+                </div>
+              ) : (
+                <div className="card overflow-hidden">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr
+                          style={{
+                            borderBottom: "1px solid var(--color-border-subtle)",
+                            background: "var(--color-surface-raised)",
+                          }}
+                        >
+                          {[
+                            { key: "name" as SortField, label: "Name", align: "left" },
+                            { key: "modules" as SortField, label: "Modules", align: "center" },
+                            { key: "score" as SortField, label: "Avg Quiz Score", align: "center" },
+                            { key: "last_active" as SortField, label: "Last Active", align: "center" },
+                            { key: "status" as SortField, label: "Status", align: "center" },
+                          ].map((col) => (
+                            <th
+                              key={col.key}
+                              onClick={() => toggleSort(col.key)}
+                              className={`text-${col.align} px-4 py-3 font-semibold text-[11px] uppercase tracking-wider cursor-pointer hover:text-blue-600 transition-colors select-none`}
+                              style={{ color: "var(--color-ink-faint)" }}
+                            >
+                              {col.label}
+                              {sortArrow(col.key)}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {filteredStudents.map((s, idx) => {
+                          const st = getStatus(s.last_active);
+                          const sc = statusColor(st);
+                          return (
+                            <motion.tr
+                              key={s.student_id}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ delay: idx * 0.02 }}
+                              onClick={() =>
+                                router.push(
+                                  `/teacher/students/${s.student_id}`
+                                )
+                              }
+                              className="cursor-pointer transition-colors"
+                              style={{
+                                borderBottom:
+                                  "1px solid var(--color-border-subtle)",
+                              }}
+                              onMouseEnter={(e) =>
+                                (e.currentTarget.style.background =
+                                  "var(--color-surface-raised)")
+                              }
+                              onMouseLeave={(e) =>
+                                (e.currentTarget.style.background =
+                                  "transparent")
+                              }
+                            >
+                              <td className="px-4 py-3.5">
+                                <span
+                                  className="font-medium"
+                                  style={{ color: "var(--color-ink)" }}
+                                >
+                                  {s.display_name || "Student"}
+                                </span>
+                              </td>
+                              <td
+                                className="px-4 py-3.5 text-center"
+                                style={{ color: "var(--color-ink-muted)" }}
+                              >
+                                {s.modules_completed}
+                              </td>
+                              <td className="px-4 py-3.5 text-center">
+                                <span
+                                  className="font-semibold"
+                                  style={{
+                                    color:
+                                      s.avg_score >= 70
+                                        ? "#16A34A"
+                                        : s.avg_score >= 50
+                                        ? "#D97706"
+                                        : s.avg_score > 0
+                                        ? "#EF4444"
+                                        : "var(--color-ink-muted)",
+                                  }}
+                                >
+                                  {s.avg_score > 0 ? `${s.avg_score}%` : "--"}
+                                </span>
+                              </td>
+                              <td
+                                className="px-4 py-3.5 text-center text-xs"
+                                style={{ color: "var(--color-ink-faint)" }}
+                              >
+                                {relativeTime(s.last_active)}
+                              </td>
+                              <td className="px-4 py-3.5 text-center">
+                                <span
+                                  className="inline-block text-xs font-semibold px-2.5 py-1 rounded-full"
+                                  style={{
+                                    background: sc.bg,
+                                    color: sc.text,
+                                  }}
+                                >
+                                  {statusLabel(st)}
+                                </span>
+                              </td>
+                            </motion.tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
             </div>
           )}
-        </div>
-      )}
 
-      {activeTab === "settings" && (
-        <div className="space-y-6">
-          {/* Edit Classroom */}
-          <div className="card p-6">
-            <h3
-              className="text-sm font-semibold mb-4 uppercase tracking-wider"
-              style={{ color: "var(--color-ink-faint)" }}
-            >
-              Classroom Details
-            </h3>
-            <div className="space-y-4">
-              <div>
-                <label
-                  className="block text-sm font-medium mb-1.5"
-                  style={{ color: "var(--color-ink)" }}
-                >
-                  Classroom Name
-                </label>
-                <input
-                  type="text"
-                  value={editName}
-                  onChange={(e) => setEditName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  style={{
-                    color: "var(--color-ink)",
-                    background: "var(--color-surface)",
-                    border: "1px solid var(--color-border)",
-                  }}
-                />
-              </div>
-              <div>
-                <label
-                  className="block text-sm font-medium mb-1.5"
-                  style={{ color: "var(--color-ink)" }}
-                >
-                  School Name (optional)
-                </label>
-                <input
-                  type="text"
-                  value={editSchool}
-                  onChange={(e) => setEditSchool(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  style={{
-                    color: "var(--color-ink)",
-                    background: "var(--color-surface)",
-                    border: "1px solid var(--color-border)",
-                  }}
-                />
-              </div>
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={handleSaveSettings}
-                  disabled={saving || !editName.trim()}
-                  className="btn-primary py-2.5 px-5 text-sm disabled:opacity-50"
-                >
-                  {saving ? "Saving..." : "Save Changes"}
-                </button>
-                {saveMsg && (
-                  <span
-                    className="text-sm"
-                    style={{
-                      color: saveMsg.includes("success")
-                        ? "#16A34A"
-                        : "#EF4444",
-                    }}
-                  >
-                    {saveMsg}
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Join Code Management */}
-          <div className="card p-6">
-            <h3
-              className="text-sm font-semibold mb-4 uppercase tracking-wider"
-              style={{ color: "var(--color-ink-faint)" }}
-            >
-              Join Code
-            </h3>
-            <div className="flex items-center justify-between">
-              <div>
+          {/* ═══════════ ASSIGNMENTS TAB ═══════════ */}
+          {activeTab === "assignments" && (
+            <div>
+              <div className="flex items-center justify-between mb-4">
                 <p
-                  className="font-mono font-bold text-lg"
-                  style={{ color: "var(--color-ink)" }}
-                >
-                  {classroom.join_code}
-                </p>
-                <p
-                  className="text-xs mt-1"
+                  className="text-sm"
                   style={{ color: "var(--color-ink-muted)" }}
                 >
-                  Regenerating will invalidate the current code.
+                  {assignments.length} assignment
+                  {assignments.length !== 1 ? "s" : ""}
                 </p>
+                <Link
+                  href={`/teacher/assignments/new?classroom=${classroomId}`}
+                  className="btn-primary py-2 px-4 text-xs"
+                >
+                  + Create Assignment
+                </Link>
               </div>
-              <button
-                onClick={handleRegenerateCode}
-                className="btn-secondary py-2 px-4 text-xs"
-              >
-                Regenerate Code
-              </button>
-            </div>
-          </div>
 
-          {/* Danger Zone */}
-          <div
-            className="card p-6"
-            style={{ border: "1px solid rgba(239, 68, 68, 0.2)" }}
-          >
-            <h3
-              className="text-sm font-semibold mb-2 uppercase tracking-wider"
-              style={{ color: "#EF4444" }}
-            >
-              Danger Zone
-            </h3>
-            <p
-              className="text-sm mb-4"
-              style={{ color: "var(--color-ink-muted)" }}
-            >
-              Deactivating this classroom will prevent students from accessing it. This action can be reversed.
-            </p>
-            <button
-              onClick={handleDeactivate}
-              disabled={!classroom.active}
-              className="px-4 py-2 rounded-xl text-sm font-medium transition-all disabled:opacity-50"
-              style={{
-                background: "rgba(239, 68, 68, 0.08)",
-                color: "#EF4444",
-                border: "1px solid rgba(239, 68, 68, 0.2)",
-              }}
-            >
-              {classroom.active ? "Deactivate Classroom" : "Classroom is Inactive"}
-            </button>
-          </div>
-        </div>
-      )}
+              {assignments.length === 0 ? (
+                <motion.div
+                  className="card p-12 text-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                >
+                  <div
+                    className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center"
+                    style={{ background: "rgba(139,92,246,0.06)" }}
+                  >
+                    <svg
+                      className="w-8 h-8"
+                      style={{ color: "#8B5CF6" }}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={1.5}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                      />
+                    </svg>
+                  </div>
+                  <h3
+                    className="text-base font-semibold mb-1"
+                    style={{ color: "var(--color-ink)" }}
+                  >
+                    No assignments yet
+                  </h3>
+                  <p
+                    className="text-sm mb-4"
+                    style={{ color: "var(--color-ink-muted)" }}
+                  >
+                    Create your first assignment to give students modules,
+                    quizzes, or practice tests.
+                  </p>
+                  <Link
+                    href={`/teacher/assignments/new?classroom=${classroomId}`}
+                    className="btn-primary py-2.5 px-6 text-sm"
+                  >
+                    Create Assignment
+                  </Link>
+                </motion.div>
+              ) : (
+                <div className="space-y-3">
+                  {assignments.map((a, idx) => {
+                    const pct =
+                      a.total_students > 0
+                        ? Math.round(
+                            (a.completed_count / a.total_students) * 100
+                          )
+                        : 0;
+                    const st = assignmentStatus(a);
+                    const stStyle = assignmentStatusStyle(st);
+                    return (
+                      <motion.div
+                        key={a.id}
+                        className="card p-5 hover:shadow-md transition-shadow"
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.04 }}
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <p
+                              className="font-semibold text-sm"
+                              style={{ color: "var(--color-ink)" }}
+                            >
+                              {a.title}
+                            </p>
+                            <span
+                              className="text-[11px] font-medium px-2 py-0.5 rounded-full"
+                              style={{
+                                background: "rgba(107,114,128,0.08)",
+                                color: "var(--color-ink-muted)",
+                              }}
+                            >
+                              {a.type === "lesson"
+                                ? "Lesson"
+                                : a.type === "quiz"
+                                ? "Quiz"
+                                : "Practice Test"}
+                            </span>
+                            <span
+                              className="text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                              style={{
+                                background: stStyle.bg,
+                                color: stStyle.text,
+                              }}
+                            >
+                              {stStyle.label}
+                            </span>
+                          </div>
+                          {a.avg_score > 0 && (
+                            <span
+                              className="text-sm font-bold shrink-0"
+                              style={{
+                                color:
+                                  a.avg_score >= 70
+                                    ? "#16A34A"
+                                    : a.avg_score >= 50
+                                    ? "#D97706"
+                                    : "#EF4444",
+                              }}
+                            >
+                              {a.avg_score}% avg
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Progress bar */}
+                        <div className="flex items-center gap-3 mb-2">
+                          <div
+                            className="flex-1 h-2 rounded-full overflow-hidden"
+                            style={{ background: "var(--color-border-subtle)" }}
+                          >
+                            <motion.div
+                              className="h-full rounded-full"
+                              initial={{ width: 0 }}
+                              animate={{ width: `${pct}%` }}
+                              transition={{ duration: 0.6, delay: idx * 0.04 }}
+                              style={{
+                                background:
+                                  pct >= 80
+                                    ? "#16A34A"
+                                    : pct >= 50
+                                    ? "#F59E0B"
+                                    : pct > 0
+                                    ? "#EF4444"
+                                    : "var(--color-border)",
+                              }}
+                            />
+                          </div>
+                          <span
+                            className="text-xs font-semibold w-12 text-right"
+                            style={{ color: "var(--color-ink-muted)" }}
+                          >
+                            {pct}%
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                          <span
+                            className="text-xs"
+                            style={{ color: "var(--color-ink-faint)" }}
+                          >
+                            {a.completed_count}/{a.total_students} completed
+                          </span>
+                          {a.due_date && (
+                            <span
+                              className="text-xs"
+                              style={{
+                                color:
+                                  st === "past_due"
+                                    ? "#EF4444"
+                                    : "var(--color-ink-faint)",
+                              }}
+                            >
+                              Due{" "}
+                              {new Date(a.due_date).toLocaleDateString()}
+                            </span>
+                          )}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ═══════════ ANALYTICS TAB ═══════════ */}
+          {activeTab === "analytics" && (
+            <div className="space-y-6">
+              {students.length === 0 ? (
+                <div className="card p-12 text-center">
+                  <p
+                    className="text-sm"
+                    style={{ color: "var(--color-ink-muted)" }}
+                  >
+                    Analytics will appear once students start completing quizzes.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  {/* Module Performance */}
+                  <motion.div
+                    className="card p-6"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0 }}
+                  >
+                    <h3
+                      className="text-sm font-semibold uppercase tracking-wider mb-4"
+                      style={{ color: "var(--color-ink-faint)" }}
+                    >
+                      Module Performance
+                    </h3>
+                    <p
+                      className="text-xs mb-4"
+                      style={{ color: "var(--color-ink-muted)" }}
+                    >
+                      Average score per module across all students in this classroom.
+                    </p>
+                    <HorizontalBarChart data={analytics.modulePerformance} />
+                  </motion.div>
+
+                  {/* Hardest Modules */}
+                  <motion.div
+                    className="card p-6"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                  >
+                    <h3
+                      className="text-sm font-semibold uppercase tracking-wider mb-4"
+                      style={{ color: "var(--color-ink-faint)" }}
+                    >
+                      Hardest Modules
+                    </h3>
+                    <p
+                      className="text-xs mb-4"
+                      style={{ color: "var(--color-ink-muted)" }}
+                    >
+                      Top 5 modules with the lowest average score (minimum 2 quiz attempts).
+                    </p>
+                    {analytics.hardestModules.length === 0 ? (
+                      <p
+                        className="text-sm"
+                        style={{ color: "var(--color-ink-muted)" }}
+                      >
+                        Not enough quiz data yet.
+                      </p>
+                    ) : (
+                      <div className="space-y-3">
+                        {analytics.hardestModules.map((m, i) => (
+                          <div
+                            key={i}
+                            className="flex items-center gap-3 p-3 rounded-xl"
+                            style={{ background: "var(--color-surface-raised)" }}
+                          >
+                            <span
+                              className="text-xs font-bold shrink-0 w-6 h-6 rounded-full flex items-center justify-center"
+                              style={{
+                                background:
+                                  m.avgScore < 50
+                                    ? "rgba(239,68,68,0.08)"
+                                    : "rgba(217,119,6,0.08)",
+                                color:
+                                  m.avgScore < 50 ? "#EF4444" : "#D97706",
+                              }}
+                            >
+                              {i + 1}
+                            </span>
+                            <div className="flex-1 min-w-0">
+                              <p
+                                className="text-sm font-medium"
+                                style={{ color: "var(--color-ink)" }}
+                              >
+                                {m.title}
+                              </p>
+                              <div className="flex items-center gap-3 mt-0.5">
+                                <span
+                                  className="text-xs font-semibold"
+                                  style={{
+                                    color:
+                                      m.avgScore >= 70
+                                        ? "#16A34A"
+                                        : m.avgScore >= 50
+                                        ? "#D97706"
+                                        : "#EF4444",
+                                  }}
+                                >
+                                  {m.avgScore}% avg
+                                </span>
+                                <span
+                                  className="text-xs"
+                                  style={{ color: "var(--color-ink-faint)" }}
+                                >
+                                  {m.attempts} quiz attempts
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </motion.div>
+
+                  {/* Two-column row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {/* Grade Distribution */}
+                    <motion.div
+                      className="card p-6"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      <h3
+                        className="text-sm font-semibold uppercase tracking-wider mb-4"
+                        style={{ color: "var(--color-ink-faint)" }}
+                      >
+                        Grade Distribution
+                      </h3>
+                      <p
+                        className="text-xs mb-4"
+                        style={{ color: "var(--color-ink-muted)" }}
+                      >
+                        Students grouped by their average quiz score.
+                      </p>
+                      <GradeDistribution distribution={analytics.distribution} />
+                    </motion.div>
+
+                    {/* Activity Over Time */}
+                    <motion.div
+                      className="card p-6"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <h3
+                        className="text-sm font-semibold uppercase tracking-wider mb-4"
+                        style={{ color: "var(--color-ink-faint)" }}
+                      >
+                        Quiz Completions Per Week
+                      </h3>
+                      <p
+                        className="text-xs mb-4"
+                        style={{ color: "var(--color-ink-muted)" }}
+                      >
+                        Last 8 weeks of quiz activity in this classroom.
+                      </p>
+                      <WeeklyBarChart data={analytics.weeklyData} />
+                    </motion.div>
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* ═══════════ SETTINGS TAB ═══════════ */}
+          {activeTab === "settings" && (
+            <div className="space-y-6">
+              {/* Classroom Details */}
+              <motion.div
+                className="card p-6"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <h3
+                  className="text-sm font-semibold mb-5 uppercase tracking-wider"
+                  style={{ color: "var(--color-ink-faint)" }}
+                >
+                  Classroom Details
+                </h3>
+                <div className="space-y-4 max-w-lg">
+                  <div>
+                    <label
+                      className="block text-sm font-medium mb-1.5"
+                      style={{ color: "var(--color-ink)" }}
+                    >
+                      Classroom Name
+                    </label>
+                    <input
+                      type="text"
+                      value={editName}
+                      onChange={(e) => setEditName(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      style={{
+                        color: "var(--color-ink)",
+                        background: "var(--color-surface)",
+                        border: "1px solid var(--color-border)",
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-sm font-medium mb-1.5"
+                      style={{ color: "var(--color-ink)" }}
+                    >
+                      School Name
+                    </label>
+                    <input
+                      type="text"
+                      value={editSchool}
+                      onChange={(e) => setEditSchool(e.target.value)}
+                      placeholder="Optional"
+                      className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      style={{
+                        color: "var(--color-ink)",
+                        background: "var(--color-surface)",
+                        border: "1px solid var(--color-border)",
+                      }}
+                    />
+                  </div>
+                  <div className="flex items-center gap-3 pt-1">
+                    <button
+                      onClick={handleSaveSettings}
+                      disabled={saving || !editName.trim()}
+                      className="btn-primary py-2.5 px-5 text-sm disabled:opacity-50"
+                    >
+                      {saving ? "Saving..." : "Save Changes"}
+                    </button>
+                    {saveMsg && (
+                      <motion.span
+                        className="text-sm"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        style={{
+                          color: saveMsg.includes("success")
+                            ? "#16A34A"
+                            : "#EF4444",
+                        }}
+                      >
+                        {saveMsg}
+                      </motion.span>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Join Code */}
+              <motion.div
+                className="card p-6"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+              >
+                <h3
+                  className="text-sm font-semibold mb-5 uppercase tracking-wider"
+                  style={{ color: "var(--color-ink-faint)" }}
+                >
+                  Join Code
+                </h3>
+                <div className="flex items-center justify-between max-w-lg">
+                  <div>
+                    <p
+                      className="font-mono font-bold text-xl tracking-widest"
+                      style={{ color: "var(--color-ink)" }}
+                    >
+                      {classroom.join_code}
+                    </p>
+                    <p
+                      className="text-xs mt-1"
+                      style={{ color: "var(--color-ink-muted)" }}
+                    >
+                      Regenerating will invalidate the current code.
+                    </p>
+                  </div>
+                  {showRegenerateConfirm ? (
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={handleRegenerateCode}
+                        className="px-3 py-2 rounded-lg text-xs font-semibold transition-colors"
+                        style={{
+                          background: "rgba(239,68,68,0.08)",
+                          color: "#EF4444",
+                        }}
+                      >
+                        Confirm
+                      </button>
+                      <button
+                        onClick={() => setShowRegenerateConfirm(false)}
+                        className="px-3 py-2 rounded-lg text-xs font-medium"
+                        style={{ color: "var(--color-ink-muted)" }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => setShowRegenerateConfirm(true)}
+                      className="btn-secondary py-2 px-4 text-xs"
+                    >
+                      Regenerate Code
+                    </button>
+                  )}
+                </div>
+              </motion.div>
+
+              {/* Danger Zone */}
+              <motion.div
+                className="card p-6"
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                style={{ border: "1px solid rgba(239, 68, 68, 0.2)" }}
+              >
+                <h3
+                  className="text-sm font-semibold mb-2 uppercase tracking-wider"
+                  style={{ color: "#EF4444" }}
+                >
+                  Danger Zone
+                </h3>
+                <p
+                  className="text-sm mb-4"
+                  style={{ color: "var(--color-ink-muted)" }}
+                >
+                  Archiving this classroom will prevent students from accessing it.
+                  This action can be reversed from the dashboard.
+                </p>
+
+                {showArchiveConfirm ? (
+                  <div
+                    className="p-4 rounded-xl mb-3"
+                    style={{ background: "rgba(239,68,68,0.04)" }}
+                  >
+                    <p
+                      className="text-sm font-medium mb-3"
+                      style={{ color: "#EF4444" }}
+                    >
+                      Are you sure? Students will lose access immediately.
+                    </p>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={handleArchive}
+                        className="px-4 py-2 rounded-xl text-sm font-semibold transition-all"
+                        style={{
+                          background: "#EF4444",
+                          color: "white",
+                        }}
+                      >
+                        Yes, Archive Classroom
+                      </button>
+                      <button
+                        onClick={() => setShowArchiveConfirm(false)}
+                        className="px-4 py-2 rounded-xl text-sm font-medium"
+                        style={{ color: "var(--color-ink-muted)" }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => setShowArchiveConfirm(true)}
+                    disabled={!classroom.active}
+                    className="px-4 py-2.5 rounded-xl text-sm font-medium transition-all disabled:opacity-40"
+                    style={{
+                      background: "rgba(239, 68, 68, 0.08)",
+                      color: "#EF4444",
+                      border: "1px solid rgba(239, 68, 68, 0.2)",
+                    }}
+                  >
+                    {classroom.active
+                      ? "Archive Classroom"
+                      : "Classroom is Archived"}
+                  </button>
+                )}
+              </motion.div>
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
+}
+
+/* ────────────────── Week Helpers ────────────────── */
+
+function getWeekKey(dateStr: string): string {
+  const d = new Date(dateStr);
+  const day = d.getDay();
+  const monday = new Date(d);
+  monday.setDate(d.getDate() - ((day + 6) % 7));
+  return monday.toISOString().slice(0, 10);
+}
+
+function getLast8Weeks(): { key: string; label: string }[] {
+  const weeks: { key: string; label: string }[] = [];
+  const now = new Date();
+  for (let i = 7; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(now.getDate() - i * 7);
+    const day = d.getDay();
+    const monday = new Date(d);
+    monday.setDate(d.getDate() - ((day + 6) % 7));
+    const key = monday.toISOString().slice(0, 10);
+    const label = `${monday.getMonth() + 1}/${monday.getDate()}`;
+    weeks.push({ key, label });
+  }
+  return weeks;
 }
