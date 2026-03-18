@@ -64,6 +64,13 @@ export default function DashboardPage() {
   const [studentAssignments, setStudentAssignments] = useState<StudentAssignment[]>([]);
   const [loading, setLoading] = useState(true);
   const [challengeStatus, setChallengeStatus] = useState<{ answered: boolean; score?: number; streak?: number } | null>(null);
+  const [bannerDismissed, setBannerDismissed] = useState(() => {
+    if (typeof window !== "undefined") {
+      const key = `dismiss-assignment-banner-${new Date().toISOString().split("T")[0]}`;
+      return localStorage.getItem(key) === "true";
+    }
+    return false;
+  });
   const { achievements, unlockedCount, totalCount } = useAchievements();
   const { recommendations, weakAreas } = useStudyRecommendations();
 
@@ -174,12 +181,6 @@ export default function DashboardPage() {
   const overdueAssignments = urgentAssignments.filter((a) => a.status === "overdue");
   const dueSoonAssignments = urgentAssignments.filter((a) => a.status !== "overdue");
   const bannerDismissKey = `dismiss-assignment-banner-${nowDate.toISOString().split("T")[0]}`;
-  const [bannerDismissed, setBannerDismissed] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem(bannerDismissKey) === "true";
-    }
-    return false;
-  });
 
   const dismissBanner = () => {
     setBannerDismissed(true);
