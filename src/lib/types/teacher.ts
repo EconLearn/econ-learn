@@ -27,6 +27,8 @@ export interface Assignment {
   due_date: string | null;
   created_at: string;
   config: AssignmentConfig;
+  status: "draft" | "scheduled" | "published";
+  publish_at: string | null;
 }
 
 export interface AssignmentConfig {

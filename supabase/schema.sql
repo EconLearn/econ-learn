@@ -131,3 +131,44 @@ CREATE INDEX idx_quiz_attempts_user ON public.quiz_attempts(user_id);
 CREATE INDEX idx_quiz_attempts_module ON public.quiz_attempts(module_id);
 CREATE INDEX idx_bookmarks_user ON public.bookmarks(user_id);
 CREATE INDEX idx_user_activity_user_date ON public.user_activity(user_id, activity_date);
+
+-- ============================================
+-- EXAM SESSIONS
+-- Tracks active and completed exam sessions
+-- ============================================
+CREATE TABLE IF NOT EXISTS public.exam_sessions (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  assignment_id UUID REFERENCES public.assignments(id) ON DELETE CASCADE NOT NULL,
+  student_id UUID REFERENCES auth.users(id) ON DELETE CASCADE NOT NULL,
+  started_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  ends_at TIMESTAMPTZ NOT NULL,
+  submitted_at TIMESTAMPTZ,
+  tab_switches INTEGER DEFAULT 0,
+  fullscreen_exits INTEGER DEFAULT 0,
+  status TEXT DEFAULT 'in_progress' CHECK (status IN ('in_progress', 'submitted', 'expired', 'force_submitted')),
+  answers JSONB,
+  score NUMERIC,
+  UNIQUE(assignment_id, student_id)
+);
+
+ALTER TABLE public.exam_sessions ENABLE ROW LEVEL SECURITY;
+
+-- Students can manage their own sessions
+CREATE POLICY "Students manage own sessions" ON public.exam_sessions
+  FOR ALL USING (auth.uid() = student_id);
+
+-- Teachers can view sessions for their classroom assignments
+CREATE POLICY "Teachers view classroom sessions" ON public.exam_sessions
+  FOR SELECT USING (
+    assignment_id IN (SELECT id FROM public.assignments WHERE teacher_id = auth.uid())
+  );
+
+-- Teachers can update sessions (for force-submit)
+CREATE POLICY "Teachers update classroom sessions" ON public.exam_sessions
+  FOR UPDATE USING (
+    assignment_id IN (SELECT id FROM public.assignments WHERE teacher_id = auth.uid())
+  );
+
+CREATE INDEX idx_exam_sessions_assignment ON public.exam_sessions(assignment_id);
+CREATE INDEX idx_exam_sessions_student ON public.exam_sessions(student_id);
+CREATE INDEX idx_exam_sessions_status ON public.exam_sessions(status);

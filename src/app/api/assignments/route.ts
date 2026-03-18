@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
   }
 
-  const { classroom_id, title, type, module_ids, due_date, config } = await req.json();
+  const { classroom_id, title, type, module_ids, due_date, config, publish_at, status } = await req.json();
 
   if (!classroom_id || !title || !type) {
     return NextResponse.json(
@@ -73,6 +73,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Not authorized" }, { status: 403 });
   }
 
+  // Determine assignment status: draft, scheduled, or published (default)
+  const assignmentStatus = status === "draft"
+    ? "draft"
+    : publish_at
+      ? "scheduled"
+      : "published";
+
   const { data: assignment, error } = await supabase
     .from("assignments")
     .insert({
@@ -83,6 +90,8 @@ export async function POST(req: NextRequest) {
       module_ids,
       due_date: due_date || null,
       config: config || {},
+      status: assignmentStatus,
+      publish_at: publish_at || null,
     })
     .select()
     .single();

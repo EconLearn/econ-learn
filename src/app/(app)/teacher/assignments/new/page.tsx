@@ -61,6 +61,10 @@ function NewAssignmentContent() {
   const [shuffleOptions, setShuffleOptions] = useState(true);
   const [showResults, setShowResults] = useState(false);
 
+  // ── Scheduling state ──
+  const [publishMode, setPublishMode] = useState<"immediate" | "scheduled">("immediate");
+  const [publishAt, setPublishAt] = useState("");
+
   // ── UI state ──
   const [classrooms, setClassrooms] = useState<Classroom[]>([]);
   const [classroomsLoading, setClassroomsLoading] = useState(true);
@@ -199,15 +203,28 @@ function NewAssignmentContent() {
     (type === "exam" ? examTimeLimit > 0 : true) &&
     status !== "loading";
 
-  // ── Submit ──
-  const handleSubmit = async () => {
-    if (!canSubmit) return;
+  // ── Submit helper ──
+  const submitAssignment = async (saveAsDraft: boolean = false) => {
+    if (!saveAsDraft && !canSubmit) return;
+    // For draft, only require title and classroom
+    if (saveAsDraft && (!title.trim() || !selectedClassroom)) return;
 
     setStatus("loading");
     setError("");
 
     try {
       let body: Record<string, unknown>;
+
+      const schedulingFields = {
+        status: saveAsDraft
+          ? "draft"
+          : publishMode === "scheduled"
+            ? "scheduled"
+            : "published",
+        publish_at: !saveAsDraft && publishMode === "scheduled" && publishAt
+          ? new Date(publishAt).toISOString()
+          : null,
+      };
 
       if (type === "exam") {
         // Gather unique module_ids from the selected questions
@@ -234,19 +251,21 @@ function NewAssignmentContent() {
             shuffle_options: shuffleOptions,
             show_results: showResults,
           },
+          ...schedulingFields,
         };
       } else {
         body = {
           classroom_id: selectedClassroom,
           title: title.trim(),
           type: type === "quiz" ? "quiz" : "lesson",
-          module_ids: selectedModules,
+          module_ids: selectedModules.length > 0 ? selectedModules : [],
           due_date: dueDate || null,
           config: {
             available_from: availableFrom || undefined,
             quiz_length: type === "quiz" ? quizLength : undefined,
             time_limit_minutes: type === "quiz" ? timeLimit : undefined,
           },
+          ...schedulingFields,
         };
       }
 
@@ -270,6 +289,9 @@ function NewAssignmentContent() {
       setError("Something went wrong. Try again.");
     }
   };
+
+  const handleSubmit = () => submitAssignment(false);
+  const handleSaveDraft = () => submitAssignment(true);
 
   // ── Selected module names for preview ──
   const allModules = useMemo(
@@ -843,10 +865,123 @@ function NewAssignmentContent() {
 
           {/* STEP 3: SCHEDULE */}
           <FormSection number={3} title="Schedule">
+            {/* Publish Mode Toggle */}
+            <div>
+              <label className="block text-sm font-medium mb-3" style={{ color: "var(--color-ink)" }}>
+                Publishing
+              </label>
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={() => { setPublishMode("immediate"); setPublishAt(""); }}
+                  className="flex-1 p-3 rounded-xl text-left transition-all"
+                  style={{
+                    background: publishMode === "immediate" ? "rgba(22, 163, 74, 0.06)" : "var(--color-surface)",
+                    border: publishMode === "immediate" ? "2px solid #16A34A" : "2px solid var(--color-border)",
+                  }}
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <div
+                      className="w-2 h-2 rounded-full"
+                      style={{ background: publishMode === "immediate" ? "#16A34A" : "var(--color-ink-faint)" }}
+                    />
+                    <span
+                      className="text-xs font-semibold"
+                      style={{ color: publishMode === "immediate" ? "#16A34A" : "var(--color-ink)" }}
+                    >
+                      Publish immediately
+                    </span>
+                  </div>
+                  <p className="text-[11px] pl-4" style={{ color: "var(--color-ink-faint)" }}>
+                    Students see it right away
+                  </p>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPublishMode("scheduled")}
+                  className="flex-1 p-3 rounded-xl text-left transition-all"
+                  style={{
+                    background: publishMode === "scheduled" ? "rgba(59, 130, 246, 0.06)" : "var(--color-surface)",
+                    border: publishMode === "scheduled" ? "2px solid #3B82F6" : "2px solid var(--color-border)",
+                  }}
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <div
+                      className="w-2 h-2 rounded-full"
+                      style={{ background: publishMode === "scheduled" ? "#3B82F6" : "var(--color-ink-faint)" }}
+                    />
+                    <span
+                      className="text-xs font-semibold"
+                      style={{ color: publishMode === "scheduled" ? "#3B82F6" : "var(--color-ink)" }}
+                    >
+                      Schedule for later
+                    </span>
+                  </div>
+                  <p className="text-[11px] pl-4" style={{ color: "var(--color-ink-faint)" }}>
+                    Pick a date and time to publish
+                  </p>
+                </button>
+              </div>
+            </div>
+
+            {/* Scheduled Publish Date/Time */}
+            <AnimatePresence>
+              {publishMode === "scheduled" && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="overflow-hidden"
+                >
+                  <div>
+                    <label className="block text-sm font-medium mb-1.5" style={{ color: "var(--color-ink)" }}>
+                      Publish Date & Time <span className="text-red-400">*</span>
+                    </label>
+                    <input
+                      type="datetime-local"
+                      value={publishAt}
+                      min={new Date().toISOString().slice(0, 16)}
+                      onChange={(e) => setPublishAt(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
+                      style={{
+                        color: "var(--color-ink)",
+                        background: "var(--color-surface)",
+                        border: "1px solid var(--color-border)",
+                      }}
+                    />
+                    <p className="text-[11px] mt-1.5" style={{ color: "var(--color-ink-faint)" }}>
+                      Students will see this assignment after this date and time.
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Status Indicator */}
+            <div
+              className="flex items-center gap-2 p-3 rounded-xl"
+              style={{ background: "var(--color-surface-sunken)", border: "1px solid var(--color-border-subtle)" }}
+            >
+              <div
+                className="w-2.5 h-2.5 rounded-full"
+                style={{
+                  background: publishMode === "immediate" ? "#16A34A" : publishAt ? "#3B82F6" : "#9CA3AF",
+                }}
+              />
+              <span className="text-xs font-medium" style={{ color: "var(--color-ink-muted)" }}>
+                {publishMode === "immediate"
+                  ? "Will be published immediately"
+                  : publishAt
+                    ? `Scheduled for ${new Date(publishAt).toLocaleString("en-US", { month: "short", day: "numeric", year: "numeric", hour: "numeric", minute: "2-digit" })}`
+                    : "Select a publish date"}
+              </span>
+            </div>
+
             {/* Quick Presets */}
             <div>
               <label className="block text-xs font-medium mb-2" style={{ color: "var(--color-ink-muted)" }}>
-                Quick Presets
+                Due Date Presets
               </label>
               <div className="flex flex-wrap gap-2">
                 <PresetButton label="Due Tomorrow" onClick={() => setDatePreset("tomorrow")} />
@@ -911,23 +1046,54 @@ function NewAssignmentContent() {
             )}
           </AnimatePresence>
 
-          {/* ── SUBMIT BUTTON ── */}
-          <motion.button
-            whileHover={canSubmit ? { scale: 1.005 } : {}}
-            whileTap={canSubmit ? { scale: 0.98 } : {}}
-            onClick={handleSubmit}
-            disabled={!canSubmit}
-            className="btn-primary w-full py-4 text-base font-semibold rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            {status === "loading" ? (
+          {/* ── SUBMIT BUTTONS ── */}
+          <div className="flex gap-3">
+            {/* Save as Draft */}
+            <motion.button
+              whileHover={title.trim() && selectedClassroom ? { scale: 1.005 } : {}}
+              whileTap={title.trim() && selectedClassroom ? { scale: 0.98 } : {}}
+              onClick={handleSaveDraft}
+              disabled={!title.trim() || !selectedClassroom || status === "loading"}
+              className="py-4 px-6 text-sm font-semibold rounded-xl disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              style={{
+                background: "var(--color-surface)",
+                color: "var(--color-ink-muted)",
+                border: "1px solid var(--color-border)",
+              }}
+            >
               <span className="flex items-center justify-center gap-2">
-                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Creating Assignment...
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+                Save as Draft
               </span>
-            ) : (
-              "Create Assignment"
-            )}
-          </motion.button>
+            </motion.button>
+
+            {/* Create / Schedule */}
+            <motion.button
+              whileHover={canSubmit ? { scale: 1.005 } : {}}
+              whileTap={canSubmit ? { scale: 0.98 } : {}}
+              onClick={handleSubmit}
+              disabled={!canSubmit || (publishMode === "scheduled" && !publishAt)}
+              className="btn-primary flex-1 py-4 text-base font-semibold rounded-xl disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              {status === "loading" ? (
+                <span className="flex items-center justify-center gap-2">
+                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  {publishMode === "scheduled" ? "Scheduling..." : "Creating..."}
+                </span>
+              ) : publishMode === "scheduled" ? (
+                <span className="flex items-center justify-center gap-2">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Schedule Assignment
+                </span>
+              ) : (
+                "Create Assignment"
+              )}
+            </motion.button>
+          </div>
         </div>
 
         {/* ─── RIGHT: PREVIEW ─── */}

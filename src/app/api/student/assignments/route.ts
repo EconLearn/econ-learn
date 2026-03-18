@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
 // GET /api/student/assignments — list all assignments for the current student's classrooms
+// Only returns assignments where status = 'published' AND (publish_at IS NULL OR publish_at <= NOW())
 export async function GET() {
   const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -32,11 +33,17 @@ export async function GET() {
     .select("id, name, school_name, teacher_id, profiles!classrooms_teacher_id_fkey(display_name)")
     .in("id", classroomIds);
 
-  // Fetch assignments for those classrooms
+  const now = new Date().toISOString();
+
+  // Fetch assignments for those classrooms — only published ones visible to students
+  // Includes assignments with no status field (backwards compatibility) or status = 'published'
+  // Also filters: publish_at must be null or in the past
   const { data: assignments, error: assignError } = await supabase
     .from("assignments")
     .select("*")
     .in("classroom_id", classroomIds)
+    .or("status.is.null,status.eq.published")
+    .or(`publish_at.is.null,publish_at.lte.${now}`)
     .order("due_date", { ascending: true, nullsFirst: false });
 
   if (assignError) {
@@ -66,19 +73,19 @@ export async function GET() {
   // Enrich assignments with completion status
   const enrichedAssignments = (assignments || []).map((a) => {
     const completion = completionMap[a.id];
-    const now = new Date();
     const dueDate = a.due_date ? new Date(a.due_date) : null;
+    const currentTime = new Date();
 
-    let status: "completed" | "pending" | "overdue" = "pending";
+    let completionStatus: "completed" | "pending" | "overdue" = "pending";
     if (completion?.completed_at) {
-      status = "completed";
-    } else if (dueDate && dueDate < now) {
-      status = "overdue";
+      completionStatus = "completed";
+    } else if (dueDate && dueDate < currentTime) {
+      completionStatus = "overdue";
     }
 
     return {
       ...a,
-      status,
+      status: completionStatus,
       completed_at: completion?.completed_at || null,
       score: completion?.score || null,
     };
