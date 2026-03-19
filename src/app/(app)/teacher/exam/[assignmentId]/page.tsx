@@ -259,6 +259,17 @@ export default function TeacherExamMonitorPage({ params }: { params: { assignmen
               </p>
             </div>
             <div className="flex gap-2 flex-wrap">
+              <Link
+                href={`/assignments/${assignmentId}?preview=true`}
+                className="text-xs font-medium px-3 py-2 rounded-lg transition-all"
+                style={{
+                  background: "rgba(59, 130, 246, 0.08)",
+                  color: "#3b82f6",
+                  border: "1px solid rgba(59, 130, 246, 0.15)",
+                }}
+              >
+                Preview Exam
+              </Link>
               <button
                 onClick={() => setShowForceSubmit(true)}
                 disabled={inProgress === 0}

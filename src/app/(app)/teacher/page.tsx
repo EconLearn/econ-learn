@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Classroom, Assignment } from "@/lib/types/teacher";
@@ -130,6 +131,18 @@ const activityLabels: Record<string, string> = {
 /* ─── Quick actions config ─── */
 
 const quickActions = [
+  {
+    href: "/teacher/assignments/quick-exam",
+    title: "Quick Exam",
+    desc: "Create an exam in 3 clicks",
+    color: "#DC2626",
+    bg: "rgba(220,38,38,0.08)",
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+      </svg>
+    ),
+  },
   {
     href: "/teacher/assignments/new",
     title: "Assign Module",
@@ -370,6 +383,7 @@ function CopyCodeButton({ code }: { code: string }) {
 
 export default function TeacherDashboard() {
   const { user, loading } = useAuth();
+  const router = useRouter();
   const supabase = createClient();
   const [data, setData] = useState<DashboardData | null>(null);
   const [loadingData, setLoadingData] = useState(true);
@@ -602,6 +616,13 @@ export default function TeacherDashboard() {
     if (!user) return;
     loadDashboard();
   }, [user, loadDashboard]);
+
+  /* ─── Redirect to onboarding if no classrooms ─── */
+  useEffect(() => {
+    if (!loading && !loadingData && user && data && data.classrooms.length === 0) {
+      router.push("/teacher/onboarding");
+    }
+  }, [loading, loadingData, user, data, router]);
 
   /* ─── Loading state ─── */
   if (loading || (loadingData && user)) {

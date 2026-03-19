@@ -4,8 +4,8 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useAuth } from "@/components/providers/AuthProvider";
-import { useRouter } from "next/navigation";
-import { getQuestionsByModules, type QuestionBankEntry } from "@/data/question-bank";
+import { useRouter, useSearchParams } from "next/navigation";
+import { getQuestionsByModules, questionBank, type QuestionBankEntry } from "@/data/question-bank";
 import { getContentForModules, type ModuleContent } from "@/data/content-map";
 import { courses } from "@/data/courses";
 import type { AssignmentConfig } from "@/lib/types/teacher";
@@ -70,7 +70,9 @@ function seededShuffle<T>(arr: T[], seed: string): T[] {
 export default function AssignmentPage({ params }: { params: { id: string } }) {
   const { user, loading: authLoading } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const assignmentId = params.id;
+  const isPreviewParam = searchParams.get("preview") === "true";
 
   const [assignment, setAssignment] = useState<AssignmentData | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -78,6 +80,7 @@ export default function AssignmentPage({ params }: { params: { id: string } }) {
   const [attemptCount, setAttemptCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isPreview, setIsPreview] = useState(false);
 
   useEffect(() => {
     if (authLoading) return;
@@ -105,6 +108,16 @@ export default function AssignmentPage({ params }: { params: { id: string } }) {
           bank_ids: data.assignment?.config?.bank_question_ids,
         });
 
+        // Check if this is a teacher previewing their own assignment
+        const isTeacherPreview = isPreviewParam && data.assignment?.teacher_id === user!.id;
+
+        if (isTeacherPreview) {
+          setIsPreview(true);
+          setAssignment(data.assignment);
+          setLoading(false);
+          return;
+        }
+
         // If this is an exam, redirect IMMEDIATELY before setting any state
         // Check both the type field AND config indicators (belt and suspenders)
         const isExam = data.assignment?.type === "exam"
@@ -131,7 +144,7 @@ export default function AssignmentPage({ params }: { params: { id: string } }) {
     }
 
     fetchAssignment();
-  }, [user, authLoading, router, assignmentId]);
+  }, [user, authLoading, router, assignmentId, isPreviewParam]);
 
   if (authLoading || loading) {
     return (
@@ -154,6 +167,33 @@ export default function AssignmentPage({ params }: { params: { id: string } }) {
           Back to Assignments
         </Link>
       </div>
+    );
+  }
+
+  // Preview mode for teachers
+  if (isPreview) {
+    if (assignment.type === "exam") {
+      return (
+        <ExamPreview assignment={assignment} userId={user.id} />
+      );
+    }
+    if (assignment.type === "quiz" || assignment.type === "practice_test") {
+      return (
+        <QuizAssignment
+          assignment={assignment}
+          userId={user.id}
+          onSubmit={() => {}}
+          previewMode
+        />
+      );
+    }
+    return (
+      <LessonAssignment
+        assignment={assignment}
+        userId={user.id}
+        onSubmit={() => {}}
+        previewMode
+      />
     );
   }
 
@@ -312,16 +352,268 @@ function AssignmentHeader({ assignment }: { assignment: AssignmentData }) {
   );
 }
 
+// ─── Preview Banner ─────────────────────────────────────────────────────────
+
+function PreviewBanner() {
+  return (
+    <div
+      className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl mb-6"
+      style={{
+        background: "rgba(245, 158, 11, 0.08)",
+        border: "1px solid rgba(245, 158, 11, 0.2)",
+      }}
+    >
+      <div className="flex items-center gap-2">
+        <svg className="w-4 h-4 flex-shrink-0" style={{ color: "#d97706" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        <p className="text-sm font-medium" style={{ color: "#92400e" }}>
+          You are previewing this assignment as a student would see it.
+        </p>
+      </div>
+      <Link
+        href="/teacher/assignments"
+        className="text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors flex-shrink-0"
+        style={{ background: "rgba(245, 158, 11, 0.15)", color: "#92400e" }}
+      >
+        Back to Teacher View
+      </Link>
+    </div>
+  );
+}
+
+// ─── Exam Preview ───────────────────────────────────────────────────────────
+
+function ExamPreview({
+  assignment,
+  userId,
+}: {
+  assignment: AssignmentData;
+  userId: string;
+}) {
+  const config = assignment.config || {};
+
+  // Build exam questions client-side from the question bank data (no API call)
+  const [examQuestions] = useState(() => {
+    const allQuestions: Array<{
+      id: string;
+      question: string;
+      options: string[];
+    }> = [];
+
+    const bankIds = ((config as Record<string, unknown>).bank_question_ids as (number | string)[]) || [];
+    for (const idx of bankIds) {
+      const numIdx = typeof idx === "string" ? parseInt(String(idx).replace("bank-", "")) : idx;
+      if (numIdx >= 0 && numIdx < questionBank.length) {
+        const entry = questionBank[numIdx];
+        allQuestions.push({
+          id: `bank-${numIdx}`,
+          question: entry.question.question,
+          options: entry.question.options,
+        });
+      }
+    }
+
+    // Note: custom questions from the database cannot be loaded client-side,
+    // so we show a placeholder for those
+    const customIds = ((config as Record<string, unknown>).custom_question_ids as string[]) || [];
+    for (let i = 0; i < customIds.length; i++) {
+      allQuestions.push({
+        id: customIds[i],
+        question: `[Custom Question ${i + 1} — stored in database]`,
+        options: ["Option A", "Option B", "Option C", "Option D"],
+      });
+    }
+
+    return allQuestions;
+  });
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [answers, setAnswers] = useState<Map<string, number>>(new Map());
+  const timeLimitMinutes = config.time_limit_minutes as number || 45;
+
+  const current = examQuestions[currentIndex];
+  const answeredCount = answers.size;
+
+  function selectAnswer(questionId: string, optionIndex: number) {
+    setAnswers((prev) => {
+      const next = new Map(prev);
+      next.set(questionId, optionIndex);
+      return next;
+    });
+  }
+
+  return (
+    <div className="max-w-2xl mx-auto px-6 py-10 lg:py-14">
+      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+        <AssignmentHeader assignment={assignment} />
+        <PreviewBanner />
+
+        {/* Exam info */}
+        <div
+          className="flex items-center gap-4 p-3 rounded-lg mb-6"
+          style={{ background: "var(--color-surface-sunken)", border: "1px solid var(--color-border-subtle)" }}
+        >
+          <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>
+            {examQuestions.length} questions &middot; {timeLimitMinutes} min time limit
+            {config.lockdown && " \u00B7 Lockdown mode enabled"}
+          </p>
+        </div>
+
+        {examQuestions.length === 0 ? (
+          <div className="card p-8 text-center">
+            <p className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
+              No questions configured for this exam.
+            </p>
+          </div>
+        ) : (
+          <>
+            {/* Question navigation grid */}
+            <div className="flex flex-wrap gap-1.5 mb-6">
+              {examQuestions.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentIndex(i)}
+                  className="w-8 h-8 rounded-md text-xs font-medium transition-all"
+                  style={{
+                    background:
+                      i === currentIndex
+                        ? "var(--accent, #3b82f6)"
+                        : answers.has(examQuestions[i].id)
+                        ? "rgba(16, 185, 129, 0.1)"
+                        : "var(--color-surface-sunken)",
+                    color:
+                      i === currentIndex
+                        ? "white"
+                        : answers.has(examQuestions[i].id)
+                        ? "#10b981"
+                        : "var(--color-ink-faint)",
+                    border:
+                      i === currentIndex
+                        ? "none"
+                        : answers.has(examQuestions[i].id)
+                        ? "1px solid rgba(16, 185, 129, 0.2)"
+                        : "1px solid var(--color-border-subtle)",
+                  }}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+
+            {/* Question card */}
+            {current && (
+              <div className="card overflow-hidden">
+                <div className="px-5 py-3 flex items-center justify-between" style={{ borderBottom: "1px solid var(--color-border-subtle)" }}>
+                  <p className="text-[11px] font-medium" style={{ color: "var(--color-ink-faint)" }}>
+                    Question {currentIndex + 1} of {examQuestions.length}
+                  </p>
+                </div>
+
+                <div className="p-6">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentIndex}
+                      initial={{ opacity: 0, x: 12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -12 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <h3
+                        className="text-[15px] font-medium leading-snug mb-5"
+                        style={{ color: "var(--color-ink)" }}
+                      >
+                        {current.question}
+                      </h3>
+
+                      <div className="space-y-2">
+                        {current.options.map((option, i) => {
+                          const isSelected = answers.get(current.id) === i;
+                          return (
+                            <button
+                              key={i}
+                              onClick={() => selectAnswer(current.id, i)}
+                              className="w-full text-left px-4 py-3 rounded-lg text-sm font-medium transition-all"
+                              style={{
+                                background: isSelected ? "rgba(59, 130, 246, 0.06)" : "var(--color-surface)",
+                                border: isSelected
+                                  ? "1.5px solid var(--accent, #3b82f6)"
+                                  : "1px solid var(--color-border-subtle)",
+                                color: isSelected ? "var(--accent, #3b82f6)" : "var(--color-ink)",
+                              }}
+                            >
+                              <span className="flex items-center gap-3">
+                                <span
+                                  className="w-5 h-5 rounded flex items-center justify-center text-[10px] font-bold flex-shrink-0"
+                                  style={{
+                                    background: isSelected ? "var(--accent, #3b82f6)" : "var(--color-surface-sunken)",
+                                    color: isSelected ? "white" : "var(--color-ink-faint)",
+                                  }}
+                                >
+                                  {String.fromCharCode(65 + i)}
+                                </span>
+                                <span className="flex-1">{option}</span>
+                              </span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+            )}
+
+            {/* Navigation */}
+            <div
+              className="sticky bottom-0 flex items-center justify-between gap-3 mt-4 py-4 px-1"
+              style={{ background: "var(--color-background, white)" }}
+            >
+              <button
+                onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))}
+                disabled={currentIndex === 0}
+                className="text-sm font-medium px-4 py-2.5 rounded-lg transition-all disabled:opacity-30"
+                style={{
+                  border: "1px solid var(--color-border-subtle)",
+                  color: "var(--color-ink-muted)",
+                }}
+              >
+                Previous
+              </button>
+
+              <p className="text-xs tabular-nums" style={{ color: "var(--color-ink-faint)" }}>
+                {answeredCount}/{examQuestions.length} answered
+              </p>
+
+              <button
+                onClick={() => setCurrentIndex((i) => Math.min(examQuestions.length - 1, i + 1))}
+                disabled={currentIndex >= examQuestions.length - 1}
+                className="text-sm font-medium px-4 py-2.5 rounded-lg transition-all disabled:opacity-30"
+                style={{ background: "var(--accent, #3b82f6)", color: "white" }}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
+      </motion.div>
+    </div>
+  );
+}
+
 // ─── Quiz Assignment ─────────────────────────────────────────────────────────
 
 function QuizAssignment({
   assignment,
   userId,
   onSubmit,
+  previewMode,
 }: {
   assignment: AssignmentData;
   userId: string;
   onSubmit: (sub: SubmissionData) => void;
+  previewMode?: boolean;
 }) {
   const config = assignment.config || {};
   const quizLength = config.quiz_length || 10;
@@ -452,6 +744,7 @@ function QuizAssignment({
     <div className="max-w-2xl mx-auto px-6 py-10 lg:py-14">
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
         <AssignmentHeader assignment={assignment} />
+        {previewMode && <PreviewBanner />}
 
         {/* Timer */}
         {timeLeft !== null && (
@@ -626,6 +919,13 @@ function QuizAssignment({
             >
               Next
             </button>
+          ) : previewMode ? (
+            <span
+              className="text-sm font-medium px-4 py-2.5 rounded-lg opacity-50"
+              style={{ background: "var(--color-surface-sunken)", color: "var(--color-ink-faint)" }}
+            >
+              Submit disabled in preview
+            </span>
           ) : (
             <button
               onClick={() => setShowConfirm(true)}
@@ -704,10 +1004,12 @@ function LessonAssignment({
   assignment,
   userId,
   onSubmit,
+  previewMode,
 }: {
   assignment: AssignmentData;
   userId: string;
   onSubmit: (sub: SubmissionData) => void;
+  previewMode?: boolean;
 }) {
   const moduleContents = getContentForModules(assignment.module_ids);
   const allSections = moduleContents.flatMap((mc) =>
@@ -795,6 +1097,7 @@ function LessonAssignment({
     <div className="max-w-2xl mx-auto px-6 py-10 lg:py-14">
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
         <AssignmentHeader assignment={assignment} />
+        {previewMode && <PreviewBanner />}
 
         {/* Reading progress */}
         <div
@@ -883,22 +1186,38 @@ function LessonAssignment({
           className="sticky bottom-0 mt-6 py-4 flex items-center justify-between"
           style={{ background: "var(--color-background, white)" }}
         >
-          <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>
-            {canSubmit
-              ? "You've read enough to submit!"
-              : `Read ${threshold - readCount} more section${threshold - readCount !== 1 ? "s" : ""} to submit`}
-          </p>
-          <button
-            onClick={handleSubmit}
-            disabled={!canSubmit || submitting}
-            className="text-sm font-medium px-5 py-2.5 rounded-lg transition-all disabled:opacity-40"
-            style={{
-              background: canSubmit ? "var(--accent, #3b82f6)" : "var(--color-surface-sunken)",
-              color: canSubmit ? "white" : "var(--color-ink-faint)",
-            }}
-          >
-            {submitting ? "Submitting..." : "Submit Lesson"}
-          </button>
+          {previewMode ? (
+            <>
+              <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>
+                Preview mode — submissions are disabled.
+              </p>
+              <span
+                className="text-sm font-medium px-5 py-2.5 rounded-lg opacity-50"
+                style={{ background: "var(--color-surface-sunken)", color: "var(--color-ink-faint)" }}
+              >
+                Submit disabled in preview
+              </span>
+            </>
+          ) : (
+            <>
+              <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>
+                {canSubmit
+                  ? "You've read enough to submit!"
+                  : `Read ${threshold - readCount} more section${threshold - readCount !== 1 ? "s" : ""} to submit`}
+              </p>
+              <button
+                onClick={handleSubmit}
+                disabled={!canSubmit || submitting}
+                className="text-sm font-medium px-5 py-2.5 rounded-lg transition-all disabled:opacity-40"
+                style={{
+                  background: canSubmit ? "var(--accent, #3b82f6)" : "var(--color-surface-sunken)",
+                  color: canSubmit ? "white" : "var(--color-ink-faint)",
+                }}
+              >
+                {submitting ? "Submitting..." : "Submit Lesson"}
+              </button>
+            </>
+          )}
         </div>
       </motion.div>
     </div>

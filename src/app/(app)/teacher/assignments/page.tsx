@@ -197,6 +197,13 @@ export default function TeacherAssignmentsPage() {
                 </div>
 
                 <div className="flex items-center gap-2 flex-shrink-0">
+                  <Link
+                    href={`/assignments/${a.id}?preview=true`}
+                    className="text-[11px] font-medium px-3 py-1.5 rounded-md transition-colors"
+                    style={{ background: "rgba(59, 130, 246, 0.1)", color: "#3B82F6" }}
+                  >
+                    Preview
+                  </Link>
                   {a.type === "exam" && (
                     <Link
                       href={`/teacher/exam/${a.id}`}

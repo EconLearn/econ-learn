@@ -1426,12 +1426,24 @@ export default function ClassroomDetailPage() {
                   {assignments.length} assignment
                   {assignments.length !== 1 ? "s" : ""}
                 </p>
-                <Link
-                  href={`/teacher/assignments/new?classroom=${classroomId}`}
-                  className="btn-primary py-2 px-4 text-xs"
-                >
-                  + Create Assignment
-                </Link>
+                <div className="flex items-center gap-2">
+                  <Link
+                    href={`/teacher/assignments/quick-exam`}
+                    className="py-2 px-4 text-xs font-semibold rounded-xl transition-all flex items-center gap-1.5"
+                    style={{ background: "rgba(220,38,38,0.08)", color: "#DC2626", border: "1px solid rgba(220,38,38,0.2)" }}
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                    </svg>
+                    Quick Exam
+                  </Link>
+                  <Link
+                    href={`/teacher/assignments/new?classroom=${classroomId}`}
+                    className="btn-primary py-2 px-4 text-xs"
+                  >
+                    + Create Assignment
+                  </Link>
+                </div>
               </div>
 
               {assignments.length === 0 ? (

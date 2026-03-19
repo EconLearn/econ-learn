@@ -626,4 +626,243 @@ If you haven't used EconLearn in your classroom before, here's a simple way to t
 
 You don't have to overhaul your entire curriculum. Start with one graph, one lesson, and see if students engage more than they do with the textbook diagram. In our experience working with AP Econ teachers across the country, the answer is almost always yes.`,
   },
+  {
+    slug: "what-is-deadweight-loss",
+    title: "What Is Deadweight Loss? AP Economics Explanation with Graphs",
+    description:
+      "Learn what deadweight loss is, why it matters in AP Economics, and how to identify it on graphs. Covers price ceilings, taxes, and monopoly with a worked numerical example.",
+    publishedAt: "2026-03-17",
+    readingTime: "9 min read",
+    tags: ["AP Micro", "Market Failure", "Graphs", "Efficiency"],
+    content: `Deadweight loss is one of the most tested concepts on the AP Microeconomics exam. It shows up in free-response questions about price controls, taxation, and monopoly. If you can identify deadweight loss on a graph and explain why it exists, you are in strong shape for exam day.
+
+This guide breaks down exactly what deadweight loss is, where it comes from, and how to calculate it with real numbers.
+
+## The Core Idea
+
+In a competitive market with no government intervention, the equilibrium price and quantity maximize total surplus. Total surplus is consumer surplus plus producer surplus. Every unit where the buyer's willingness to pay exceeds the seller's cost gets produced and traded.
+
+Deadweight loss is the reduction in total surplus that occurs when the market moves away from that efficient equilibrium. It represents transactions that would have benefited both buyers and sellers but no longer happen.
+
+Think of it this way: if a buyer values a sandwich at $8 and a seller can make it for $4, that trade creates $4 of surplus. If something prevents that trade from happening, that $4 is lost. Nobody gets it. It vanishes. That is deadweight loss.
+
+## Deadweight Loss from Price Ceilings
+
+A price ceiling is a legal maximum price set below the equilibrium. Rent control is the classic example.
+
+When a price ceiling is imposed below equilibrium, the quantity supplied falls because some producers are unwilling or unable to sell at the lower price. The quantity demanded rises because more consumers want the product at the cheaper price. The result is a shortage: quantity demanded exceeds quantity supplied.
+
+On the graph, deadweight loss appears as a triangle between the supply curve and the demand curve, to the right of the new (reduced) quantity and to the left of the original equilibrium quantity. The units inside that triangle are trades that would have happened at equilibrium but no longer occur because the price ceiling reduced supply.
+
+You can explore how price ceilings create deadweight loss using the interactive supply and demand graphs in the [Market Failure module](/micro/market-failure). Drag the price ceiling slider and watch the deadweight loss triangle appear in real time.
+
+## Deadweight Loss from Taxes
+
+When the government places a per-unit tax on a good, it drives a wedge between the price buyers pay and the price sellers receive. Buyers pay more than before, sellers receive less than before, and the quantity traded falls.
+
+The tax generates government revenue equal to the tax amount times the quantity sold. But total surplus still drops. The deadweight loss triangle sits between the supply and demand curves, from the new lower quantity out to the original equilibrium quantity.
+
+Here is the key insight for AP exams: tax revenue is not deadweight loss. Tax revenue is a transfer from buyers and sellers to the government. Deadweight loss is the surplus that disappears entirely because some trades no longer happen.
+
+The size of the deadweight loss depends on the elasticities of supply and demand. More elastic curves mean larger deadweight loss because quantity responds more to the price change. This is a common multiple-choice topic.
+
+## Deadweight Loss from Monopoly
+
+A monopolist produces less output and charges a higher price than a competitive market would. The monopolist restricts output to where marginal revenue equals marginal cost, then charges the price from the demand curve at that quantity.
+
+The deadweight loss triangle sits between the demand curve and the marginal cost curve, from the monopolist's quantity out to the competitive quantity (where demand intersects MC). The units inside the triangle are the ones a competitive market would produce but the monopolist does not.
+
+This graph is critical for AP Micro. Practice drawing it in the [Monopoly module](/micro/monopoly), where you can adjust the demand curve and cost curves and see how the deadweight loss area changes.
+
+## Worked Example with Numbers
+
+Suppose a market has the following linear supply and demand:
+
+- **Demand:** P = 20 - 2Q
+- **Supply:** P = 2 + 2Q
+
+**Step 1: Find equilibrium.** Set demand equal to supply:
+
+20 - 2Q = 2 + 2Q → 18 = 4Q → Q = 4.5, P = 11
+
+At equilibrium, 4.5 units trade at $11 each.
+
+**Step 2: Impose a $4 per-unit tax.** The tax shifts the effective supply curve up by $4:
+
+New supply: P = 6 + 2Q
+
+Set the new supply equal to demand:
+
+20 - 2Q = 6 + 2Q → 14 = 4Q → Q = 3.5
+
+Buyers pay: P = 20 - 2(3.5) = $13. Sellers receive: $13 - $4 = $9.
+
+**Step 3: Calculate deadweight loss.** The deadweight loss triangle has:
+
+- **Base:** the tax wedge = $4 (the vertical distance between what buyers pay and sellers receive)
+- **Height:** the reduction in quantity = 4.5 - 3.5 = 1 unit
+
+Deadweight loss = 0.5 × base × height = 0.5 × $4 × 1 = **$2**
+
+For comparison, government tax revenue = $4 × 3.5 = $14. The $2 deadweight loss is surplus that neither consumers, producers, nor the government captures. It is gone.
+
+**Step 4: Check your understanding.** What happens if the tax doubles to $8? The new supply becomes P = 10 + 2Q. Setting equal to demand: 20 - 2Q = 10 + 2Q → Q = 2.5. The deadweight loss = 0.5 × $8 × 2 = **$8**. Notice that doubling the tax quadrupled the deadweight loss. This is because deadweight loss grows with the square of the tax rate, another frequently tested concept.
+
+## How to Identify Deadweight Loss on Any AP Graph
+
+Use this checklist whenever an FRQ or multiple-choice question asks about deadweight loss:
+
+1. **Find the efficient quantity.** This is where supply (or MC) intersects demand (or MB) with no intervention.
+2. **Find the actual quantity.** This is the quantity produced under the policy, tax, or market structure in the question.
+3. **If actual quantity is less than efficient quantity, deadweight loss exists.** The triangle sits between the demand and supply curves over the range of lost units.
+4. **Shade or label the triangle.** On FRQs, label it clearly as DWL. Points are awarded for correct identification and labeling.
+
+If you are asked to calculate it, remember the triangle formula: 0.5 × base × height. The base is usually the price difference (tax wedge, or gap between P and MC), and the height is the quantity reduction.
+
+## Common AP Mistakes to Avoid
+
+**Confusing transfers with deadweight loss.** When a monopolist earns economic profit, that profit comes from consumer surplus being transferred to the producer. It is not deadweight loss. Deadweight loss is only the surplus that nobody gets.
+
+**Forgetting deadweight loss in perfect competition.** A perfectly competitive market in long-run equilibrium has zero deadweight loss. This is why economists use it as the efficiency benchmark.
+
+**Drawing the triangle on the wrong side.** The deadweight loss triangle is always between the quantity actually traded and the efficient quantity. It never extends beyond the efficient quantity.
+
+## Practice with Interactive Graphs
+
+Static textbook diagrams only go so far. To build real intuition for deadweight loss, work through the interactive exercises in the [Market Failure module](/micro/market-failure) and the [Monopoly module](/micro/monopoly) on EconLearn. You can adjust curves, impose taxes and price controls, and see exactly how the deadweight loss area changes in response. That kind of hands-on practice is what makes the concept stick for exam day.`,
+  },
+  {
+    slug: "fiscal-vs-monetary-policy",
+    title: "Fiscal Policy vs Monetary Policy: AP Macro Study Guide",
+    description:
+      "A clear comparison of fiscal and monetary policy for AP Macroeconomics. Covers who controls each, the tools involved, effects on AD/AS, interest rates, and time lags.",
+    publishedAt: "2026-03-18",
+    readingTime: "9 min read",
+    tags: ["AP Macro", "Fiscal Policy", "Monetary Policy", "Study Guide"],
+    content: `Fiscal policy and monetary policy are the two big levers for managing the macroeconomy. The AP Macroeconomics exam tests your ability to compare them, explain how each works through the economy, and predict their effects on output, price level, and interest rates.
+
+This guide gives you a side-by-side comparison with everything you need for the exam.
+
+## Who Controls Each Policy?
+
+**Fiscal policy** is controlled by Congress and the President. It involves changes to government spending and taxation. Because it requires legislation, fiscal policy decisions are political. They go through committees, floor votes, and presidential approval.
+
+**Monetary policy** is controlled by the Federal Reserve (the Fed), specifically the Federal Open Market Committee (FOMC). The Fed operates independently from elected officials. The Chair of the Fed is appointed by the President but does not take orders from Congress. This independence is designed to keep monetary policy decisions based on economic conditions rather than election cycles.
+
+This distinction matters on the AP exam. If a question asks who is responsible for changing the money supply, the answer is always the Fed. If it asks who decides to increase government spending, the answer is Congress.
+
+## The Tools of Fiscal Policy
+
+Fiscal policy uses two main tools:
+
+**Government spending.** When the government increases spending on infrastructure, defense, education, or transfer payments, it injects money directly into the economy. This increases aggregate demand. When the government cuts spending, aggregate demand decreases.
+
+**Taxation.** When the government cuts taxes, households and businesses keep more of their income and tend to spend more. This increases aggregate demand. When taxes rise, disposable income falls and aggregate demand decreases.
+
+Expansionary fiscal policy means increasing government spending, cutting taxes, or both. Contractionary fiscal policy means decreasing government spending, raising taxes, or both.
+
+You can see how these tools shift the AD curve and change equilibrium output and price level in the [Fiscal Policy module](/macro/fiscal-policy) on EconLearn.
+
+## The Tools of Monetary Policy
+
+The Fed has three primary tools:
+
+**Open market operations (OMOs).** This is the most frequently used tool. When the Fed buys government bonds on the open market, it puts money into the banking system, increasing the money supply. When it sells bonds, it pulls money out, decreasing the money supply.
+
+**The federal funds rate target.** The Fed sets a target for the interest rate that banks charge each other for overnight loans. Lowering the target rate encourages borrowing and spending. Raising it discourages borrowing. In practice, the Fed uses open market operations to hit its rate target.
+
+**The reserve requirement (and interest on reserves).** The reserve requirement is the fraction of deposits banks must hold and not lend out. Lowering it allows banks to lend more, increasing the money supply. The Fed also pays interest on reserves held at the Fed, which influences how much banks choose to lend.
+
+Expansionary monetary policy means buying bonds, lowering the federal funds rate target, or lowering the reserve requirement. Contractionary monetary policy is the reverse.
+
+Explore how these tools affect the money market, interest rates, and aggregate demand in the [Monetary Policy module](/macro/monetary-policy).
+
+## How Each Policy Affects the Economy
+
+Here is the chain of events for each type of policy. Understanding these transmission mechanisms is essential for AP free-response questions.
+
+### Expansionary Fiscal Policy Chain
+
+1. Government increases spending or cuts taxes.
+2. Aggregate demand shifts right.
+3. Real GDP increases, unemployment falls, price level rises.
+4. Higher GDP increases the demand for money (people need more money for transactions).
+5. Higher money demand pushes interest rates up.
+6. Higher interest rates can crowd out some private investment.
+
+The crowding-out effect is a critical AP concept. Expansionary fiscal policy raises interest rates, which reduces private investment, partially offsetting the initial increase in aggregate demand. The net effect on GDP is positive but smaller than the full multiplier effect would suggest.
+
+### Expansionary Monetary Policy Chain
+
+1. The Fed buys bonds, increasing the money supply.
+2. More money in the system pushes interest rates down.
+3. Lower interest rates encourage business investment and consumer borrowing.
+4. Investment and consumption rise, shifting aggregate demand right.
+5. Real GDP increases, unemployment falls, price level rises.
+
+Notice the key difference: fiscal policy affects AD directly (government spending is a component of AD), while monetary policy works indirectly through interest rates and then investment.
+
+## Effects on Interest Rates
+
+This is one of the most common AP exam traps.
+
+**Expansionary fiscal policy raises interest rates.** The government borrows more to finance spending, increasing the demand for loanable funds. Interest rates rise.
+
+**Expansionary monetary policy lowers interest rates.** The Fed increases the money supply, shifting the supply of money right in the money market. Interest rates fall.
+
+If an FRQ asks you to show the combined effect of expansionary fiscal policy and expansionary monetary policy on interest rates, the answer is ambiguous because the two policies push interest rates in opposite directions. The net effect depends on the relative magnitudes. This is a nuanced point that earns full credit on AP exams.
+
+## Time Lags
+
+Both policies face delays between the decision to act and the impact on the economy. The types of lags differ, and AP exams frequently test this.
+
+### Fiscal Policy Lags
+
+**Recognition lag.** It takes time to identify that the economy is in a recession or overheating.
+
+**Legislative lag.** This is the big one for fiscal policy. Getting a tax cut or spending bill through Congress can take months or even years. Political disagreements, committee negotiations, and procedural rules all slow the process.
+
+**Implementation lag.** Even after a bill is signed, it takes time to actually spend the money. Infrastructure projects require planning, bidding, and construction.
+
+### Monetary Policy Lags
+
+**Recognition lag.** Same as fiscal policy. The Fed needs data to identify the problem.
+
+**Decision lag.** Much shorter than the legislative lag. The FOMC meets roughly every six weeks and can act quickly. In emergencies, the Fed can act between meetings.
+
+**Impact lag.** This is the big one for monetary policy. After the Fed changes interest rates, it takes 6 to 18 months for the full effect to work through business investment decisions, consumer borrowing, and ultimately aggregate demand.
+
+The bottom line: monetary policy can be decided quickly but takes a long time to affect the economy. Fiscal policy takes a long time to decide but can affect the economy more directly once implemented.
+
+## Side-by-Side Comparison
+
+Here is a summary table to study from:
+
+| Feature | Fiscal Policy | Monetary Policy |
+|---|---|---|
+| Controlled by | Congress and President | Federal Reserve (FOMC) |
+| Main tools | Govt. spending, taxes | OMOs, fed funds rate, reserve req. |
+| Affects AD | Directly | Indirectly (through interest rates) |
+| Effect on interest rates | Raises them (crowding out) | Lowers them |
+| Biggest time lag | Legislative lag | Impact lag |
+| Political influence | High (requires legislation) | Low (Fed is independent) |
+
+## How to Answer AP FRQs on This Topic
+
+When an FRQ asks you to recommend a policy response to a recession or inflation, follow this structure:
+
+1. **Identify the problem.** Recessionary gap (real GDP below full employment) or inflationary gap (real GDP above full employment).
+2. **Choose the policy type.** The question usually specifies fiscal or monetary. If not, explain both.
+3. **Name the specific tool.** Do not just say "expansionary fiscal policy." Say "increase government spending" or "cut personal income taxes."
+4. **Trace the chain of effects.** Show how the tool affects AD, and then how AD affects real GDP, unemployment, and the price level. For monetary policy, include the interest rate step.
+5. **Draw and label the graph.** Show the AD/AS model with the shift. Label the initial and new equilibrium points, real GDP on the x-axis, and price level on the y-axis.
+
+If the question asks about side effects, mention crowding out for fiscal policy or the liquidity trap for monetary policy (when interest rates are already near zero and the Fed cannot lower them further).
+
+## Practice Both Policies
+
+Understanding fiscal and monetary policy separately is important, but the AP exam often asks about them together. What happens when the government uses expansionary fiscal policy while the Fed uses contractionary monetary policy? Both push output in opposite directions, but interest rates rise unambiguously because both policies push rates up.
+
+Work through these scenarios in the [Fiscal Policy module](/macro/fiscal-policy) and the [Monetary Policy module](/macro/monetary-policy) on EconLearn. The interactive AD/AS and money market graphs let you apply both policies simultaneously and see the combined effects on equilibrium. That practice builds the intuition you need to handle any policy combination the AP exam throws at you.`,
+  },
 ];
