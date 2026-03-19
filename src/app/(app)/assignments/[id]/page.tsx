@@ -96,6 +96,13 @@ export default function AssignmentPage({ params }: { params: { id: string } }) {
           return;
         }
         const data = await res.json();
+
+        // If this is an exam, redirect IMMEDIATELY before setting any state
+        if (data.assignment?.type === "exam") {
+          router.push(`/exam/${data.assignment.id}`);
+          return; // Don't set loading=false, keep showing spinner
+        }
+
         setAssignment(data.assignment);
         setSubmitted(data.submitted);
         setSubmission(data.submission);

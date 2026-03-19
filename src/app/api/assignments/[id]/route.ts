@@ -77,3 +77,81 @@ export async function GET(
     attempt_count: completions?.length || 0,
   });
 }
+
+// DELETE /api/assignments/[id] — delete an assignment (teacher only)
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  }
+
+  const { data: assignment } = await supabase
+    .from("assignments")
+    .select("teacher_id")
+    .eq("id", params.id)
+    .single();
+
+  if (!assignment || assignment.teacher_id !== user.id) {
+    return NextResponse.json({ error: "Not authorized" }, { status: 403 });
+  }
+
+  // Delete completions first, then the assignment
+  await supabase.from("assignment_completions").delete().eq("assignment_id", params.id);
+  await supabase.from("exam_sessions").delete().eq("assignment_id", params.id);
+  const { error } = await supabase.from("assignments").delete().eq("id", params.id);
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ deleted: true });
+}
+
+// PATCH /api/assignments/[id] — update assignment (teacher only)
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  }
+
+  const { data: assignment } = await supabase
+    .from("assignments")
+    .select("teacher_id")
+    .eq("id", params.id)
+    .single();
+
+  if (!assignment || assignment.teacher_id !== user.id) {
+    return NextResponse.json({ error: "Not authorized" }, { status: 403 });
+  }
+
+  const body = await req.json();
+  const updates: Record<string, unknown> = {};
+
+  if (body.title !== undefined) updates.title = body.title;
+  if (body.due_date !== undefined) updates.due_date = body.due_date;
+  if (body.config !== undefined) updates.config = body.config;
+  if (body.status !== undefined) updates.status = body.status;
+
+  const { data: updated, error } = await supabase
+    .from("assignments")
+    .update(updates)
+    .eq("id", params.id)
+    .select()
+    .single();
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ assignment: updated });
+}
