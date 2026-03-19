@@ -102,6 +102,12 @@ export default function MarketingNav() {
             >
               For Schools
             </Link>
+            <Link
+              href="/pricing"
+              className="text-sm font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors"
+            >
+              Pricing
+            </Link>
           </div>
 
           {/* Right: Auth actions (desktop) */}
@@ -232,6 +238,22 @@ export default function MarketingNav() {
                     onClick={() => setMobileOpen(false)}
                   >
                     For Districts
+                  </Link>
+                  <Link
+                    href="/for-administrators"
+                    className="block px-3 py-3 text-sm font-medium rounded-lg hover:bg-[var(--color-surface-raised)] transition-colors"
+                    style={{ color: "var(--color-ink-light)" }}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    For Administrators
+                  </Link>
+                  <Link
+                    href="/pilot-program"
+                    className="block px-3 py-3 text-sm font-medium rounded-lg hover:bg-[var(--color-surface-raised)] transition-colors"
+                    style={{ color: "var(--color-ink-light)" }}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Pilot Program
                   </Link>
                   <Link
                     href="/pricing"

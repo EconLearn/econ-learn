@@ -682,7 +682,60 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          SECTION 5 — CTA
+          SECTION 5 — DISTRICT CTA
+          ══════════════════════════════════════════════════ */}
+      <section className="py-20 sm:py-24">
+        <div className="max-w-5xl mx-auto px-5 sm:px-6">
+          <ScrollReveal>
+            <div
+              className="rounded-2xl p-10 sm:p-14"
+              style={{ background: "linear-gradient(135deg, #1E293B, #334155)" }}
+            >
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <div
+                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-4"
+                    style={{ background: "rgba(59, 130, 246, 0.15)", color: "#60A5FA" }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                    Now partnering with schools & districts
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+                    Bring EconLearn to your school or district
+                  </h2>
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    One platform for every AP Economics classroom. Lockdown exams, real-time analytics, and interactive
+                    graphs — starting at $1.50/student. FERPA-compliant. Free pilot available.
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row md:flex-col gap-3">
+                  <Link
+                    href="/for-administrators"
+                    className="bg-white text-gray-900 font-medium text-sm py-3 px-6 rounded-xl hover:bg-gray-100 transition-colors text-center"
+                  >
+                    For Administrators
+                  </Link>
+                  <Link
+                    href="/pilot-program"
+                    className="bg-white/10 text-white font-medium text-sm py-3 px-6 rounded-xl hover:bg-white/20 transition-colors text-center border border-white/10"
+                  >
+                    Start a Free Pilot
+                  </Link>
+                  <Link
+                    href="/pricing"
+                    className="text-gray-400 hover:text-white text-sm font-medium transition-colors text-center py-2"
+                  >
+                    View all plans &rarr;
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          SECTION 6 — CTA
           ══════════════════════════════════════════════════ */}
       <section className="py-24 sm:py-32" style={{ background: "var(--color-surface-raised)" }}>
         <div className="max-w-6xl mx-auto px-5 sm:px-6">
@@ -738,6 +791,8 @@ export default function HomePage() {
                 <li><Link href="/pricing" className="text-sm">Pricing</Link></li>
                 <li><Link href="/schools" className="text-sm">For Schools</Link></li>
                 <li><Link href="/districts" className="text-sm">For Districts</Link></li>
+                <li><Link href="/for-administrators" className="text-sm">For Administrators</Link></li>
+                <li><Link href="/pilot-program" className="text-sm">Pilot Program</Link></li>
               </ul>
             </div>
             <div>

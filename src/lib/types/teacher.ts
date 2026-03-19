@@ -69,7 +69,7 @@ export interface Subscription {
   teacher_id: string;
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
-  plan: "free" | "classroom" | "school";
+  plan: "free" | "classroom" | "school" | "district";
   student_limit: number;
   status: "active" | "trial" | "canceled" | "past_due";
   trial_ends_at: string | null;

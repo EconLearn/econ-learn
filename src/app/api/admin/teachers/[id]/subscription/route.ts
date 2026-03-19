@@ -38,7 +38,7 @@ export async function PATCH(
   }
 
   // Validate plan value
-  if (updates.plan && !["free", "classroom", "school"].includes(updates.plan)) {
+  if (updates.plan && !["free", "classroom", "school", "district"].includes(updates.plan)) {
     return NextResponse.json(
       { error: "Invalid plan value" },
       { status: 400 }

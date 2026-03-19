@@ -184,6 +184,7 @@ export async function GET(
   const classmates = members.map((m: any) => {
     const stats = studentStats[m.student_id];
     return {
+      student_id: m.student_id,
       display_name: profileMap.get(m.student_id) || "Anonymous",
       modules_completed: stats ? stats.modules.size : 0,
       avg_quiz_score:
@@ -194,7 +195,14 @@ export async function GET(
     };
   });
 
-  return NextResponse.json({ classmates });
+  // Get join code for empty state
+  const { data: classroomData } = await supabase
+    .from("classrooms")
+    .select("join_code")
+    .eq("id", classroomId)
+    .single();
+
+  return NextResponse.json({ classmates, join_code: classroomData?.join_code || null });
 }
 
 function addDays(dateStr: string, days: number): string {

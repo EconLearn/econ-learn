@@ -37,6 +37,7 @@ interface Assignment {
 }
 
 interface Classmate {
+  student_id: string;
   display_name: string;
   modules_completed: number;
   avg_quiz_score: number;
@@ -56,6 +57,7 @@ export default function ClassroomDetailPage() {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"announcements" | "assignments" | "classmates">("assignments");
   const [classmateSort, setClassmateSort] = useState<"streak" | "score" | "modules">("streak");
+  const [joinCode, setJoinCode] = useState<string | null>(null);
 
   const allModules = [...courses[0].modules, ...courses[1].modules];
 
@@ -120,6 +122,7 @@ export default function ClassroomDetailPage() {
         if (classmatesRes.ok) {
           const data = await classmatesRes.json();
           setClassmates(data.classmates || []);
+          if (data.join_code) setJoinCode(data.join_code);
         }
       } catch {
         // Handle error silently
@@ -449,7 +452,7 @@ export default function ClassroomDetailPage() {
         {/* Classmates Tab */}
         {activeTab === "classmates" && (
           <div>
-            {classmates.length > 0 ? (
+            {classmates.length > 1 ? (
               <div className="card overflow-hidden">
                 {/* Sort header */}
                 <div
@@ -492,108 +495,132 @@ export default function ClassroomDetailPage() {
                     if (classmateSort === "score") return b.avg_quiz_score - a.avg_quiz_score;
                     return b.modules_completed - a.modules_completed;
                   })
-                  .map((mate, index) => (
-                    <motion.div
-                      key={`${mate.display_name}-${index}`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: index * 0.03, duration: 0.2 }}
-                    >
-                      <div
-                        className="grid grid-cols-12 gap-2 px-5 py-3.5 items-center"
-                        style={
-                          index > 0
-                            ? { borderTop: "1px solid var(--color-border-subtle)" }
-                            : undefined
-                        }
+                  .map((mate, index) => {
+                    const isYou = mate.student_id === user?.id;
+                    const rankIcon = index === 0 ? "\uD83E\uDD47" : index === 1 ? "\uD83E\uDD48" : index === 2 ? "\uD83E\uDD49" : null;
+                    return (
+                      <motion.div
+                        key={mate.student_id}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: index * 0.03, duration: 0.2 }}
                       >
-                        {/* Rank */}
-                        <div className="col-span-1 text-center">
-                          <span
-                            className="text-xs font-bold"
-                            style={{
-                              color:
-                                index === 0
-                                  ? "#EAB308"
-                                  : index === 1
-                                  ? "#94A3B8"
-                                  : index === 2
-                                  ? "#D97706"
-                                  : "var(--color-ink-faint)",
-                            }}
-                          >
-                            {index + 1}
-                          </span>
-                        </div>
+                        <div
+                          className="grid grid-cols-12 gap-2 px-5 py-3.5 items-center"
+                          style={{
+                            ...(index > 0
+                              ? { borderTop: "1px solid var(--color-border-subtle)" }
+                              : {}),
+                            ...(isYou
+                              ? { background: "rgba(59, 130, 246, 0.04)" }
+                              : {}),
+                          }}
+                        >
+                          {/* Rank */}
+                          <div className="col-span-1 text-center">
+                            {rankIcon ? (
+                              <span className="text-sm">{rankIcon}</span>
+                            ) : (
+                              <span
+                                className="text-xs font-bold"
+                                style={{ color: "var(--color-ink-faint)" }}
+                              >
+                                {index + 1}
+                              </span>
+                            )}
+                          </div>
 
-                        {/* Name */}
-                        <div className="col-span-4 min-w-0">
-                          <p
-                            className="text-sm font-medium truncate"
-                            style={{ color: "var(--color-ink)" }}
-                          >
-                            {mate.display_name}
-                          </p>
-                        </div>
+                          {/* Name */}
+                          <div className="col-span-4 min-w-0 flex items-center gap-1.5">
+                            <p
+                              className="text-sm font-medium truncate"
+                              style={{ color: isYou ? "#3B82F6" : "var(--color-ink)" }}
+                            >
+                              {mate.display_name}
+                            </p>
+                            {isYou && (
+                              <span
+                                className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full shrink-0"
+                                style={{ background: "rgba(59, 130, 246, 0.1)", color: "#3B82F6" }}
+                              >
+                                You
+                              </span>
+                            )}
+                          </div>
 
-                        {/* Streak */}
-                        <div className="col-span-2 text-center">
-                          <span
-                            className="text-xs font-semibold"
-                            style={{ color: mate.streak > 0 ? "#F59E0B" : "var(--color-ink-faint)" }}
-                          >
-                            {mate.streak > 0 ? `${mate.streak}d` : "--"}
-                          </span>
-                        </div>
+                          {/* Streak */}
+                          <div className="col-span-2 text-center">
+                            {mate.streak > 0 ? (
+                              <span className="text-xs font-semibold" style={{ color: "#F59E0B" }}>
+                                {"\uD83D\uDD25"} {mate.streak}d
+                              </span>
+                            ) : (
+                              <span className="text-xs" style={{ color: "var(--color-ink-faint)" }}>--</span>
+                            )}
+                          </div>
 
-                        {/* Modules Completed */}
-                        <div className="col-span-3 text-center">
-                          <span
-                            className="text-xs font-medium"
-                            style={{ color: "var(--color-ink-muted)" }}
-                          >
-                            {mate.modules_completed}
-                          </span>
-                        </div>
+                          {/* Modules Completed */}
+                          <div className="col-span-3 text-center">
+                            <span
+                              className="text-xs font-medium"
+                              style={{ color: "var(--color-ink-muted)" }}
+                            >
+                              {mate.modules_completed} / 24
+                            </span>
+                          </div>
 
-                        {/* Avg Score */}
-                        <div className="col-span-2 text-center">
-                          <span
-                            className="text-[11px] font-semibold px-2 py-0.5 rounded-full"
-                            style={{
-                              background:
-                                mate.avg_quiz_score >= 80
-                                  ? "rgba(34, 197, 94, 0.08)"
-                                  : mate.avg_quiz_score >= 60
-                                  ? "rgba(234, 179, 8, 0.08)"
-                                  : mate.avg_quiz_score > 0
-                                  ? "rgba(239, 68, 68, 0.08)"
-                                  : "var(--color-surface-sunken)",
-                              color:
-                                mate.avg_quiz_score >= 80
-                                  ? "#15803d"
-                                  : mate.avg_quiz_score >= 60
-                                  ? "#A16207"
-                                  : mate.avg_quiz_score > 0
-                                  ? "#dc2626"
-                                  : "var(--color-ink-faint)",
-                            }}
-                          >
-                            {mate.avg_quiz_score > 0 ? `${mate.avg_quiz_score}%` : "--"}
-                          </span>
+                          {/* Avg Score */}
+                          <div className="col-span-2 text-center">
+                            <span
+                              className="text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                              style={{
+                                background:
+                                  mate.avg_quiz_score >= 80
+                                    ? "rgba(34, 197, 94, 0.08)"
+                                    : mate.avg_quiz_score >= 60
+                                    ? "rgba(234, 179, 8, 0.08)"
+                                    : mate.avg_quiz_score > 0
+                                    ? "rgba(239, 68, 68, 0.08)"
+                                    : "var(--color-surface-sunken)",
+                                color:
+                                  mate.avg_quiz_score >= 80
+                                    ? "#15803d"
+                                    : mate.avg_quiz_score >= 60
+                                    ? "#A16207"
+                                    : mate.avg_quiz_score > 0
+                                    ? "#dc2626"
+                                    : "var(--color-ink-faint)",
+                              }}
+                            >
+                              {mate.avg_quiz_score > 0 ? `${mate.avg_quiz_score}%` : "--"}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    </motion.div>
-                  ))}
+                      </motion.div>
+                    );
+                  })}
               </div>
             ) : (
               <div
-                className="card p-8 text-center"
+                className="card p-10 text-center"
                 style={{ border: "2px dashed var(--color-border-subtle)" }}
               >
-                <p className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
-                  No classmates yet.
+                <div className="text-3xl mb-3">{"\uD83D\uDC65"}</div>
+                <p className="text-sm font-medium mb-1" style={{ color: "var(--color-ink)" }}>
+                  {classmates.length === 1 ? "You're the first one here!" : "No classmates yet"}
                 </p>
+                <p className="text-xs mb-4" style={{ color: "var(--color-ink-muted)" }}>
+                  Share the join code with your classmates so they can join this classroom.
+                </p>
+                {joinCode && (
+                  <div
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl"
+                    style={{ background: "var(--color-surface-raised)", border: "1px solid var(--color-border)" }}
+                  >
+                    <span className="text-xs font-medium" style={{ color: "var(--color-ink-muted)" }}>Join Code:</span>
+                    <span className="text-lg font-bold tracking-widest" style={{ color: "var(--color-ink)" }}>{joinCode}</span>
+                  </div>
+                )}
               </div>
             )}
           </div>
