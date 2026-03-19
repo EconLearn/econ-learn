@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "About EconLearn",
   description:
     "EconLearn is a free AP Economics study platform with interactive graphs, 350+ practice questions, and flashcards. Built for students who learn by doing.",
-  alternates: { canonical: "https://econlearn.org/about" },
+  alternates: { canonical: "https://www.econlearn.org/about" },
 };
 
 export default function AboutPage() {

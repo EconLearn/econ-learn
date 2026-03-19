@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Interactive Economics Graphs - AP Econ Sandbox",
   description:
     "17 interactive economics graphs for AP Micro & Macro. Supply and demand, monopoly, AD/AS, fiscal policy, and more. Drag curves and explore freely.",
-  alternates: { canonical: "https://econlearn.org/sandbox" },
+  alternates: { canonical: "https://www.econlearn.org/sandbox" },
 };
 
 const GRAPHS = [

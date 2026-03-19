@@ -14,11 +14,11 @@ export function generateMetadata({
   return {
     title: `${mod.title} - AP Macroeconomics Study Guide`,
     description: `${mod.description} Free interactive lesson with practice questions and detailed explanations.`,
-    alternates: { canonical: `https://econlearn.org${mod.href}` },
+    alternates: { canonical: `https://www.econlearn.org${mod.href}` },
     openGraph: {
       title: `${mod.title} - AP Macro | EconLearn`,
       description: mod.description,
-      url: `https://econlearn.org${mod.href}`,
+      url: `https://www.econlearn.org${mod.href}`,
     },
   };
 }

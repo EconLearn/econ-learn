@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "Blog - AP Economics Study Tips & Guides",
   description:
     "AP Economics study tips, exam strategies, and concept explanations. Free guides to help you score a 5 on the AP Micro and Macro exams.",
-  alternates: { canonical: "https://econlearn.org/blog" },
+  alternates: { canonical: "https://www.econlearn.org/blog" },
   openGraph: {
     title: "EconLearn Blog - AP Economics Study Tips",
     description:
       "Free AP Economics study guides, FRQ tips, and exam strategies.",
-    url: "https://econlearn.org/blog",
+    url: "https://www.econlearn.org/blog",
   },
 };
 

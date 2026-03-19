@@ -143,7 +143,7 @@ export default function DailyChallengePage() {
   const handleShare = useCallback(() => {
     if (!attempt) return;
     const text = `I scored ${attempt.score} on today's EconLearn Challenge! Can you beat me?`;
-    const url = "https://econlearn.org/challenge";
+    const url = "https://www.econlearn.org/challenge";
     window.open(
       `https://twitter.com/intent/tweet?text=${encodeURIComponent(
         text
@@ -155,7 +155,7 @@ export default function DailyChallengePage() {
 
   const handleCopyLink = useCallback(() => {
     if (!attempt) return;
-    const text = `I scored ${attempt.score} on today's EconLearn Challenge! Try it: https://econlearn.org/challenge`;
+    const text = `I scored ${attempt.score} on today's EconLearn Challenge! Try it: https://www.econlearn.org/challenge`;
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);

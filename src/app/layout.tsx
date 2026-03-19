@@ -6,7 +6,7 @@ import ThemeInitializer from "@/components/providers/ThemeInitializer";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
 
-const BASE_URL = "https://econlearn.org";
+const BASE_URL = "https://www.econlearn.org";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),

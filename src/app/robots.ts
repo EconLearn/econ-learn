@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/dashboard", "/profile", "/auth/"],
       },
     ],
-    sitemap: "https://econlearn.org/sitemap.xml",
+    sitemap: "https://www.econlearn.org/sitemap.xml",
   };
 }

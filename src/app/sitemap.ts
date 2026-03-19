@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { microCourse, macroCourse } from "@/data/courses";
 import { blogPosts } from "@/data/blog-posts";
 
-const BASE_URL = "https://econlearn.org";
+const BASE_URL = "https://www.econlearn.org";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();

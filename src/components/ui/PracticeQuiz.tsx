@@ -310,7 +310,7 @@ export default function PracticeQuiz({ questions: allQuestions, moduleId }: Prac
           <button
             onClick={() => {
               const text = `I scored ${percentage}% on the ${moduleId?.replace(/-/g, " ") || "economics"} quiz on EconLearn!`;
-              const url = `https://econlearn.org${window.location.pathname}`;
+              const url = `https://www.econlearn.org${window.location.pathname}`;
               window.open(
                 `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
                 "_blank",
@@ -330,7 +330,7 @@ export default function PracticeQuiz({ questions: allQuestions, moduleId }: Prac
           </button>
           <button
             onClick={() => {
-              const text = `I scored ${percentage}% on the ${moduleId?.replace(/-/g, " ") || "economics"} quiz on EconLearn! Try it: https://econlearn.org${window.location.pathname}`;
+              const text = `I scored ${percentage}% on the ${moduleId?.replace(/-/g, " ") || "economics"} quiz on EconLearn! Try it: https://www.econlearn.org${window.location.pathname}`;
               navigator.clipboard.writeText(text).then(() => {
                 // Brief visual feedback
                 const el = document.activeElement as HTMLButtonElement;

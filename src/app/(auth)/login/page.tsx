@@ -36,7 +36,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: "https://econlearn.org/auth/callback",
+        redirectTo: "https://www.econlearn.org/auth/callback",
       },
     });
     if (error) {

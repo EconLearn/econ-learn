@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Terms of Service",
   description:
     "EconLearn terms of service. Rules and guidelines for using our free AP Economics study platform.",
-  alternates: { canonical: "https://econlearn.org/terms" },
+  alternates: { canonical: "https://www.econlearn.org/terms" },
 };
 
 export default function TermsPage() {

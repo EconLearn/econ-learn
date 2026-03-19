@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "AP Economics Teacher Pricing - Classroom Tools",
   description: "Free for students, $3/student for classroom tools. Teacher dashboards, assignable quizzes, student progress tracking, and interactive graph demos.",
-  alternates: { canonical: "https://econlearn.org/pricing" },
+  alternates: { canonical: "https://www.econlearn.org/pricing" },
 };
 
 export default function PricingPage() {

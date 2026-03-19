@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "EconLearn privacy policy. How we collect, use, and protect your data when you use our free AP Economics study platform.",
-  alternates: { canonical: "https://econlearn.org/privacy" },
+  alternates: { canonical: "https://www.econlearn.org/privacy" },
 };
 
 export default function PrivacyPage() {

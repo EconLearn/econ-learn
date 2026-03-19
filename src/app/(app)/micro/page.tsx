@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "AP Microeconomics Study Guide - Free Review & Practice",
   description:
     "Free AP Micro study guide with 12 modules: supply and demand, monopoly graphs, elasticity, market structures, and more. 175+ practice questions and interactive graphs.",
-  alternates: { canonical: "https://econlearn.org/micro" },
+  alternates: { canonical: "https://www.econlearn.org/micro" },
   openGraph: {
     title: "AP Microeconomics Study Guide | EconLearn",
     description:
       "Free AP Micro study guide covering all 12 topics with interactive graphs, practice questions, and flashcards.",
-    url: "https://econlearn.org/micro",
+    url: "https://www.econlearn.org/micro",
   },
 };
 
@@ -25,7 +25,7 @@ export default function MicroPage() {
     provider: {
       "@type": "Organization",
       name: "EconLearn",
-      url: "https://econlearn.org",
+      url: "https://www.econlearn.org",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",

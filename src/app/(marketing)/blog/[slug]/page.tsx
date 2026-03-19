@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.description,
-    alternates: { canonical: `https://econlearn.org/blog/${post.slug}` },
+    alternates: { canonical: `https://www.econlearn.org/blog/${post.slug}` },
     openGraph: {
       title: post.title,
       description: post.description,
-      url: `https://econlearn.org/blog/${post.slug}`,
+      url: `https://www.econlearn.org/blog/${post.slug}`,
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
@@ -102,16 +102,16 @@ export default async function BlogPostPage({ params }: Props) {
     author: {
       "@type": "Organization",
       name: "EconLearn",
-      url: "https://econlearn.org",
+      url: "https://www.econlearn.org",
     },
     publisher: {
       "@type": "Organization",
       name: "EconLearn",
-      url: "https://econlearn.org",
+      url: "https://www.econlearn.org",
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://econlearn.org/blog/${post.slug}`,
+      "@id": `https://www.econlearn.org/blog/${post.slug}`,
     },
   };
 

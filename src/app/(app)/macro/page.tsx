@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "AP Macroeconomics Review - Free Study Guide & Practice",
   description:
     "Free AP Macro review with 12 modules: GDP, fiscal policy, monetary policy, AD/AS model, and more. 175+ practice questions and interactive economics graphs.",
-  alternates: { canonical: "https://econlearn.org/macro" },
+  alternates: { canonical: "https://www.econlearn.org/macro" },
   openGraph: {
     title: "AP Macroeconomics Review & Study Guide | EconLearn",
     description:
       "Free AP Macro study guide covering all 12 topics with interactive graphs, practice questions, and flashcards.",
-    url: "https://econlearn.org/macro",
+    url: "https://www.econlearn.org/macro",
   },
 };
 
@@ -25,7 +25,7 @@ export default function MacroPage() {
     provider: {
       "@type": "Organization",
       name: "EconLearn",
-      url: "https://econlearn.org",
+      url: "https://www.econlearn.org",
     },
     hasCourseInstance: {
       "@type": "CourseInstance",
