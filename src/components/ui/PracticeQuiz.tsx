@@ -620,27 +620,42 @@ export default function PracticeQuiz({ questions: allQuestions, moduleId }: Prac
           )}
         </AnimatePresence>
 
-        {/* Next button */}
+        {/* Navigation buttons */}
         <AnimatePresence>
           {showExplanation && (
-            <motion.button
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.15 }}
-              onClick={handleNext}
-              className="btn-primary mt-4 w-full flex items-center justify-center gap-2"
+              className="mt-4 flex gap-2"
             >
-              {currentIndex < questions.length - 1 ? (
-                <>
-                  Next Question
+              {currentIndex > 0 && (
+                <button
+                  onClick={() => { setCurrentIndex(currentIndex - 1); setSelectedAnswer(null); setShowExplanation(false); }}
+                  className="btn-secondary flex-1 flex items-center justify-center gap-2"
+                >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
                   </svg>
-                </>
-              ) : (
-                "See Results"
+                  Previous
+                </button>
               )}
-            </motion.button>
+              <button
+                onClick={handleNext}
+                className="btn-primary flex-1 flex items-center justify-center gap-2"
+              >
+                {currentIndex < questions.length - 1 ? (
+                  <>
+                    Next Question
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </>
+                ) : (
+                  "See Results"
+                )}
+              </button>
+            </motion.div>
           )}
         </AnimatePresence>
       </div>

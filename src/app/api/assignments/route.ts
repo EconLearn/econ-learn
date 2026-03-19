@@ -55,11 +55,16 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  if (type === "exam" && (!config?.question_ids || config.question_ids.length === 0)) {
-    return NextResponse.json(
-      { error: "question_ids are required for exam assignments" },
-      { status: 400 }
-    );
+  if (type === "exam") {
+    const bankIds = config?.bank_question_ids || [];
+    const customIds = config?.custom_question_ids || [];
+    const legacyIds = config?.question_ids || [];
+    if (bankIds.length === 0 && customIds.length === 0 && legacyIds.length === 0) {
+      return NextResponse.json(
+        { error: "Select at least one question for exam assignments" },
+        { status: 400 }
+      );
+    }
   }
 
   // Verify teacher owns the classroom
