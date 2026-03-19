@@ -238,7 +238,7 @@ function ModulePerformanceChart({ data }: { data: { module: string; moduleId: st
           </div>
         );
       })}
-      <div className="flex items-center gap-4 mt-4 pt-3" style={{ borderTop: "1px solid var(--color-border-subtle)" }}>
+      <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-4 pt-3" style={{ borderTop: "1px solid var(--color-border-subtle)" }}>
         <div className="flex items-center gap-1.5">
           <div className="w-2.5 h-2.5 rounded-full" style={{ background: "#16A34A" }} />
           <span className="text-[10px]" style={{ color: "var(--color-ink-faint)" }}>80%+</span>
@@ -296,13 +296,13 @@ function DashboardSkeleton() {
             "linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(139,92,246,0.05) 50%, rgba(22,163,74,0.04) 100%)",
         }}
       >
-        <div className="max-w-6xl mx-auto px-6 pt-12 pb-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10">
           <div className="h-4 w-32 rounded-md bg-gray-200 animate-pulse mb-3" />
           <div className="h-10 w-72 rounded-lg bg-gray-200 animate-pulse mb-2" />
           <div className="h-4 w-56 rounded-md bg-gray-200 animate-pulse" />
         </div>
       </div>
-      <div className="max-w-6xl mx-auto px-6 pb-16 -mt-2">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-16 -mt-2">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10 mt-6">
           {[0, 1, 2, 3].map((i) => (
             <div key={i} className="card p-5">
@@ -653,13 +653,13 @@ export default function TeacherDashboard() {
               "linear-gradient(135deg, rgba(59,130,246,0.06) 0%, rgba(139,92,246,0.05) 50%, rgba(22,163,74,0.04) 100%)",
           }}
         >
-          <div className="max-w-6xl mx-auto px-6 pt-12 pb-10">
-            <h1 className="text-3xl font-extrabold tracking-tight" style={{ color: "var(--color-ink)" }}>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10">
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight" style={{ color: "var(--color-ink)" }}>
               Teacher Dashboard
             </h1>
           </div>
         </div>
-        <div className="max-w-6xl mx-auto px-6 pb-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
           <div className="card p-12 text-center mt-6">
             <div
               className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4"
@@ -711,7 +711,7 @@ export default function TeacherDashboard() {
             "linear-gradient(135deg, rgba(59,130,246,0.07) 0%, rgba(139,92,246,0.06) 50%, rgba(22,163,74,0.04) 100%)",
         }}
       >
-        <div className="max-w-6xl mx-auto px-6 pt-12 pb-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-10">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -721,7 +721,7 @@ export default function TeacherDashboard() {
               Teacher Dashboard
             </p>
             <h1
-              className="text-3xl md:text-4xl font-extrabold tracking-tight"
+              className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight"
               style={{ color: "var(--color-ink)" }}
             >
               Welcome back, {displayName}
@@ -733,7 +733,7 @@ export default function TeacherDashboard() {
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 pb-16 -mt-2">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 pb-16 -mt-2">
 
         {/* ═══ Stat Cards ═══ */}
         <motion.div
@@ -1112,7 +1112,7 @@ export default function TeacherDashboard() {
           <h2 className="text-xs font-bold mb-4 uppercase tracking-widest" style={{ color: "var(--color-ink-faint)" }}>
             Quick Actions
           </h2>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {quickActions.map((action, i) => {
               // If "Assign Module" and we have classrooms, link to first classroom
               let href = action.href;

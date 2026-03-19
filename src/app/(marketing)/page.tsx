@@ -157,7 +157,7 @@ export default function HomePage() {
           ══════════════════════════════════════════════════ */}
       <section style={{ background: "var(--color-surface-raised)", borderTop: "1px solid var(--color-border-subtle)", borderBottom: "1px solid var(--color-border-subtle)" }}>
         <div className="max-w-4xl mx-auto px-5 sm:px-6 py-10">
-          <div className="grid grid-cols-4 gap-6 text-center">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
             <div>
               <p className="text-2xl sm:text-3xl font-bold" style={{ color: "var(--color-ink)" }}>
                 <AnimatedCounter target={totalModules} />

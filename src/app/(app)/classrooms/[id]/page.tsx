@@ -37,7 +37,10 @@ interface Assignment {
 }
 
 interface Classmate {
-  first_name: string;
+  display_name: string;
+  modules_completed: number;
+  avg_quiz_score: number;
+  streak: number;
 }
 
 export default function ClassroomDetailPage() {
@@ -52,6 +55,7 @@ export default function ClassroomDetailPage() {
   const [classmates, setClassmates] = useState<Classmate[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<"announcements" | "assignments" | "classmates">("assignments");
+  const [classmateSort, setClassmateSort] = useState<"streak" | "score" | "modules">("streak");
 
   const allModules = [...courses[0].modules, ...courses[1].modules];
 
@@ -64,11 +68,12 @@ export default function ClassroomDetailPage() {
 
     async function fetchData() {
       try {
-        // Fetch classroom details and assignments in parallel
-        const [classroomRes, assignmentRes, announcementRes] = await Promise.all([
+        // Fetch classroom details, assignments, announcements, and classmates in parallel
+        const [classroomRes, assignmentRes, announcementRes, classmatesRes] = await Promise.all([
           fetch("/api/student/classrooms"),
           fetch("/api/student/assignments"),
           fetch(`/api/classrooms/${classroomId}/announcements`),
+          fetch(`/api/classrooms/${classroomId}/classmates`),
         ]);
 
         if (classroomRes.ok) {
@@ -110,6 +115,11 @@ export default function ClassroomDetailPage() {
         if (announcementRes.ok) {
           const data = await announcementRes.json();
           setAnnouncements(data.announcements || []);
+        }
+
+        if (classmatesRes.ok) {
+          const data = await classmatesRes.json();
+          setClassmates(data.classmates || []);
         }
       } catch {
         // Handle error silently

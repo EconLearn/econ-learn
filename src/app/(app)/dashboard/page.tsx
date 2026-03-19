@@ -196,7 +196,7 @@ export default function DashboardPage() {
     : "/classrooms";
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-10 lg:py-14">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 lg:py-14">
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -677,7 +677,7 @@ export default function DashboardPage() {
               </div>
             </div>
             {/* Quick Stats */}
-            <div className="grid grid-cols-4 gap-3 pt-3" style={{ borderTop: "1px solid var(--color-border-subtle)" }}>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3" style={{ borderTop: "1px solid var(--color-border-subtle)" }}>
               {[
                 { label: "Quizzes", value: recentQuizzes.length },
                 { label: "Avg Score", value: recentQuizzes.length > 0 ? `${Math.round(recentQuizzes.reduce((s, q) => s + (q.score / q.total_questions) * 100, 0) / recentQuizzes.length)}%` : "--" },

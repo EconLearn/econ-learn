@@ -143,7 +143,7 @@ function Skeleton({ className = "", style }: { className?: string; style?: React
 
 function HeaderSkeleton() {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       <Skeleton className="w-24 h-4 mb-8" />
       <div className="flex items-start justify-between mb-8">
         <div>
@@ -152,7 +152,7 @@ function HeaderSkeleton() {
         </div>
         <Skeleton className="w-36 h-10 rounded-xl" />
       </div>
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {[1, 2, 3, 4].map((i) => (
           <Skeleton key={i} className="h-24 rounded-2xl" />
         ))}
@@ -857,7 +857,7 @@ export default function ClassroomDetailPage() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
       {/* ── Breadcrumb ── */}
       <motion.div
         className="mb-6"
@@ -887,7 +887,7 @@ export default function ClassroomDetailPage() {
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-3 flex-wrap">
             <h1
-              className="text-3xl font-bold tracking-tight"
+              className="text-2xl sm:text-3xl font-bold tracking-tight"
               style={{ color: "var(--color-ink)" }}
             >
               {classroom.name}

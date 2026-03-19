@@ -556,7 +556,7 @@ export default function PracticeTestPage() {
               className="overflow-hidden mb-4"
             >
               <div className="card p-4">
-                <div className="grid grid-cols-10 gap-1.5">
+                <div className="grid grid-cols-5 sm:grid-cols-10 gap-1.5">
                   {testQuestions.map((_, i) => {
                     const a = answers[i];
                     const isCurrent = i === currentIdx;
@@ -821,7 +821,7 @@ export default function PracticeTestPage() {
             </p>
 
             {/* Action buttons */}
-            <div className="flex items-center justify-center gap-3 mt-6">
+            <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
               <button onClick={() => setMode("config")} className="btn-primary text-sm">
                 New Test
               </button>

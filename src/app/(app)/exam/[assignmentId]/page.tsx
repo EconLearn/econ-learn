@@ -522,19 +522,19 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
     <div className="fixed inset-0 bg-white z-[9999] flex flex-col overflow-hidden">
       {/* ── Top Bar ── */}
       <div
-        className="flex items-center justify-between px-6 py-3 flex-shrink-0"
+        className="flex flex-wrap items-center justify-between gap-2 px-3 sm:px-6 py-3 flex-shrink-0"
         style={{ borderBottom: "1px solid #e5e7eb" }}
       >
-        <div className="flex items-center gap-4">
-          <h1 className="text-sm font-bold text-gray-900 truncate max-w-[200px]">{examTitle}</h1>
-          <span className="text-xs font-medium text-gray-500">
+        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+          <h1 className="text-xs sm:text-sm font-bold text-gray-900 truncate max-w-[120px] sm:max-w-[200px]">{examTitle}</h1>
+          <span className="text-xs font-medium text-gray-500 shrink-0">
             Q {currentIndex + 1}/{orderedQuestions.length}
           </span>
         </div>
 
         {/* Timer */}
         <div
-          className="flex items-center gap-2 px-3 py-1.5 rounded-lg"
+          className="flex items-center gap-2 px-2 sm:px-3 py-1.5 rounded-lg"
           style={{
             background: isTimeCritical ? "rgba(239,68,68,0.08)" : isTimeWarning ? "rgba(245,158,11,0.08)" : "#f9fafb",
             border: isTimeCritical ? "1px solid rgba(239,68,68,0.2)" : "1px solid #e5e7eb",
@@ -556,7 +556,7 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-500">
+          <span className="text-xs text-gray-500 hidden sm:inline">
             {answeredCount}/{orderedQuestions.length} answered
           </span>
           <button
@@ -570,9 +570,9 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
 
       {/* ── Main Content ── */}
       <div className="flex-1 overflow-y-auto">
-        <div className="max-w-2xl mx-auto px-6 py-8">
+        <div className="max-w-2xl mx-auto px-3 sm:px-6 py-6 sm:py-8">
           {/* Question grid */}
-          <div className="flex flex-wrap gap-1.5 mb-6">
+          <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-6">
             {orderedQuestions.map((q, i) => {
               const isAnswered = answers.has(q.id);
               const isFlagged = flagged.has(q.id);
@@ -582,7 +582,7 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
                 <button
                   key={q.id}
                   onClick={() => setCurrentIndex(i)}
-                  className="w-8 h-8 rounded-md text-xs font-medium transition-all relative"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-md text-[10px] sm:text-xs font-medium transition-all relative"
                   style={{
                     background: isCurrent
                       ? "#1f2937"
