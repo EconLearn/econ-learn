@@ -58,7 +58,7 @@ function NewAssignmentContent() {
   const [teacherQuestions, setTeacherQuestions] = useState<TeacherQuestion[]>([]);
   const [questionsLoading, setQuestionsLoading] = useState(false);
   const [selectedQuestionIds, setSelectedQuestionIds] = useState<string[]>([]);
-  const [selectedBankQuestionIds, setSelectedBankQuestionIds] = useState<string[]>([]);
+  const [selectedBankQuestionIds, setSelectedBankQuestionIds] = useState<number[]>([]);
   const [examQuestionTab, setExamQuestionTab] = useState<ExamQuestionTab>("bank");
   const [examTimeLimit, setExamTimeLimit] = useState<number>(45);
   const [lockdown, setLockdown] = useState(true);
@@ -158,12 +158,13 @@ function NewAssignmentContent() {
     return map;
   }, [teacherQuestions]);
 
-  // ── Group bank questions by module ──
+  // ── Group bank questions by module (with index for ID) ──
   const bankQuestionsByModule = useMemo(() => {
-    const map: Record<string, QuestionBankEntry[]> = {};
-    for (const entry of questionBank) {
+    const map: Record<string, Array<QuestionBankEntry & { bankIdx: number }>> = {};
+    for (let i = 0; i < questionBank.length; i++) {
+      const entry = questionBank[i];
       if (!map[entry.moduleId]) map[entry.moduleId] = [];
-      map[entry.moduleId].push(entry);
+      map[entry.moduleId].push({ ...entry, bankIdx: i });
     }
     return map;
   }, []);
@@ -177,9 +178,9 @@ function NewAssignmentContent() {
     );
   }, []);
 
-  const toggleBankQuestion = useCallback((id: string) => {
+  const toggleBankQuestion = useCallback((idx: number) => {
     setSelectedBankQuestionIds((prev) =>
-      prev.includes(id) ? prev.filter((qid) => qid !== id) : [...prev, id]
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
     );
   }, []);
 
@@ -196,12 +197,12 @@ function NewAssignmentContent() {
 
   const toggleAllBankForModule = useCallback((moduleId: string) => {
     const moduleQs = bankQuestionsByModule[moduleId] || [];
-    const moduleQIds = moduleQs.map((e) => e.question.id);
-    const allSelected = moduleQIds.every((id) => selectedBankQuestionIds.includes(id));
+    const moduleIdxs = moduleQs.map((e) => e.bankIdx);
+    const allSelected = moduleIdxs.every((idx) => selectedBankQuestionIds.includes(idx));
     if (allSelected) {
-      setSelectedBankQuestionIds((prev) => prev.filter((id) => !moduleQIds.includes(id)));
+      setSelectedBankQuestionIds((prev) => prev.filter((idx) => !moduleIdxs.includes(idx)));
     } else {
-      setSelectedBankQuestionIds((prev) => Array.from(new Set([...prev, ...moduleQIds])));
+      setSelectedBankQuestionIds((prev) => Array.from(new Set([...prev, ...moduleIdxs])));
     }
   }, [bankQuestionsByModule, selectedBankQuestionIds]);
 
@@ -266,9 +267,9 @@ function NewAssignmentContent() {
         const customModuleIds = teacherQuestions
           .filter((q) => selectedQuestionIds.includes(q.id))
           .map((q) => q.module_id);
-        const bankModuleIds = questionBank
-          .filter((e) => selectedBankQuestionIds.includes(e.question.id))
-          .map((e) => e.moduleId);
+        const bankModuleIds = selectedBankQuestionIds
+          .filter((idx) => idx >= 0 && idx < questionBank.length)
+          .map((idx) => questionBank[idx].moduleId);
         const examModuleIds = Array.from(new Set([...customModuleIds, ...bankModuleIds]));
 
         body = {
@@ -552,7 +553,7 @@ function NewAssignmentContent() {
                 {totalSelectedCount > 0 && (
                   <button
                     type="button"
-                    onClick={() => { setSelectedQuestionIds([]); setSelectedBankQuestionIds([]); }}
+                    onClick={() => { setSelectedQuestionIds([]); setSelectedBankQuestionIds([] as number[]); }}
                     className="text-xs font-medium text-red-500 hover:text-red-600"
                   >
                     Clear All
@@ -605,8 +606,8 @@ function NewAssignmentContent() {
                     These are the same high-quality questions students see in practice quizzes. Students may have already encountered these.
                   </p>
                   {Object.entries(bankQuestionsByModule).map(([moduleId, entries]) => {
-                    const moduleQIds = entries.map((e) => e.question.id);
-                    const allModuleSelected = moduleQIds.every((id) => selectedBankQuestionIds.includes(id));
+                    const moduleIdxs = entries.map((e) => e.bankIdx);
+                    const allModuleSelected = moduleIdxs.every((idx) => selectedBankQuestionIds.includes(idx));
 
                     return (
                       <div key={moduleId}>
@@ -636,12 +637,12 @@ function NewAssignmentContent() {
                         </div>
                         <div className="space-y-1.5">
                           {entries.map((entry) => {
-                            const isSelected = selectedBankQuestionIds.includes(entry.question.id);
+                            const isSelected = selectedBankQuestionIds.includes(entry.bankIdx);
                             return (
                               <button
-                                key={entry.question.id}
+                                key={entry.bankIdx}
                                 type="button"
-                                onClick={() => toggleBankQuestion(entry.question.id)}
+                                onClick={() => toggleBankQuestion(entry.bankIdx)}
                                 className="w-full text-left p-3 rounded-lg transition-all"
                                 style={{
                                   background: isSelected ? "rgba(59, 130, 246, 0.06)" : "var(--color-surface)",
