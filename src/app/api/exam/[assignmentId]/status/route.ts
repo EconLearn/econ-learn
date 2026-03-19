@@ -41,28 +41,43 @@ export async function GET(
   const isTeacher = classroom?.teacher_id === user.id;
 
   if (isTeacher) {
-    // Teacher view: get all sessions with student info
+    // Teacher view: get all sessions
     const { data: sessions } = await supabase
       .from("exam_sessions")
-      .select("*, profiles!exam_sessions_student_id_fkey(display_name, email)")
+      .select("*")
       .eq("assignment_id", assignmentId)
       .order("started_at", { ascending: true });
 
-    // Also get classroom members to show who hasn't started
+    // Get classroom members
     const { data: members } = await supabase
       .from("classroom_members")
-      .select("student_id, profiles!classroom_members_student_id_fkey(display_name, email)")
+      .select("student_id")
       .eq("classroom_id", assignment.classroom_id);
 
-    const sessionMap = new Map<string, (typeof sessions extends (infer T)[] | null ? T : never)>();
+    // Get ALL student IDs (from members + sessions)
+    const allStudentIds = new Set<string>();
+    for (const m of members || []) allStudentIds.add(m.student_id);
+    for (const s of sessions || []) allStudentIds.add(s.student_id);
+
+    // Fetch profiles separately (no FK join issues)
+    const { data: profiles } = await supabase
+      .from("profiles")
+      .select("id, display_name, email")
+      .in("id", Array.from(allStudentIds));
+
+    const profileMap = new Map<string, { display_name: string; email: string }>();
+    for (const p of profiles || []) {
+      profileMap.set(p.id, { display_name: p.display_name || "Unknown", email: p.email || "" });
+    }
+
+    const sessionMap = new Map<string, any>();
     for (const s of sessions || []) {
       sessionMap.set(s.student_id, s);
     }
 
     const now = new Date();
     const students = (members || []).map((m) => {
-      const profileData = m.profiles as any;
-      const profile = Array.isArray(profileData) ? profileData[0] : profileData;
+      const profile = profileMap.get(m.student_id);
       const session = sessionMap.get(m.student_id);
 
       if (!session) {
@@ -82,12 +97,11 @@ export async function GET(
       const endsAt = new Date(session.ends_at);
       const timeRemaining = Math.max(0, Math.round((endsAt.getTime() - now.getTime()) / 1000));
       const answeredCount = Array.isArray(session.answers) ? session.answers.length : 0;
-      const sessionProfile = session.profiles as { display_name: string; email: string } | null;
 
       return {
         student_id: session.student_id,
-        name: sessionProfile?.display_name || profile?.display_name || "Unknown",
-        email: sessionProfile?.email || profile?.email || "",
+        name: profile?.display_name || "Unknown",
+        email: profile?.email || "",
         status: session.status,
         questions_answered: answeredCount,
         tab_switches: session.tab_switches || 0,

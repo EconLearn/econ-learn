@@ -38,13 +38,23 @@ export async function GET(
     return NextResponse.json({ error: "Not authorized" }, { status: 403 });
   }
 
-  // Fetch all exam sessions with student profiles
+  // Fetch all exam sessions (no FK join - profiles queried separately)
   const { data: sessions } = await supabase
     .from("exam_sessions")
-    .select("*, profiles!exam_sessions_student_id_fkey(display_name, email)")
+    .select("*")
     .eq("assignment_id", assignmentId)
     .in("status", ["submitted", "force_submitted", "expired"])
     .order("submitted_at", { ascending: false });
+
+  // Fetch profiles separately
+  const studentIds = (sessions || []).map((s) => s.student_id);
+  const { data: profilesData } = studentIds.length > 0
+    ? await supabase.from("profiles").select("id, display_name, email").in("id", studentIds)
+    : { data: [] };
+  const profileMap = new Map<string, { display_name: string; email: string }>();
+  for (const p of profilesData || []) {
+    profileMap.set(p.id, { display_name: p.display_name || "Unknown", email: p.email || "" });
+  }
 
   const config = assignment.config || {};
 
@@ -99,7 +109,7 @@ export async function GET(
   const questionMap = new Map(questions.map((q) => [q.id, q]));
 
   const submissions = (sessions || []).map((session) => {
-    const profile = session.profiles as { display_name: string; email: string } | null;
+    const profile = profileMap.get(session.student_id);
     const answers = Array.isArray(session.answers) ? session.answers : [];
     const startedAt = new Date(session.started_at);
     const submittedAt = session.submitted_at ? new Date(session.submitted_at) : null;
