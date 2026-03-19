@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from "react";
 
-// AP Exam dates for 2026 (AP Economics exams are typically in mid-May)
-const AP_MICRO_DATE = new Date("2026-05-11T08:00:00");
-const AP_MACRO_DATE = new Date("2026-05-13T08:00:00");
+// AP Exam dates for 2026 (from College Board official schedule)
+// Micro: Monday May 4, 2026 at 12 PM local
+// Macro: Friday May 8, 2026 at 12 PM local
+const AP_MICRO_DATE = new Date("2026-05-04T12:00:00");
+const AP_MACRO_DATE = new Date("2026-05-08T12:00:00");
 
 function getDaysUntil(date: Date): number {
   const now = new Date();
