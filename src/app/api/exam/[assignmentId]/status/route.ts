@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { questionBank } from "@/data/question-bank";
 
 /*
 GET /api/exam/[assignmentId]/status
@@ -97,6 +98,56 @@ export async function GET(
       };
     });
 
+    // Build questions list with correct answers for teacher view
+    const config = assignment.config || {};
+    const examQuestions: Array<{
+      id: string;
+      question: string;
+      options: string[];
+      correct_index: number;
+      source: "bank" | "custom";
+    }> = [];
+
+    // Bank questions
+    const bankIds = (config.bank_question_ids as (number | string)[]) || [];
+    for (const idx of bankIds) {
+      const numIdx = typeof idx === "string" ? parseInt(String(idx).replace("bank-", "")) : idx;
+      if (numIdx >= 0 && numIdx < questionBank.length) {
+        const entry = questionBank[numIdx];
+        examQuestions.push({
+          id: `bank-${numIdx}`,
+          question: entry.question.question,
+          options: entry.question.options,
+          correct_index: entry.question.correctIndex,
+          source: "bank",
+        });
+      }
+    }
+
+    // Custom questions
+    const customQIds = (config.custom_question_ids as string[]) || [];
+    const legacyQIds = (config.question_ids as string[]) || [];
+    const allCustomQIds = customQIds.length > 0 ? customQIds : legacyQIds;
+
+    if (allCustomQIds.length > 0) {
+      const { data: customQuestions } = await supabase
+        .from("teacher_questions")
+        .select("id, question, options, correct_index")
+        .in("id", allCustomQIds);
+
+      for (const q of customQuestions || []) {
+        examQuestions.push({
+          id: q.id,
+          question: q.question,
+          options: typeof q.options === "string" ? JSON.parse(q.options) : q.options,
+          correct_index: q.correct_index,
+          source: "custom",
+        });
+      }
+    }
+
+    const totalQ = examQuestions.length || (config.question_ids as string[] || []).length;
+
     return NextResponse.json({
       role: "teacher",
       assignment: {
@@ -106,7 +157,8 @@ export async function GET(
         classroom_name: classroom?.name || "",
       },
       students,
-      total_questions: (assignment.config?.question_ids || []).length,
+      total_questions: totalQ,
+      questions: examQuestions,
     });
   }
 
@@ -180,19 +232,37 @@ export async function POST(
       .eq("status", "in_progress");
 
     const config = assignment.config || {};
-    const questionIds = config.question_ids || [];
 
-    // Fetch correct answers for grading
-    const { data: questions } = await supabase
-      .from("teacher_questions")
-      .select("id, correct_index")
-      .in("id", questionIds);
-
+    // Build correct answer map from all sources (bank + custom + legacy)
     const correctMap = new Map<string, number>();
-    for (const q of questions || []) {
-      correctMap.set(q.id, q.correct_index);
+
+    // Bank questions
+    const bankIds = (config.bank_question_ids as (number | string)[]) || [];
+    for (const idx of bankIds) {
+      const numIdx = typeof idx === "string" ? parseInt(String(idx).replace("bank-", "")) : idx;
+      if (numIdx >= 0 && numIdx < questionBank.length) {
+        const entry = questionBank[numIdx];
+        correctMap.set(`bank-${numIdx}`, entry.question.correctIndex);
+      }
     }
 
+    // Custom questions
+    const customIds = (config.custom_question_ids as string[]) || [];
+    const legacyIds = (config.question_ids as string[]) || [];
+    const allCustomIds = customIds.length > 0 ? customIds : legacyIds;
+
+    if (allCustomIds.length > 0) {
+      const { data: customQuestions } = await supabase
+        .from("teacher_questions")
+        .select("id, correct_index")
+        .in("id", allCustomIds);
+
+      for (const q of customQuestions || []) {
+        correctMap.set(q.id, q.correct_index);
+      }
+    }
+
+    const totalQuestionCount = correctMap.size;
     const now = new Date().toISOString();
 
     for (const session of sessions || []) {
@@ -204,7 +274,7 @@ export async function POST(
         if (isCorrect) correctCount++;
         return { ...a, correct: isCorrect };
       });
-      const score = questionIds.length > 0 ? Math.round((correctCount / questionIds.length) * 100) : 0;
+      const score = totalQuestionCount > 0 ? Math.round((correctCount / totalQuestionCount) * 100) : 0;
       const timeSpent = Math.round((new Date(now).getTime() - new Date(session.started_at).getTime()) / 1000);
 
       await supabase

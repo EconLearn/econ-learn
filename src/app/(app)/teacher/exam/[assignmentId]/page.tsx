@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { useRouter } from "next/navigation";
@@ -19,6 +19,14 @@ interface StudentStatus {
   time_remaining_seconds: number | null;
   score: number | null;
   submitted_at?: string;
+}
+
+interface ExamQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correct_index: number;
+  source: "bank" | "custom";
 }
 
 interface ExamInfo {
@@ -42,10 +50,18 @@ export default function TeacherExamMonitorPage({ params }: { params: { assignmen
 
   const [exam, setExam] = useState<ExamInfo | null>(null);
   const [students, setStudents] = useState<StudentStatus[]>([]);
+  const [questions, setQuestions] = useState<ExamQuestion[]>([]);
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+
+  // View Questions state
+  const [showQuestions, setShowQuestions] = useState(false);
+
+  // Violation alert state
+  const [violationAlert, setViolationAlert] = useState<string | null>(null);
+  const prevViolationsRef = useRef<Map<string, number>>(new Map());
 
   // Confirmation modals
   const [showForceSubmit, setShowForceSubmit] = useState(false);
@@ -69,6 +85,34 @@ export default function TeacherExamMonitorPage({ params }: { params: { assignmen
       setExam(data.assignment);
       setStudents(data.students);
       setTotalQuestions(data.total_questions);
+      if (data.questions) {
+        setQuestions(data.questions);
+      }
+
+      // Check for new violations since last refresh
+      const prevMap = prevViolationsRef.current;
+      const newAlerts: string[] = [];
+      for (const s of data.students as StudentStatus[]) {
+        const total = s.tab_switches + s.fullscreen_exits;
+        const prev = prevMap.get(s.student_id) || 0;
+        if (total > prev && prev > 0) {
+          newAlerts.push(s.name);
+        }
+      }
+
+      // Update previous violations map
+      const newMap = new Map<string, number>();
+      for (const s of data.students as StudentStatus[]) {
+        newMap.set(s.student_id, s.tab_switches + s.fullscreen_exits);
+      }
+      prevViolationsRef.current = newMap;
+
+      if (newAlerts.length > 0) {
+        setViolationAlert(
+          `New violation${newAlerts.length > 1 ? "s" : ""} detected: ${newAlerts.join(", ")}`
+        );
+        setTimeout(() => setViolationAlert(null), 6000);
+      }
     } catch {
       setError("Failed to load exam status");
     }
@@ -175,6 +219,25 @@ export default function TeacherExamMonitorPage({ params }: { params: { assignmen
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+      {/* ── Violation Alert Banner ── */}
+      <AnimatePresence>
+        {violationAlert && (
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            className="mb-4 px-4 py-3 rounded-xl text-sm font-medium"
+            style={{
+              background: "rgba(239, 68, 68, 0.08)",
+              color: "#dc2626",
+              border: "1px solid rgba(239, 68, 68, 0.2)",
+            }}
+          >
+            <span className="font-bold mr-1">Alert:</span> {violationAlert}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ── Header ── */}
       <div className="mb-8">
         <nav className="module-breadcrumb mb-4">
@@ -231,7 +294,7 @@ export default function TeacherExamMonitorPage({ params }: { params: { assignmen
                 </span>
               )}
               <Link
-                href={`/teacher/assignments/${assignmentId}/submissions`}
+                href={`/teacher/exam/${assignmentId}/submissions`}
                 className="text-xs font-medium px-3 py-2 rounded-lg transition-all"
                 style={{
                   background: "var(--color-surface-sunken)",
@@ -253,6 +316,94 @@ export default function TeacherExamMonitorPage({ params }: { params: { assignmen
         <StatCard label="Submitted" value={submitted} color="#10b981" />
         <StatCard label="Expired" value={expired} color="#ef4444" />
       </div>
+
+      {/* ── View Questions (Collapsible) ── */}
+      {questions.length > 0 && (
+        <div className="mb-8">
+          <button
+            onClick={() => setShowQuestions(!showQuestions)}
+            className="flex items-center gap-2 text-sm font-semibold mb-3 transition-colors"
+            style={{ color: "var(--color-ink-muted)" }}
+          >
+            <svg
+              className={`w-4 h-4 transition-transform ${showQuestions ? "rotate-90" : ""}`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+            View Questions ({questions.length})
+          </button>
+          <AnimatePresence>
+            {showQuestions && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="overflow-hidden"
+              >
+                <div className="space-y-3">
+                  {questions.map((q, i) => (
+                    <div
+                      key={q.id}
+                      className="rounded-xl p-4"
+                      style={{
+                        background: "var(--color-surface)",
+                        border: "1px solid var(--color-border-subtle)",
+                      }}
+                    >
+                      <div className="flex items-start gap-2 mb-2">
+                        <span
+                          className="text-xs font-bold flex-shrink-0 mt-0.5 w-6 h-6 rounded-full flex items-center justify-center"
+                          style={{
+                            background: "var(--color-surface-sunken)",
+                            color: "var(--color-ink-muted)",
+                          }}
+                        >
+                          {i + 1}
+                        </span>
+                        <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>
+                          {q.question}
+                        </p>
+                      </div>
+                      <div className="ml-8 space-y-1">
+                        {q.options.map((opt, optIdx) => (
+                          <p
+                            key={optIdx}
+                            className="text-xs py-0.5 px-2 rounded"
+                            style={{
+                              color: optIdx === q.correct_index ? "#059669" : "var(--color-ink-faint)",
+                              fontWeight: optIdx === q.correct_index ? 600 : 400,
+                              background: optIdx === q.correct_index ? "rgba(16, 185, 129, 0.06)" : "transparent",
+                            }}
+                          >
+                            {String.fromCharCode(65 + optIdx)}. {opt}
+                            {optIdx === q.correct_index && " (correct)"}
+                          </p>
+                        ))}
+                      </div>
+                      <div className="ml-8 mt-1">
+                        <span
+                          className="text-[10px] font-medium px-1.5 py-0.5 rounded"
+                          style={{
+                            background: q.source === "bank" ? "rgba(59,130,246,0.08)" : "rgba(168,85,247,0.08)",
+                            color: q.source === "bank" ? "#3b82f6" : "#a855f7",
+                          }}
+                        >
+                          {q.source === "bank" ? "Question Bank" : "Custom"}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
 
       {/* ── Student Grid ── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -345,13 +496,17 @@ function StudentCard({
   };
 
   const cfg = statusConfig[student.status] || statusConfig.not_started;
+  const violations = student.tab_switches + student.fullscreen_exits;
+  const hasHighViolations = violations >= 3;
 
   return (
     <div
       className="rounded-xl p-4"
       style={{
-        background: "var(--color-surface)",
-        border: "1px solid var(--color-border-subtle)",
+        background: hasHighViolations ? "rgba(239, 68, 68, 0.03)" : "var(--color-surface)",
+        border: hasHighViolations
+          ? "1px solid rgba(239, 68, 68, 0.3)"
+          : "1px solid var(--color-border-subtle)",
       }}
     >
       <div className="flex items-start justify-between mb-3">
@@ -412,23 +567,30 @@ function StudentCard({
           </div>
         )}
 
-        {/* Tab switches */}
-        {student.tab_switches > 0 && (
+        {/* Violations (combined tab_switches + fullscreen_exits) */}
+        {student.status !== "not_started" && (
           <div className="flex items-center justify-between text-xs">
-            <span style={{ color: "var(--color-ink-faint)" }}>Tab switches</span>
-            <span className="font-medium text-red-500 tabular-nums">
-              {student.tab_switches}
-            </span>
-          </div>
-        )}
-
-        {/* Fullscreen exits */}
-        {student.fullscreen_exits > 0 && (
-          <div className="flex items-center justify-between text-xs">
-            <span style={{ color: "var(--color-ink-faint)" }}>Fullscreen exits</span>
-            <span className="font-medium text-red-500 tabular-nums">
-              {student.fullscreen_exits}
-            </span>
+            <span style={{ color: "var(--color-ink-faint)" }}>Violations</span>
+            {violations > 0 ? (
+              <span
+                className="font-semibold tabular-nums px-1.5 py-0.5 rounded"
+                style={{
+                  color: hasHighViolations ? "#dc2626" : "#d97706",
+                  background: hasHighViolations
+                    ? "rgba(239, 68, 68, 0.08)"
+                    : "rgba(245, 158, 11, 0.08)",
+                }}
+              >
+                {violations}
+                <span className="font-normal ml-1" style={{ color: "var(--color-ink-faint)" }}>
+                  ({student.tab_switches} tab, {student.fullscreen_exits} fs)
+                </span>
+              </span>
+            ) : (
+              <span className="font-medium" style={{ color: "var(--color-ink-faint)" }}>
+                0
+              </span>
+            )}
           </div>
         )}
       </div>

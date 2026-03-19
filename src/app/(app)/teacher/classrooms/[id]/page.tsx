@@ -192,7 +192,7 @@ function HorizontalBarChart({
         const pct = d.max > 0 ? d.value / d.max : 0;
         const barWidth = Math.max(2, pct * (600 - labelW - 60));
         const color =
-          d.value >= 80 ? "#16A34A" : d.value >= 60 ? "#F59E0B" : "#EF4444";
+          d.value >= 80 ? "#16A34A" : d.value >= 60 ? "#3B82F6" : d.value >= 40 ? "#F59E0B" : "#EF4444";
         return (
           <g key={i}>
             <text
@@ -388,6 +388,13 @@ export default function ClassroomDetailPage() {
   const [sortField, setSortField] = useState<SortField>("name");
   const [sortDir, setSortDir] = useState<SortDir>("asc");
 
+  /* ── Announcements ── */
+  const [announcements, setAnnouncements] = useState<
+    { id: string; content: string; pinned: boolean; teacher_name: string; created_at: string }[]
+  >([]);
+  const [announcementText, setAnnouncementText] = useState("");
+  const [postingAnnouncement, setPostingAnnouncement] = useState(false);
+
   /* ── Settings ── */
   const [editName, setEditName] = useState("");
   const [editSchool, setEditSchool] = useState("");
@@ -528,6 +535,17 @@ export default function ClassroomDetailPage() {
         });
       }
       setAssignments(assignmentsWithStats);
+
+      // 5. Announcements
+      try {
+        const annRes = await fetch(`/api/classrooms/${classroomId}/announcements`);
+        if (annRes.ok) {
+          const annData = await annRes.json();
+          setAnnouncements(annData.announcements || []);
+        }
+      } catch {
+        // Announcements are non-critical — silently fail
+      }
     } catch (err) {
       console.error("Failed to load classroom data:", err);
       setError("Something went wrong loading classroom data.");
@@ -612,6 +630,41 @@ export default function ClassroomDetailPage() {
       console.error("Failed to archive:", err);
     }
     setShowArchiveConfirm(false);
+  };
+
+  const handlePostAnnouncement = async () => {
+    if (!announcementText.trim() || postingAnnouncement) return;
+    setPostingAnnouncement(true);
+    try {
+      const res = await fetch(`/api/classrooms/${classroomId}/announcements`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: announcementText.trim() }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setAnnouncements((prev) => [data.announcement, ...prev]);
+        setAnnouncementText("");
+      }
+    } catch (err) {
+      console.error("Failed to post announcement:", err);
+    } finally {
+      setPostingAnnouncement(false);
+    }
+  };
+
+  const handleDeleteAnnouncement = async (announcementId: string) => {
+    try {
+      const res = await fetch(
+        `/api/classrooms/${classroomId}/announcements?announcement_id=${announcementId}`,
+        { method: "DELETE" }
+      );
+      if (res.ok) {
+        setAnnouncements((prev) => prev.filter((a) => a.id !== announcementId));
+      }
+    } catch (err) {
+      console.error("Failed to delete announcement:", err);
+    }
   };
 
   /* ────────────────── SORTING / FILTERING ────────────────── */
@@ -722,7 +775,14 @@ export default function ClassroomDetailPage() {
       count: weeklyAgg[w.key] || 0,
     }));
 
-    return { modulePerformance, hardestModules, distribution, weeklyData };
+    // At-risk students: avg score < 60% OR no activity in 14+ days
+    const atRiskStudents = students.filter((s) => {
+      const lowScore = s.avg_score > 0 && s.avg_score < 60;
+      const inactive = daysSince(s.last_active) >= 14;
+      return lowScore || inactive;
+    });
+
+    return { modulePerformance, hardestModules, distribution, weeklyData, atRiskStudents };
   }, [students]);
 
   /* ────────────────── COMPUTED STATS ────────────────── */
@@ -963,6 +1023,91 @@ export default function ClassroomDetailPage() {
         ))}
       </motion.div>
 
+      {/* ── Announcements ── */}
+      <motion.div
+        className="card p-5 mb-8"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        <h3
+          className="text-sm font-semibold uppercase tracking-wider mb-3"
+          style={{ color: "var(--color-ink-faint)" }}
+        >
+          Announcements
+        </h3>
+        <div className="flex gap-3 mb-4">
+          <input
+            type="text"
+            value={announcementText}
+            onChange={(e) => setAnnouncementText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handlePostAnnouncement();
+              }
+            }}
+            placeholder="Post an announcement to your class..."
+            className="flex-1 px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            style={{
+              color: "var(--color-ink)",
+              background: "var(--color-surface)",
+              border: "1px solid var(--color-border)",
+            }}
+          />
+          <button
+            onClick={handlePostAnnouncement}
+            disabled={!announcementText.trim() || postingAnnouncement}
+            className="btn-primary py-2.5 px-5 text-sm shrink-0 disabled:opacity-50"
+          >
+            {postingAnnouncement ? "Posting..." : "Post"}
+          </button>
+        </div>
+        {announcements.length > 0 && (
+          <div className="space-y-2 max-h-64 overflow-y-auto">
+            {announcements.map((a) => (
+              <div
+                key={a.id}
+                className="flex items-start gap-3 p-3 rounded-xl group"
+                style={{ background: "var(--color-surface-raised)" }}
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm" style={{ color: "var(--color-ink)" }}>
+                    {a.content}
+                  </p>
+                  <p className="text-xs mt-1" style={{ color: "var(--color-ink-faint)" }}>
+                    {a.teacher_name} &middot;{" "}
+                    {new Date(a.created_at).toLocaleDateString(undefined, {
+                      month: "short",
+                      day: "numeric",
+                      hour: "numeric",
+                      minute: "2-digit",
+                    })}
+                    {a.pinned && (
+                      <span className="ml-2 text-[10px] font-semibold" style={{ color: "#3B82F6" }}>
+                        Pinned
+                      </span>
+                    )}
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleDeleteAnnouncement(a.id)}
+                  className="text-[11px] font-medium px-2 py-1 rounded transition-colors opacity-0 group-hover:opacity-100 hover:bg-red-50 shrink-0"
+                  style={{ color: "#EF4444" }}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+        {announcements.length === 0 && (
+          <p className="text-xs" style={{ color: "var(--color-ink-faint)" }}>
+            No announcements yet. Post one above to notify your students.
+          </p>
+        )}
+      </motion.div>
+
       {/* ── Tabs ── */}
       <div
         className="flex gap-1 mb-8 p-1 rounded-xl overflow-x-auto"
@@ -1171,12 +1316,33 @@ export default function ClassroomDetailPage() {
                               }
                             >
                               <td className="px-4 py-3.5">
-                                <span
-                                  className="font-medium"
-                                  style={{ color: "var(--color-ink)" }}
-                                >
-                                  {s.display_name || "Student"}
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span
+                                    className="font-medium"
+                                    style={{ color: "var(--color-ink)" }}
+                                  >
+                                    {s.display_name || "Student"}
+                                  </span>
+                                  {((s.avg_score > 0 && s.avg_score < 60) || daysSince(s.last_active) >= 14) && (
+                                    <span
+                                      className="text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider"
+                                      style={{
+                                        background: s.avg_score > 0 && s.avg_score < 60
+                                          ? "rgba(239,68,68,0.08)"
+                                          : "rgba(217,119,6,0.08)",
+                                        color: s.avg_score > 0 && s.avg_score < 60
+                                          ? "#EF4444"
+                                          : "#D97706",
+                                      }}
+                                      title={
+                                        (s.avg_score > 0 && s.avg_score < 60 ? `Low score: ${s.avg_score}%` : "") +
+                                        (daysSince(s.last_active) >= 14 ? ` Inactive ${daysSince(s.last_active)}d` : "")
+                                      }
+                                    >
+                                      At Risk
+                                    </span>
+                                  )}
+                                </div>
                               </td>
                               <td
                                 className="px-4 py-3.5 text-center"
@@ -1605,6 +1771,94 @@ export default function ClassroomDetailPage() {
                       <WeeklyBarChart data={analytics.weeklyData} />
                     </motion.div>
                   </div>
+
+                  {/* At-Risk Students */}
+                  <motion.div
+                    className="card p-6"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <h3
+                      className="text-sm font-semibold uppercase tracking-wider mb-1"
+                      style={{ color: "var(--color-ink-faint)" }}
+                    >
+                      At-Risk Students
+                    </h3>
+                    <p
+                      className="text-xs mb-4"
+                      style={{ color: "var(--color-ink-muted)" }}
+                    >
+                      Students with average score below 60% or inactive for 14+ days.
+                    </p>
+                    {analytics.atRiskStudents.length === 0 ? (
+                      <div
+                        className="flex items-center gap-3 p-4 rounded-xl"
+                        style={{ background: "rgba(22,163,74,0.04)" }}
+                      >
+                        <svg className="w-5 h-5 shrink-0" style={{ color: "#16A34A" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p className="text-sm font-medium" style={{ color: "#16A34A" }}>
+                          No at-risk students. All students are performing well!
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="space-y-2">
+                        {analytics.atRiskStudents.map((s) => {
+                          const lowScore = s.avg_score > 0 && s.avg_score < 60;
+                          const inactive = daysSince(s.last_active) >= 14;
+                          return (
+                            <div
+                              key={s.student_id}
+                              className="flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-colors hover:shadow-sm"
+                              style={{
+                                background: lowScore ? "rgba(239,68,68,0.04)" : "rgba(217,119,6,0.04)",
+                                border: `1px solid ${lowScore ? "rgba(239,68,68,0.12)" : "rgba(217,119,6,0.12)"}`,
+                              }}
+                              onClick={() => router.push(`/teacher/students/${s.student_id}`)}
+                            >
+                              <div
+                                className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
+                                style={{
+                                  background: lowScore ? "rgba(239,68,68,0.08)" : "rgba(217,119,6,0.08)",
+                                }}
+                              >
+                                <svg className="w-4 h-4" style={{ color: lowScore ? "#EF4444" : "#D97706" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                                </svg>
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>
+                                  {s.display_name || "Student"}
+                                </p>
+                                <div className="flex items-center gap-3 mt-0.5 flex-wrap">
+                                  {lowScore && (
+                                    <span className="text-xs font-semibold" style={{ color: "#EF4444" }}>
+                                      {s.avg_score}% avg score
+                                    </span>
+                                  )}
+                                  {inactive && (
+                                    <span className="text-xs font-semibold" style={{ color: "#D97706" }}>
+                                      Inactive {daysSince(s.last_active)}d
+                                    </span>
+                                  )}
+                                  {!lowScore && s.avg_score > 0 && (
+                                    <span className="text-xs" style={{ color: "var(--color-ink-faint)" }}>
+                                      {s.avg_score}% avg score
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                              <svg className="w-4 h-4 shrink-0" style={{ color: "var(--color-ink-faint)" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                              </svg>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </motion.div>
                 </>
               )}
             </div>
