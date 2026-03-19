@@ -528,21 +528,49 @@ export default function TeacherDashboard() {
         }
       }
 
-      // ── Module scores (aggregate quiz results by module) ──
+      // ── Module scores (aggregate from assignment_completions + exam_sessions) ──
       const moduleScoreMap: Record<string, { total: number; count: number }> = {};
-      if (classroomIds.length > 0) {
-        const { data: quizResults } = await supabase
-          .from("quiz_results")
-          .select("module_id, score_percent")
-          .in("classroom_id", classroomIds);
+      if (allAssignments.length > 0) {
+        // Map assignment IDs to their module_ids
+        const assignmentModuleMap: Record<string, string[]> = {};
+        for (const a of allAssignments) {
+          assignmentModuleMap[a.id] = a.module_ids || [];
+        }
 
-        if (quizResults) {
-          for (const q of quizResults) {
-            if (!moduleScoreMap[q.module_id]) {
-              moduleScoreMap[q.module_id] = { total: 0, count: 0 };
+        // Get completions
+        const { data: completions } = await supabase
+          .from("assignment_completions")
+          .select("assignment_id, score")
+          .in("assignment_id", allAssignments.map((a) => a.id))
+          .not("score", "is", null);
+
+        if (completions) {
+          for (const c of completions) {
+            const moduleIds = assignmentModuleMap[c.assignment_id] || [];
+            for (const moduleId of moduleIds) {
+              if (!moduleScoreMap[moduleId]) moduleScoreMap[moduleId] = { total: 0, count: 0 };
+              moduleScoreMap[moduleId].total += c.score || 0;
+              moduleScoreMap[moduleId].count += 1;
             }
-            moduleScoreMap[q.module_id].total += q.score_percent || 0;
-            moduleScoreMap[q.module_id].count += 1;
+          }
+        }
+
+        // Also get exam session scores
+        const { data: examSessions } = await supabase
+          .from("exam_sessions")
+          .select("assignment_id, score")
+          .in("assignment_id", allAssignments.map((a) => a.id))
+          .in("status", ["submitted", "force_submitted"])
+          .not("score", "is", null);
+
+        if (examSessions) {
+          for (const es of examSessions) {
+            const moduleIds = assignmentModuleMap[es.assignment_id] || [];
+            for (const moduleId of moduleIds) {
+              if (!moduleScoreMap[moduleId]) moduleScoreMap[moduleId] = { total: 0, count: 0 };
+              moduleScoreMap[moduleId].total += es.score || 0;
+              moduleScoreMap[moduleId].count += 1;
+            }
           }
         }
       }
@@ -563,28 +591,64 @@ export default function TeacherDashboard() {
         let modulesProgress = 0;
 
         if (c.student_count > 0) {
-          // Get quiz results for this classroom to compute avg score
-          const { data: classQuizResults } = await supabase
-            .from("quiz_results")
-            .select("score_percent, module_id, user_id")
-            .eq("classroom_id", c.id);
+          // Get scores from assignment_completions for this classroom
+          const classAssignmentIds = allAssignments
+            .filter((a) => a.classroom_id === c.id)
+            .map((a) => a.id);
 
-          if (classQuizResults && classQuizResults.length > 0) {
-            const sum = classQuizResults.reduce((acc: number, q: any) => acc + (q.score_percent || 0), 0);
-            avgScore = Math.round(sum / classQuizResults.length);
-
-            // Unique modules completed across all students
-            const uniqueModules = new Set(classQuizResults.map((q: any) => q.module_id));
-            // Average modules per student
-            const studentModuleMap: Record<string, Set<string>> = {};
-            for (const q of classQuizResults) {
-              if (!studentModuleMap[q.user_id]) studentModuleMap[q.user_id] = new Set();
-              studentModuleMap[q.user_id].add(q.module_id);
+          const scores: number[] = [];
+          if (classAssignmentIds.length > 0) {
+            const { data: completions } = await supabase
+              .from("assignment_completions")
+              .select("score, student_id")
+              .in("assignment_id", classAssignmentIds)
+              .not("score", "is", null);
+            if (completions) {
+              for (const comp of completions) {
+                if (comp.score != null) scores.push(comp.score);
+              }
             }
-            const avgModulesPerStudent =
-              Object.values(studentModuleMap).reduce((sum, s) => sum + s.size, 0) /
-              Object.keys(studentModuleMap).length;
-            modulesProgress = Math.round((avgModulesPerStudent / totalModules) * 100);
+
+            // Also include exam_sessions scores
+            const { data: examSessions } = await supabase
+              .from("exam_sessions")
+              .select("score, student_id")
+              .in("assignment_id", classAssignmentIds)
+              .in("status", ["submitted", "force_submitted"])
+              .not("score", "is", null);
+            if (examSessions) {
+              for (const es of examSessions) {
+                if (es.score != null) scores.push(es.score);
+              }
+            }
+          }
+
+          if (scores.length > 0) {
+            avgScore = Math.round(scores.reduce((acc, s) => acc + s, 0) / scores.length);
+          }
+
+          // Compute module progress from module_progress table
+          const { data: memberIds } = await supabase
+            .from("classroom_members")
+            .select("student_id")
+            .eq("classroom_id", c.id);
+          if (memberIds && memberIds.length > 0) {
+            const { data: moduleProgressData } = await supabase
+              .from("module_progress")
+              .select("module_id, user_id")
+              .in("user_id", memberIds.map((m) => m.student_id))
+              .eq("completed", true);
+            if (moduleProgressData && moduleProgressData.length > 0) {
+              const studentModuleMap: Record<string, Set<string>> = {};
+              for (const mp of moduleProgressData) {
+                if (!studentModuleMap[mp.user_id]) studentModuleMap[mp.user_id] = new Set();
+                studentModuleMap[mp.user_id].add(mp.module_id);
+              }
+              const avgModulesPerStudent =
+                Object.values(studentModuleMap).reduce((s, set) => s + set.size, 0) /
+                Object.keys(studentModuleMap).length;
+              modulesProgress = Math.round((avgModulesPerStudent / totalModules) * 100);
+            }
           }
         }
 

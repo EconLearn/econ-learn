@@ -176,7 +176,7 @@ export default function HomePage() {
             </div>
             <div>
               <p className="text-2xl sm:text-3xl font-bold" style={{ color: "var(--color-ink)" }}>
-                <AnimatedCounter target={144} suffix="+" />
+                <AnimatedCounter target={150} suffix="+" />
               </p>
               <p className="text-sm mt-1" style={{ color: "var(--color-ink-muted)" }}>
                 flashcards
@@ -226,7 +226,7 @@ export default function HomePage() {
             <FeatureCard
               icon={<FlashcardIcon />}
               title="Flashcard Decks"
-              description="144+ cards covering key terms and concepts. Sorted by module so you can target weak spots."
+              description="150+ cards covering key terms and concepts. Sorted by module so you can target weak spots."
               delay={0.16}
             />
             <FeatureCard
@@ -399,6 +399,268 @@ export default function HomePage() {
               }}
             >
               <EmailCapture />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          SECTION — BUILT FOR AP ECONOMICS
+          ══════════════════════════════════════════════════ */}
+      <section className="py-24 sm:py-32">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4" style={{ color: "var(--color-ink)" }}>
+                Built for AP Economics
+              </h2>
+              <p className="text-lg max-w-2xl mx-auto" style={{ color: "var(--color-ink-muted)" }}>
+                Content aligned to the College Board AP curriculum for both Microeconomics and Macroeconomics.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <ScrollReveal delay={0} from="left">
+              <div
+                className="rounded-2xl p-8 h-full"
+                style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-4">
+                  <span className="text-lg font-bold text-blue-600">&mu;</span>
+                </div>
+                <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--color-ink)" }}>
+                  AP Microeconomics
+                </h3>
+                <ul className="space-y-2 text-sm" style={{ color: "var(--color-ink-muted)" }}>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-blue-500 shrink-0" />
+                    Supply &amp; Demand, Elasticity, Consumer Choice
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-blue-500 shrink-0" />
+                    Market Structures: Perfect Competition to Monopoly
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-blue-500 shrink-0" />
+                    Factor Markets, Externalities, Public Goods
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-blue-500 shrink-0" />
+                    Interactive graphs for every major model
+                  </li>
+                </ul>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.1} from="right">
+              <div
+                className="rounded-2xl p-8 h-full"
+                style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
+              >
+                <div className="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center mb-4">
+                  <span className="text-lg font-bold text-violet-600">&Sigma;</span>
+                </div>
+                <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--color-ink)" }}>
+                  AP Macroeconomics
+                </h3>
+                <ul className="space-y-2 text-sm" style={{ color: "var(--color-ink-muted)" }}>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-violet-500 shrink-0" />
+                    GDP, Unemployment, Inflation, Business Cycle
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-violet-500 shrink-0" />
+                    AD/AS Model, Fiscal &amp; Monetary Policy
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-violet-500 shrink-0" />
+                    Loanable Funds, Money Market, Exchange Rates
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-violet-500 shrink-0" />
+                    International Trade and Economic Growth
+                  </li>
+                </ul>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          SECTION — HOW IT WORKS
+          ══════════════════════════════════════════════════ */}
+      <section className="py-24 sm:py-32" style={{ background: "var(--color-surface-raised)", borderTop: "1px solid var(--color-border-subtle)", borderBottom: "1px solid var(--color-border-subtle)" }}>
+        <div className="max-w-6xl mx-auto px-5 sm:px-6">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4" style={{ color: "var(--color-ink)" }}>
+                How It Works
+              </h2>
+              <p className="text-lg max-w-xl mx-auto" style={{ color: "var(--color-ink-muted)" }}>
+                Three steps to exam-ready confidence.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid sm:grid-cols-3 gap-8">
+            <ScrollReveal delay={0}>
+              <div className="text-center">
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5"
+                  style={{ background: "rgba(59, 130, 246, 0.08)" }}
+                >
+                  <span className="text-xl font-bold text-blue-600">1</span>
+                </div>
+                <h3 className="text-base font-semibold mb-2" style={{ color: "var(--color-ink)" }}>
+                  Pick a Topic
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+                  Choose from {totalModules} modules across AP Micro and AP Macro. Each one covers a specific unit from the AP curriculum.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.1}>
+              <div className="text-center">
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5"
+                  style={{ background: "rgba(139, 92, 246, 0.08)" }}
+                >
+                  <span className="text-xl font-bold text-violet-600">2</span>
+                </div>
+                <h3 className="text-base font-semibold mb-2" style={{ color: "var(--color-ink)" }}>
+                  Learn by Doing
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+                  Read the lesson, drag curves on interactive graphs, and review flashcards. Understanding beats memorization.
+                </p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.2}>
+              <div className="text-center">
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-5"
+                  style={{ background: "rgba(22, 163, 74, 0.08)" }}
+                >
+                  <span className="text-xl font-bold text-green-600">3</span>
+                </div>
+                <h3 className="text-base font-semibold mb-2" style={{ color: "var(--color-ink)" }}>
+                  Test Yourself
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+                  Take AP-style quizzes with detailed explanations. Track your scores on the dashboard and focus on weak areas.
+                </p>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+          SECTION — FOR TEACHERS (EXPANDED)
+          ══════════════════════════════════════════════════ */}
+      <section className="py-24 sm:py-32">
+        <div className="max-w-6xl mx-auto px-5 sm:px-6">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4" style={{ color: "var(--color-ink)" }}>
+                Powerful Classroom Tools
+              </h2>
+              <p className="text-lg max-w-2xl mx-auto" style={{ color: "var(--color-ink-muted)" }}>
+                Everything AP Economics teachers need to run their classroom, assign work, and monitor student progress.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+            {[
+              {
+                title: "Classroom Management",
+                description: "Create classrooms, invite students with join codes, and manage rosters in one place.",
+                icon: (
+                  <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                  </svg>
+                ),
+              },
+              {
+                title: "Exam Lockdown",
+                description: "Fullscreen lockdown mode with tab-switch detection and violation tracking for exam integrity.",
+                icon: (
+                  <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                  </svg>
+                ),
+              },
+              {
+                title: "Performance Analytics",
+                description: "See class averages by module, identify at-risk students, and export reports to CSV.",
+                icon: (
+                  <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+                  </svg>
+                ),
+              },
+              {
+                title: "Custom Question Bank",
+                description: "Create your own questions or use the built-in bank. Mix and match for tailored exams.",
+                icon: (
+                  <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                  </svg>
+                ),
+              },
+              {
+                title: "Assignable Content",
+                description: "Assign lessons, quizzes, and exams to specific classrooms with due dates and auto-grading.",
+                icon: (
+                  <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15a2.25 2.25 0 012.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
+                  </svg>
+                ),
+              },
+              {
+                title: "Real-Time Monitoring",
+                description: "Watch students take exams live. See who is online, their progress, and flag suspicious activity.",
+                icon: (
+                  <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                ),
+              },
+            ].map((feature, i) => (
+              <ScrollReveal key={feature.title} delay={i * 0.06}>
+                <div
+                  className="rounded-2xl p-6 h-full"
+                  style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)" }}
+                >
+                  <div className="mb-3" style={{ color: "var(--color-ink-muted)" }}>
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-sm font-semibold mb-1.5" style={{ color: "var(--color-ink)" }}>
+                    {feature.title}
+                  </h3>
+                  <p className="text-xs leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+                    {feature.description}
+                  </p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          <ScrollReveal delay={0.3}>
+            <div className="text-center mt-10">
+              <Link
+                href="/pricing"
+                className="btn-secondary inline-flex items-center px-6 py-2.5 text-sm"
+              >
+                View Teacher Plans
+                <ArrowRight className="ml-1.5" />
+              </Link>
             </div>
           </ScrollReveal>
         </div>

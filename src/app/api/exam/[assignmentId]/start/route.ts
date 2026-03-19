@@ -52,58 +52,70 @@ export async function POST(
   const config = assignment.config || {};
   const timeLimitMinutes = config.time_limit_minutes || 45;
 
-  // Check for existing session
+  // Check for existing session for this student + assignment
   const { data: existingSession } = await supabase
     .from("exam_sessions")
     .select("*")
     .eq("assignment_id", assignmentId)
     .eq("student_id", user.id)
-    .single();
+    .maybeSingle();
 
   if (existingSession) {
-    // If already submitted or force_submitted, deny
-    if (existingSession.status === "submitted" || existingSession.status === "force_submitted") {
-      return NextResponse.json({ error: "Exam already submitted" }, { status: 409 });
+    // If already completed (submitted, force_submitted, or expired), deny
+    if (
+      existingSession.status === "submitted" ||
+      existingSession.status === "force_submitted" ||
+      existingSession.status === "expired"
+    ) {
+      return NextResponse.json(
+        { error: "Exam already completed" },
+        { status: 409 }
+      );
     }
 
-    // Check if expired
-    const endsAt = new Date(existingSession.ends_at);
-    const now = new Date();
-    if (now > endsAt) {
-      // Mark as expired
-      await supabase
-        .from("exam_sessions")
-        .update({ status: "expired" })
-        .eq("id", existingSession.id);
-      return NextResponse.json({ error: "Exam time expired" }, { status: 410 });
+    // Session is in_progress — check if time has expired
+    if (existingSession.status === "in_progress") {
+      const endsAt = new Date(existingSession.ends_at);
+      const now = new Date();
+      if (now > endsAt) {
+        // Mark as expired
+        await supabase
+          .from("exam_sessions")
+          .update({ status: "expired" })
+          .eq("id", existingSession.id);
+        return NextResponse.json(
+          { error: "Exam time expired" },
+          { status: 410 }
+        );
+      }
+
+      // Resume existing in-progress session
+      const questions = await fetchExamQuestions(supabase, config);
+
+      return NextResponse.json({
+        session: {
+          id: existingSession.id,
+          started_at: existingSession.started_at,
+          ends_at: existingSession.ends_at,
+          status: existingSession.status,
+          answers: existingSession.answers,
+          tab_switches: existingSession.tab_switches,
+          fullscreen_exits: existingSession.fullscreen_exits,
+        },
+        questions,
+        config: {
+          lockdown: config.lockdown ?? true,
+          shuffle_questions: config.shuffle_questions ?? true,
+          shuffle_options: config.shuffle_options ?? true,
+          show_results: config.show_results ?? false,
+          time_limit_minutes: timeLimitMinutes,
+        },
+        title: assignment.title,
+      });
     }
-
-    // Resume existing session — fetch questions from both sources
-    const questions = await fetchExamQuestions(supabase, config);
-
-    return NextResponse.json({
-      session: {
-        id: existingSession.id,
-        started_at: existingSession.started_at,
-        ends_at: existingSession.ends_at,
-        status: existingSession.status,
-        answers: existingSession.answers,
-        tab_switches: existingSession.tab_switches,
-        fullscreen_exits: existingSession.fullscreen_exits,
-      },
-      questions,
-      config: {
-        lockdown: config.lockdown ?? true,
-        shuffle_questions: config.shuffle_questions ?? true,
-        shuffle_options: config.shuffle_options ?? true,
-        show_results: config.show_results ?? false,
-        time_limit_minutes: timeLimitMinutes,
-      },
-      title: assignment.title,
-    });
   }
 
-  // Create new session
+  // No existing session — create a new one
   const startedAt = new Date();
   const endsAt = new Date(startedAt.getTime() + timeLimitMinutes * 60 * 1000);
 
@@ -123,6 +135,47 @@ export async function POST(
     .single();
 
   if (sessionError) {
+    // Handle race condition: if a concurrent request inserted a session between
+    // our check and this insert, we get a unique constraint violation (code 23505).
+    // Re-fetch and return the existing session instead of failing.
+    if (sessionError.code === "23505") {
+      const { data: raceSession } = await supabase
+        .from("exam_sessions")
+        .select("*")
+        .eq("assignment_id", assignmentId)
+        .eq("student_id", user.id)
+        .maybeSingle();
+
+      if (raceSession && raceSession.status === "in_progress") {
+        const questions = await fetchExamQuestions(supabase, config);
+        return NextResponse.json({
+          session: {
+            id: raceSession.id,
+            started_at: raceSession.started_at,
+            ends_at: raceSession.ends_at,
+            status: raceSession.status,
+            answers: raceSession.answers,
+            tab_switches: raceSession.tab_switches,
+            fullscreen_exits: raceSession.fullscreen_exits,
+          },
+          questions,
+          config: {
+            lockdown: config.lockdown ?? true,
+            shuffle_questions: config.shuffle_questions ?? true,
+            shuffle_options: config.shuffle_options ?? true,
+            show_results: config.show_results ?? false,
+            time_limit_minutes: timeLimitMinutes,
+          },
+          title: assignment.title,
+        });
+      }
+
+      return NextResponse.json(
+        { error: "Exam already completed" },
+        { status: 409 }
+      );
+    }
+
     return NextResponse.json({ error: sessionError.message }, { status: 500 });
   }
 

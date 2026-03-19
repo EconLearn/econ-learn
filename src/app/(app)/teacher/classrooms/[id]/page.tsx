@@ -1386,20 +1386,20 @@ export default function ClassroomDetailPage() {
                                   >
                                     {s.display_name || "Student"}
                                   </span>
-                                  {((s.avg_score > 0 && s.avg_score < 60) || daysSince(s.last_active) >= 14) && (
+                                  {((s.avg_score > 0 && s.avg_score < atRiskScoreThreshold) || daysSince(s.last_active) >= atRiskInactivityDays) && (
                                     <span
                                       className="text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider"
                                       style={{
-                                        background: s.avg_score > 0 && s.avg_score < 60
+                                        background: s.avg_score > 0 && s.avg_score < atRiskScoreThreshold
                                           ? "rgba(239,68,68,0.08)"
                                           : "rgba(217,119,6,0.08)",
-                                        color: s.avg_score > 0 && s.avg_score < 60
+                                        color: s.avg_score > 0 && s.avg_score < atRiskScoreThreshold
                                           ? "#EF4444"
                                           : "#D97706",
                                       }}
                                       title={
-                                        (s.avg_score > 0 && s.avg_score < 60 ? `Low score: ${s.avg_score}%` : "") +
-                                        (daysSince(s.last_active) >= 14 ? ` Inactive ${daysSince(s.last_active)}d` : "")
+                                        (s.avg_score > 0 && s.avg_score < atRiskScoreThreshold ? `Low score: ${s.avg_score}%` : "") +
+                                        (daysSince(s.last_active) >= atRiskInactivityDays ? ` Inactive ${daysSince(s.last_active)}d` : "")
                                       }
                                     >
                                       At Risk
@@ -1902,8 +1902,8 @@ export default function ClassroomDetailPage() {
                     ) : (
                       <div className="space-y-2">
                         {analytics.atRiskStudents.map((s) => {
-                          const lowScore = s.avg_score > 0 && s.avg_score < 60;
-                          const inactive = daysSince(s.last_active) >= 14;
+                          const lowScore = s.avg_score > 0 && s.avg_score < atRiskScoreThreshold;
+                          const inactive = daysSince(s.last_active) >= atRiskInactivityDays;
                           return (
                             <div
                               key={s.student_id}

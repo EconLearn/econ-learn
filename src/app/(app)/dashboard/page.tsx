@@ -354,9 +354,10 @@ export default function DashboardPage() {
             </div>
             <div className="grid sm:grid-cols-2 gap-3">
               {studentClassrooms.map((classroom) => (
-                <div
+                <Link
                   key={classroom.id}
-                  className="card p-4"
+                  href={`/classrooms/${classroom.id}`}
+                  className="card-interactive group p-4"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(139, 92, 246, 0.08)" }}>
@@ -365,15 +366,18 @@ export default function DashboardPage() {
                       </svg>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-semibold truncate" style={{ color: 'var(--color-ink)' }}>
+                      <p className="text-sm font-semibold truncate group-hover:text-blue-600 transition-colors" style={{ color: 'var(--color-ink)' }}>
                         {classroom.name}
                       </p>
                       <p className="text-[11px]" style={{ color: 'var(--color-ink-faint)' }}>
                         {classroom.teacher_name}{classroom.school_name ? ` · ${classroom.school_name}` : ""}
                       </p>
                     </div>
+                    <svg className="w-4 h-4 flex-shrink-0 group-hover:text-blue-500 transition-colors" style={{ color: 'var(--color-border)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

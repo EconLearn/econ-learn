@@ -119,6 +119,7 @@ export default function ReportsPage() {
   const [reportData, setReportData] = useState<ReportData | null>(null);
   const [loading, setLoading] = useState(true);
   const [exporting, setExporting] = useState(false);
+  const [atRiskThreshold, setAtRiskThreshold] = useState(60);
 
   // Load classrooms
   useEffect(() => {
@@ -160,23 +161,73 @@ export default function ReportsPage() {
           0
         );
 
-        // Module scores
-        const { data: quizResults } = await supabase
-          .from("quiz_results")
-          .select("module_id, score_percent, user_id")
+        // Module scores: gather from assignment_completions + exam_sessions
+        const { data: allAssignments } = await supabase
+          .from("assignments")
+          .select("id, title, type, classroom_id, module_ids")
           .in("classroom_id", classroomIds);
 
+        const allAssignmentIds = (allAssignments || []).map((a) => a.id);
+
+        // Fetch assignment completions and exam sessions in parallel
+        const [{ data: allCompletions }, { data: allExamSessions }] =
+          await Promise.all([
+            allAssignmentIds.length > 0
+              ? supabase
+                  .from("assignment_completions")
+                  .select("assignment_id, student_id, score, completed_at")
+                  .in("assignment_id", allAssignmentIds)
+              : Promise.resolve({ data: [] as any[] }),
+            allAssignmentIds.length > 0
+              ? supabase
+                  .from("exam_sessions")
+                  .select("assignment_id, student_id, score, status")
+                  .in("assignment_id", allAssignmentIds)
+                  .in("status", ["submitted", "force_submitted"])
+              : Promise.resolve({ data: [] as any[] }),
+          ]);
+
+        // Build a combined scores list with module mapping
+        // Each entry: { student_id, score, module_ids }
+        const combinedScores: { student_id: string; score: number; module_ids: string[] }[] = [];
+        const assignmentMap = new Map(
+          (allAssignments || []).map((a) => [a.id, a])
+        );
+
+        for (const c of allCompletions || []) {
+          const assignment = assignmentMap.get(c.assignment_id);
+          if (assignment && c.score != null) {
+            combinedScores.push({
+              student_id: c.student_id,
+              score: c.score,
+              module_ids: assignment.module_ids || [],
+            });
+          }
+        }
+
+        for (const e of allExamSessions || []) {
+          const assignment = assignmentMap.get(e.assignment_id);
+          if (assignment && e.score != null) {
+            combinedScores.push({
+              student_id: e.student_id,
+              score: e.score,
+              module_ids: assignment.module_ids || [],
+            });
+          }
+        }
+
+        // Aggregate scores by module
         const moduleMap: Record<
           string,
           { total: number; count: number }
         > = {};
-        if (quizResults) {
-          for (const q of quizResults) {
-            if (!moduleMap[q.module_id]) {
-              moduleMap[q.module_id] = { total: 0, count: 0 };
+        for (const entry of combinedScores) {
+          for (const mid of entry.module_ids) {
+            if (!moduleMap[mid]) {
+              moduleMap[mid] = { total: 0, count: 0 };
             }
-            moduleMap[q.module_id].total += q.score_percent || 0;
-            moduleMap[q.module_id].count += 1;
+            moduleMap[mid].total += entry.score;
+            moduleMap[mid].count += 1;
           }
         }
 
@@ -191,25 +242,14 @@ export default function ReportsPage() {
           })
         );
 
-        // Assignment completions
-        const { data: assignments } = await supabase
-          .from("assignments")
-          .select("id, title, type, classroom_id")
-          .in("classroom_id", classroomIds);
-
+        // Assignment completions (reuse allAssignments + allCompletions from above)
         const assignmentCompletions: AssignmentCompletion[] = [];
-        if (assignments && assignments.length > 0) {
-          const assignmentIds = assignments.map((a) => a.id);
-          const { data: completions } = await supabase
-            .from("assignment_completions")
-            .select("assignment_id, score, completed_at")
-            .in("assignment_id", assignmentIds);
-
-          for (const a of assignments) {
+        if (allAssignments && allAssignments.length > 0) {
+          for (const a of allAssignments) {
             const aClassroom = targetClassrooms.find(
               (c) => c.id === a.classroom_id
             );
-            const aCompletions = (completions || []).filter(
+            const aCompletions = (allCompletions || []).filter(
               (c) => c.assignment_id === a.id && c.completed_at
             );
             const avgScore =
@@ -241,36 +281,41 @@ export default function ReportsPage() {
 
         const { data: members } = await supabase
           .from("classroom_members")
-          .select("student_id, joined_at, classroom_id, profiles(display_name)")
+          .select("student_id, joined_at, classroom_id")
           .in("classroom_id", classroomIds);
 
         if (members) {
           const studentIds = Array.from(new Set(members.map((m: any) => m.student_id)));
 
-          // Get quiz scores per student
+          // Fetch profiles separately (cannot FK join on auth.users)
+          const { data: profiles } = studentIds.length > 0
+            ? await supabase
+                .from("profiles")
+                .select("id, display_name")
+                .in("id", studentIds)
+            : { data: [] as any[] };
+
+          const profileMap = new Map(
+            (profiles || []).map((p: any) => [p.id, p.display_name])
+          );
+
+          // Compute per-student scores from combinedScores
           const studentScores: Record<
             string,
-            { total: number; count: number; lastActive: string }
+            { total: number; count: number }
           > = {};
 
-          if (quizResults) {
-            for (const q of quizResults) {
-              if (!studentScores[q.user_id]) {
-                studentScores[q.user_id] = {
-                  total: 0,
-                  count: 0,
-                  lastActive: "",
-                };
-              }
-              studentScores[q.user_id].total += q.score_percent || 0;
-              studentScores[q.user_id].count += 1;
+          for (const entry of combinedScores) {
+            if (!studentScores[entry.student_id]) {
+              studentScores[entry.student_id] = { total: 0, count: 0 };
             }
+            studentScores[entry.student_id].total += entry.score;
+            studentScores[entry.student_id].count += 1;
           }
 
           for (const sid of studentIds) {
             const member = members.find((m) => m.student_id === sid);
-            const name =
-              (member as any)?.profiles?.display_name || "Student";
+            const name = profileMap.get(sid) || "Student";
             const scores = studentScores[sid];
             const avgScore =
               scores && scores.count > 0
@@ -279,7 +324,7 @@ export default function ReportsPage() {
             const lastActive = member?.joined_at || null;
 
             const reasons: string[] = [];
-            if (scores && scores.count > 0 && avgScore < 60) {
+            if (scores && scores.count > 0 && avgScore < atRiskThreshold) {
               reasons.push(`Average score: ${avgScore}%`);
             }
             if (
@@ -288,8 +333,8 @@ export default function ReportsPage() {
             ) {
               reasons.push("Inactive for 7+ days");
             }
-            if (scores && scores.count === 0) {
-              reasons.push("No quiz attempts");
+            if (!scores || scores.count === 0) {
+              reasons.push("No assignment attempts");
             }
 
             if (reasons.length > 0) {
@@ -318,7 +363,7 @@ export default function ReportsPage() {
     }
 
     loadReports();
-  }, [user, classrooms, selectedClassroom, supabase]);
+  }, [user, classrooms, selectedClassroom, supabase, atRiskThreshold]);
 
   const handleExportCSV = async () => {
     setExporting(true);
@@ -574,12 +619,38 @@ export default function ReportsPage() {
           {/* At-Risk Students */}
           <div className="card p-6">
             <div className="flex items-center justify-between mb-4">
-              <h2
-                className="text-sm font-semibold uppercase tracking-wider"
-                style={{ color: "var(--color-ink-faint)" }}
-              >
-                At-Risk Students
-              </h2>
+              <div className="flex items-center gap-4">
+                <h2
+                  className="text-sm font-semibold uppercase tracking-wider"
+                  style={{ color: "var(--color-ink-faint)" }}
+                >
+                  At-Risk Students
+                </h2>
+                <label
+                  className="flex items-center gap-1.5 text-xs"
+                  style={{ color: "var(--color-ink-muted)" }}
+                >
+                  Threshold:
+                  <input
+                    type="number"
+                    min={0}
+                    max={100}
+                    value={atRiskThreshold}
+                    onChange={(e) =>
+                      setAtRiskThreshold(
+                        Math.max(0, Math.min(100, Number(e.target.value) || 0))
+                      )
+                    }
+                    className="w-14 px-1.5 py-0.5 rounded text-xs text-center focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    style={{
+                      color: "var(--color-ink)",
+                      background: "var(--color-surface)",
+                      border: "1px solid var(--color-border)",
+                    }}
+                  />
+                  %
+                </label>
+              </div>
               <span
                 className="text-xs px-2.5 py-1 rounded-full font-medium"
                 style={{
