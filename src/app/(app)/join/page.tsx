@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { createClient } from "@/lib/supabase/client";
+import { useNavStore } from "@/lib/stores/nav-store";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -39,6 +40,8 @@ export default function JoinClassroomPage() {
 
       setStatus("success");
       setClassroomName(data.classroom_name);
+      // Refresh sidebar so the new classroom appears immediately
+      useNavStore.getState().invalidate();
     } catch {
       setStatus("error");
       setMessage("Something went wrong. Try again.");
