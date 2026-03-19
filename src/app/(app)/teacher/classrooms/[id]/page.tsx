@@ -1127,6 +1127,7 @@ export default function ClassroomDetailPage() {
                             { key: "score" as SortField, label: "Avg Quiz Score", align: "center" },
                             { key: "last_active" as SortField, label: "Last Active", align: "center" },
                             { key: "status" as SortField, label: "Status", align: "center" },
+                            { key: "actions" as SortField, label: "", align: "center" },
                           ].map((col) => (
                             <th
                               key={col.key}
@@ -1216,6 +1217,26 @@ export default function ClassroomDetailPage() {
                                 >
                                   {statusLabel(st)}
                                 </span>
+                              </td>
+                              <td className="px-4 py-3.5 text-center">
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (!confirm(`Remove ${s.display_name || "this student"} from the classroom?`)) return;
+                                    fetch(`/api/classrooms/${classroomId}/students?student_id=${s.student_id}`, { method: "DELETE" })
+                                      .then((res) => {
+                                        if (res.ok) {
+                                          setStudents((prev) => prev.filter((st) => st.student_id !== s.student_id));
+                                        } else {
+                                          alert("Failed to remove student");
+                                        }
+                                      });
+                                  }}
+                                  className="text-[11px] font-medium px-2 py-1 rounded transition-colors hover:bg-red-50"
+                                  style={{ color: "#EF4444" }}
+                                >
+                                  Remove
+                                </button>
                               </td>
                             </motion.tr>
                           );
