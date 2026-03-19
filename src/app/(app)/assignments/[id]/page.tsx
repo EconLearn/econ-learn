@@ -98,7 +98,12 @@ export default function AssignmentPage({ params }: { params: { id: string } }) {
         const data = await res.json();
 
         // If this is an exam, redirect IMMEDIATELY before setting any state
-        if (data.assignment?.type === "exam") {
+        // Check both the type field AND config indicators (belt and suspenders)
+        const isExam = data.assignment?.type === "exam"
+          || data.assignment?.config?.lockdown === true
+          || data.assignment?.config?.bank_question_ids?.length > 0
+          || data.assignment?.config?.custom_question_ids?.length > 0;
+        if (isExam) {
           router.push(`/exam/${data.assignment.id}`);
           return; // Don't set loading=false, keep showing spinner
         }

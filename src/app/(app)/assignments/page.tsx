@@ -17,7 +17,8 @@ interface StudentAssignment {
   id: string;
   classroom_id: string;
   title: string;
-  type: "lesson" | "quiz" | "practice_test";
+  type: "lesson" | "quiz" | "practice_test" | "exam";
+  config?: Record<string, unknown>;
   module_ids: string[];
   due_date: string | null;
   status: "completed" | "pending" | "overdue";
@@ -168,7 +169,8 @@ export default function StudentAssignmentsPage() {
             {filtered.map((assignment, i) => {
               const classroomName = classroomMap[assignment.classroom_id] || "";
               const urgencyColor = getUrgencyColor(assignment.due_date, assignment.status);
-              const typeLabel = assignment.type === "quiz" ? "Quiz" : assignment.type === "practice_test" ? "Practice Test" : "Lesson";
+              const typeLabel = assignment.type === "exam" ? "Exam" : assignment.type === "quiz" ? "Quiz" : assignment.type === "practice_test" ? "Practice Test" : "Lesson";
+              const isExam = assignment.type === "exam" || assignment.config?.lockdown === true || (assignment.config?.bank_question_ids as unknown[])?.length > 0;
 
               return (
                 <Link
