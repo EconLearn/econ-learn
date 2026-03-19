@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { questionBank } from "@/data/question-bank";
 
 /*
 POST /api/exam/[assignmentId]/submit
@@ -74,17 +75,33 @@ export async function POST(
   }
 
   const config = assignment.config || {};
-  const questionIds = config.question_ids || [];
+  const bankIds = (config.bank_question_ids as number[]) || [];
+  const customIds = (config.custom_question_ids as string[]) || [];
+  const legacyIds = (config.question_ids as string[]) || [];
 
-  // Fetch the actual questions (with correct_index) for grading
-  const { data: questions } = await supabase
-    .from("teacher_questions")
-    .select("id, correct_index")
-    .in("id", questionIds);
-
+  // Build correct answer map from both sources
   const correctMap = new Map<string, number>();
-  for (const q of questions || []) {
-    correctMap.set(q.id, q.correct_index);
+
+  // Bank questions — get correct_index from static data
+  for (const idx of bankIds) {
+    const numIdx = typeof idx === "string" ? parseInt((idx as string).replace("bank-", "")) : idx;
+    if (numIdx >= 0 && numIdx < questionBank.length) {
+      const entry = questionBank[numIdx];
+      correctMap.set(`bank-${numIdx}`, entry.question.correctIndex);
+    }
+  }
+
+  // Custom teacher questions — get correct_index from database
+  const allCustomIds = customIds.length > 0 ? customIds : legacyIds;
+  if (allCustomIds.length > 0) {
+    const { data: customQuestions } = await supabase
+      .from("teacher_questions")
+      .select("id, correct_index")
+      .in("id", allCustomIds);
+
+    for (const q of customQuestions || []) {
+      correctMap.set(q.id, q.correct_index);
+    }
   }
 
   // Grade the answers
@@ -100,7 +117,7 @@ export async function POST(
     };
   });
 
-  const totalQuestions = questionIds.length;
+  const totalQuestions = correctMap.size;
   const score = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
 
   const submittedAt = new Date().toISOString();

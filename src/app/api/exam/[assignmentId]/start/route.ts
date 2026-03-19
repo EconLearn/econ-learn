@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { questionBank } from "@/data/question-bank";
 
 /*
 POST /api/exam/[assignmentId]/start
@@ -77,8 +78,8 @@ export async function POST(
       return NextResponse.json({ error: "Exam time expired" }, { status: 410 });
     }
 
-    // Resume existing session — fetch questions
-    const questions = await fetchExamQuestions(supabase, config.question_ids || []);
+    // Resume existing session — fetch questions from both sources
+    const questions = await fetchExamQuestions(supabase, config);
 
     return NextResponse.json({
       session: {
@@ -125,8 +126,8 @@ export async function POST(
     return NextResponse.json({ error: sessionError.message }, { status: 500 });
   }
 
-  // Fetch questions (without correct answers)
-  const questions = await fetchExamQuestions(supabase, config.question_ids || []);
+  // Fetch questions (without correct answers) from both sources
+  const questions = await fetchExamQuestions(supabase, config);
 
   return NextResponse.json({
     session: {
@@ -150,25 +151,82 @@ export async function POST(
   });
 }
 
-// Fetch questions without correct_index
+// Fetch questions from both bank and custom sources, without correct answers
 async function fetchExamQuestions(
   supabase: ReturnType<typeof createClient>,
-  questionIds: string[]
+  config: Record<string, unknown>
 ) {
-  if (questionIds.length === 0) return [];
+  const allQuestions: Array<{
+    id: string;
+    module_id: string;
+    course: string;
+    question: string;
+    options: string[];
+    difficulty: string;
+    source: "bank" | "custom";
+  }> = [];
 
-  const { data: questions } = await supabase
-    .from("teacher_questions")
-    .select("id, module_id, course, question, options, difficulty")
-    .in("id", questionIds);
+  // 1. Bank questions (from static question-bank.ts)
+  const bankIds = (config.bank_question_ids as (number | string)[]) || [];
+  if (bankIds.length > 0) {
+    for (const idx of bankIds) {
+      const numIdx = typeof idx === "string" ? parseInt(String(idx).replace("bank-", "")) : idx;
+      if (numIdx >= 0 && numIdx < questionBank.length) {
+        const entry = questionBank[numIdx];
+        allQuestions.push({
+          id: `bank-${numIdx}`,
+          module_id: entry.moduleId,
+          course: entry.course,
+          question: entry.question.question,
+          options: entry.question.options,
+          difficulty: "medium",
+          source: "bank",
+        });
+      }
+    }
+  }
 
-  // Return questions WITHOUT correct_index
-  return (questions || []).map((q) => ({
-    id: q.id,
-    module_id: q.module_id,
-    course: q.course,
-    question: q.question,
-    options: q.options,
-    difficulty: q.difficulty,
-  }));
+  // 2. Custom teacher questions (from database)
+  const customIds = (config.custom_question_ids as string[]) || [];
+  if (customIds.length > 0) {
+    const { data: customQuestions } = await supabase
+      .from("teacher_questions")
+      .select("id, module_id, course, question, options, difficulty")
+      .in("id", customIds);
+
+    for (const q of customQuestions || []) {
+      allQuestions.push({
+        id: q.id,
+        module_id: q.module_id,
+        course: q.course,
+        question: q.question,
+        options: typeof q.options === "string" ? JSON.parse(q.options) : q.options,
+        difficulty: q.difficulty || "medium",
+        source: "custom",
+      });
+    }
+  }
+
+  // 3. Legacy format (config.question_ids) — treat as custom
+  const legacyIds = (config.question_ids as string[]) || [];
+  if (legacyIds.length > 0 && customIds.length === 0 && bankIds.length === 0) {
+    const { data: legacyQuestions } = await supabase
+      .from("teacher_questions")
+      .select("id, module_id, course, question, options, difficulty")
+      .in("id", legacyIds);
+
+    for (const q of legacyQuestions || []) {
+      allQuestions.push({
+        id: q.id,
+        module_id: q.module_id,
+        course: q.course,
+        question: q.question,
+        options: typeof q.options === "string" ? JSON.parse(q.options) : q.options,
+        difficulty: q.difficulty || "medium",
+        source: "custom",
+      });
+    }
+  }
+
+  return allQuestions;
 }
