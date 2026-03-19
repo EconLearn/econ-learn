@@ -100,10 +100,17 @@ export async function DELETE(
     return NextResponse.json({ error: "Not authorized" }, { status: 403 });
   }
 
-  // Delete completions first, then the assignment
+  // Delete completions first (need to match RLS), then the assignment
+  // RLS on assignment_completions requires teacher owns the assignment - use assignment_id filter
   await supabase.from("assignment_completions").delete().eq("assignment_id", params.id);
-  await supabase.from("exam_sessions").delete().eq("assignment_id", params.id);
-  const { error } = await supabase.from("assignments").delete().eq("id", params.id);
+  // exam_sessions may not exist yet - ignore errors
+  try { await supabase.from("exam_sessions").delete().eq("assignment_id", params.id); } catch {}
+  // Include teacher_id in the delete filter so RLS policy is satisfied
+  const { error } = await supabase
+    .from("assignments")
+    .delete()
+    .eq("id", params.id)
+    .eq("teacher_id", user.id);
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

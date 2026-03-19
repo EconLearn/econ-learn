@@ -99,3 +99,45 @@ export async function GET(
 
   return NextResponse.json({ students });
 }
+
+// DELETE /api/classrooms/[id]/students?student_id=xxx — remove a student
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  }
+
+  // Verify teacher owns this classroom
+  const { data: classroom } = await supabase
+    .from("classrooms")
+    .select("id")
+    .eq("id", params.id)
+    .eq("teacher_id", user.id)
+    .single();
+
+  if (!classroom) {
+    return NextResponse.json({ error: "Not authorized" }, { status: 403 });
+  }
+
+  const studentId = req.nextUrl.searchParams.get("student_id");
+  if (!studentId) {
+    return NextResponse.json({ error: "student_id is required" }, { status: 400 });
+  }
+
+  const { error } = await supabase
+    .from("classroom_members")
+    .delete()
+    .eq("classroom_id", params.id)
+    .eq("student_id", studentId);
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({ removed: true });
+}
