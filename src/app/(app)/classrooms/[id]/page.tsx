@@ -448,13 +448,154 @@ export default function ClassroomDetailPage() {
 
         {/* Classmates Tab */}
         {activeTab === "classmates" && (
-          <div
-            className="card p-8 text-center"
-            style={{ border: "2px dashed var(--color-border-subtle)" }}
-          >
-            <p className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
-              Classmate visibility is managed by your teacher.
-            </p>
+          <div>
+            {classmates.length > 0 ? (
+              <div className="card overflow-hidden">
+                {/* Sort header */}
+                <div
+                  className="grid grid-cols-12 gap-2 px-5 py-3 text-[11px] font-semibold"
+                  style={{
+                    color: "var(--color-ink-faint)",
+                    borderBottom: "1px solid var(--color-border-subtle)",
+                    background: "var(--color-surface-raised, var(--color-surface-sunken))",
+                  }}
+                >
+                  <div className="col-span-1 text-center">#</div>
+                  <div className="col-span-4">Name</div>
+                  <div
+                    className="col-span-2 text-center cursor-pointer select-none transition-colors hover:opacity-80"
+                    style={{ color: classmateSort === "streak" ? "var(--accent)" : undefined }}
+                    onClick={() => setClassmateSort("streak")}
+                  >
+                    Streak {classmateSort === "streak" ? "\u25BC" : ""}
+                  </div>
+                  <div
+                    className="col-span-3 text-center cursor-pointer select-none transition-colors hover:opacity-80"
+                    style={{ color: classmateSort === "modules" ? "var(--accent)" : undefined }}
+                    onClick={() => setClassmateSort("modules")}
+                  >
+                    Modules {classmateSort === "modules" ? "\u25BC" : ""}
+                  </div>
+                  <div
+                    className="col-span-2 text-center cursor-pointer select-none transition-colors hover:opacity-80"
+                    style={{ color: classmateSort === "score" ? "var(--accent)" : undefined }}
+                    onClick={() => setClassmateSort("score")}
+                  >
+                    Avg Score {classmateSort === "score" ? "\u25BC" : ""}
+                  </div>
+                </div>
+
+                {/* Sorted classmate rows */}
+                {[...classmates]
+                  .sort((a, b) => {
+                    if (classmateSort === "streak") return b.streak - a.streak;
+                    if (classmateSort === "score") return b.avg_quiz_score - a.avg_quiz_score;
+                    return b.modules_completed - a.modules_completed;
+                  })
+                  .map((mate, index) => (
+                    <motion.div
+                      key={`${mate.display_name}-${index}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.03, duration: 0.2 }}
+                    >
+                      <div
+                        className="grid grid-cols-12 gap-2 px-5 py-3.5 items-center"
+                        style={
+                          index > 0
+                            ? { borderTop: "1px solid var(--color-border-subtle)" }
+                            : undefined
+                        }
+                      >
+                        {/* Rank */}
+                        <div className="col-span-1 text-center">
+                          <span
+                            className="text-xs font-bold"
+                            style={{
+                              color:
+                                index === 0
+                                  ? "#EAB308"
+                                  : index === 1
+                                  ? "#94A3B8"
+                                  : index === 2
+                                  ? "#D97706"
+                                  : "var(--color-ink-faint)",
+                            }}
+                          >
+                            {index + 1}
+                          </span>
+                        </div>
+
+                        {/* Name */}
+                        <div className="col-span-4 min-w-0">
+                          <p
+                            className="text-sm font-medium truncate"
+                            style={{ color: "var(--color-ink)" }}
+                          >
+                            {mate.display_name}
+                          </p>
+                        </div>
+
+                        {/* Streak */}
+                        <div className="col-span-2 text-center">
+                          <span
+                            className="text-xs font-semibold"
+                            style={{ color: mate.streak > 0 ? "#F59E0B" : "var(--color-ink-faint)" }}
+                          >
+                            {mate.streak > 0 ? `${mate.streak}d` : "--"}
+                          </span>
+                        </div>
+
+                        {/* Modules Completed */}
+                        <div className="col-span-3 text-center">
+                          <span
+                            className="text-xs font-medium"
+                            style={{ color: "var(--color-ink-muted)" }}
+                          >
+                            {mate.modules_completed}
+                          </span>
+                        </div>
+
+                        {/* Avg Score */}
+                        <div className="col-span-2 text-center">
+                          <span
+                            className="text-[11px] font-semibold px-2 py-0.5 rounded-full"
+                            style={{
+                              background:
+                                mate.avg_quiz_score >= 80
+                                  ? "rgba(34, 197, 94, 0.08)"
+                                  : mate.avg_quiz_score >= 60
+                                  ? "rgba(234, 179, 8, 0.08)"
+                                  : mate.avg_quiz_score > 0
+                                  ? "rgba(239, 68, 68, 0.08)"
+                                  : "var(--color-surface-sunken)",
+                              color:
+                                mate.avg_quiz_score >= 80
+                                  ? "#15803d"
+                                  : mate.avg_quiz_score >= 60
+                                  ? "#A16207"
+                                  : mate.avg_quiz_score > 0
+                                  ? "#dc2626"
+                                  : "var(--color-ink-faint)",
+                            }}
+                          >
+                            {mate.avg_quiz_score > 0 ? `${mate.avg_quiz_score}%` : "--"}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+              </div>
+            ) : (
+              <div
+                className="card p-8 text-center"
+                style={{ border: "2px dashed var(--color-border-subtle)" }}
+              >
+                <p className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
+                  No classmates yet.
+                </p>
+              </div>
+            )}
           </div>
         )}
       </motion.div>

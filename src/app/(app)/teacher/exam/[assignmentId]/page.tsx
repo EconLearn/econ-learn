@@ -537,9 +537,23 @@ function StudentCard({
     >
       <div className="flex items-start justify-between mb-3">
         <div className="min-w-0">
-          <p className="text-sm font-semibold truncate" style={{ color: "var(--color-ink)" }}>
-            {student.name}
-          </p>
+          <div className="flex items-center gap-1.5">
+            <p className="text-sm font-semibold truncate" style={{ color: "var(--color-ink)" }}>
+              {student.name}
+            </p>
+            {violations > 0 && (
+              <span
+                className="flex-shrink-0 text-[9px] font-bold px-1.5 py-0.5 rounded"
+                style={{
+                  background: hasHighViolations ? "rgba(239,68,68,0.15)" : "rgba(245,158,11,0.15)",
+                  color: hasHighViolations ? "#dc2626" : "#d97706",
+                }}
+                title={`${student.tab_switches} tab switches, ${student.fullscreen_exits} fullscreen exits`}
+              >
+                ⚠ {violations}
+              </span>
+            )}
+          </div>
           <p className="text-[11px] truncate" style={{ color: "var(--color-ink-faint)" }}>
             {student.email}
           </p>

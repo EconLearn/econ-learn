@@ -379,6 +379,8 @@ export default function ClassroomDetailPage() {
 
   /* ── Tab ── */
   const [activeTab, setActiveTab] = useState<TabKey>("students");
+  const [atRiskScoreThreshold, setAtRiskScoreThreshold] = useState(60);
+  const [atRiskInactivityDays, setAtRiskInactivityDays] = useState(14);
 
   /* ── Join code copy ── */
   const [codeCopied, setCodeCopied] = useState(false);
@@ -775,15 +777,15 @@ export default function ClassroomDetailPage() {
       count: weeklyAgg[w.key] || 0,
     }));
 
-    // At-risk students: avg score < 60% OR no activity in 14+ days
+    // At-risk students: avg score below threshold OR no activity in inactivity days
     const atRiskStudents = students.filter((s) => {
-      const lowScore = s.avg_score > 0 && s.avg_score < 60;
-      const inactive = daysSince(s.last_active) >= 14;
+      const lowScore = s.avg_score > 0 && s.avg_score < atRiskScoreThreshold;
+      const inactive = daysSince(s.last_active) >= atRiskInactivityDays;
       return lowScore || inactive;
     });
 
     return { modulePerformance, hardestModules, distribution, weeklyData, atRiskStudents };
-  }, [students]);
+  }, [students, atRiskScoreThreshold, atRiskInactivityDays]);
 
   /* ────────────────── COMPUTED STATS ────────────────── */
 
@@ -1797,12 +1799,33 @@ export default function ClassroomDetailPage() {
                     >
                       At-Risk Students
                     </h3>
-                    <p
-                      className="text-xs mb-4"
-                      style={{ color: "var(--color-ink-muted)" }}
-                    >
-                      Students with average score below 60% or inactive for 14+ days.
-                    </p>
+                    <div className="flex flex-wrap items-center gap-3 mb-4">
+                      <label className="flex items-center gap-1.5 text-xs" style={{ color: "var(--color-ink-muted)" }}>
+                        Score below
+                        <input
+                          type="number"
+                          value={atRiskScoreThreshold}
+                          onChange={(e) => setAtRiskScoreThreshold(Number(e.target.value))}
+                          className="w-14 px-1.5 py-0.5 rounded text-xs text-center"
+                          style={{ border: "1px solid var(--color-border-subtle)", background: "var(--color-surface)", color: "var(--color-ink)" }}
+                          min={0}
+                          max={100}
+                        />%
+                      </label>
+                      <label className="flex items-center gap-1.5 text-xs" style={{ color: "var(--color-ink-muted)" }}>
+                        or inactive for
+                        <input
+                          type="number"
+                          value={atRiskInactivityDays}
+                          onChange={(e) => setAtRiskInactivityDays(Number(e.target.value))}
+                          className="w-14 px-1.5 py-0.5 rounded text-xs text-center"
+                          style={{ border: "1px solid var(--color-border-subtle)", background: "var(--color-surface)", color: "var(--color-ink)" }}
+                          min={1}
+                          max={90}
+                        />
+                        days
+                      </label>
+                    </div>
                     {analytics.atRiskStudents.length === 0 ? (
                       <div
                         className="flex items-center gap-3 p-4 rounded-xl"
