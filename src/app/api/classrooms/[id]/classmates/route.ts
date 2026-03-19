@@ -39,10 +39,10 @@ export async function GET(
     );
   }
 
-  // Load all members with display names
+  // Load all members (NO FK JOIN on profiles — it breaks because student_id references auth.users not profiles)
   const { data: members, error } = await supabase
     .from("classroom_members")
-    .select("student_id, joined_at, profiles(display_name)")
+    .select("student_id, joined_at")
     .eq("classroom_id", classroomId);
 
   if (error) {
@@ -55,11 +55,46 @@ export async function GET(
 
   const studentIds = members.map((m: any) => m.student_id);
 
-  // Get quiz results for progress stats
-  const { data: quizResults } = await supabase
-    .from("quiz_results")
-    .select("user_id, module_id, score_percent")
-    .in("user_id", studentIds);
+  // Query profiles SEPARATELY (critical pattern — FK joins on auth.users references don't work)
+  const { data: profilesData } = await supabase
+    .from("profiles")
+    .select("id, display_name")
+    .in("id", studentIds);
+
+  const profileMap = new Map<string, string>();
+  for (const p of profilesData || []) {
+    profileMap.set(p.id, p.display_name || "Anonymous");
+  }
+
+  // Get assignment completions for progress stats (NOT quiz_results — that view is broken)
+  const { data: completions } = await supabase
+    .from("assignment_completions")
+    .select("student_id, assignment_id, score_percent")
+    .in("student_id", studentIds);
+
+  // Also get exam sessions for exam scores
+  const { data: examSessions } = await supabase
+    .from("exam_sessions")
+    .select("student_id, assignment_id, score, status")
+    .in("student_id", studentIds)
+    .eq("status", "submitted");
+
+  // Get the assignments to know which module each belongs to
+  const allAssignmentIds = new Set<string>();
+  for (const c of completions || []) allAssignmentIds.add(c.assignment_id);
+  for (const e of examSessions || []) allAssignmentIds.add(e.assignment_id);
+
+  const { data: assignmentDetails } = allAssignmentIds.size > 0
+    ? await supabase
+        .from("assignments")
+        .select("id, module_ids")
+        .in("id", Array.from(allAssignmentIds))
+    : { data: [] };
+
+  const assignmentModuleMap = new Map<string, string[]>();
+  for (const a of assignmentDetails || []) {
+    assignmentModuleMap.set(a.id, a.module_ids || []);
+  }
 
   // Get streak data from user_activity
   const { data: activityData } = await supabase
@@ -68,28 +103,39 @@ export async function GET(
     .in("user_id", studentIds)
     .order("activity_date", { ascending: false });
 
-  // Aggregate quiz stats per student
+  // Aggregate stats per student from completions + exam sessions
   const studentStats: Record<
     string,
     {
       modules: Set<string>;
       totalScore: number;
-      quizCount: number;
+      scoreCount: number;
     }
   > = {};
 
-  if (quizResults) {
-    for (const q of quizResults) {
-      if (!studentStats[q.user_id]) {
-        studentStats[q.user_id] = {
-          modules: new Set(),
-          totalScore: 0,
-          quizCount: 0,
-        };
-      }
-      studentStats[q.user_id].modules.add(q.module_id);
-      studentStats[q.user_id].totalScore += q.score_percent || 0;
-      studentStats[q.user_id].quizCount += 1;
+  const ensureStats = (id: string) => {
+    if (!studentStats[id]) {
+      studentStats[id] = { modules: new Set(), totalScore: 0, scoreCount: 0 };
+    }
+  };
+
+  for (const c of completions || []) {
+    ensureStats(c.student_id);
+    const mods = assignmentModuleMap.get(c.assignment_id) || [];
+    for (const m of mods) studentStats[c.student_id].modules.add(m);
+    if (c.score_percent != null) {
+      studentStats[c.student_id].totalScore += c.score_percent;
+      studentStats[c.student_id].scoreCount += 1;
+    }
+  }
+
+  for (const e of examSessions || []) {
+    ensureStats(e.student_id);
+    const mods = assignmentModuleMap.get(e.assignment_id) || [];
+    for (const m of mods) studentStats[e.student_id].modules.add(m);
+    if (e.score != null) {
+      studentStats[e.student_id].totalScore += e.score;
+      studentStats[e.student_id].scoreCount += 1;
     }
   }
 
@@ -138,11 +184,11 @@ export async function GET(
   const classmates = members.map((m: any) => {
     const stats = studentStats[m.student_id];
     return {
-      display_name: m.profiles?.display_name || "Anonymous",
+      display_name: profileMap.get(m.student_id) || "Anonymous",
       modules_completed: stats ? stats.modules.size : 0,
       avg_quiz_score:
-        stats && stats.quizCount > 0
-          ? Math.round(stats.totalScore / stats.quizCount)
+        stats && stats.scoreCount > 0
+          ? Math.round(stats.totalScore / stats.scoreCount)
           : 0,
       streak: studentStreaks[m.student_id] || 0,
     };
