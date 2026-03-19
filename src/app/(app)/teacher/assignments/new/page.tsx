@@ -6,7 +6,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { microCourse, macroCourse } from "@/data/courses";
+import { questionBank, type QuestionBankEntry } from "@/data/question-bank";
 import type { TeacherQuestion } from "@/lib/types/teacher";
+
+type ExamQuestionTab = "bank" | "custom";
 
 type AssignmentType = "lesson" | "quiz" | "custom_quiz" | "exam";
 
@@ -55,6 +58,8 @@ function NewAssignmentContent() {
   const [teacherQuestions, setTeacherQuestions] = useState<TeacherQuestion[]>([]);
   const [questionsLoading, setQuestionsLoading] = useState(false);
   const [selectedQuestionIds, setSelectedQuestionIds] = useState<string[]>([]);
+  const [selectedBankQuestionIds, setSelectedBankQuestionIds] = useState<string[]>([]);
+  const [examQuestionTab, setExamQuestionTab] = useState<ExamQuestionTab>("bank");
   const [examTimeLimit, setExamTimeLimit] = useState<number>(45);
   const [lockdown, setLockdown] = useState(true);
   const [shuffleQuestions, setShuffleQuestions] = useState(true);
@@ -143,7 +148,7 @@ function NewAssignmentContent() {
     }
   };
 
-  // ── Group questions by module ──
+  // ── Group custom questions by module ──
   const questionsByModule = useMemo(() => {
     const map: Record<string, TeacherQuestion[]> = {};
     for (const q of teacherQuestions) {
@@ -153,8 +158,27 @@ function NewAssignmentContent() {
     return map;
   }, [teacherQuestions]);
 
+  // ── Group bank questions by module ──
+  const bankQuestionsByModule = useMemo(() => {
+    const map: Record<string, QuestionBankEntry[]> = {};
+    for (const entry of questionBank) {
+      if (!map[entry.moduleId]) map[entry.moduleId] = [];
+      map[entry.moduleId].push(entry);
+    }
+    return map;
+  }, []);
+
+  // ── Combined question count ──
+  const totalSelectedCount = selectedQuestionIds.length + selectedBankQuestionIds.length;
+
   const toggleQuestion = useCallback((id: string) => {
     setSelectedQuestionIds((prev) =>
+      prev.includes(id) ? prev.filter((qid) => qid !== id) : [...prev, id]
+    );
+  }, []);
+
+  const toggleBankQuestion = useCallback((id: string) => {
+    setSelectedBankQuestionIds((prev) =>
       prev.includes(id) ? prev.filter((qid) => qid !== id) : [...prev, id]
     );
   }, []);
@@ -169,6 +193,17 @@ function NewAssignmentContent() {
       setSelectedQuestionIds((prev) => Array.from(new Set([...prev, ...moduleQIds])));
     }
   }, [questionsByModule, selectedQuestionIds]);
+
+  const toggleAllBankForModule = useCallback((moduleId: string) => {
+    const moduleQs = bankQuestionsByModule[moduleId] || [];
+    const moduleQIds = moduleQs.map((e) => e.question.id);
+    const allSelected = moduleQIds.every((id) => selectedBankQuestionIds.includes(id));
+    if (allSelected) {
+      setSelectedBankQuestionIds((prev) => prev.filter((id) => !moduleQIds.includes(id)));
+    } else {
+      setSelectedBankQuestionIds((prev) => Array.from(new Set([...prev, ...moduleQIds])));
+    }
+  }, [bankQuestionsByModule, selectedBankQuestionIds]);
 
   // ── Date presets ──
   const setDatePreset = (preset: "tomorrow" | "friday" | "next_week") => {
@@ -199,7 +234,7 @@ function NewAssignmentContent() {
     type !== null &&
     type !== "custom_quiz" &&
     selectedClassroom &&
-    (type === "exam" ? selectedQuestionIds.length > 0 : selectedModules.length > 0) &&
+    (type === "exam" ? totalSelectedCount > 0 : selectedModules.length > 0) &&
     (type === "exam" ? examTimeLimit > 0 : true) &&
     status !== "loading";
 
@@ -227,14 +262,14 @@ function NewAssignmentContent() {
       };
 
       if (type === "exam") {
-        // Gather unique module_ids from the selected questions
-        const examModuleIds = Array.from(
-          new Set(
-            teacherQuestions
-              .filter((q) => selectedQuestionIds.includes(q.id))
-              .map((q) => q.module_id)
-          )
-        );
+        // Gather unique module_ids from both custom and bank selected questions
+        const customModuleIds = teacherQuestions
+          .filter((q) => selectedQuestionIds.includes(q.id))
+          .map((q) => q.module_id);
+        const bankModuleIds = questionBank
+          .filter((e) => selectedBankQuestionIds.includes(e.question.id))
+          .map((e) => e.moduleId);
+        const examModuleIds = Array.from(new Set([...customModuleIds, ...bankModuleIds]));
 
         body = {
           classroom_id: selectedClassroom,
@@ -244,7 +279,8 @@ function NewAssignmentContent() {
           due_date: dueDate || null,
           config: {
             available_from: availableFrom || undefined,
-            question_ids: selectedQuestionIds,
+            bank_question_ids: selectedBankQuestionIds,
+            custom_question_ids: selectedQuestionIds,
             lockdown,
             time_limit_minutes: examTimeLimit,
             shuffle_questions: shuffleQuestions,
@@ -485,64 +521,113 @@ function NewAssignmentContent() {
           {/* STEP 2: CONTENT SELECTION — differs for exam vs lesson/quiz */}
           {type === "exam" ? (
             <FormSection number={2} title="Exam Questions">
-              {questionsLoading ? (
-                <div className="flex items-center gap-2 py-8">
-                  <div
-                    className="w-4 h-4 border-2 rounded-full animate-spin"
-                    style={{ borderColor: "var(--color-border)", borderTopColor: "var(--color-ink)" }}
-                  />
-                  <span className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
-                    Loading your question bank...
-                  </span>
-                </div>
-              ) : teacherQuestions.length === 0 ? (
-                <div
-                  className="p-5 rounded-xl text-center"
-                  style={{ background: "var(--color-surface-sunken)", border: "1px solid var(--color-border-subtle)" }}
-                >
-                  <p className="text-sm mb-2" style={{ color: "var(--color-ink-muted)" }}>
-                    No questions in your question bank yet.
-                  </p>
-                  <Link href="/teacher/questions" className="text-sm text-blue-500 hover:underline font-medium">
-                    Create questions first
-                  </Link>
-                </div>
-              ) : (
-                <>
-                  {/* Selected count */}
-                  <div
-                    className="flex items-center justify-between p-3 rounded-lg"
-                    style={{ background: "var(--color-surface-sunken)", border: "1px solid var(--color-border-subtle)" }}
-                  >
-                    <span className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>
-                      {selectedQuestionIds.length} question{selectedQuestionIds.length !== 1 ? "s" : ""} selected
-                    </span>
-                    {selectedQuestionIds.length > 0 && (
-                      <button
-                        type="button"
-                        onClick={() => setSelectedQuestionIds([])}
-                        className="text-xs font-medium text-red-500 hover:text-red-600"
-                      >
-                        Clear All
-                      </button>
-                    )}
-                  </div>
+              {/* Warning banner */}
+              <div
+                className="p-4 rounded-xl flex gap-3"
+                style={{ background: "rgba(245, 158, 11, 0.06)", border: "1px solid rgba(245, 158, 11, 0.2)" }}
+              >
+                <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="#d97706" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+                <p className="text-xs leading-relaxed" style={{ color: "#92400e" }}>
+                  Questions from the EconLearn bank may overlap with practice quiz questions students have already seen. For high-stakes exams, we recommend using your custom questions or a mix of both.
+                </p>
+              </div>
 
-                  {/* Questions grouped by module */}
-                  {Object.entries(questionsByModule).map(([moduleId, questions]) => {
-                    const moduleName = allModules.find((m) => m.id === moduleId)?.title || moduleId;
-                    const moduleQIds = questions.map((q) => q.id);
-                    const allModuleSelected = moduleQIds.every((id) => selectedQuestionIds.includes(id));
+              {/* Combined selection count */}
+              <div
+                className="flex items-center justify-between p-3 rounded-lg"
+                style={{ background: "var(--color-surface-sunken)", border: "1px solid var(--color-border-subtle)" }}
+              >
+                <div>
+                  <span className="text-sm font-medium" style={{ color: "var(--color-ink)" }}>
+                    {totalSelectedCount} question{totalSelectedCount !== 1 ? "s" : ""} selected
+                  </span>
+                  {totalSelectedCount > 0 && (
+                    <span className="text-xs ml-2" style={{ color: "var(--color-ink-faint)" }}>
+                      ({selectedBankQuestionIds.length} from EconLearn bank, {selectedQuestionIds.length} custom)
+                    </span>
+                  )}
+                </div>
+                {totalSelectedCount > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => { setSelectedQuestionIds([]); setSelectedBankQuestionIds([]); }}
+                    className="text-xs font-medium text-red-500 hover:text-red-600"
+                  >
+                    Clear All
+                  </button>
+                )}
+              </div>
+
+              {/* Tab switcher */}
+              <div className="flex gap-1 p-1 rounded-xl" style={{ background: "var(--color-surface-sunken)" }}>
+                <button
+                  type="button"
+                  onClick={() => setExamQuestionTab("bank")}
+                  className="flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition-all"
+                  style={{
+                    background: examQuestionTab === "bank" ? "var(--color-surface)" : "transparent",
+                    color: examQuestionTab === "bank" ? "var(--color-ink)" : "var(--color-ink-faint)",
+                    boxShadow: examQuestionTab === "bank" ? "0 1px 3px rgba(0,0,0,0.08)" : "none",
+                  }}
+                >
+                  EconLearn Question Bank
+                  {selectedBankQuestionIds.length > 0 && (
+                    <span className="ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] font-bold" style={{ background: "rgba(59,130,246,0.1)", color: "#3B82F6" }}>
+                      {selectedBankQuestionIds.length}
+                    </span>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setExamQuestionTab("custom")}
+                  className="flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition-all"
+                  style={{
+                    background: examQuestionTab === "custom" ? "var(--color-surface)" : "transparent",
+                    color: examQuestionTab === "custom" ? "var(--color-ink)" : "var(--color-ink-faint)",
+                    boxShadow: examQuestionTab === "custom" ? "0 1px 3px rgba(0,0,0,0.08)" : "none",
+                  }}
+                >
+                  My Custom Questions
+                  {selectedQuestionIds.length > 0 && (
+                    <span className="ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] font-bold" style={{ background: "rgba(59,130,246,0.1)", color: "#3B82F6" }}>
+                      {selectedQuestionIds.length}
+                    </span>
+                  )}
+                </button>
+              </div>
+
+              {/* Tab content: EconLearn Question Bank */}
+              {examQuestionTab === "bank" && (
+                <div className="space-y-5">
+                  <p className="text-[11px]" style={{ color: "var(--color-ink-faint)" }}>
+                    These are the same high-quality questions students see in practice quizzes. Students may have already encountered these.
+                  </p>
+                  {Object.entries(bankQuestionsByModule).map(([moduleId, entries]) => {
+                    const moduleQIds = entries.map((e) => e.question.id);
+                    const allModuleSelected = moduleQIds.every((id) => selectedBankQuestionIds.includes(id));
 
                     return (
                       <div key={moduleId}>
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-ink-faint)" }}>
-                            {moduleName} ({questions.length})
-                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-ink-faint)" }}>
+                              {entries[0].moduleName} ({entries.length})
+                            </span>
+                            <span
+                              className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
+                              style={{
+                                background: entries[0].course === "micro" ? "rgba(59,130,246,0.1)" : "rgba(139,92,246,0.1)",
+                                color: entries[0].course === "micro" ? "#3B82F6" : "#8B5CF6",
+                              }}
+                            >
+                              {entries[0].course === "micro" ? "Micro" : "Macro"}
+                            </span>
+                          </div>
                           <button
                             type="button"
-                            onClick={() => toggleAllForModule(moduleId)}
+                            onClick={() => toggleAllBankForModule(moduleId)}
                             className="text-xs font-medium px-2 py-0.5 rounded transition-colors hover:bg-blue-50"
                             style={{ color: "#3B82F6" }}
                           >
@@ -550,13 +635,13 @@ function NewAssignmentContent() {
                           </button>
                         </div>
                         <div className="space-y-1.5">
-                          {questions.map((q) => {
-                            const isSelected = selectedQuestionIds.includes(q.id);
+                          {entries.map((entry) => {
+                            const isSelected = selectedBankQuestionIds.includes(entry.question.id);
                             return (
                               <button
-                                key={q.id}
+                                key={entry.question.id}
                                 type="button"
-                                onClick={() => toggleQuestion(q.id)}
+                                onClick={() => toggleBankQuestion(entry.question.id)}
                                 className="w-full text-left p-3 rounded-lg transition-all"
                                 style={{
                                   background: isSelected ? "rgba(59, 130, 246, 0.06)" : "var(--color-surface)",
@@ -579,20 +664,26 @@ function NewAssignmentContent() {
                                   </div>
                                   <div className="min-w-0 flex-1">
                                     <p
-                                      className="text-xs font-medium leading-snug"
+                                      className="text-xs font-medium leading-snug line-clamp-2"
                                       style={{ color: isSelected ? "#3B82F6" : "var(--color-ink)" }}
                                     >
-                                      {q.question}
+                                      {entry.question.question}
                                     </p>
                                     <div className="flex items-center gap-2 mt-1">
                                       <span
                                         className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
+                                        style={{ background: "rgba(59,130,246,0.08)", color: "#3B82F6" }}
+                                      >
+                                        EconLearn
+                                      </span>
+                                      <span
+                                        className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
                                         style={{
-                                          background: q.difficulty === "easy" ? "rgba(16,185,129,0.1)" : q.difficulty === "hard" ? "rgba(239,68,68,0.1)" : "rgba(245,158,11,0.1)",
-                                          color: q.difficulty === "easy" ? "#059669" : q.difficulty === "hard" ? "#dc2626" : "#d97706",
+                                          background: entries[0].course === "micro" ? "rgba(59,130,246,0.08)" : "rgba(139,92,246,0.08)",
+                                          color: entries[0].course === "micro" ? "#3B82F6" : "#8B5CF6",
                                         }}
                                       >
-                                        {q.difficulty}
+                                        {entry.moduleName}
                                       </span>
                                     </div>
                                   </div>
@@ -604,12 +695,131 @@ function NewAssignmentContent() {
                       </div>
                     );
                   })}
-                </>
+                </div>
+              )}
+
+              {/* Tab content: My Custom Questions */}
+              {examQuestionTab === "custom" && (
+                <div className="space-y-5">
+                  {questionsLoading ? (
+                    <div className="flex items-center gap-2 py-8">
+                      <div
+                        className="w-4 h-4 border-2 rounded-full animate-spin"
+                        style={{ borderColor: "var(--color-border)", borderTopColor: "var(--color-ink)" }}
+                      />
+                      <span className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
+                        Loading your custom questions...
+                      </span>
+                    </div>
+                  ) : teacherQuestions.length === 0 ? (
+                    <div
+                      className="p-5 rounded-xl text-center"
+                      style={{ background: "var(--color-surface-sunken)", border: "1px solid var(--color-border-subtle)" }}
+                    >
+                      <p className="text-sm mb-1" style={{ color: "var(--color-ink-muted)" }}>
+                        No custom questions yet.
+                      </p>
+                      <p className="text-xs mb-3" style={{ color: "var(--color-ink-faint)" }}>
+                        Custom questions are unique to you and students have not seen them before.
+                      </p>
+                      <Link href="/teacher/questions" className="text-sm text-blue-500 hover:underline font-medium">
+                        Create questions
+                      </Link>
+                    </div>
+                  ) : (
+                    <>
+                      <p className="text-[11px]" style={{ color: "var(--color-ink-faint)" }}>
+                        These questions are unique to you. Students have not seen them in practice mode.
+                      </p>
+                      {Object.entries(questionsByModule).map(([moduleId, questions]) => {
+                        const moduleName = allModules.find((m) => m.id === moduleId)?.title || moduleId;
+                        const moduleQIds = questions.map((q) => q.id);
+                        const allModuleSelected = moduleQIds.every((id) => selectedQuestionIds.includes(id));
+
+                        return (
+                          <div key={moduleId}>
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-ink-faint)" }}>
+                                {moduleName} ({questions.length})
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => toggleAllForModule(moduleId)}
+                                className="text-xs font-medium px-2 py-0.5 rounded transition-colors hover:bg-blue-50"
+                                style={{ color: "#3B82F6" }}
+                              >
+                                {allModuleSelected ? "Deselect All" : "Select All"}
+                              </button>
+                            </div>
+                            <div className="space-y-1.5">
+                              {questions.map((q) => {
+                                const isSelected = selectedQuestionIds.includes(q.id);
+                                return (
+                                  <button
+                                    key={q.id}
+                                    type="button"
+                                    onClick={() => toggleQuestion(q.id)}
+                                    className="w-full text-left p-3 rounded-lg transition-all"
+                                    style={{
+                                      background: isSelected ? "rgba(59, 130, 246, 0.06)" : "var(--color-surface)",
+                                      border: isSelected ? "1.5px solid rgba(59, 130, 246, 0.3)" : "1.5px solid var(--color-border-subtle)",
+                                    }}
+                                  >
+                                    <div className="flex items-start gap-2.5">
+                                      <div
+                                        className="mt-0.5 flex-shrink-0 w-4 h-4 rounded flex items-center justify-center transition-all"
+                                        style={{
+                                          background: isSelected ? "#3B82F6" : "transparent",
+                                          border: isSelected ? "none" : "1.5px solid var(--color-ink-faint)",
+                                        }}
+                                      >
+                                        {isSelected && (
+                                          <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                          </svg>
+                                        )}
+                                      </div>
+                                      <div className="min-w-0 flex-1">
+                                        <p
+                                          className="text-xs font-medium leading-snug line-clamp-2"
+                                          style={{ color: isSelected ? "#3B82F6" : "var(--color-ink)" }}
+                                        >
+                                          {q.question}
+                                        </p>
+                                        <div className="flex items-center gap-2 mt-1">
+                                          <span
+                                            className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
+                                            style={{ background: "rgba(16,185,129,0.08)", color: "#059669" }}
+                                          >
+                                            Custom
+                                          </span>
+                                          <span
+                                            className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
+                                            style={{
+                                              background: q.difficulty === "easy" ? "rgba(16,185,129,0.1)" : q.difficulty === "hard" ? "rgba(239,68,68,0.1)" : "rgba(245,158,11,0.1)",
+                                              color: q.difficulty === "easy" ? "#059669" : q.difficulty === "hard" ? "#dc2626" : "#d97706",
+                                            }}
+                                          >
+                                            {q.difficulty}
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </>
+                  )}
+                </div>
               )}
 
               {/* Exam Settings */}
               <AnimatePresence>
-                {selectedQuestionIds.length > 0 && (
+                {totalSelectedCount > 0 && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
@@ -1109,7 +1319,7 @@ function NewAssignmentContent() {
               quizLength={type === "quiz" ? quizLength : undefined}
               timeLimit={type === "quiz" ? timeLimit : type === "exam" ? examTimeLimit : undefined}
               isExam={type === "exam"}
-              examQuestionCount={type === "exam" ? selectedQuestionIds.length : undefined}
+              examQuestionCount={type === "exam" ? totalSelectedCount : undefined}
               lockdown={type === "exam" ? lockdown : undefined}
             />
           </div>

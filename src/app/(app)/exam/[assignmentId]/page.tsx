@@ -85,6 +85,9 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
 
   const hasSubmittedRef = useRef(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const saveTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const tabSwitchesRef = useRef(0);
+  const fullscreenExitsRef = useRef(0);
 
   // ── Shuffled questions (stable per session) ──
   const [orderedQuestions, setOrderedQuestions] = useState<ExamQuestion[]>([]);
@@ -146,8 +149,12 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
           setOptionMaps(maps);
         }
 
-        setTabSwitches(data.session.tab_switches || 0);
-        setFullscreenExits(data.session.fullscreen_exits || 0);
+        const restoredTabSwitches = data.session.tab_switches || 0;
+        const restoredFullscreenExits = data.session.fullscreen_exits || 0;
+        setTabSwitches(restoredTabSwitches);
+        setFullscreenExits(restoredFullscreenExits);
+        tabSwitchesRef.current = restoredTabSwitches;
+        fullscreenExitsRef.current = restoredFullscreenExits;
       } catch {
         setError("Failed to start exam");
       }
@@ -200,9 +207,16 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
       if (document.hidden) {
         setTabSwitches((prev) => {
           const next = prev + 1;
+          tabSwitchesRef.current = next;
           setShowTabWarning(true);
           // Auto-hide after 5 seconds
           setTimeout(() => setShowTabWarning(false), 5000);
+          // Immediately persist to server
+          fetch(`/api/exam/${assignmentId}/save-progress`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ tab_switches: next }),
+          }).catch(() => {});
           return next;
         });
       }
@@ -220,12 +234,19 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
       if (!document.fullscreenElement) {
         setFullscreenExits((prev) => {
           const next = prev + 1;
+          fullscreenExitsRef.current = next;
           setShowFullscreenWarning(true);
           setTimeout(() => {
             setShowFullscreenWarning(false);
             // Re-request fullscreen
             requestFullscreen();
           }, 3000);
+          // Immediately persist to server
+          fetch(`/api/exam/${assignmentId}/save-progress`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ fullscreen_exits: next }),
+          }).catch(() => {});
           return next;
         });
       }
@@ -234,6 +255,58 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
     document.addEventListener("fullscreenchange", handleFullscreenChange);
     return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
   }, [config?.lockdown, submitted]);
+
+  // ── Save progress to server (answers + lockdown counters) ──
+  const saveProgress = useCallback(async () => {
+    if (hasSubmittedRef.current || !session) return;
+
+    const answerArray: ExamAnswer[] = [];
+    answers.forEach((selectedIndex, questionId) => {
+      answerArray.push({ question_id: questionId, selected_index: selectedIndex });
+    });
+
+    try {
+      await fetch(`/api/exam/${assignmentId}/save-progress`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          answers: answerArray,
+          tab_switches: tabSwitchesRef.current,
+          fullscreen_exits: fullscreenExitsRef.current,
+        }),
+      });
+    } catch {
+      // Silent fail — best-effort save
+    }
+  }, [session, answers, assignmentId]);
+
+  // ── Periodic auto-save (every 15 seconds) ──
+  useEffect(() => {
+    if (loading || !session || submitted) return;
+
+    saveTimerRef.current = setInterval(() => {
+      saveProgress();
+    }, 15_000);
+
+    return () => {
+      if (saveTimerRef.current) clearInterval(saveTimerRef.current);
+    };
+  }, [loading, session, submitted, saveProgress]);
+
+  // ── Warn on beforeunload to prevent accidental navigation ──
+  useEffect(() => {
+    if (submitted) return;
+
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (hasSubmittedRef.current) return;
+      e.preventDefault();
+      // Save progress on unload attempt
+      saveProgress();
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [submitted, saveProgress]);
 
   // ── Helpers ──
   function requestFullscreen() {
