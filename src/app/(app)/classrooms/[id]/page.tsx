@@ -163,11 +163,8 @@ export default function ClassroomDetailPage() {
     return { label: "Start", variant: "primary" as const };
   };
 
-  const getModuleLink = (assignment: Assignment) => {
-    if (assignment.module_ids?.[0]) {
-      const mod = allModules.find((m) => m.id === assignment.module_ids[0]);
-      if (mod) return mod.href;
-    }
+  // Always link to the assignment page — it handles exam redirects, submission tracking, etc.
+  const getAssignmentLink = (assignment: Assignment) => {
     return `/assignments/${assignment.id}`;
   };
 
@@ -347,7 +344,7 @@ export default function ClassroomDetailPage() {
                   const status = getStatusStyle(assignment.status);
                   const typeBadge = getTypeBadge(assignment.type);
                   const action = getAssignmentAction(assignment);
-                  const link = getModuleLink(assignment);
+                  const link = getAssignmentLink(assignment);
 
                   return (
                     <motion.div
