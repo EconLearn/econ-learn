@@ -21,11 +21,17 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { dailyChallenges } from "@/data/daily-challenges";
 
+function getPacificDate(): string {
+  // Always use Pacific Time for daily challenge rotation
+  return new Date().toLocaleDateString("en-CA", { timeZone: "America/Los_Angeles" });
+}
+
 function getTodaysChallengeIndex(): number {
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const diff = now.getTime() - start.getTime();
-  const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const pacificDate = getPacificDate();
+  const [year, month, day] = pacificDate.split("-").map(Number);
+  const start = new Date(year, 0, 0);
+  const current = new Date(year, month - 1, day);
+  const dayOfYear = Math.floor((current.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
   return dayOfYear % dailyChallenges.length;
 }
 
@@ -41,7 +47,7 @@ export async function GET() {
   let attempt = null;
 
   if (user) {
-    const today = new Date().toISOString().split("T")[0];
+    const today = getPacificDate();
     const { data } = await supabase
       .from("challenge_attempts")
       .select("*")

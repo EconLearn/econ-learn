@@ -429,15 +429,27 @@ export default function ClassroomDetailPage() {
       setEditName(classroomData.name);
       setEditSchool(classroomData.school_name || "");
 
-      // 2. Members
+      // 2. Members (query profiles separately — no FK join)
       const { data: members } = await supabase
         .from("classroom_members")
-        .select("student_id, joined_at, profiles(display_name)")
+        .select("student_id, joined_at")
         .eq("classroom_id", classroomId);
 
       const studentIds = (members || []).map((m: any) => m.student_id);
 
-      // 3. Quiz results for analytics
+      // Fetch profiles separately
+      let profileMap = new Map<string, string>();
+      if (studentIds.length > 0) {
+        const { data: profiles } = await supabase
+          .from("profiles")
+          .select("id, display_name")
+          .in("id", studentIds);
+        for (const p of profiles || []) {
+          profileMap.set(p.id, p.display_name || "Unknown");
+        }
+      }
+
+      // 3. Get scores from assignment_completions AND exam_sessions
       let quizMap: Record<
         string,
         {
@@ -452,48 +464,97 @@ export default function ClassroomDetailPage() {
       > = {};
 
       if (studentIds.length > 0) {
-        const { data: quizResults } = await supabase
-          .from("quiz_results")
-          .select("user_id, module_id, score_percent, created_at")
-          .in("user_id", studentIds);
+        // Get all assignments for this classroom
+        const { data: classAssignments } = await supabase
+          .from("assignments")
+          .select("id, module_ids, type")
+          .eq("classroom_id", classroomId);
 
-        if (quizResults) {
-          for (const q of quizResults) {
-            if (!quizMap[q.user_id]) {
-              quizMap[q.user_id] = {
-                total: 0,
-                count: 0,
-                scores: [],
-                modules: new Set(),
-                lastActive: q.created_at,
-                moduleScores: {},
-                weeklyCompletions: {},
+        const assignmentIds = (classAssignments || []).map((a: any) => a.id);
+        const assignmentModuleMap = new Map<string, string[]>();
+        for (const a of classAssignments || []) {
+          assignmentModuleMap.set(a.id, a.module_ids || []);
+        }
+
+        // Get completions from assignment_completions
+        if (assignmentIds.length > 0) {
+          const { data: completions } = await supabase
+            .from("assignment_completions")
+            .select("student_id, assignment_id, score, completed_at")
+            .in("assignment_id", assignmentIds)
+            .in("student_id", studentIds)
+            .not("completed_at", "is", null);
+
+          for (const c of completions || []) {
+            if (!quizMap[c.student_id]) {
+              quizMap[c.student_id] = {
+                total: 0, count: 0, scores: [], modules: new Set(),
+                lastActive: c.completed_at, moduleScores: {}, weeklyCompletions: {},
               };
             }
-            const s = quizMap[q.user_id];
-            s.total += q.score_percent || 0;
+            const s = quizMap[c.student_id];
+            const score = c.score || 0;
+            s.total += score;
             s.count += 1;
-            s.scores.push(q.score_percent || 0);
-            s.modules.add(q.module_id);
-            if (q.created_at > s.lastActive) s.lastActive = q.created_at;
+            s.scores.push(score);
+            if (c.completed_at > s.lastActive) s.lastActive = c.completed_at;
 
-            // Module scores
-            if (!s.moduleScores[q.module_id]) s.moduleScores[q.module_id] = [];
-            s.moduleScores[q.module_id].push(q.score_percent || 0);
+            // Map completion to modules
+            const mods = assignmentModuleMap.get(c.assignment_id) || [];
+            for (const mod of mods) {
+              s.modules.add(mod);
+              if (!s.moduleScores[mod]) s.moduleScores[mod] = [];
+              s.moduleScores[mod].push(score);
+            }
 
-            // Weekly completions
-            const weekStart = getWeekKey(q.created_at);
+            const weekStart = getWeekKey(c.completed_at);
             s.weeklyCompletions[weekStart] = (s.weeklyCompletions[weekStart] || 0) + 1;
           }
         }
 
+        // Also get exam_sessions scores
+        if (assignmentIds.length > 0) {
+          const { data: examSessions } = await supabase
+            .from("exam_sessions")
+            .select("student_id, assignment_id, score, submitted_at, status")
+            .in("assignment_id", assignmentIds)
+            .in("student_id", studentIds)
+            .in("status", ["submitted", "force_submitted"]);
+
+          for (const es of examSessions || []) {
+            if (es.score == null) continue;
+            if (!quizMap[es.student_id]) {
+              quizMap[es.student_id] = {
+                total: 0, count: 0, scores: [], modules: new Set(),
+                lastActive: es.submitted_at || "", moduleScores: {}, weeklyCompletions: {},
+              };
+            }
+            const s = quizMap[es.student_id];
+            s.total += es.score;
+            s.count += 1;
+            s.scores.push(es.score);
+            if (es.submitted_at && es.submitted_at > s.lastActive) s.lastActive = es.submitted_at;
+
+            const mods = assignmentModuleMap.get(es.assignment_id) || [];
+            for (const mod of mods) {
+              s.modules.add(mod);
+              if (!s.moduleScores[mod]) s.moduleScores[mod] = [];
+              s.moduleScores[mod].push(es.score);
+            }
+
+            if (es.submitted_at) {
+              const weekStart = getWeekKey(es.submitted_at);
+              s.weeklyCompletions[weekStart] = (s.weeklyCompletions[weekStart] || 0) + 1;
+            }
+          }
+        }
       }
 
       const studentRows: StudentRow[] = (members || []).map((m: any) => {
         const s = quizMap[m.student_id];
         return {
           student_id: m.student_id,
-          display_name: m.profiles?.display_name || null,
+          display_name: profileMap.get(m.student_id) || null,
           joined_at: m.joined_at,
           modules_completed: s ? s.modules.size : 0,
           avg_score: s && s.count > 0 ? Math.round(s.total / s.count) : 0,
