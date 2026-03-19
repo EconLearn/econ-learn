@@ -638,12 +638,59 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Activity Calendar */}
+        {/* Study Activity */}
         <div className="mb-8">
           <h2 className="text-xs font-medium uppercase tracking-wider mb-3" style={{ color: 'var(--color-ink-faint)' }}>
             Study activity
           </h2>
-          <ActivityCalendar activityDays={activityDays} />
+          <div className="card p-5">
+            <div className="flex items-center gap-5 mb-4">
+              {/* Streak */}
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "rgba(249, 115, 22, 0.1)" }}>
+                  <span style={{ fontSize: 20 }}>🔥</span>
+                </div>
+                <div>
+                  <p className="text-xl font-bold tabular-nums" style={{ color: "var(--color-ink)" }}>{calculateStreak(activityDays)}</p>
+                  <p className="text-[10px] font-medium" style={{ color: "var(--color-ink-faint)" }}>day streak</p>
+                </div>
+              </div>
+              {/* Modules Progress */}
+              <div className="flex-1">
+                <div className="flex items-center justify-between mb-1">
+                  <p className="text-[11px] font-medium" style={{ color: "var(--color-ink-muted)" }}>
+                    {completedMicro + completedMacro} of {courses[0].modules.length + courses[1].modules.length} modules
+                  </p>
+                  <p className="text-[11px] font-bold" style={{ color: "var(--color-ink)" }}>
+                    {Math.round(((completedMicro + completedMacro) / (courses[0].modules.length + courses[1].modules.length)) * 100)}%
+                  </p>
+                </div>
+                <div className="h-2 rounded-full overflow-hidden" style={{ background: "var(--color-surface-sunken)" }}>
+                  <div
+                    className="h-full rounded-full transition-all duration-500"
+                    style={{
+                      width: `${((completedMicro + completedMacro) / (courses[0].modules.length + courses[1].modules.length)) * 100}%`,
+                      background: (completedMicro + completedMacro) === (courses[0].modules.length + courses[1].modules.length) ? "#22c55e" : "#3b82f6",
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+            {/* Quick Stats */}
+            <div className="grid grid-cols-4 gap-3 pt-3" style={{ borderTop: "1px solid var(--color-border-subtle)" }}>
+              {[
+                { label: "Quizzes", value: recentQuizzes.length },
+                { label: "Avg Score", value: recentQuizzes.length > 0 ? `${Math.round(recentQuizzes.reduce((s, q) => s + (q.score / q.total_questions) * 100, 0) / recentQuizzes.length)}%` : "--" },
+                { label: "Modules", value: completedMicro + completedMacro },
+                { label: "Active Days", value: activityDays.length },
+              ].map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <p className="text-base font-bold" style={{ color: "var(--color-ink)" }}>{stat.value}</p>
+                  <p className="text-[10px] font-medium" style={{ color: "var(--color-ink-faint)" }}>{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </motion.div>
     </div>
