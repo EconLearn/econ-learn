@@ -353,33 +353,48 @@ export default function HomePage() {
       </section>
 
       {/* ══════════════════════════════════════════════════
-          SECTION 4.5 — FOR TEACHERS CALLOUT
+          SECTION 4.5 — FOR SCHOOLS & DISTRICTS
           ══════════════════════════════════════════════════ */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-5 sm:px-6">
           <ScrollReveal>
             <div
-              className="rounded-2xl p-8 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+              className="rounded-2xl p-8 sm:p-10"
               style={{
                 background: "var(--color-surface)",
                 border: "1px solid var(--color-border)",
               }}
             >
-              <div>
-                <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--color-ink)" }}>
-                  For Teachers
-                </h3>
-                <p className="text-sm leading-relaxed max-w-lg" style={{ color: "var(--color-ink-muted)" }}>
-                  Used by AP teachers to demo concepts in class. Fullscreen graphs, assignable quizzes, student progress tracking.
-                </p>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-6">
+                <div>
+                  <h3 className="text-lg font-semibold mb-2" style={{ color: "var(--color-ink)" }}>
+                    For Schools &amp; Districts
+                  </h3>
+                  <p className="text-sm leading-relaxed max-w-lg" style={{ color: "var(--color-ink-muted)" }}>
+                    Bring EconLearn to your entire economics department or district. Lockdown exams, teacher dashboards, cross-school analytics, and volume pricing starting at $1.50/student.
+                  </p>
+                </div>
+                <Link
+                  href="/districts"
+                  className="btn-primary inline-flex items-center px-6 py-2.5 text-sm shrink-0"
+                >
+                  Learn More
+                  <ArrowRight className="ml-1.5" />
+                </Link>
               </div>
-              <Link
-                href="/pricing"
-                className="btn-secondary inline-flex items-center px-6 py-2.5 text-sm shrink-0"
-              >
-                View Pricing
-                <ArrowRight className="ml-1.5" />
-              </Link>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/schools" className="text-sm font-medium hover:text-blue-600 transition-colors" style={{ color: "#3B82F6" }}>
+                  For Schools &rarr;
+                </Link>
+                <span style={{ color: "var(--color-ink-faint)" }}>&middot;</span>
+                <Link href="/districts" className="text-sm font-medium hover:text-blue-600 transition-colors" style={{ color: "#3B82F6" }}>
+                  For Districts &rarr;
+                </Link>
+                <span style={{ color: "var(--color-ink-faint)" }}>&middot;</span>
+                <Link href="/pricing" className="text-sm font-medium hover:text-blue-600 transition-colors" style={{ color: "#3B82F6" }}>
+                  View Pricing &rarr;
+                </Link>
+              </div>
             </div>
           </ScrollReveal>
         </div>
@@ -721,7 +736,8 @@ export default function HomePage() {
                 <li><Link href="/signup" className="text-sm">Create Account</Link></li>
                 <li><Link href="/blog" className="text-sm">Blog</Link></li>
                 <li><Link href="/pricing" className="text-sm">Pricing</Link></li>
-                <li><Link href="/pricing" className="text-sm">For Teachers</Link></li>
+                <li><Link href="/schools" className="text-sm">For Schools</Link></li>
+                <li><Link href="/districts" className="text-sm">For Districts</Link></li>
               </ul>
             </div>
             <div>

@@ -860,38 +860,53 @@ export default function TeacherDashboard() {
             </Link>
           </div>
 
-          {data.classrooms.length === 0 ? (
-            /* Empty state */
-            <div
-              className="card py-14 px-8 text-center"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(59,130,246,0.04) 0%, transparent 100%)",
-              }}
-            >
-              <EmptyClassroomsIllustration />
-              <h3 className="text-lg font-bold mb-2" style={{ color: "var(--color-ink)" }}>
-                No classrooms yet
-              </h3>
-              <p
-                className="text-sm mb-6 max-w-md mx-auto leading-relaxed"
-                style={{ color: "var(--color-ink-muted)" }}
-              >
-                Create your first classroom to start inviting students, assigning lessons, and tracking progress.
-              </p>
-              <Link
-                href="/teacher/classrooms"
-                className="btn-primary py-3 px-8 text-sm inline-flex items-center gap-2"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-                Create Your First Classroom
-              </Link>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {data.classrooms.map((classroom, idx) => (
+          {(() => {
+            const activeClassrooms = data.classrooms.filter((c) => c.active !== false);
+            const archivedClassrooms = data.classrooms.filter((c) => c.active === false);
+
+            if (activeClassrooms.length === 0 && archivedClassrooms.length === 0) {
+              return (
+                <div
+                  className="card py-14 px-8 text-center"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, rgba(59,130,246,0.04) 0%, transparent 100%)",
+                  }}
+                >
+                  <EmptyClassroomsIllustration />
+                  <h3 className="text-lg font-bold mb-2" style={{ color: "var(--color-ink)" }}>
+                    No classrooms yet
+                  </h3>
+                  <p
+                    className="text-sm mb-6 max-w-md mx-auto leading-relaxed"
+                    style={{ color: "var(--color-ink-muted)" }}
+                  >
+                    Create your first classroom to start inviting students, assigning lessons, and tracking progress.
+                  </p>
+                  <Link
+                    href="/teacher/classrooms"
+                    className="btn-primary py-3 px-8 text-sm inline-flex items-center gap-2"
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Create Your First Classroom
+                  </Link>
+                </div>
+              );
+            }
+
+            return (
+              <>
+                {activeClassrooms.length === 0 && archivedClassrooms.length > 0 ? (
+                  <div className="card p-8 text-center mb-4">
+                    <p className="text-sm" style={{ color: "var(--color-ink-muted)" }}>
+                      All classrooms are archived. Create a new one or unarchive an existing classroom below.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {activeClassrooms.map((classroom, idx) => (
                 <motion.div
                   key={classroom.id}
                   custom={5 + idx}
@@ -998,39 +1013,87 @@ export default function TeacherDashboard() {
                 </motion.div>
               ))}
 
-              {/* Create new classroom card */}
-              <motion.div
-                custom={5 + data.classrooms.length}
-                initial="hidden"
-                animate="visible"
-                variants={fadeUp}
-              >
-                <Link
-                  href="/teacher/classrooms"
-                  className="card flex flex-col items-center justify-center p-8 group transition-all duration-200 hover:-translate-y-1 hover:shadow-lg h-full min-h-[200px]"
-                  style={{
-                    border: "2px dashed var(--color-border)",
-                    background: "transparent",
-                  }}
-                >
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center mb-3 transition-transform duration-200 group-hover:scale-110"
-                    style={{
-                      background: "rgba(59,130,246,0.08)",
-                      color: "#3B82F6",
-                    }}
-                  >
-                    <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                  </div>
-                  <p className="text-sm font-semibold" style={{ color: "var(--color-ink-muted)" }}>
-                    Create New Classroom
-                  </p>
-                </Link>
-              </motion.div>
-            </div>
-          )}
+                      {/* Create new classroom card */}
+                      <motion.div
+                        custom={5 + activeClassrooms.length}
+                        initial="hidden"
+                        animate="visible"
+                        variants={fadeUp}
+                      >
+                        <Link
+                          href="/teacher/classrooms"
+                          className="card flex flex-col items-center justify-center p-8 group transition-all duration-200 hover:-translate-y-1 hover:shadow-lg h-full min-h-[200px]"
+                          style={{
+                            border: "2px dashed var(--color-border)",
+                            background: "transparent",
+                          }}
+                        >
+                          <div
+                            className="w-12 h-12 rounded-full flex items-center justify-center mb-3 transition-transform duration-200 group-hover:scale-110"
+                            style={{
+                              background: "rgba(59,130,246,0.08)",
+                              color: "#3B82F6",
+                            }}
+                          >
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                          </div>
+                          <p className="text-sm font-semibold" style={{ color: "var(--color-ink-muted)" }}>
+                            Create New Classroom
+                          </p>
+                        </Link>
+                      </motion.div>
+                    </div>
+                )}
+
+                {/* Archived classrooms */}
+                {archivedClassrooms.length > 0 && (
+                  <details className="mt-4">
+                    <summary
+                      className="cursor-pointer text-sm font-medium py-2 select-none"
+                      style={{ color: "var(--color-ink-muted)" }}
+                    >
+                      Archived Classrooms ({archivedClassrooms.length})
+                    </summary>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-3">
+                      {archivedClassrooms.map((classroom, idx) => (
+                        <Link
+                          key={classroom.id}
+                          href={`/teacher/classrooms/${classroom.id}`}
+                          className="card block p-5 group transition-all duration-200 hover:-translate-y-1 hover:shadow-lg opacity-60 hover:opacity-100"
+                          style={{ position: "relative", overflow: "hidden" }}
+                        >
+                          <div
+                            className="absolute top-0 left-0 right-0 h-1"
+                            style={{ background: "var(--color-ink-faint)" }}
+                          />
+                          <div className="flex items-start justify-between mb-2">
+                            <div className="flex-1 min-w-0">
+                              <h3
+                                className="font-semibold text-base truncate"
+                                style={{ color: "var(--color-ink-muted)" }}
+                              >
+                                {classroom.name}
+                              </h3>
+                              <span className="text-[10px] uppercase tracking-wider font-semibold" style={{ color: "var(--color-ink-faint)" }}>
+                                Archived
+                              </span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs" style={{ color: "var(--color-ink-faint)" }}>
+                              {classroom.student_count} student{classroom.student_count !== 1 ? "s" : ""}
+                            </span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </details>
+                )}
+              </>
+            );
+          })()}
         </motion.div>
 
         {/* ═══ Recent Activity + Performance Chart ═══ */}

@@ -96,6 +96,12 @@ export default function MarketingNav() {
             >
               Macroeconomics
             </Link>
+            <Link
+              href="/schools"
+              className="text-sm font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors"
+            >
+              For Schools
+            </Link>
           </div>
 
           {/* Right: Auth actions (desktop) */}
@@ -206,6 +212,36 @@ export default function MarketingNav() {
                 >
                   Macroeconomics
                 </Link>
+
+                <div className="pt-4 mt-4 space-y-1" style={{ borderTop: "1px solid var(--color-border-subtle)" }}>
+                  <p className="px-3 py-1 text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-ink-faint)" }}>
+                    For Educators
+                  </p>
+                  <Link
+                    href="/schools"
+                    className="block px-3 py-3 text-sm font-medium rounded-lg hover:bg-[var(--color-surface-raised)] transition-colors"
+                    style={{ color: "var(--color-ink-light)" }}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    For Schools
+                  </Link>
+                  <Link
+                    href="/districts"
+                    className="block px-3 py-3 text-sm font-medium rounded-lg hover:bg-[var(--color-surface-raised)] transition-colors"
+                    style={{ color: "var(--color-ink-light)" }}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    For Districts
+                  </Link>
+                  <Link
+                    href="/pricing"
+                    className="block px-3 py-3 text-sm font-medium rounded-lg hover:bg-[var(--color-surface-raised)] transition-colors"
+                    style={{ color: "var(--color-ink-light)" }}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Pricing
+                  </Link>
+                </div>
 
                 <div className="pt-4 mt-4 space-y-1" style={{ borderTop: "1px solid var(--color-border-subtle)" }}>
                   {!loading && (

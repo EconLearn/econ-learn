@@ -95,6 +95,39 @@ export default function AboutPage() {
             </svg>
           </Link>
         </div>
+
+        {/* For Institutions */}
+        <div className="mt-16 pt-10" style={{ borderTop: "1px solid var(--color-border)" }}>
+          <h2
+            className="text-xl font-bold mb-3"
+            style={{ color: "var(--color-ink)" }}
+          >
+            For Schools &amp; Districts
+          </h2>
+          <p
+            className="text-sm leading-relaxed mb-4"
+            style={{ color: "var(--color-ink-muted)" }}
+          >
+            EconLearn is now available for schools and districts looking to provide a unified AP Economics platform across
+            multiple classrooms. Volume pricing, dedicated onboarding, lockdown exams, and cross-school analytics included.
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <Link
+              href="/schools"
+              className="text-sm font-medium hover:text-blue-600 transition-colors"
+              style={{ color: "#3B82F6" }}
+            >
+              For Schools &rarr;
+            </Link>
+            <Link
+              href="/districts"
+              className="text-sm font-medium hover:text-blue-600 transition-colors"
+              style={{ color: "#3B82F6" }}
+            >
+              For Districts &rarr;
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );

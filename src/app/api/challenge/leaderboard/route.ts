@@ -71,7 +71,36 @@ export async function GET(request: Request) {
 
   const profileMap: Record<string, { display_name: string; school: string | null }> = {};
   for (const p of profiles || []) {
-    profileMap[p.id] = { display_name: p.display_name, school: p.school };
+    profileMap[p.id] = { display_name: p.display_name, school: p.school || null };
+  }
+
+  // For users without a school in their profile, try to derive from classroom membership
+  const usersWithoutSchool = userIds.filter((id) => !profileMap[id]?.school);
+  if (usersWithoutSchool.length > 0) {
+    // Get classroom memberships for these users
+    const { data: memberships } = await supabase
+      .from("classroom_members")
+      .select("student_id, classroom_id")
+      .in("student_id", usersWithoutSchool);
+
+    if (memberships && memberships.length > 0) {
+      const classroomIds = Array.from(new Set(memberships.map((m) => m.classroom_id)));
+      const { data: classrooms } = await supabase
+        .from("classrooms")
+        .select("id, school_name")
+        .in("id", classroomIds)
+        .not("school_name", "is", null);
+
+      if (classrooms) {
+        const classroomSchoolMap = new Map(classrooms.map((c) => [c.id, c.school_name]));
+        for (const m of memberships) {
+          const schoolName = classroomSchoolMap.get(m.classroom_id);
+          if (schoolName && profileMap[m.student_id] && !profileMap[m.student_id].school) {
+            profileMap[m.student_id].school = schoolName;
+          }
+        }
+      }
+    }
   }
 
   // Build leaderboard
