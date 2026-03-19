@@ -92,11 +92,13 @@ export default function TeacherExamMonitorPage({ params }: { params: { assignmen
       // Check for new violations since last refresh
       const prevMap = prevViolationsRef.current;
       const newAlerts: string[] = [];
+      const isFirstLoad = prevMap.size === 0;
       for (const s of data.students as StudentStatus[]) {
         const total = s.tab_switches + s.fullscreen_exits;
         const prev = prevMap.get(s.student_id) || 0;
-        if (total > prev && prev > 0) {
-          newAlerts.push(s.name);
+        // Alert on ANY increase in violations (not just when prev > 0)
+        if (total > prev && !isFirstLoad) {
+          newAlerts.push(`${s.name} (${total - prev} new)`);
         }
       }
 
@@ -108,16 +110,29 @@ export default function TeacherExamMonitorPage({ params }: { params: { assignmen
       prevViolationsRef.current = newMap;
 
       if (newAlerts.length > 0) {
-        setViolationAlert(
-          `New violation${newAlerts.length > 1 ? "s" : ""} detected: ${newAlerts.join(", ")}`
-        );
-        setTimeout(() => setViolationAlert(null), 6000);
+        const alertMsg = `Violation${newAlerts.length > 1 ? "s" : ""}: ${newAlerts.join(", ")}`;
+        setViolationAlert(alertMsg);
+        // Keep alert visible for 15 seconds (was 6)
+        setTimeout(() => setViolationAlert(null), 15000);
+        // Browser notification (works even if teacher is on another tab)
+        if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+          new Notification("EconLearn Exam Alert", { body: alertMsg, icon: "/favicon-512.png" });
+        }
+        // Also play a sound
+        try { new Audio("data:audio/wav;base64,UklGRl9vT19teleXF2ZlBmbXQgAAAA").play(); } catch {}
       }
     } catch {
       setError("Failed to load exam status");
     }
     setLoading(false);
   }, [assignmentId]);
+
+  // Request notification permission on mount
+  useEffect(() => {
+    if (typeof Notification !== "undefined" && Notification.permission === "default") {
+      Notification.requestPermission();
+    }
+  }, []);
 
   // Initial fetch
   useEffect(() => {
