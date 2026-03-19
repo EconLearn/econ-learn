@@ -308,6 +308,43 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
     return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, [submitted, saveProgress]);
 
+  // ── Anti-cheat: block copy, paste, right-click, keyboard shortcuts ──
+  useEffect(() => {
+    if (!config?.lockdown || submitted) return;
+
+    const blockContextMenu = (e: MouseEvent) => { e.preventDefault(); };
+    const blockKeyboard = (e: KeyboardEvent) => {
+      // Block Ctrl/Cmd + C, V, F, U, P, S, A and F12
+      if ((e.ctrlKey || e.metaKey) && ['c','v','f','u','p','s','a'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+      }
+      if (e.key === 'F12') e.preventDefault();
+      // Block Ctrl+Shift+I (DevTools), Ctrl+Shift+J (Console)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+      }
+    };
+    const blockCopy = (e: ClipboardEvent) => { e.preventDefault(); };
+    const blockSelect = () => { window.getSelection()?.removeAllRanges(); };
+
+    document.addEventListener("contextmenu", blockContextMenu);
+    document.addEventListener("keydown", blockKeyboard);
+    document.addEventListener("copy", blockCopy);
+    document.addEventListener("cut", blockCopy);
+    document.addEventListener("paste", blockCopy);
+    // Periodically clear text selection
+    const selInterval = setInterval(blockSelect, 500);
+
+    return () => {
+      document.removeEventListener("contextmenu", blockContextMenu);
+      document.removeEventListener("keydown", blockKeyboard);
+      document.removeEventListener("copy", blockCopy);
+      document.removeEventListener("cut", blockCopy);
+      document.removeEventListener("paste", blockCopy);
+      clearInterval(selInterval);
+    };
+  }, [config?.lockdown, submitted]);
+
   // ── Helpers ──
   function requestFullscreen() {
     try {

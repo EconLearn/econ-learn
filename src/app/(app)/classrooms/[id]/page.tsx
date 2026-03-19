@@ -28,7 +28,7 @@ interface Assignment {
   id: string;
   classroom_id: string;
   title: string;
-  type: "lesson" | "quiz" | "practice_test";
+  type: "lesson" | "quiz" | "practice_test" | "exam";
   module_ids: string[];
   due_date: string | null;
   status: "completed" | "pending" | "overdue";
@@ -146,6 +146,8 @@ export default function ClassroomDetailPage() {
 
   const getTypeBadge = (type: string) => {
     switch (type) {
+      case "exam":
+        return { bg: "rgba(239, 68, 68, 0.08)", color: "#dc2626", label: "Exam" };
       case "quiz":
         return { bg: "rgba(59, 130, 246, 0.08)", color: "#2563eb", label: "Quiz" };
       case "practice_test":

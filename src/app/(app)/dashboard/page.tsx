@@ -42,7 +42,7 @@ interface StudentAssignment {
   id: string;
   classroom_id: string;
   title: string;
-  type: "lesson" | "quiz" | "practice_test";
+  type: "lesson" | "quiz" | "practice_test" | "exam";
   module_ids: string[];
   due_date: string | null;
   status: "completed" | "pending" | "overdue";
@@ -436,7 +436,7 @@ export default function DashboardPage() {
                         <span className="text-xs font-medium text-red-500">Overdue</span>
                       ) : (
                         <span className="text-xs font-medium" style={{ color: 'var(--color-ink-faint)' }}>
-                          {assignment.type === "quiz" ? "Quiz" : assignment.type === "practice_test" ? "Test" : "Lesson"}
+                          {assignment.type === "exam" ? "Exam" : assignment.type === "quiz" ? "Quiz" : assignment.type === "practice_test" ? "Test" : "Lesson"}
                         </span>
                       )}
                     </div>
