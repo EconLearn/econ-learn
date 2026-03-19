@@ -97,14 +97,26 @@ export default function AssignmentPage({ params }: { params: { id: string } }) {
         }
         const data = await res.json();
 
+        // DEBUG: log the assignment type so we can verify in browser console
+        console.log("[EconLearn] Assignment loaded:", {
+          id: data.assignment?.id,
+          type: data.assignment?.type,
+          config_lockdown: data.assignment?.config?.lockdown,
+          bank_ids: data.assignment?.config?.bank_question_ids,
+        });
+
         // If this is an exam, redirect IMMEDIATELY before setting any state
         // Check both the type field AND config indicators (belt and suspenders)
         const isExam = data.assignment?.type === "exam"
           || data.assignment?.config?.lockdown === true
-          || data.assignment?.config?.bank_question_ids?.length > 0
-          || data.assignment?.config?.custom_question_ids?.length > 0;
+          || (data.assignment?.config?.bank_question_ids as unknown[])?.length > 0
+          || (data.assignment?.config?.custom_question_ids as unknown[])?.length > 0;
+
+        console.log("[EconLearn] isExam:", isExam);
+
         if (isExam) {
-          router.push(`/exam/${data.assignment.id}`);
+          console.log("[EconLearn] Redirecting to exam page:", `/exam/${data.assignment.id}`);
+          window.location.href = `/exam/${data.assignment.id}`;
           return; // Don't set loading=false, keep showing spinner
         }
 
