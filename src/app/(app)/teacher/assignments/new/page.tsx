@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense, useMemo, useCallback } from "react";
+import { useState, useEffect, useRef, Suspense, useMemo, useCallback } from "react";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import { microCourse, macroCourse } from "@/data/courses";
 import { questionBank, type QuestionBankEntry } from "@/data/question-bank";
 import type { TeacherQuestion } from "@/lib/types/teacher";
 
-type ExamQuestionTab = "bank" | "custom";
+type ExamQuestionTab = "bank" | "custom" | "import";
 
 type AssignmentType = "lesson" | "quiz" | "custom_quiz" | "exam";
 
@@ -18,6 +18,16 @@ interface Classroom {
   name: string;
   school_name?: string;
   classroom_members?: { count: number }[];
+}
+
+interface ParsedImportQuestion {
+  question: string;
+  options: string[];
+  correct_index: number;
+  module_id: string;
+  course: "micro" | "macro";
+  difficulty: "easy" | "medium" | "hard";
+  explanation: string | null;
 }
 
 export default function NewAssignmentPage() {
@@ -65,6 +75,19 @@ function NewAssignmentContent() {
   const [shuffleQuestions, setShuffleQuestions] = useState(true);
   const [shuffleOptions, setShuffleOptions] = useState(true);
   const [showResults, setShowResults] = useState(false);
+
+  // ── Import / bulk upload state ──
+  const [importText, setImportText] = useState("");
+  const [parsedImportQuestions, setParsedImportQuestions] = useState<ParsedImportQuestion[]>([]);
+  const [importSaving, setImportSaving] = useState(false);
+  const [importError, setImportError] = useState("");
+  const [importSuccess, setImportSuccess] = useState("");
+
+  // ── Jump-to-section state ──
+  const [activeBankModuleId, setActiveBankModuleId] = useState<string | null>(null);
+  const [activeCustomModuleId, setActiveCustomModuleId] = useState<string | null>(null);
+  const bankScrollRef = useRef<HTMLDivElement>(null);
+  const customScrollRef = useRef<HTMLDivElement>(null);
 
   // ── Scheduling state ──
   const [publishMode, setPublishMode] = useState<"immediate" | "scheduled">("immediate");
@@ -205,6 +228,259 @@ function NewAssignmentContent() {
       setSelectedBankQuestionIds((prev) => Array.from(new Set([...prev, ...moduleIdxs])));
     }
   }, [bankQuestionsByModule, selectedBankQuestionIds]);
+
+  // ── Ordered module lists for jump-to-section nav ──
+  const bankModuleOrder = useMemo(() => {
+    const seen = new Set<string>();
+    const ordered: Array<{ moduleId: string; moduleName: string; course: "micro" | "macro" }> = [];
+    for (const entry of questionBank) {
+      if (!seen.has(entry.moduleId)) {
+        seen.add(entry.moduleId);
+        ordered.push({ moduleId: entry.moduleId, moduleName: entry.moduleName, course: entry.course });
+      }
+    }
+    return ordered;
+  }, []);
+
+  const customModuleOrder = useMemo(() => {
+    const seen = new Set<string>();
+    const ordered: Array<{ moduleId: string; moduleName: string; course: "micro" | "macro" }> = [];
+    const allMods = [...microModules, ...macroModules];
+    for (const q of teacherQuestions) {
+      if (!seen.has(q.module_id)) {
+        seen.add(q.module_id);
+        const mod = allMods.find((m) => m.id === q.module_id);
+        const isMicro = microModules.some((m) => m.id === q.module_id);
+        ordered.push({
+          moduleId: q.module_id,
+          moduleName: mod?.title || q.module_id,
+          course: isMicro ? "micro" : "macro",
+        });
+      }
+    }
+    return ordered;
+  }, [teacherQuestions, microModules, macroModules]);
+
+  // ── IntersectionObserver for bank tab ──
+  useEffect(() => {
+    if (examQuestionTab !== "bank") return;
+    const container = bankScrollRef.current;
+    if (!container) return;
+
+    const sections = container.querySelectorAll<HTMLElement>("[data-bank-module]");
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveBankModuleId(entry.target.getAttribute("data-bank-module"));
+          }
+        }
+      },
+      { root: null, rootMargin: "-80px 0px -60% 0px", threshold: 0 }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, [examQuestionTab, bankQuestionsByModule]);
+
+  // ── IntersectionObserver for custom tab ──
+  useEffect(() => {
+    if (examQuestionTab !== "custom") return;
+    const container = customScrollRef.current;
+    if (!container) return;
+
+    const sections = container.querySelectorAll<HTMLElement>("[data-custom-module]");
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveCustomModuleId(entry.target.getAttribute("data-custom-module"));
+          }
+        }
+      },
+      { root: null, rootMargin: "-80px 0px -60% 0px", threshold: 0 }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, [examQuestionTab, questionsByModule]);
+
+  // ── Parse import text ──
+  const parseImportText = useCallback((text: string) => {
+    if (!text.trim()) {
+      setParsedImportQuestions([]);
+      return;
+    }
+    const blocks = text.split("---").map((b) => b.trim()).filter(Boolean);
+    const parsed: ParsedImportQuestion[] = [];
+
+    for (const block of blocks) {
+      const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
+      const qLine = lines.find((l) => l.startsWith("Q:"));
+      if (!qLine) continue;
+
+      const question = qLine.replace(/^Q:\s*/, "").trim();
+      const optionLines = lines.filter((l) => /^[A-D]\)/.test(l));
+      if (optionLines.length < 2) continue;
+
+      let correctIndex = -1;
+      const options = optionLines.map((line, i) => {
+        const clean = line.replace(/^[A-D]\)\s*/, "");
+        if (clean.endsWith("*")) {
+          correctIndex = i;
+          return clean.slice(0, -1).trim();
+        }
+        return clean.trim();
+      });
+
+      if (correctIndex === -1) correctIndex = 0;
+
+      const moduleLine = lines.find((l) => l.startsWith("Module:"));
+      const moduleId = moduleLine ? moduleLine.replace(/^Module:\s*/, "").trim() : "supply-and-demand";
+
+      const difficultyLine = lines.find((l) => l.startsWith("Difficulty:"));
+      const rawDiff = difficultyLine ? difficultyLine.replace(/^Difficulty:\s*/, "").trim().toLowerCase() : "medium";
+      const difficulty = (["easy", "medium", "hard"].includes(rawDiff) ? rawDiff : "medium") as "easy" | "medium" | "hard";
+
+      const explanationLine = lines.find((l) => l.startsWith("Explanation:"));
+      const explanation = explanationLine ? explanationLine.replace(/^Explanation:\s*/, "").trim() : null;
+
+      // Pad to 4 options
+      while (options.length < 4) options.push("");
+
+      const isMicro = microModules.some((m) => m.id === moduleId);
+      parsed.push({
+        question,
+        options: options.slice(0, 4),
+        correct_index: correctIndex,
+        module_id: moduleId,
+        course: isMicro ? "micro" : "macro",
+        difficulty,
+        explanation,
+      });
+    }
+    setParsedImportQuestions(parsed);
+  }, [microModules]);
+
+  // ── CSV file handler ──
+  const handleCsvUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const csvText = ev.target?.result as string;
+      if (!csvText) return;
+      const lines = csvText.split("\n").map((l) => l.trim()).filter(Boolean);
+      if (lines.length < 2) return; // header + at least 1 row
+
+      // Parse CSV (simple: split by comma, respecting quoted strings)
+      const parseCsvLine = (line: string): string[] => {
+        const result: string[] = [];
+        let current = "";
+        let inQuotes = false;
+        for (let i = 0; i < line.length; i++) {
+          const ch = line[i];
+          if (ch === '"') {
+            inQuotes = !inQuotes;
+          } else if (ch === "," && !inQuotes) {
+            result.push(current.trim());
+            current = "";
+          } else {
+            current += ch;
+          }
+        }
+        result.push(current.trim());
+        return result;
+      };
+
+      const header = parseCsvLine(lines[0]).map((h) => h.toLowerCase());
+      const qIdx = header.indexOf("question");
+      const aIdx = header.indexOf("option_a");
+      const bIdx = header.indexOf("option_b");
+      const cIdx = header.indexOf("option_c");
+      const dIdx = header.indexOf("option_d");
+      const correctIdx = header.indexOf("correct");
+      const modIdx = header.indexOf("module");
+      const diffIdx = header.indexOf("difficulty");
+      const explIdx = header.indexOf("explanation");
+
+      if (qIdx === -1 || aIdx === -1 || bIdx === -1 || correctIdx === -1) {
+        setImportError("CSV must have columns: question, option_a, option_b, correct. Optional: option_c, option_d, module, difficulty, explanation");
+        return;
+      }
+
+      const parsed: ParsedImportQuestion[] = [];
+      for (let i = 1; i < lines.length; i++) {
+        const cols = parseCsvLine(lines[i]);
+        const question = cols[qIdx];
+        if (!question) continue;
+        const options = [
+          cols[aIdx] || "",
+          cols[bIdx] || "",
+          cIdx !== -1 ? cols[cIdx] || "" : "",
+          dIdx !== -1 ? cols[dIdx] || "" : "",
+        ];
+        const correctLetter = (cols[correctIdx] || "a").toLowerCase();
+        const correct_index = { a: 0, b: 1, c: 2, d: 3 }[correctLetter] ?? 0;
+        const moduleId = modIdx !== -1 && cols[modIdx] ? cols[modIdx] : "supply-and-demand";
+        const rawDiff = diffIdx !== -1 && cols[diffIdx] ? cols[diffIdx].toLowerCase() : "medium";
+        const difficulty = (["easy", "medium", "hard"].includes(rawDiff) ? rawDiff : "medium") as "easy" | "medium" | "hard";
+        const explanation = explIdx !== -1 && cols[explIdx] ? cols[explIdx] : null;
+        const isMicro = microModules.some((m) => m.id === moduleId);
+
+        parsed.push({
+          question,
+          options,
+          correct_index,
+          module_id: moduleId,
+          course: isMicro ? "micro" : "macro",
+          difficulty,
+          explanation,
+        });
+      }
+      setParsedImportQuestions(parsed);
+      setImportError("");
+      setImportSuccess(`Parsed ${parsed.length} question${parsed.length !== 1 ? "s" : ""} from CSV`);
+    };
+    reader.readAsText(file);
+    e.target.value = ""; // reset so same file can be re-uploaded
+  }, [microModules]);
+
+  // ── Save imported questions ──
+  const saveImportedQuestions = useCallback(async () => {
+    if (parsedImportQuestions.length === 0) return;
+    setImportSaving(true);
+    setImportError("");
+    setImportSuccess("");
+
+    try {
+      const res = await fetch("/api/teacher/questions/bulk", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ questions: parsedImportQuestions }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setImportError(data.error || "Failed to save questions");
+        return;
+      }
+      setImportSuccess(`Saved ${data.count} question${data.count !== 1 ? "s" : ""} successfully!`);
+      setParsedImportQuestions([]);
+      setImportText("");
+      // Refresh teacher questions
+      const refreshRes = await fetch("/api/teacher/questions");
+      if (refreshRes.ok) {
+        const refreshData = await refreshRes.json();
+        setTeacherQuestions(refreshData.questions || []);
+      }
+    } catch {
+      setImportError("Something went wrong saving questions.");
+    } finally {
+      setImportSaving(false);
+    }
+  }, [parsedImportQuestions]);
 
   // ── Date presets ──
   const setDatePreset = (preset: "tomorrow" | "friday" | "next_week") => {
@@ -597,111 +873,133 @@ function NewAssignmentContent() {
                     </span>
                   )}
                 </button>
+                <button
+                  type="button"
+                  onClick={() => setExamQuestionTab("import")}
+                  className="flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition-all"
+                  style={{
+                    background: examQuestionTab === "import" ? "var(--color-surface)" : "transparent",
+                    color: examQuestionTab === "import" ? "var(--color-ink)" : "var(--color-ink-faint)",
+                    boxShadow: examQuestionTab === "import" ? "0 1px 3px rgba(0,0,0,0.08)" : "none",
+                  }}
+                >
+                  Import Questions
+                </button>
               </div>
 
               {/* Tab content: EconLearn Question Bank */}
               {examQuestionTab === "bank" && (
-                <div className="space-y-5">
-                  <p className="text-[11px]" style={{ color: "var(--color-ink-faint)" }}>
+                <div className="space-y-0" ref={bankScrollRef}>
+                  <p className="text-[11px] mb-3" style={{ color: "var(--color-ink-faint)" }}>
                     These are the same high-quality questions students see in practice quizzes. Students may have already encountered these.
                   </p>
-                  {Object.entries(bankQuestionsByModule).map(([moduleId, entries]) => {
-                    const moduleIdxs = entries.map((e) => e.bankIdx);
-                    const allModuleSelected = moduleIdxs.every((idx) => selectedBankQuestionIds.includes(idx));
 
-                    return (
-                      <div key={moduleId}>
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-ink-faint)" }}>
-                              {entries[0].moduleName} ({entries.length})
-                            </span>
-                            <span
-                              className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
-                              style={{
-                                background: entries[0].course === "micro" ? "rgba(59,130,246,0.1)" : "rgba(139,92,246,0.1)",
-                                color: entries[0].course === "micro" ? "#3B82F6" : "#8B5CF6",
-                              }}
-                            >
-                              {entries[0].course === "micro" ? "Micro" : "Macro"}
-                            </span>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => toggleAllBankForModule(moduleId)}
-                            className="text-xs font-medium px-2 py-0.5 rounded transition-colors hover:bg-blue-50"
-                            style={{ color: "#3B82F6" }}
-                          >
-                            {allModuleSelected ? "Deselect All" : "Select All"}
-                          </button>
-                        </div>
-                        <div className="space-y-1.5">
-                          {entries.map((entry) => {
-                            const isSelected = selectedBankQuestionIds.includes(entry.bankIdx);
-                            return (
-                              <button
-                                key={entry.bankIdx}
-                                type="button"
-                                onClick={() => toggleBankQuestion(entry.bankIdx)}
-                                className="w-full text-left p-3 rounded-lg transition-all"
+                  {/* Jump-to-section pill nav */}
+                  <ModuleJumpNav
+                    modules={bankModuleOrder}
+                    activeModuleId={activeBankModuleId}
+                    idPrefix="bank-module"
+                  />
+
+                  <div className="space-y-5 mt-3">
+                    {Object.entries(bankQuestionsByModule).map(([moduleId, entries]) => {
+                      const moduleIdxs = entries.map((e) => e.bankIdx);
+                      const allModuleSelected = moduleIdxs.every((idx) => selectedBankQuestionIds.includes(idx));
+
+                      return (
+                        <div key={moduleId} id={`bank-module-${moduleId}`} data-bank-module={moduleId}>
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-ink-faint)" }}>
+                                {entries[0].moduleName} ({entries.length})
+                              </span>
+                              <span
+                                className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
                                 style={{
-                                  background: isSelected ? "rgba(59, 130, 246, 0.06)" : "var(--color-surface)",
-                                  border: isSelected ? "1.5px solid rgba(59, 130, 246, 0.3)" : "1.5px solid var(--color-border-subtle)",
+                                  background: entries[0].course === "micro" ? "rgba(59,130,246,0.1)" : "rgba(139,92,246,0.1)",
+                                  color: entries[0].course === "micro" ? "#3B82F6" : "#8B5CF6",
                                 }}
                               >
-                                <div className="flex items-start gap-2.5">
-                                  <div
-                                    className="mt-0.5 flex-shrink-0 w-4 h-4 rounded flex items-center justify-center transition-all"
-                                    style={{
-                                      background: isSelected ? "#3B82F6" : "transparent",
-                                      border: isSelected ? "none" : "1.5px solid var(--color-ink-faint)",
-                                    }}
-                                  >
-                                    {isSelected && (
-                                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                      </svg>
-                                    )}
-                                  </div>
-                                  <div className="min-w-0 flex-1">
-                                    <p
-                                      className="text-xs font-medium leading-snug line-clamp-2"
-                                      style={{ color: isSelected ? "#3B82F6" : "var(--color-ink)" }}
+                                {entries[0].course === "micro" ? "Micro" : "Macro"}
+                              </span>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => toggleAllBankForModule(moduleId)}
+                              className="text-xs font-medium px-2 py-0.5 rounded transition-colors hover:bg-blue-50"
+                              style={{ color: "#3B82F6" }}
+                            >
+                              {allModuleSelected ? "Deselect All" : "Select All"}
+                            </button>
+                          </div>
+                          <div className="space-y-1.5">
+                            {entries.map((entry) => {
+                              const isSelected = selectedBankQuestionIds.includes(entry.bankIdx);
+                              return (
+                                <button
+                                  key={entry.bankIdx}
+                                  type="button"
+                                  onClick={() => toggleBankQuestion(entry.bankIdx)}
+                                  className="w-full text-left p-3 rounded-lg transition-all"
+                                  style={{
+                                    background: isSelected ? "rgba(59, 130, 246, 0.06)" : "var(--color-surface)",
+                                    border: isSelected ? "1.5px solid rgba(59, 130, 246, 0.3)" : "1.5px solid var(--color-border-subtle)",
+                                  }}
+                                >
+                                  <div className="flex items-start gap-2.5">
+                                    <div
+                                      className="mt-0.5 flex-shrink-0 w-4 h-4 rounded flex items-center justify-center transition-all"
+                                      style={{
+                                        background: isSelected ? "#3B82F6" : "transparent",
+                                        border: isSelected ? "none" : "1.5px solid var(--color-ink-faint)",
+                                      }}
                                     >
-                                      {entry.question.question}
-                                    </p>
-                                    <div className="flex items-center gap-2 mt-1">
-                                      <span
-                                        className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
-                                        style={{ background: "rgba(59,130,246,0.08)", color: "#3B82F6" }}
+                                      {isSelected && (
+                                        <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                        </svg>
+                                      )}
+                                    </div>
+                                    <div className="min-w-0 flex-1">
+                                      <p
+                                        className="text-xs font-medium leading-snug line-clamp-2"
+                                        style={{ color: isSelected ? "#3B82F6" : "var(--color-ink)" }}
                                       >
-                                        EconLearn
-                                      </span>
-                                      <span
-                                        className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
-                                        style={{
-                                          background: entries[0].course === "micro" ? "rgba(59,130,246,0.08)" : "rgba(139,92,246,0.08)",
-                                          color: entries[0].course === "micro" ? "#3B82F6" : "#8B5CF6",
-                                        }}
-                                      >
-                                        {entry.moduleName}
-                                      </span>
+                                        {entry.question.question}
+                                      </p>
+                                      <div className="flex items-center gap-2 mt-1">
+                                        <span
+                                          className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
+                                          style={{ background: "rgba(59,130,246,0.08)", color: "#3B82F6" }}
+                                        >
+                                          EconLearn
+                                        </span>
+                                        <span
+                                          className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
+                                          style={{
+                                            background: entries[0].course === "micro" ? "rgba(59,130,246,0.08)" : "rgba(139,92,246,0.08)",
+                                            color: entries[0].course === "micro" ? "#3B82F6" : "#8B5CF6",
+                                          }}
+                                        >
+                                          {entry.moduleName}
+                                        </span>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              </button>
-                            );
-                          })}
+                                </button>
+                              );
+                            })}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
               )}
 
               {/* Tab content: My Custom Questions */}
               {examQuestionTab === "custom" && (
-                <div className="space-y-5">
+                <div className="space-y-0" ref={customScrollRef}>
                   {questionsLoading ? (
                     <div className="flex items-center gap-2 py-8">
                       <div
@@ -729,91 +1027,276 @@ function NewAssignmentContent() {
                     </div>
                   ) : (
                     <>
-                      <p className="text-[11px]" style={{ color: "var(--color-ink-faint)" }}>
+                      <p className="text-[11px] mb-3" style={{ color: "var(--color-ink-faint)" }}>
                         These questions are unique to you. Students have not seen them in practice mode.
                       </p>
-                      {Object.entries(questionsByModule).map(([moduleId, questions]) => {
-                        const moduleName = allModules.find((m) => m.id === moduleId)?.title || moduleId;
-                        const moduleQIds = questions.map((q) => q.id);
-                        const allModuleSelected = moduleQIds.every((id) => selectedQuestionIds.includes(id));
 
-                        return (
-                          <div key={moduleId}>
-                            <div className="flex items-center justify-between mb-2">
-                              <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-ink-faint)" }}>
-                                {moduleName} ({questions.length})
-                              </span>
-                              <button
-                                type="button"
-                                onClick={() => toggleAllForModule(moduleId)}
-                                className="text-xs font-medium px-2 py-0.5 rounded transition-colors hover:bg-blue-50"
-                                style={{ color: "#3B82F6" }}
-                              >
-                                {allModuleSelected ? "Deselect All" : "Select All"}
-                              </button>
-                            </div>
-                            <div className="space-y-1.5">
-                              {questions.map((q) => {
-                                const isSelected = selectedQuestionIds.includes(q.id);
-                                return (
-                                  <button
-                                    key={q.id}
-                                    type="button"
-                                    onClick={() => toggleQuestion(q.id)}
-                                    className="w-full text-left p-3 rounded-lg transition-all"
-                                    style={{
-                                      background: isSelected ? "rgba(59, 130, 246, 0.06)" : "var(--color-surface)",
-                                      border: isSelected ? "1.5px solid rgba(59, 130, 246, 0.3)" : "1.5px solid var(--color-border-subtle)",
-                                    }}
-                                  >
-                                    <div className="flex items-start gap-2.5">
-                                      <div
-                                        className="mt-0.5 flex-shrink-0 w-4 h-4 rounded flex items-center justify-center transition-all"
-                                        style={{
-                                          background: isSelected ? "#3B82F6" : "transparent",
-                                          border: isSelected ? "none" : "1.5px solid var(--color-ink-faint)",
-                                        }}
-                                      >
-                                        {isSelected && (
-                                          <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                          </svg>
-                                        )}
-                                      </div>
-                                      <div className="min-w-0 flex-1">
-                                        <p
-                                          className="text-xs font-medium leading-snug line-clamp-2"
-                                          style={{ color: isSelected ? "#3B82F6" : "var(--color-ink)" }}
+                      {/* Jump-to-section pill nav */}
+                      <ModuleJumpNav
+                        modules={customModuleOrder}
+                        activeModuleId={activeCustomModuleId}
+                        idPrefix="custom-module"
+                      />
+
+                      <div className="space-y-5 mt-3">
+                        {Object.entries(questionsByModule).map(([moduleId, questions]) => {
+                          const moduleName = allModules.find((m) => m.id === moduleId)?.title || moduleId;
+                          const moduleQIds = questions.map((q) => q.id);
+                          const allModuleSelected = moduleQIds.every((id) => selectedQuestionIds.includes(id));
+
+                          return (
+                            <div key={moduleId} id={`custom-module-${moduleId}`} data-custom-module={moduleId}>
+                              <div className="flex items-center justify-between mb-2">
+                                <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: "var(--color-ink-faint)" }}>
+                                  {moduleName} ({questions.length})
+                                </span>
+                                <button
+                                  type="button"
+                                  onClick={() => toggleAllForModule(moduleId)}
+                                  className="text-xs font-medium px-2 py-0.5 rounded transition-colors hover:bg-blue-50"
+                                  style={{ color: "#3B82F6" }}
+                                >
+                                  {allModuleSelected ? "Deselect All" : "Select All"}
+                                </button>
+                              </div>
+                              <div className="space-y-1.5">
+                                {questions.map((q) => {
+                                  const isSelected = selectedQuestionIds.includes(q.id);
+                                  return (
+                                    <button
+                                      key={q.id}
+                                      type="button"
+                                      onClick={() => toggleQuestion(q.id)}
+                                      className="w-full text-left p-3 rounded-lg transition-all"
+                                      style={{
+                                        background: isSelected ? "rgba(59, 130, 246, 0.06)" : "var(--color-surface)",
+                                        border: isSelected ? "1.5px solid rgba(59, 130, 246, 0.3)" : "1.5px solid var(--color-border-subtle)",
+                                      }}
+                                    >
+                                      <div className="flex items-start gap-2.5">
+                                        <div
+                                          className="mt-0.5 flex-shrink-0 w-4 h-4 rounded flex items-center justify-center transition-all"
+                                          style={{
+                                            background: isSelected ? "#3B82F6" : "transparent",
+                                            border: isSelected ? "none" : "1.5px solid var(--color-ink-faint)",
+                                          }}
                                         >
-                                          {q.question}
-                                        </p>
-                                        <div className="flex items-center gap-2 mt-1">
-                                          <span
-                                            className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
-                                            style={{ background: "rgba(16,185,129,0.08)", color: "#059669" }}
+                                          {isSelected && (
+                                            <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                                              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                            </svg>
+                                          )}
+                                        </div>
+                                        <div className="min-w-0 flex-1">
+                                          <p
+                                            className="text-xs font-medium leading-snug line-clamp-2"
+                                            style={{ color: isSelected ? "#3B82F6" : "var(--color-ink)" }}
                                           >
-                                            Custom
-                                          </span>
-                                          <span
-                                            className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
-                                            style={{
-                                              background: q.difficulty === "easy" ? "rgba(16,185,129,0.1)" : q.difficulty === "hard" ? "rgba(239,68,68,0.1)" : "rgba(245,158,11,0.1)",
-                                              color: q.difficulty === "easy" ? "#059669" : q.difficulty === "hard" ? "#dc2626" : "#d97706",
-                                            }}
-                                          >
-                                            {q.difficulty}
-                                          </span>
+                                            {q.question}
+                                          </p>
+                                          <div className="flex items-center gap-2 mt-1">
+                                            <span
+                                              className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
+                                              style={{ background: "rgba(16,185,129,0.08)", color: "#059669" }}
+                                            >
+                                              Custom
+                                            </span>
+                                            <span
+                                              className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
+                                              style={{
+                                                background: q.difficulty === "easy" ? "rgba(16,185,129,0.1)" : q.difficulty === "hard" ? "rgba(239,68,68,0.1)" : "rgba(245,158,11,0.1)",
+                                                color: q.difficulty === "easy" ? "#059669" : q.difficulty === "hard" ? "#dc2626" : "#d97706",
+                                              }}
+                                            >
+                                              {q.difficulty}
+                                            </span>
+                                          </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  </button>
-                                );
-                              })}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+
+              {/* Tab content: Import Questions */}
+              {examQuestionTab === "import" && (
+                <div className="space-y-5">
+                  <p className="text-[11px]" style={{ color: "var(--color-ink-faint)" }}>
+                    Paste questions or upload a CSV file to bulk-import custom questions into your question bank.
+                  </p>
+
+                  {/* Textarea input */}
+                  <div>
+                    <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--color-ink-muted)" }}>
+                      Paste Questions
+                    </label>
+                    <textarea
+                      value={importText}
+                      onChange={(e) => {
+                        setImportText(e.target.value);
+                        parseImportText(e.target.value);
+                      }}
+                      placeholder={`Q: What is the law of demand?\nA) As price increases, quantity demanded increases\nB) As price increases, quantity demanded decreases *\nC) Supply creates its own demand\nD) Price is determined by supply only\nModule: supply-and-demand\n---\nQ: Next question...`}
+                      rows={10}
+                      className="w-full px-4 py-3 rounded-xl text-xs font-mono focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow resize-y"
+                      style={{
+                        color: "var(--color-ink)",
+                        background: "var(--color-surface)",
+                        border: "1px solid var(--color-border)",
+                      }}
+                    />
+                    <p className="text-[10px] mt-1" style={{ color: "var(--color-ink-faint)" }}>
+                      Mark the correct answer with an asterisk (*). Separate questions with --- on its own line.
+                      Optional lines: Module: module-id, Difficulty: easy/medium/hard, Explanation: text
+                    </p>
+                  </div>
+
+                  {/* CSV upload */}
+                  <div>
+                    <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--color-ink-muted)" }}>
+                      Or Upload CSV
+                    </label>
+                    <label
+                      className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-xs font-medium cursor-pointer transition-all hover:bg-blue-50"
+                      style={{
+                        background: "var(--color-surface)",
+                        border: "1.5px dashed var(--color-border)",
+                        color: "var(--color-ink-muted)",
+                      }}
+                    >
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                      </svg>
+                      Choose .csv file
+                      <input
+                        type="file"
+                        accept=".csv"
+                        onChange={handleCsvUpload}
+                        className="hidden"
+                      />
+                    </label>
+                    <p className="text-[10px] mt-1" style={{ color: "var(--color-ink-faint)" }}>
+                      Columns: question, option_a, option_b, option_c, option_d, correct (a/b/c/d), module, difficulty, explanation
+                    </p>
+                  </div>
+
+                  {/* Error / Success messages */}
+                  {importError && (
+                    <div
+                      className="p-3 rounded-xl text-xs font-medium"
+                      style={{ background: "rgba(239,68,68,0.06)", border: "1px solid rgba(239,68,68,0.2)", color: "#dc2626" }}
+                    >
+                      {importError}
+                    </div>
+                  )}
+                  {importSuccess && (
+                    <div
+                      className="p-3 rounded-xl text-xs font-medium"
+                      style={{ background: "rgba(16,185,129,0.06)", border: "1px solid rgba(16,185,129,0.2)", color: "#059669" }}
+                    >
+                      {importSuccess}
+                    </div>
+                  )}
+
+                  {/* Preview parsed questions */}
+                  {parsedImportQuestions.length > 0 && (
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs font-semibold" style={{ color: "var(--color-ink)" }}>
+                          Preview ({parsedImportQuestions.length} question{parsedImportQuestions.length !== 1 ? "s" : ""})
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => { setParsedImportQuestions([]); setImportText(""); setImportSuccess(""); }}
+                          className="text-xs font-medium text-red-500 hover:text-red-600"
+                        >
+                          Clear
+                        </button>
+                      </div>
+                      <div className="space-y-2 max-h-80 overflow-y-auto">
+                        {parsedImportQuestions.map((q, i) => (
+                          <div
+                            key={i}
+                            className="p-3 rounded-lg"
+                            style={{
+                              background: "var(--color-surface)",
+                              border: "1.5px solid var(--color-border-subtle)",
+                            }}
+                          >
+                            <p className="text-xs font-medium mb-1.5" style={{ color: "var(--color-ink)" }}>
+                              {i + 1}. {q.question}
+                            </p>
+                            <div className="grid grid-cols-2 gap-1 mb-1.5">
+                              {q.options.map((opt, j) => (
+                                opt && (
+                                  <span
+                                    key={j}
+                                    className="text-[10px] px-2 py-1 rounded"
+                                    style={{
+                                      background: j === q.correct_index ? "rgba(16,185,129,0.08)" : "var(--color-surface-sunken)",
+                                      color: j === q.correct_index ? "#059669" : "var(--color-ink-muted)",
+                                      fontWeight: j === q.correct_index ? 600 : 400,
+                                    }}
+                                  >
+                                    {String.fromCharCode(65 + j)}) {opt}
+                                    {j === q.correct_index && " \u2713"}
+                                  </span>
+                                )
+                              ))}
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span
+                                className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
+                                style={{
+                                  background: q.course === "micro" ? "rgba(59,130,246,0.08)" : "rgba(139,92,246,0.08)",
+                                  color: q.course === "micro" ? "#3B82F6" : "#8B5CF6",
+                                }}
+                              >
+                                {q.module_id}
+                              </span>
+                              <span
+                                className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
+                                style={{
+                                  background: q.difficulty === "easy" ? "rgba(16,185,129,0.1)" : q.difficulty === "hard" ? "rgba(239,68,68,0.1)" : "rgba(245,158,11,0.1)",
+                                  color: q.difficulty === "easy" ? "#059669" : q.difficulty === "hard" ? "#dc2626" : "#d97706",
+                                }}
+                              >
+                                {q.difficulty}
+                              </span>
                             </div>
                           </div>
-                        );
-                      })}
-                    </>
+                        ))}
+                      </div>
+
+                      {/* Save All button */}
+                      <button
+                        type="button"
+                        onClick={saveImportedQuestions}
+                        disabled={importSaving}
+                        className="w-full mt-3 py-3 rounded-xl text-sm font-semibold transition-all disabled:opacity-50"
+                        style={{
+                          background: "#3B82F6",
+                          color: "white",
+                        }}
+                      >
+                        {importSaving ? (
+                          <span className="flex items-center justify-center gap-2">
+                            <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            Saving...
+                          </span>
+                        ) : (
+                          `Save All ${parsedImportQuestions.length} Question${parsedImportQuestions.length !== 1 ? "s" : ""}`
+                        )}
+                      </button>
+                    </div>
                   )}
                 </div>
               )}
@@ -1522,6 +2005,87 @@ function ToggleSetting({
           style={{ transform: enabled ? "translateX(16px)" : "translateX(0)" }}
         />
       </button>
+    </div>
+  );
+}
+
+function ModuleJumpNav({
+  modules,
+  activeModuleId,
+  idPrefix,
+}: {
+  modules: Array<{ moduleId: string; moduleName: string; course: "micro" | "macro" }>;
+  activeModuleId: string | null;
+  idPrefix: string;
+}) {
+  const navRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll the active pill into view
+  useEffect(() => {
+    if (!activeModuleId || !navRef.current) return;
+    const pill = navRef.current.querySelector(`[data-pill="${activeModuleId}"]`);
+    if (pill) {
+      pill.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    }
+  }, [activeModuleId]);
+
+  if (modules.length === 0) return null;
+
+  // Group by course for dividers
+  let lastCourse: string | null = null;
+
+  return (
+    <div
+      ref={navRef}
+      className="flex items-center gap-1.5 overflow-x-auto py-2 px-1 -mx-1 sticky top-0 z-10"
+      style={{
+        background: "var(--color-surface-sunken)",
+        borderRadius: "10px",
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+      }}
+    >
+      <style>{`[data-jump-nav]::-webkit-scrollbar { display: none; }`}</style>
+      {modules.map((mod) => {
+        const showDivider = lastCourse !== null && mod.course !== lastCourse;
+        lastCourse = mod.course;
+        const isActive = activeModuleId === mod.moduleId;
+
+        return (
+          <div key={mod.moduleId} className="flex items-center gap-1.5 flex-shrink-0" data-jump-nav>
+            {showDivider && (
+              <span
+                className="text-[9px] font-bold uppercase tracking-wider px-1.5 flex-shrink-0"
+                style={{ color: "var(--color-ink-faint)" }}
+              >
+                |
+              </span>
+            )}
+            <button
+              type="button"
+              data-pill={mod.moduleId}
+              onClick={() => {
+                const el = document.getElementById(`${idPrefix}-${mod.moduleId}`);
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="flex-shrink-0 px-2.5 py-1 rounded-full text-[10px] font-medium transition-all whitespace-nowrap"
+              style={{
+                background: isActive
+                  ? mod.course === "micro" ? "rgba(59,130,246,0.15)" : "rgba(139,92,246,0.15)"
+                  : "transparent",
+                color: isActive
+                  ? mod.course === "micro" ? "#3B82F6" : "#8B5CF6"
+                  : "var(--color-ink-faint)",
+                border: isActive
+                  ? `1px solid ${mod.course === "micro" ? "rgba(59,130,246,0.3)" : "rgba(139,92,246,0.3)"}`
+                  : "1px solid transparent",
+              }}
+            >
+              {mod.moduleName}
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 }

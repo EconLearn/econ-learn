@@ -81,6 +81,7 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
   const [fullscreenExits, setFullscreenExits] = useState(0);
   const [showTabWarning, setShowTabWarning] = useState(false);
   const [showFullscreenWarning, setShowFullscreenWarning] = useState(false);
+  const [showDevToolsWarning, setShowDevToolsWarning] = useState(false);
   const [showTimeUp, setShowTimeUp] = useState(false);
 
   const hasSubmittedRef = useRef(false);
@@ -88,6 +89,9 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
   const saveTimerRef = useRef<NodeJS.Timeout | null>(null);
   const tabSwitchesRef = useRef(0);
   const fullscreenExitsRef = useRef(0);
+  const visibilityFiredRef = useRef(false);
+  const blurFocusTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const focusLostAtRef = useRef<number | null>(null);
 
   // ── Shuffled questions (stable per session) ──
   const [orderedQuestions, setOrderedQuestions] = useState<ExamQuestion[]>([]);
@@ -205,6 +209,9 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
 
     const handleVisibilityChange = () => {
       if (document.hidden) {
+        // Set flag so blur handler can debounce within 100ms
+        visibilityFiredRef.current = true;
+        setTimeout(() => { visibilityFiredRef.current = false; }, 150);
         setTabSwitches((prev) => {
           const next = prev + 1;
           tabSwitchesRef.current = next;
@@ -309,41 +316,263 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
   }, [submitted, saveProgress]);
 
   // ── Anti-cheat: block copy, paste, right-click, keyboard shortcuts ──
+  // ── Plus: blur detection, DevTools detection, PiP blocking, resize/monitor detection,
+  // ──       drag prevention, iframe protection, focus monitoring ──
   useEffect(() => {
     if (!config?.lockdown || submitted) return;
 
+    // --- Iframe / embed protection ---
+    if (window.self !== window.top) {
+      // Page is iframed — break out
+      window.top!.location.href = window.location.href;
+    }
+    // Add CSP meta tag to block embedding by AI tools
+    const cspMeta = document.createElement("meta");
+    cspMeta.httpEquiv = "Content-Security-Policy";
+    cspMeta.content = "frame-ancestors 'self'; frame-src 'none';";
+    document.head.appendChild(cspMeta);
+
+    // --- Block context menu ---
     const blockContextMenu = (e: MouseEvent) => { e.preventDefault(); };
+
+    // --- Block keyboard shortcuts (extended) ---
     const blockKeyboard = (e: KeyboardEvent) => {
       // Block Ctrl/Cmd + C, V, F, U, P, S, A and F12
       if ((e.ctrlKey || e.metaKey) && ['c','v','f','u','p','s','a'].includes(e.key.toLowerCase())) {
         e.preventDefault();
       }
       if (e.key === 'F12') e.preventDefault();
-      // Block Ctrl+Shift+I (DevTools), Ctrl+Shift+J (Console)
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) {
+      // Block Ctrl+Shift+I (DevTools), Ctrl+Shift+J (Console), Ctrl+Shift+C (inspector)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c','s'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+      }
+      // Block Alt+Tab (where detectable)
+      if (e.altKey && e.key === 'Tab') {
+        e.preventDefault();
+      }
+      // Block Cmd+Space (Spotlight on Mac — can search AI)
+      if (e.metaKey && e.key === ' ') {
+        e.preventDefault();
+      }
+      // Block Cmd+Tab / Alt+Tab
+      if ((e.metaKey || e.altKey) && e.key === 'Tab') {
+        e.preventDefault();
+      }
+      // Block Windows/Meta key alone
+      if (e.key === 'Meta' || e.key === 'OS') {
+        e.preventDefault();
+      }
+      // Block Ctrl+Shift+S (screenshot tools)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 's') {
         e.preventDefault();
       }
     };
+
+    // --- Block clipboard ---
     const blockCopy = (e: ClipboardEvent) => { e.preventDefault(); };
+
+    // --- Block text selection ---
     const blockSelect = () => { window.getSelection()?.removeAllRanges(); };
 
+    // --- Block drag ---
+    const blockDrag = (e: DragEvent) => { e.preventDefault(); };
+
+    // --- Window blur detection (catches AI overlays, sidebar popups, floating windows) ---
+    const handleWindowBlur = () => {
+      // Debounce: if visibilitychange already fired within 100ms, skip
+      if (visibilityFiredRef.current) return;
+      // Allow 100ms for visibilitychange to potentially fire first
+      setTimeout(() => {
+        if (visibilityFiredRef.current) return;
+        setTabSwitches((prev) => {
+          const next = prev + 1;
+          tabSwitchesRef.current = next;
+          setShowTabWarning(true);
+          setTimeout(() => setShowTabWarning(false), 5000);
+          fetch(`/api/exam/${assignmentId}/save-progress`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ tab_switches: next }),
+          }).catch(() => {});
+          return next;
+        });
+      }, 100);
+    };
+
+    // --- Focus monitoring (detect overlays that steal focus > 2s without hiding page) ---
+    const handleFocusLost = () => {
+      if (document.hidden) return; // Already counted via visibilitychange
+      focusLostAtRef.current = Date.now();
+      blurFocusTimerRef.current = setTimeout(() => {
+        // If still not focused after 2s and page is visible, it's an overlay
+        if (focusLostAtRef.current && !document.hasFocus() && !document.hidden) {
+          setTabSwitches((prev) => {
+            const next = prev + 1;
+            tabSwitchesRef.current = next;
+            setShowTabWarning(true);
+            setTimeout(() => setShowTabWarning(false), 5000);
+            fetch(`/api/exam/${assignmentId}/save-progress`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ tab_switches: next }),
+            }).catch(() => {});
+            return next;
+          });
+        }
+        focusLostAtRef.current = null;
+      }, 2000);
+    };
+    const handleFocusRegained = () => {
+      focusLostAtRef.current = null;
+      if (blurFocusTimerRef.current) {
+        clearTimeout(blurFocusTimerRef.current);
+        blurFocusTimerRef.current = null;
+      }
+    };
+
+    // --- DevTools detection ---
+    let devToolsDetected = false;
+    const devToolsInterval = setInterval(() => {
+      // Method 1: Check window size differential (DevTools docked)
+      const widthDiff = window.outerWidth - window.innerWidth;
+      const heightDiff = window.outerHeight - window.innerHeight;
+      const sizeThreshold = 160;
+
+      let detected = false;
+      if (widthDiff > sizeThreshold || heightDiff > sizeThreshold) {
+        detected = true;
+      }
+
+      // Method 2: debugger timing trick
+      const before = performance.now();
+      // eslint-disable-next-line no-debugger
+      debugger;
+      const after = performance.now();
+      if (after - before > 100) {
+        detected = true;
+      }
+
+      if (detected && !devToolsDetected) {
+        devToolsDetected = true;
+        setShowDevToolsWarning(true);
+        setFullscreenExits((prev) => {
+          const next = prev + 1;
+          fullscreenExitsRef.current = next;
+          fetch(`/api/exam/${assignmentId}/save-progress`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ fullscreen_exits: next }),
+          }).catch(() => {});
+          return next;
+        });
+      } else if (!detected && devToolsDetected) {
+        devToolsDetected = false;
+        setShowDevToolsWarning(false);
+      }
+    }, 2000);
+
+    // --- Picture-in-Picture blocking ---
+    const blockPiP = (e: Event) => {
+      e.preventDefault();
+      setTabSwitches((prev) => {
+        const next = prev + 1;
+        tabSwitchesRef.current = next;
+        fetch(`/api/exam/${assignmentId}/save-progress`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ tab_switches: next }),
+        }).catch(() => {});
+        return next;
+      });
+    };
+    // Block PiP on existing and future video elements
+    const videoElements = document.querySelectorAll("video");
+    videoElements.forEach((v) => v.addEventListener("enterpictureinpicture", blockPiP));
+    // Also override requestPictureInPicture on the prototype
+    if (HTMLVideoElement.prototype.requestPictureInPicture) {
+      const origPiP = HTMLVideoElement.prototype.requestPictureInPicture;
+      HTMLVideoElement.prototype.requestPictureInPicture = function () {
+        blockPiP(new Event("enterpictureinpicture"));
+        return origPiP.call(this).then(
+          () => { document.exitPictureInPicture?.(); return null as unknown as PictureInPictureWindow; },
+          () => null as unknown as PictureInPictureWindow
+        );
+      };
+    }
+
+    // --- Multi-monitor / window resize detection during fullscreen ---
+    const handleResize = () => {
+      if (!document.fullscreenElement) return;
+      const screenW = window.screen.width;
+      const innerW = window.innerWidth;
+      // If inner width is significantly less than screen width in fullscreen, flag it
+      if (screenW - innerW > 200) {
+        setFullscreenExits((prev) => {
+          const next = prev + 1;
+          fullscreenExitsRef.current = next;
+          setShowFullscreenWarning(true);
+          setTimeout(() => setShowFullscreenWarning(false), 3000);
+          fetch(`/api/exam/${assignmentId}/save-progress`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ fullscreen_exits: next }),
+          }).catch(() => {});
+          return next;
+        });
+      }
+    };
+    // Check for multi-monitor at setup
+    const multiMonitorCheck = setInterval(() => {
+      if (window.screen.availWidth > window.screen.width * 1.5) {
+        // Likely multiple monitors — flag once
+        setFullscreenExits((prev) => {
+          const next = prev + 1;
+          fullscreenExitsRef.current = next;
+          fetch(`/api/exam/${assignmentId}/save-progress`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ fullscreen_exits: next }),
+          }).catch(() => {});
+          return next;
+        });
+        clearInterval(multiMonitorCheck);
+      }
+    }, 5000);
+
+    // --- Register all event listeners ---
     document.addEventListener("contextmenu", blockContextMenu);
     document.addEventListener("keydown", blockKeyboard);
     document.addEventListener("copy", blockCopy);
     document.addEventListener("cut", blockCopy);
     document.addEventListener("paste", blockCopy);
-    // Periodically clear text selection
+    document.addEventListener("dragstart", blockDrag);
+    window.addEventListener("blur", handleWindowBlur);
+    document.addEventListener("focusout", handleFocusLost);
+    document.addEventListener("focusin", handleFocusRegained);
+    window.addEventListener("resize", handleResize);
     const selInterval = setInterval(blockSelect, 500);
 
+    // --- Cleanup ---
     return () => {
       document.removeEventListener("contextmenu", blockContextMenu);
       document.removeEventListener("keydown", blockKeyboard);
       document.removeEventListener("copy", blockCopy);
       document.removeEventListener("cut", blockCopy);
       document.removeEventListener("paste", blockCopy);
+      document.removeEventListener("dragstart", blockDrag);
+      window.removeEventListener("blur", handleWindowBlur);
+      document.removeEventListener("focusout", handleFocusLost);
+      document.removeEventListener("focusin", handleFocusRegained);
+      window.removeEventListener("resize", handleResize);
       clearInterval(selInterval);
+      clearInterval(devToolsInterval);
+      clearInterval(multiMonitorCheck);
+      if (blurFocusTimerRef.current) clearTimeout(blurFocusTimerRef.current);
+      // Remove CSP meta tag
+      if (cspMeta.parentNode) cspMeta.parentNode.removeChild(cspMeta);
+      videoElements.forEach((v) => v.removeEventListener("enterpictureinpicture", blockPiP));
     };
-  }, [config?.lockdown, submitted]);
+  }, [config?.lockdown, submitted, assignmentId]);
 
   // ── Helpers ──
   function requestFullscreen() {
@@ -818,6 +1047,31 @@ export default function ExamPage({ params }: { params: { assignmentId: string } 
               </p>
               <p className="text-xs text-red-500 font-medium mt-2">
                 Fullscreen exits: {fullscreenExits}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── DevTools Warning (persistent) ── */}
+      <AnimatePresence>
+        {showDevToolsWarning && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[10001] flex items-center justify-center bg-black/80"
+          >
+            <div className="bg-white rounded-xl p-8 max-w-sm text-center shadow-xl">
+              <svg className="w-12 h-12 text-red-600 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+              </svg>
+              <h3 className="text-base font-bold text-red-700 mb-2">Developer Tools Detected</h3>
+              <p className="text-sm text-gray-600">
+                Close Developer Tools immediately. This violation has been recorded and your teacher has been notified.
+              </p>
+              <p className="text-xs text-red-500 font-medium mt-2">
+                Violations: {fullscreenExits}
               </p>
             </div>
           </motion.div>

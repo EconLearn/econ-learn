@@ -66,10 +66,17 @@ export async function GET(
     profileMap.set(p.id, p.display_name || "Anonymous");
   }
 
+  // Get self-study module progress (this is where free module completions are tracked)
+  const { data: moduleProgress } = await supabase
+    .from("module_progress")
+    .select("user_id, module_id, completed")
+    .in("user_id", studentIds)
+    .eq("completed", true);
+
   // Get assignment completions for progress stats (NOT quiz_results — that view is broken)
   const { data: completions } = await supabase
     .from("assignment_completions")
-    .select("student_id, assignment_id, score_percent")
+    .select("student_id, assignment_id, score")
     .in("student_id", studentIds);
 
   // Also get exam sessions for exam scores
@@ -78,6 +85,12 @@ export async function GET(
     .select("student_id, assignment_id, score, status")
     .in("student_id", studentIds)
     .eq("status", "submitted");
+
+  // Get quiz_attempts for self-study quiz scores
+  const { data: quizAttempts } = await supabase
+    .from("quiz_attempts")
+    .select("user_id, module_id, score")
+    .in("user_id", studentIds);
 
   // Get the assignments to know which module each belongs to
   const allAssignmentIds = new Set<string>();
@@ -119,12 +132,28 @@ export async function GET(
     }
   };
 
+  // Add self-study module completions
+  for (const mp of moduleProgress || []) {
+    ensureStats(mp.user_id);
+    studentStats[mp.user_id].modules.add(mp.module_id);
+  }
+
+  // Add self-study quiz scores
+  for (const qa of quizAttempts || []) {
+    ensureStats(qa.user_id);
+    studentStats[qa.user_id].modules.add(qa.module_id);
+    if (qa.score != null) {
+      studentStats[qa.user_id].totalScore += qa.score;
+      studentStats[qa.user_id].scoreCount += 1;
+    }
+  }
+
   for (const c of completions || []) {
     ensureStats(c.student_id);
     const mods = assignmentModuleMap.get(c.assignment_id) || [];
     for (const m of mods) studentStats[c.student_id].modules.add(m);
-    if (c.score_percent != null) {
-      studentStats[c.student_id].totalScore += c.score_percent;
+    if (c.score != null) {
+      studentStats[c.student_id].totalScore += c.score;
       studentStats[c.student_id].scoreCount += 1;
     }
   }

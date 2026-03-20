@@ -55,7 +55,7 @@ export default function PracticeQuiz({ questions: allQuestions, moduleId }: Prac
   const [showReview, setShowReview] = useState(false);
   const questionStartRef = useRef(Date.now());
 
-  // Fetch personal best on mount
+  // Fetch personal best on mount + mark module as accessed
   useEffect(() => {
     if (!user || !moduleId) return;
 
@@ -72,6 +72,33 @@ export default function PracticeQuiz({ questions: allQuestions, moduleId }: Prac
           setPersonalBest(data[0].score);
         }
       });
+
+    // Mark module as accessed (records last_accessed_at for "Continue Studying")
+    const courseId = ["basic-concepts", "supply-and-demand", "elasticity", "consumer-choice",
+      "production-costs", "perfect-competition", "monopoly", "monopolistic-competition",
+      "oligopoly", "factor-markets", "market-failure", "public-goods-externalities"
+    ].includes(moduleId) ? "micro" : "macro";
+
+    supabase.from("module_progress").upsert(
+      {
+        user_id: user.id,
+        module_id: moduleId,
+        course_id: courseId,
+        last_accessed_at: new Date().toISOString(),
+      },
+      { onConflict: "user_id,module_id" }
+    );
+
+    // Log activity for today
+    const today = new Date().toISOString().split("T")[0];
+    supabase.from("user_activity").upsert(
+      {
+        user_id: user.id,
+        activity_date: today,
+        modules_studied: 1,
+      },
+      { onConflict: "user_id,activity_date" }
+    );
   }, [user, moduleId]);
 
   // Save quiz attempt when completed
@@ -100,6 +127,24 @@ export default function PracticeQuiz({ questions: allQuestions, moduleId }: Prac
         quizzes_completed: 1,
       },
       { onConflict: "user_id,activity_date" }
+    );
+
+    // Mark module as accessed and completed in module_progress
+    const courseId = ["basic-concepts", "supply-and-demand", "elasticity", "consumer-choice",
+      "production-costs", "perfect-competition", "monopoly", "monopolistic-competition",
+      "oligopoly", "factor-markets", "market-failure", "public-goods-externalities"
+    ].includes(moduleId) ? "micro" : "macro";
+
+    await supabase.from("module_progress").upsert(
+      {
+        user_id: user.id,
+        module_id: moduleId,
+        course_id: courseId,
+        completed: true,
+        completed_at: new Date().toISOString(),
+        last_accessed_at: new Date().toISOString(),
+      },
+      { onConflict: "user_id,module_id" }
     );
 
     // Update personal best if higher

@@ -69,5 +69,38 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
+  // Auto-assign teacher role if not already set
+  await supabase
+    .from("profiles")
+    .update({ role: "teacher" })
+    .eq("id", user.id)
+    .in("role", ["student", "null"]);
+
+  // Also update if role is null
+  await supabase
+    .from("profiles")
+    .update({ role: "teacher" })
+    .eq("id", user.id)
+    .is("role", null);
+
+  // Auto-create a 30-day free trial subscription if none exists
+  const { data: existingSub } = await supabase
+    .from("subscriptions")
+    .select("id")
+    .eq("teacher_id", user.id)
+    .maybeSingle();
+
+  if (!existingSub) {
+    const trialEnd = new Date();
+    trialEnd.setDate(trialEnd.getDate() + 30);
+    await supabase.from("subscriptions").insert({
+      teacher_id: user.id,
+      plan: "classroom",
+      status: "trial",
+      trial_ends_at: trialEnd.toISOString(),
+      student_limit: 35,
+    });
+  }
+
   return NextResponse.json({ classroom }, { status: 201 });
 }

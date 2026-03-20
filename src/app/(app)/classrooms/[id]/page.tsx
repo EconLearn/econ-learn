@@ -452,7 +452,7 @@ export default function ClassroomDetailPage() {
         {/* Classmates Tab */}
         {activeTab === "classmates" && (
           <div>
-            {classmates.length > 1 ? (
+            {classmates.length >= 1 ? (
               <div className="card overflow-hidden">
                 {/* Sort header */}
                 <div

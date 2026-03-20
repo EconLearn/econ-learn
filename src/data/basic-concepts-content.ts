@@ -7,51 +7,49 @@ export const basicConceptsContent = {
   sections: [
     {
       heading: "Scarcity and Choice",
-      content: `Every society that has ever existed ran into the same wall: not enough stuff for everyone who wants it. That wall is **scarcity**, and it applies whether you're talking about a nomadic tribe splitting up meat or the U.S. Congress fighting over a $6.1 trillion federal budget in fiscal year 2024. Resources are finite — land, labor, capital, entrepreneurship (those are the four **factors of production**, and yes, the AP exam loves asking you to list them).
+      content: `Every society that has ever existed inevitably runs into the same barrier, that being that there isn't enough resources for everyone that might want it. That wall is known as **scarcity**, and it exists regardless of whether you're talking about a pre-modernization tribe splitting up meat or the United States Congress fighting over a $6.1 trillion federal budget. Resources can be defined through finite land, labor, capital, entrepreneurship, and note that these are the four **factors of production** and the AP exam loves asking you to list them.
 
-**Scarcity** is not the same thing as poverty. John D. Rockefeller controlled about 90% of American oil refining by the 1890s and was probably the richest person alive, but he still only had 24 hours in a day and a limited supply of political goodwill. Even billionaires face scarcity — just not the kind most of us worry about.
+Everyone deals with scarcity in one way or another. John D. Rockefeller controlled about 90% of American oil refining in the 1890s and was likely one of, if not the richest person alive, yet he still had the same 24 hours in a day that we all have. Even billionaires face scarcity, it's just not the kind that most of us worry about.
 
-Because you can't have everything, every choice comes with a **tradeoff**. Congress routes a dollar to defense, that dollar can't go to infrastructure. A student spends Friday night studying instead of working a shift. A farmer plants corn on the back forty instead of soybeans. Economics as a discipline exists because of this basic reality — people, businesses, and governments all have to allocate limited resources among competing wants, and the way they make those allocations has consequences. The Physiocrats in 1750s France were among the first to try mapping how this works systematically, and we've been building on that ever since.`,
+Ultimately, you can't have everything, every choice includes some kind of **tradeoff**. When Congress moves a dollar to defense, that dollar can't be used for infrastructure development. A student spends Friday night studying instead of working a shift. A farmer plants corn in the back of his lot instead of soybeans. Economics in its entirety exists because of this basic reality, that people, businesses, and governments all have to allocate limited resources among competing needs and desires, the way that we make those allocations always has consequences.`,
     },
     {
       heading: "Opportunity Cost",
-      content: `In 1914, Henry Ford doubled his assembly-line wages to $5 a day. The press thought he'd lost his mind. But Ford had done the math — every skilled mechanic who walked out to work for a competitor cost him more in lost production than the raise would. He was thinking in terms of **opportunity cost**, which is the value of the next-best alternative you give up when you make a choice.
+      content: `In 1914, Henry Ford doubled his assembly-line wages to $5 a day. The press thought he'd lost his mind. But Ford had done the math, every skilled mechanic who walked out to work for a competitor cost him more in lost production than the raise would, a perfect example of **opportunity cost**.
 
-This concept scales up and down. A high school graduate in 2024 choosing between a four-year university and a full-time job paying $35,000/year isn't just giving up tuition money — they're also forgoing four years of paychecks. That lost income is part of the real cost of college, and it's the kind of thing AP free-response questions will absolutely test you on.
+This concept scales up and down. A high school graduate in 2024 has to choose between a four-year university and a full-time job paying $35,000/year, to go to university is to fork over thousands of dollars, while they're also forgoing four years of paychecks. That lost income is part of the real cost of college, and it's the kind of thing AP free-response questions are likely to test you on.
 
-One mistake that shows up constantly on exams: stacking multiple forgone options together. If that graduate also turned down a $20,000/year job, the opportunity cost of college is $35,000 (the best alternative), not $55,000. You only count the single best thing you didn't do.
+One mistake that shows up constantly on exams is stacking multiple forgone options together. If that high school graduate previously mentioned also turned down a $20,000/year job, the opportunity cost of college is $35,000, because that is the best alternative, not $55,000. You can only count the single best thing you didn't do, because you can't complete both at once.
 
-When Congress put roughly $886 billion toward defense in FY2024, the **opportunity cost** was whatever that money could have funded instead — healthcare expansion, bridge repairs, rural broadband, whatever. A startup that burns its seed round hiring engineers can't also run a big marketing campaign. Every resource pointed in one direction gets pulled away from another, and getting comfortable with that idea is really what the first unit of AP Econ is about.`,
+A startup that burns its original startup assets by hiring engineers can't also run a big marketing campaign. Every resource pointed in one direction gets pulled away from another, and getting comfortable with that idea is really what unit one of AP Economics is all about.`,
     },
     {
       heading: "The Production Possibilities Curve",
       content: `During WWII, the U.S. government told automobile factories to stop making cars and start making tanks. By 1943, Detroit was producing zero new civilian vehicles — the entire industrial base had been redirected toward military output. That's a real-world example of movement along a **production possibilities curve** (PPC).
 
-A PPC plots every combination of two goods an economy can produce when it's using all its resources at full capacity. Points on the curve mean efficiency — all workers employed, all factories running. Points inside the curve mean something is going to waste (idle factories, unemployed workers — the U.S. during the Great Depression sat way inside its PPC, with unemployment over 25%). Points outside the curve? Can't get there with what you currently have.
+A PPC plots every combination of two goods an economy can produce when it's using all its resources at full capacity. Points on the curve mean efficiency, where all workers are employed, all factories are running. Points inside the curve mean something is going to waste (idle factories, unemployed workers. For example, the U.S. during the Great Depression sat way inside its PPC, with unemployment over 25%). In the same way, points outside the curve cannot exist with the capabilities that exist in that environment, making it unattainable.
 
-The curve bows outward, and the reason matters for the exam. It's **increasing opportunity costs**. When Roosevelt first shifted workers from consumer goods to munitions in 1941, the government pulled people from industries that had little to do with war production — the sacrifice in consumer goods was small. By 1944, they were drafting dairy farmers and schoolteachers into war work, and each additional tank cost a much bigger chunk of civilian output. Resources aren't perfectly interchangeable between uses (farmland makes a terrible factory floor), so the tradeoff gets steeper as you push toward the extremes.`,
+The curve bows outward, and the reason matters for the exam. It's **increasing opportunity costs**. Resources aren't perfectly interchangeable between uses, so the tradeoff gets steeper as you push toward the extremes.`,
     },
     {
       heading: "Opportunity Cost on the PPC",
-      content: `Reading opportunity cost off a PPC is really just reading the **slope**. At any point, the slope tells you how many units of the Y-axis good you surrender to get one more unit of the X-axis good.
+      content: `Reading opportunity cost off a PPC is really just reading the **slope**. At any point, the slope tells you how many units on the Y-axis you surrender to get one more unit of the good on the X-axis.
 
-Slide to the right — produce more of Good X — and the curve gets steeper. The 10th unit of X might cost you 1 unit of Y. The 50th unit might cost 4. Same good, very different price, because you keep pulling in resources that are worse and worse at making X.
+Now adjusting the graph to move more to the right, you will notice the curve will gradually become steeper. The 10th unit of X might cost you 1 unit of Y, while the 50th unit might cost 4. It's the same good, but at a very different price because you keep pulling in resources that are worse and worse at making X.
 
-There's an important wrinkle that comes up during recessions. When the economy is sitting inside the curve — like in April 2020 when U.S. unemployment spiked to 14.7% — you can actually increase output of both goods at the same time just by putting idle resources back to work. No tradeoff at all. But once you're on the curve itself, every extra unit of X means giving up some Y. That's the efficient frontier, and there's no free lunch on it.
+There's an important wrinkle that comes up during recessions. When the economy is sitting inside the curve you can actually increase output of both goods at the same time just by putting idle resources back to work. No tradeoff at all. But once you're on the curve itself, every extra unit of X means giving up some Y. That's the efficient frontier, and there's no free lunch on it.
 
-A straight-line PPC (which is rare in real life but common on AP multiple choice) means **constant opportunity costs** — each unit of X always costs the same amount of Y. That only happens if resources are perfectly adaptable between the two goods, which almost never holds outside a textbook problem.`,
+A straight-line PPC (which is rare in real life but common on AP multiple choice) means **constant opportunity costs**. It means that every unit of X always costs the exact same amount of Y. That only happens if resources are perfectly adaptable between the two goods, which almost never holds accurate outside a textbook problem.`,
     },
     {
       heading: "Comparative Advantage",
-      content: `David Ricardo published *On the Principles of Political Economy and Taxation* in 1817, and the core idea in it still drives how economists think about trade. **Comparative advantage** says that even when one country is better at making everything, both countries are still better off if they specialize and trade.
+      content: `**Comparative advantage**, simply put, states that even when one country is better at making everything, both countries will still benefit when they specialize in what they are best at and trade with one another.
 
-Ricardo used England and Portugal — Portugal could produce both wine and cloth more cheaply, but it still made sense for each country to focus on its lower-opportunity-cost good and swap. The key is always opportunity cost, not raw productivity.
+Let's take Portugal and England for example. Portugal could produce both wine and cloth way cheaper than England, yet it still made sense for each country to focus on the goods it can produce with lower opportunity costs, and then trade with what they could specialize the most in. The key is always opportunity cost, not raw productivity.
 
-Take a modern example. The U.S. could manufacture T-shirts, but every hour an American worker spends sewing cotton in 2024 is an hour not spent writing software or building semiconductors. Bangladesh gives up far less valuable output when it produces textiles, so Bangladesh has the comparative advantage in clothing.
+Take a modern example. The U.S. could manufacture T-shirts if we wanted, possibly even faster than Bangladesh. Yet every hour an American worker spends sewing cotton in 2024 is an hour not spent writing software, for example, or building semiconductors, goods that are more important to us. Bangladesh gives up far less valuable output when it produces textiles, so Bangladesh has the comparative advantage in clothing.
 
-**Absolute advantage** just means one party can produce more from the same inputs. The U.S. has an absolute advantage over Bangladesh in virtually every sector. That fact alone tells you nothing about who should specialize in what — and the AP exam will try to trip you up by confusing the two concepts.
-
-A quick numerical example: the U.S. can produce 100 units of software or 50 units of clothing. Bangladesh can produce 10 units of software or 30 units of clothing. The U.S. gives up 0.5 clothing per software unit; Bangladesh gives up 3. So the U.S. holds comparative advantage in software. For clothing, Bangladesh sacrifices only 0.33 software per unit versus 2 for the U.S., giving Bangladesh the comparative advantage there — despite being less productive across the board.
+**Absolute advantage** just means one party can produce more from the same inputs. The U.S. has an absolute advantage over Bangladesh in virtually every sector. That fact alone tells you nothing about who should specialize in what, and the AP exam will always try to confuse you by confusing the two concepts.
 
 Both sides specialize where their opportunity cost is lowest, trade with each other, and end up consuming more than either could produce alone. Ricardo worked this out over two hundred years ago and it remains one of the most powerful (and counterintuitive) results in economics.`,
     },
@@ -59,13 +57,11 @@ Both sides specialize where their opportunity cost is lowest, trade with each ot
       heading: "Shifting the PPC",
       content: `The PPC moves when an economy's productive capacity changes. Most of 20th-century economic history is about these shifts.
 
-An **outward shift** means the economy can make more of both goods — that's economic growth. The U.S. between 1945 and 1970 is a textbook case: the GI Bill sent millions of veterans to college, the Interstate Highway Act of 1956 slashed shipping costs, the baby boom expanded the labor force, and wartime R&D kept spinning off commercial technologies. Immigration, discovery of new resources (the Permian Basin oil fields, for instance), and investment in factories all push the frontier out.
+An **outward shift** of the PPC means the economy can make more of both goods due to increasing resources, and that's economic growth. The U.S. between 1945 and 1970 is a good example, it started with the GI Bill sending millions of veterans to college, the Interstate Highway Act of 1956 then slashing shipping costs. The baby boom proceeded to expand the labor force, and wartime R&D kept spinning off commercial technologies. The point is, immigration, discovery of new resources, and investment in factories all can push the frontier outwards, amongst other factors.
 
-An **inward shift** means capacity has shrunk. The Black Death wiped out roughly a third of Europe's population between 1347 and 1351 and collapsed economic output across the continent. In the modern era, natural disasters destroying infrastructure, brain drain from emigration, or resource depletion through overfishing can all pull the curve inward.
+An **inward shift** means capacity has shrunk. Let's take early Europe for example. The Black Death wiped out about a third of Europe's population between 1347 and 1351, it collapsed economies across the continent. In the modern era, when natural disasters destroy infrastructure, or when general resource depletion occurs through overfishing for example, this would all have the effect of pulling the curve inward.
 
-Shifts don't have to be even. The Green Revolution of the 1960s — when new crop varieties dramatically boosted yields in India and Mexico — pushed the food-axis endpoint outward but didn't do much for industrial output. That's a **pivot** rather than a parallel shift.
-
-What was outside the curve last year becomes reachable after an outward shift. That's really all economic growth is on a graph — the frontier moving outward over time.`,
+What was outside the curve last year becomes reachable after an outward shift. That's really all economic growth is on a graph.`,
     },
     {
       heading: "Worked Example",
@@ -73,21 +69,19 @@ What was outside the curve last year becomes reachable after an outward shift. T
 
 **Step 1 — find each country's opportunity cost of widgets.**
 
-Country A: 50 gadgets / 100 widgets = **0.5 gadgets per widget**.
-Country B: 40 gadgets / 60 widgets = **0.67 gadgets per widget**.
+Country A: 50 gadgets / 100 widgets = **0.5 gadgets per widget**. Country B: 40 gadgets / 60 widgets = **0.67 gadgets per widget**.
 
 **Step 2 — compare.** Country A gives up less (0.5 < 0.67), so **Country A has the comparative advantage in widgets**.
 
 **Now do gadgets.**
 
-Country A: 100 widgets / 50 gadgets = **2 widgets per gadget**.
-Country B: 60 widgets / 40 gadgets = **1.5 widgets per gadget**.
+Country A: 100 widgets / 50 gadgets = **2 widgets per gadget**. Country B: 60 widgets / 40 gadgets = **1.5 widgets per gadget**.
 
 **Compare.** Country B gives up less (1.5 < 2), so **Country B has the comparative advantage in gadgets**.
 
-Notice that Country A produces more of both goods in absolute terms. Doesn't matter for specialization — Ricardo figured this out in 1817 and the logic hasn't changed. Comparative advantage is about who gives up less, not who makes more.
+Notice that Country A actually produces more of both goods. It doesn't matter for specialization, though, because comparative advantage is about who gives up less, not who makes more.
 
-Country A specializes in widgets, Country B in gadgets, they trade, and both end up consuming beyond their individual PPCs. On the AP exam, if you can crank through these opportunity cost calculations quickly and cleanly, you'll pick up easy points on both MC and FRQ.`,
+Country A specializes in widgets and Country B in gadgets. When they trade they can both consume beyond their individual PPCs.`,
     },
   ],
 };
