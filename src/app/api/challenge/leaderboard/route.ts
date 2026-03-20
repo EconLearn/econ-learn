@@ -93,11 +93,17 @@ export async function GET(request: Request) {
 
       if (classrooms) {
         const classroomSchoolMap = new Map(classrooms.map((c) => [c.id, c.school_name]));
+        const profilesToUpdate: { id: string; school: string }[] = [];
         for (const m of memberships) {
           const schoolName = classroomSchoolMap.get(m.classroom_id);
           if (schoolName && profileMap[m.student_id] && !profileMap[m.student_id].school) {
             profileMap[m.student_id].school = schoolName;
+            profilesToUpdate.push({ id: m.student_id, school: schoolName });
           }
+        }
+        // Persist school names to profiles for future lookups
+        for (const p of profilesToUpdate) {
+          supabase.from("profiles").update({ school: p.school }).eq("id", p.id).is("school", null).then(() => {});
         }
       }
     }

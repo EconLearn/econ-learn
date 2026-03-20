@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
   // Find the classroom
   const { data: classroom, error: findError } = await supabase
     .from("classrooms")
-    .select("id, name, teacher_id, active")
+    .select("id, name, teacher_id, active, school_name")
     .eq("join_code", formattedCode)
     .single();
 
@@ -71,6 +71,15 @@ export async function POST(req: NextRequest) {
 
   if (joinError) {
     return NextResponse.json({ error: joinError.message }, { status: 500 });
+  }
+
+  // Copy school_name from classroom to student's profile (for leaderboard display)
+  if (classroom.school_name) {
+    await supabase
+      .from("profiles")
+      .update({ school: classroom.school_name })
+      .eq("id", user.id)
+      .is("school", null);
   }
 
   return NextResponse.json({
