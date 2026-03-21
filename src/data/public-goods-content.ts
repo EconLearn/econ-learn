@@ -3,31 +3,31 @@ import type { PracticeQuestion } from "@/data/supply-demand-content";
 export const publicGoodsContent = {
   title: "Public Goods & Externalities",
   subtitle:
-    "Toggle the tax and subsidy controls on the graph — watch deadweight loss shrink to zero when the price signal finally reflects full social costs",
+    "Toggle the tax and subsidy controls on the graph and watch deadweight loss shrink to zero when the price signal finally reflects full social costs",
   sections: [
     {
       heading: "Negative Externalities",
-      content: `Two supply curves on the graph. The lower one is private supply, the upper one is social cost. That vertical gap between them — that's the external cost per unit, and it's the whole story.
+      content: `Two supply curves on the graph. The lower one is private supply, the upper one is social cost. That vertical gap between them is the external cost per unit, and it's the whole story.
 
 A coal plant generates electricity and dumps sulfur dioxide into the atmosphere. Communities downwind end up with higher asthma rates. They never signed up for that cost.
 
-The uncompensated damage imposed on third parties is a **negative externality**. The factory looks at its own production costs — labor, fuel, machinery — when deciding how much to produce. It ignores the health damage it inflicts on everybody else. The factory's own costs are the **marginal private cost (MPC)**. Tack on the external damage and you get the **marginal social cost (MSC)**, which is always higher when a negative externality exists.
+The uncompensated damage imposed on third parties is a **negative externality**. The factory looks at its own production costs (labor, fuel, machinery) when deciding how much to produce. It ignores the health damage it inflicts on everybody else. The factory's own costs are the **marginal private cost (MPC)**. Tack on the external damage and you get the **marginal social cost (MSC)**, which is always higher when a negative externality exists.
 
-Because MSC sits above MPC, the market price ends up too low and quantity produced too high. The market **overproduces** relative to the social optimum. On the graph, look at where demand crosses private supply versus where it crosses the social cost curve — that quantity gap is the overproduction, and the shaded triangle between the two intersections represents deadweight loss. Every unit produced in that gap costs society more than the benefit it generates, but the market cranks them out anyway because the firm doesn't see those costs on its books.
+Because MSC sits above MPC, the market price ends up too low and quantity produced too high. The market **overproduces** relative to the social optimum. On the graph, look at where demand crosses private supply versus where it crosses the social cost curve. That quantity gap is the overproduction, and the shaded triangle between the two intersections represents deadweight loss. Every unit produced in that gap costs society more than the benefit it generates, but the market cranks them out anyway because the firm doesn't see those costs on its books.
 
-Carbon emissions from driving, noise from late-night construction next to apartment buildings, secondhand cigarette smoke, antibiotic resistance driven by overuse in livestock feed — all negative externalities, all producing that same pattern on the graph.`,
+Carbon emissions from driving, noise from late-night construction next to apartment buildings, secondhand cigarette smoke, and antibiotic resistance driven by overuse in livestock feed are all negative externalities producing that same pattern on the graph.`,
     },
     {
       heading: "Positive Externalities",
-      content: `Flip to the demand side of the graph. Two demand curves this time — private demand below, social benefit above. The gap is the external benefit per unit.
+      content: `Flip to the demand side of the graph. Two demand curves this time: private demand below, social benefit above. The gap is the external benefit per unit.
 
-Getting a flu vaccine protects you directly. Obviously. But it also protects everyone you'd otherwise sneeze on — your coworker in the next cubicle, the elderly neighbor you wave to every morning, the immunocompromised person on the bus. They get a benefit they never paid for.
+Getting a flu vaccine protects you directly. Obviously. But it also protects everyone you'd otherwise sneeze on: your coworker in the next cubicle, the elderly neighbor you wave to every morning, the immunocompromised person on the bus. They get a benefit they never paid for.
 
-That spillover to third parties is a **positive externality**. The buyer weighs only their own benefit — skipping a week of fever and body aches — and ignores the broader social gain their vaccination provides. The buyer's personal gain is the **marginal private benefit (MPB)**. Add in the benefit to everyone else and you get the **marginal social benefit (MSB)**.
+That spillover to third parties is a **positive externality**. The buyer weighs only their own benefit (skipping a week of fever and body aches) and ignores the broader social gain their vaccination provides. The buyer's personal gain is the **marginal private benefit (MPB)**. Add in the benefit to everyone else and you get the **marginal social benefit (MSB)**.
 
 MSB exceeds MPB, so the market price is too high and the quantity consumed too low. The market **underproduces**. On the graph, the social benefit curve floats above private demand, and the equilibrium quantity falls short of where MSB intersects supply.
 
-Education is probably the most cited example. A more educated worker earns more (that's the private benefit), but a more educated workforce also means higher productivity across firms that hire those workers, lower crime rates, and stronger civic participation — benefits that don't appear on anyone's tuition bill. R&D spending by tech companies generates knowledge spillovers that competitors and other industries can build on. Beekeepers whose bees pollinate neighboring farms produce an external benefit the beekeeper can't capture in honey prices. Home renovations that lift an entire block's property values also fit the pattern.`,
+Education is probably the most cited example. A more educated worker earns more (that's the private benefit), but a more educated workforce also means higher productivity across firms that hire those workers, lower crime rates, and stronger civic participation. None of those benefits appear on anyone's tuition bill. R&D spending by tech companies generates knowledge spillovers that competitors and other industries can build on. Beekeepers whose bees pollinate neighboring farms produce an external benefit the beekeeper can't capture in honey prices. Home renovations that lift an entire block's property values also fit the pattern.`,
     },
     {
       heading: "Pigouvian Taxes and Subsidies",
@@ -35,11 +35,11 @@ Education is probably the most cited example. A more educated worker earns more 
 
 Markets overproduce when there's a negative externality and underproduce when there's a positive one. Arthur Pigou, writing at Cambridge in 1920, proposed the fix that economists still rely on: make people face the full social cost or benefit of their actions through prices.
 
-A **Pigouvian tax** is a per-unit tax set equal to the external cost. Factory inflicts $15 of pollution damage per unit of output — tax each unit $15. The firm's private cost rises to match social cost. Supply curve shifts up until it overlaps with MSC. The market produces the socially optimal quantity on its own after that. No banning, no mandates.
+A **Pigouvian tax** is a per-unit tax set equal to the external cost. Factory inflicts $15 of pollution damage per unit of output, so you tax each unit $15. The firm's private cost rises to match social cost. Supply curve shifts up until it overlaps with MSC. The market produces the socially optimal quantity on its own after that. No banning, no mandates.
 
-A **Pigouvian subsidy** handles the positive externality case. Flu vaccines generate $15 of external benefit per dose — subsidize each dose by $15. Effective demand rises to match social benefit. Toggle the subsidy control on the graph and watch private demand climb up to meet the social benefit curve.
+A **Pigouvian subsidy** handles the positive externality case. Flu vaccines generate $15 of external benefit per dose, so you subsidize each dose by $15. Effective demand rises to match social benefit. Toggle the subsidy control on the graph and watch private demand climb up to meet the social benefit curve.
 
-The appeal of the Pigouvian approach is that it uses the market to fix the market. Adjust prices so that self-interested decisions lead to the socially optimal outcome — no central planner picking quantities, no prohibition. British Columbia introduced a carbon tax in 2008 at $10 per ton of CO2 and gradually raised it to $65 by 2023. Revenue-neutral by design: the province cut income and business taxes by equivalent amounts. That's a Pigouvian tax working in the real world, not just on a chalkboard.`,
+The appeal of the Pigouvian approach is that it uses the market to fix the market. Adjust prices so that self-interested decisions lead to the socially optimal outcome, without any central planner picking quantities or prohibition needed. British Columbia introduced a carbon tax in 2008 at $10 per ton of CO2 and gradually raised it to $65 by 2023. Revenue-neutral by design: the province cut income and business taxes by equivalent amounts. That's a Pigouvian tax working in the real world, not just on a chalkboard.`,
     },
     {
       heading: "Public Goods and the Free-Rider Problem",
@@ -47,13 +47,13 @@ The appeal of the Pigouvian approach is that it uses the market to fix the marke
 
 **Public goods** have two defining properties:
 
-**Non-excludable** — you can't keep non-payers from consuming the good. **Non-rival** — one person's consumption doesn't reduce what's available for anyone else.
+**Non-excludable** means you can't keep non-payers from consuming the good. **Non-rival** means one person's consumption doesn't reduce what's available for anyone else.
 
-National defense is the standard example on every AP exam. The military protects every person in the country at once (non-rival), and there's no way to defend selected citizens while leaving others exposed (non-excludable). Street lighting works the same way. Public fireworks on the Fourth of July. Open-source software like Linux — anyone can download and run it without reducing its availability. Basic scientific research funded by government agencies also qualifies, since published findings are available to everyone.
+National defense is the standard example on every AP exam. The military protects every person in the country at once (non-rival), and there's no way to defend selected citizens while leaving others exposed (non-excludable). Street lighting works the same way. Public fireworks on the Fourth of July. Open-source software like Linux, which anyone can download and run without reducing its availability, is another example. Basic scientific research funded by government agencies also qualifies, since published findings are available to everyone.
 
-If you benefit whether you pay or not, why would you pay? The **free-rider problem**. Everybody wants the good, everybody has an incentive to let somebody else cover the tab. If enough people free-ride, the good never gets produced — or it gets produced at a fraction of the quantity society actually wants.
+If you benefit whether you pay or not, why would you pay? The **free-rider problem**. Everybody wants the good, everybody has an incentive to let somebody else cover the tab. If enough people free-ride, the good never gets produced at all, or it gets produced at a fraction of the quantity society actually wants.
 
-Private markets fail here because there's no revenue mechanism. Governments fund public goods through compulsory taxation instead — your tax dollars pay for defense, parks, and flood levees whether you personally asked for them or not. The compulsion is the point. It solves the free-rider problem by eliminating the option to opt out of payment.`,
+Private markets fail here because there's no revenue mechanism. Governments fund public goods through compulsory taxation instead, so your tax dollars pay for defense, parks, and flood levees whether you personally asked for them or not. The compulsion is the point. It solves the free-rider problem by eliminating the option to opt out of payment.`,
     },
     {
       heading: "The Coase Theorem and Property Rights",
@@ -61,11 +61,11 @@ Private markets fail here because there's no revenue mechanism. Governments fund
 
 The **Coase theorem**: if property rights are well-defined and transaction costs are low, private parties can negotiate to the efficient outcome regardless of who initially holds the rights.
 
-Give the farmer the legal right to undamaged crops. The rancher will offer payment for grazing permission — but only up to the amount the rancher actually gains from grazing. If that gain exceeds the farmer's crop damage, they strike a deal and both end up better off. If not, the cattle stay penned. Efficient either way.
+Give the farmer the legal right to undamaged crops. The rancher will offer payment for grazing permission, but only up to the amount the rancher actually gains from grazing. If that gain exceeds the farmer's crop damage, they strike a deal and both end up better off. If not, the cattle stay penned. Efficient either way.
 
-Now flip the rights — the rancher has the legal right to let cattle roam. The farmer offers to pay the rancher to pen them, up to the value of avoided crop damage. Same efficient allocation of resources, just different distribution of money.
+Now flip the rights. The rancher has the legal right to let cattle roam. The farmer offers to pay the rancher to pen them, up to the value of avoided crop damage. Same efficient allocation of resources, just different distribution of money.
 
-In practice, though, Coase hits hard limits fast. **Transaction costs** can be enormous — try getting 200,000 people affected by factory pollution across an industrial corridor into a room to negotiate. Property rights are sometimes unclear (who owns the air above a smokestack?). Power imbalances warp the bargaining. So for large-scale externalities — climate change involves billions of people across every country on the planet — Pigouvian taxes and direct regulation remain the go-to tools. Coase works beautifully in two-party disputes with clear property lines and low negotiating costs, and it breaks down almost everywhere else.`,
+In practice, though, Coase hits hard limits fast. **Transaction costs** can be enormous. Try getting 200,000 people affected by factory pollution across an industrial corridor into a room to negotiate. Property rights are sometimes unclear (who owns the air above a smokestack?). Power imbalances warp the bargaining. So for large-scale externalities like climate change, which involves billions of people across every country on the planet, Pigouvian taxes and direct regulation remain the go-to tools. Coase works beautifully in two-party disputes with clear property lines and low negotiating costs, and it breaks down almost everywhere else.`,
     },
     {
       heading: "Worked Example: Calculating the Optimal Pigouvian Tax",
@@ -98,7 +98,7 @@ The upper curve on the graph sits exactly $15 above the lower one at every quant
 DWL = 0.5 x (Q_market - Q_optimal) x (external cost)
 DWL = 0.5 x (53.3 - 43.3) x 15 = **$75**
 
-**Pigouvian tax.** Set it at $15 per widget — equal to the external cost. Toggle the tax on the graph: private supply jumps up by $15 and lands right on top of the MSC curve. The new market equilibrium matches the social optimum. Deadweight loss disappears.
+**Pigouvian tax.** Set it at $15 per widget, equal to the external cost. Toggle the tax on the graph: private supply jumps up by $15 and lands right on top of the MSC curve. The new market equilibrium matches the social optimum. Deadweight loss disappears.
 
 Verification: with the $15 tax baked in, the new supply curve is P = 25 + 0.7Q, which is identical to MSC. The market corrects itself.`,
     },
@@ -118,7 +118,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The fisheries bear genuine costs — contaminated water, damaged catch — from production they were never part of. Negative externality by definition. (A) confuses the plant's employment with the pollution spillover; jobs are a private market outcome, not the externality at issue. (D) gets the relationship completely backwards; the fishers are victims of the pollution, not free-riders benefiting from the plant.",
+      "The fisheries bear genuine costs (contaminated water, damaged catch) from production they were never part of. Negative externality by definition. (A) confuses the plant's employment with the pollution spillover; jobs are a private market outcome, not the externality at issue. (D) gets the relationship completely backwards; the fishers are victims of the pollution, not free-riders benefiting from the plant.",
   },
   {
     id: "pg-2",
@@ -132,7 +132,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Social benefit exceeds private benefit. Buyers weigh only their own gain, so they purchase less than society would want. Underproduction. (A) describes negative externalities — that's the overproduction case.",
+      "Social benefit exceeds private benefit. Buyers weigh only their own gain, so they purchase less than society would want. Underproduction. (A) describes negative externalities, which is the overproduction case.",
   },
   {
     id: "pg-3",
@@ -146,7 +146,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "The tax closes the gap between private and social cost. That gap is the external cost per unit — the vertical distance between the two supply curves on the graph. Set the tax equal to that distance and private cost jumps up to match social cost. (A) misidentifies the goal; it's allocative efficiency, not revenue maximization. (B) would double-count private costs the firm already pays.",
+      "The tax closes the gap between private and social cost. That gap is the external cost per unit, which is the vertical distance between the two supply curves on the graph. Set the tax equal to that distance and private cost jumps up to match social cost. (A) misidentifies the goal; it's allocative efficiency, not revenue maximization. (B) would double-count private costs the firm already pays.",
   },
   {
     id: "pg-4",
@@ -159,7 +159,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "National defense is non-rival (protecting one citizen doesn't reduce protection for anyone else) and non-excludable (you can't selectively leave some citizens undefended). Toll roads are excludable — non-payers get blocked at the booth. Netflix is excludable through login credentials. Bread is both rival and excludable. Private good through and through.",
+      "National defense is non-rival (protecting one citizen doesn't reduce protection for anyone else) and non-excludable (you can't selectively leave some citizens undefended). Toll roads are excludable because non-payers get blocked at the booth. Netflix is excludable through login credentials. Bread is both rival and excludable. Private good through and through.",
   },
   {
     id: "pg-5",
@@ -173,7 +173,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Non-excludability means people enjoy the benefit without paying for it. If enough people free-ride, no private firm can generate sufficient revenue to justify producing the good. It gets underproduced or skipped entirely. (A) describes the negative externality outcome, not the public good problem. (C) has no logical basis — monopoly power doesn't solve the excludability issue that drives the free-rider problem.",
+      "Non-excludability means people enjoy the benefit without paying for it. If enough people free-ride, no private firm can generate sufficient revenue to justify producing the good. It gets underproduced or skipped entirely. (A) describes the negative externality outcome, not the public good problem. (C) has no logical basis because monopoly power doesn't solve the excludability issue that drives the free-rider problem.",
   },
   {
     id: "pg-6",
@@ -187,7 +187,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Clear property rights plus low bargaining costs — those are the two conditions Coase requires. Parties negotiate their way to efficiency without government intervention. (A) is Pigou's approach, not Coase's. (C) actually undermines Coasean bargaining; more parties means higher transaction costs, which is exactly what causes the theorem to fail.",
+      "Clear property rights plus low bargaining costs are the two conditions Coase requires. Parties negotiate their way to efficiency without government intervention. (A) is Pigou's approach, not Coase's. (C) actually undermines Coasean bargaining; more parties means higher transaction costs, which is exactly what causes the theorem to fail.",
   },
   {
     id: "pg-7",
@@ -201,7 +201,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Toggle the tax on the graph and the deadweight loss triangle disappears. The $20 tax shifts supply up by exactly the external cost, making private cost equal to social cost. The market equilibrium now sits at the socially optimal point. (A) applies to taxes on goods without externalities — those create new distortions. A Pigouvian tax corrects an existing distortion rather than creating one.",
+      "Toggle the tax on the graph and the deadweight loss triangle disappears. The $20 tax shifts supply up by exactly the external cost, making private cost equal to social cost. The market equilibrium now sits at the socially optimal point. (A) applies to taxes on goods without externalities, because those create new distortions. A Pigouvian tax corrects an existing distortion rather than creating one.",
   },
   {
     id: "pg-8",
@@ -215,7 +215,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 0,
     explanation:
-      "With a positive externality, marginal social benefit exceeds marginal private benefit. The market only reflects private benefit, settling at a price that's too high relative to social value — which prices out buyers who would generate genuine social gains — and a quantity that falls short of the optimum. A subsidy would lower the effective price and push quantity toward where society wants it. (B) describes the negative externality pattern, which is the reverse.",
+      "With a positive externality, marginal social benefit exceeds marginal private benefit. The market only reflects private benefit, settling at a price that's too high relative to social value (which prices out buyers who would generate genuine social gains) and a quantity that falls short of the optimum. A subsidy would lower the effective price and push quantity toward where society wants it. (B) describes the negative externality pattern, which is the reverse.",
   },
   {
     id: "pg-9",
@@ -229,7 +229,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "A **club good** (also called a toll good) is non-rival up to a congestion point but excludable — the provider can restrict access to paying members. HBO, a private golf course, a gated community pool. (A) requires both non-rivalry and non-excludability; excludability disqualifies it. (D) is the opposite combination — rival but non-excludable.",
+      "A **club good** (also called a toll good) is non-rival up to a congestion point but excludable, so the provider can restrict access to paying members. HBO, a private golf course, a gated community pool. (A) requires both non-rivalry and non-excludability; excludability disqualifies it. (D) is the opposite combination: rival but non-excludable.",
   },
   {
     id: "pg-10",
@@ -243,7 +243,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Common resources are rival (one cow eating the grass leaves less for the next cow) but non-excludable (herders can't be fenced out of open pasture). Each herder captures the full private benefit of adding another cow but shares the overgrazing damage with everyone else. That lopsided incentive drives overuse even though collective restraint would make everyone better off — exactly what Garrett Hardin described in his 1968 essay. (A) is wrong because if the pasture were non-rival, overgrazing wouldn't be an issue in the first place.",
+      "Common resources are rival (one cow eating the grass leaves less for the next cow) but non-excludable (herders can't be fenced out of open pasture). Each herder captures the full private benefit of adding another cow but shares the overgrazing damage with everyone else. That lopsided incentive drives overuse even though collective restraint would make everyone better off, which is exactly what Garrett Hardin described in his 1968 essay. (A) is wrong because if the pasture were non-rival, overgrazing wouldn't be an issue in the first place.",
   },
   {
     id: "pg-11",
@@ -257,7 +257,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Non-excludability is the problem. The firm can't block passing ships from seeing the beam, so captains have no reason to pay. Without revenue, the firm can't cover operating costs. (A) is wrong because lighthouse light is non-rival — hundreds of ships can use it simultaneously without diminishing it. (D) doesn't make sense; lighthouses aren't consumer goods with income elasticity.",
+      "Non-excludability is the problem. The firm can't block passing ships from seeing the beam, so captains have no reason to pay. Without revenue, the firm can't cover operating costs. (A) is wrong because lighthouse light is non-rival; hundreds of ships can use it simultaneously without diminishing it. (D) doesn't make sense; lighthouses aren't consumer goods with income elasticity.",
   },
   {
     id: "pg-12",
@@ -271,7 +271,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The free-rider problem is the market failure that triggers government involvement. Non-excludability means private firms can't charge users, so the good gets underproduced or never produced at all. Governments use compulsory taxation to solve the revenue problem — everyone pays, everyone benefits. (A) is wrong because governments aren't necessarily cheaper producers; the issue is revenue collection, not production cost. (D) confuses public goods with externalities — two different concepts entirely.",
+      "The free-rider problem is the market failure that triggers government involvement. Non-excludability means private firms can't charge users, so the good gets underproduced or never produced at all. Governments use compulsory taxation to solve the revenue problem: everyone pays, everyone benefits. (A) is wrong because governments aren't necessarily cheaper producers; the issue is revenue collection, not production cost. (D) confuses public goods with externalities, which are two different concepts entirely.",
   },
   {
     id: "pg-13",
@@ -285,7 +285,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "$14 million in benefits minus $10 million in costs equals $4 million in net social benefit. Build it. (A) focuses on individual affordability, which is a distributional question rather than the efficiency criterion that cost-benefit analysis actually uses. (C) is too sweeping — whether a park justifies its cost depends on the specific numbers, not a blanket rule. (D) invokes a jobs argument that ignores opportunity cost; $10 million spent differently would also create employment.",
+      "$14 million in benefits minus $10 million in costs equals $4 million in net social benefit. Build it. (A) focuses on individual affordability, which is a distributional question rather than the efficiency criterion that cost-benefit analysis actually uses. (C) is too sweeping because whether a park justifies its cost depends on the specific numbers, not a blanket rule. (D) invokes a jobs argument that ignores opportunity cost; $10 million spent differently would also create employment.",
   },
   {
     id: "pg-14",
@@ -299,7 +299,7 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Public goods are non-rival, meaning every consumer enjoys the same unit at the same time. To find total social benefit at any given quantity, you add up what each person is willing to pay for that unit — that's vertical summation. This is different from private goods, where market demand comes from horizontal summation (adding quantities at each price). (D) is the private good method. (A) captures only one person's valuation and ignores everyone else who also benefits simultaneously. (B) is a statistical average that doesn't correspond to any standard aggregation procedure in economics.",
+      "Public goods are non-rival, meaning every consumer enjoys the same unit at the same time. To find total social benefit at any given quantity, you add up what each person is willing to pay for that unit. That's vertical summation. This is different from private goods, where market demand comes from horizontal summation (adding quantities at each price). (D) is the private good method. (A) captures only one person's valuation and ignores everyone else who also benefits simultaneously. (B) is a statistical average that doesn't correspond to any standard aggregation procedure in economics.",
   },
   {
     id: "pg-15",
@@ -313,6 +313,6 @@ export const publicGoodsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Two forces compound each other. Non-excludability means firms can't charge non-payers, which destroys the revenue stream. On top of that, consumers strategically understate how much they value the good — why admit you'd pay $50 for flood protection if you can free-ride on your neighbor's contribution? Together, these forces push private provision far below the socially optimal level. (B) states the opposite of reality; consumers actively conceal their true preferences for public goods precisely because they can benefit without paying. (A) misidentifies the problem — it's about incentives and revenue, not production capability.",
+      "Two forces compound each other. Non-excludability means firms can't charge non-payers, which destroys the revenue stream. On top of that, consumers strategically understate how much they value the good. Why admit you'd pay $50 for flood protection if you can free-ride on your neighbor's contribution? Together, these forces push private provision far below the socially optimal level. (B) states the opposite of reality; consumers actively conceal their true preferences for public goods precisely because they can benefit without paying. (A) misidentifies the problem because it's about incentives and revenue, not production capability.",
   },
 ];

@@ -25,7 +25,7 @@ A startup that burns its original startup assets by hiring engineers can't also 
     },
     {
       heading: "The Production Possibilities Curve",
-      content: `During WWII, the U.S. government told automobile factories to stop making cars and start making tanks. By 1943, Detroit was producing zero new civilian vehicles — the entire industrial base had been redirected toward military output. That's a real-world example of movement along a **production possibilities curve** (PPC).
+      content: `During WWII, the U.S. government told automobile factories to stop making cars and start making tanks. By 1943, Detroit was producing zero new civilian vehicles. The entire industrial base had been redirected toward military output. That's a real-world example of movement along a **production possibilities curve** (PPC).
 
 A PPC plots every combination of two goods an economy can produce when it's using all its resources at full capacity. Points on the curve mean efficiency, where all workers are employed, all factories are running. Points inside the curve mean something is going to waste (idle factories, unemployed workers. For example, the U.S. during the Great Depression sat way inside its PPC, with unemployment over 25%). In the same way, points outside the curve cannot exist with the capabilities that exist in that environment, making it unattainable.
 
@@ -67,11 +67,11 @@ What was outside the curve last year becomes reachable after an outward shift. T
       heading: "Worked Example",
       content: `Country A can produce 100 widgets or 50 gadgets. Country B can produce 60 widgets or 40 gadgets. Who specializes in what?
 
-**Step 1 — find each country's opportunity cost of widgets.**
+**Step 1: find each country's opportunity cost of widgets.**
 
 Country A: 50 gadgets / 100 widgets = **0.5 gadgets per widget**. Country B: 40 gadgets / 60 widgets = **0.67 gadgets per widget**.
 
-**Step 2 — compare.** Country A gives up less (0.5 < 0.67), so **Country A has the comparative advantage in widgets**.
+**Step 2: compare.** Country A gives up less (0.5 < 0.67), so **Country A has the comparative advantage in widgets**.
 
 **Now do gadgets.**
 
@@ -99,7 +99,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Scarcity — limited resources set against unlimited wants — is the foundational reason economics exists as a discipline. Every allocation decision involves a tradeoff because of it. Option A conflates scarcity with poverty; even Rockefeller in the 1890s faced scarcity of time and political capital. Option C identifies a distribution problem, and Option D identifies market failure — both real, but neither is THE fundamental economic problem that drives the entire field.",
+      "Scarcity, meaning limited resources set against unlimited wants, is the foundational reason economics exists as a discipline. Every allocation decision involves a tradeoff because of it. Option A conflates scarcity with poverty; even Rockefeller in the 1890s faced scarcity of time and political capital. Option C identifies a distribution problem, and Option D identifies market failure. Both are real, but neither is THE fundamental economic problem that drives the entire field.",
   },
   {
     id: "bc-2",
@@ -113,7 +113,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "The concert ($20) beats the shift ($12), making it the next-best alternative. Opportunity cost = $20. Option C adds both forgone options together — a classic error on AP exams, since opportunity cost only counts the single best alternative not taken. Option A picks the inferior alternative. Option D is wishful thinking; studying absolutely carries an opportunity cost.",
+      "The concert ($20) beats the shift ($12), making it the next-best alternative. Opportunity cost = $20. Option C adds both forgone options together, which is a classic error on AP exams, since opportunity cost only counts the single best alternative not taken. Option A picks the inferior alternative. Option D is wishful thinking; studying absolutely carries an opportunity cost.",
   },
   {
     id: "bc-3",
@@ -127,7 +127,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Inside the curve means reachable but wasteful — think of the U.S. economy during the Great Depression, when a quarter of the workforce sat idle. The country could have produced more of both goods simply by employing those workers. Option A describes points ON the curve. Option B describes points OUTSIDE the curve. Option D confuses a location on the graph with a shift of the graph itself.",
+      "Inside the curve means reachable but wasteful. Think of the U.S. economy during the Great Depression, when a quarter of the workforce sat idle. The country could have produced more of both goods simply by employing those workers. Option A describes points ON the curve. Option B describes points OUTSIDE the curve. Option D confuses a location on the graph with a shift of the graph itself.",
   },
   {
     id: "bc-4",
@@ -141,7 +141,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Resources are specialized. Farmland makes a poor factory floor, and machinists make poor farmers. As production of one good expands, the economy must pull in resources increasingly ill-suited to making it — each additional unit costs more of the other good. That increasing opportunity cost creates the bowed-out shape. Option A would produce a straight line. Option B would produce an inward-bowing curve, which is not the standard shape. Option D describes a firm-level cost phenomenon unrelated to the PPC's geometry.",
+      "Resources are specialized. Farmland makes a poor factory floor, and machinists make poor farmers. As production of one good expands, the economy must pull in resources increasingly ill-suited to making it, so each additional unit costs more of the other good. That increasing opportunity cost creates the bowed-out shape. Option A would produce a straight line. Option B would produce an inward-bowing curve, which is not the standard shape. Option D describes a firm-level cost phenomenon unrelated to the PPC's geometry.",
   },
   {
     id: "bc-5",
@@ -155,7 +155,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Country X gives up 2 tons of rice per ton of cloth (200/100). Country Y gives up 1 ton of rice per ton of cloth (150/150). Since 1 < 2, Country Y sacrifices less rice and holds the comparative advantage in cloth. Option A confuses absolute advantage in rice with comparative advantage in cloth — two entirely different concepts, as Ricardo showed in 1817. Option C makes the same error using total output. Option D is arithmetically wrong.",
+      "Country X gives up 2 tons of rice per ton of cloth (200/100). Country Y gives up 1 ton of rice per ton of cloth (150/150). Since 1 < 2, Country Y sacrifices less rice and holds the comparative advantage in cloth. Option A confuses absolute advantage in rice with comparative advantage in cloth, which are two entirely different concepts, as Ricardo showed in 1817. Option C makes the same error using total output. Option D is arithmetically wrong.",
   },
   {
     id: "bc-6",
@@ -169,7 +169,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "New technology raises the ceiling on what the economy can produce, pushing the entire frontier outward — the way transistor technology expanded American productive capacity in the 1950s and 1960s. Option A is the trap: cutting unemployment moves the economy from a point inside the PPC toward the existing curve, but the curve itself stays put. The PPC represents maximum potential, and reducing unemployment means approaching that potential, not raising it. Option B changes the production mix (movement along the curve). Option D restates Option A in different words.",
+      "New technology raises the ceiling on what the economy can produce, pushing the entire frontier outward, similar to how transistor technology expanded American productive capacity in the 1950s and 1960s. Option A is the trap: cutting unemployment moves the economy from a point inside the PPC toward the existing curve, but the curve itself stays put. The PPC represents maximum potential, and reducing unemployment means approaching that potential, not raising it. Option B changes the production mix (movement along the curve). Option D restates Option A in different words.",
   },
   {
     id: "bc-7",
@@ -183,7 +183,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Specialization based on comparative advantage raises total world output. Both countries trade and end up consuming combinations beyond their own individual PPCs — something neither could reach alone. This was the core of Ricardo's 1817 argument, and it holds up two centuries later. Option A gets it half right but misses that the more productive country also gains. Option C is a widespread misconception; even a country better at everything still benefits. Option D is the opposite of what happens.",
+      "Specialization based on comparative advantage raises total world output. Both countries trade and end up consuming combinations beyond their own individual PPCs, something neither could reach alone. This was the core of Ricardo's 1817 argument, and it holds up two centuries later. Option A gets it half right but misses that the more productive country also gains. Option C is a widespread misconception; even a country better at everything still benefits. Option D is the opposite of what happens.",
   },
   {
     id: "bc-8",
@@ -197,7 +197,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Straight line means constant slope, meaning the tradeoff ratio never changes. Produce the 1st unit of X or the 100th, and you surrender the same amount of Y each time. That scenario only arises when every resource is equally suited to producing both goods. Option A describes a bowed-out (concave) PPC. Option B would produce an inward-bowing curve. Option D is nonsensical — the slope itself IS the opportunity cost, and it exists at every point.",
+      "Straight line means constant slope, meaning the tradeoff ratio never changes. Produce the 1st unit of X or the 100th, and you surrender the same amount of Y each time. That scenario only arises when every resource is equally suited to producing both goods. Option A describes a bowed-out (concave) PPC. Option B would produce an inward-bowing curve. Option D is nonsensical because the slope itself IS the opportunity cost, and it exists at every point.",
   },
   {
     id: "bc-9",
@@ -211,7 +211,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Country A produces more of both goods (80 > 30 food, 40 > 30 clothing), so it holds absolute advantage in both. For comparative advantage: Country A's cost of 1 food = 40/80 = 0.5 clothing; Country B's cost of 1 food = 30/30 = 1 clothing. Since 0.5 < 1, Country A has comparative advantage in food. Country B has comparative advantage in clothing (1 food per clothing vs. 2 for A). Option A is impossible — no country can hold comparative advantage in both goods, since comparative advantage is inherently relative. Option C is wrong because Country A's clothing output (40) exceeds Country B's (30). Option D reverses the comparative advantage calculation.",
+      "Country A produces more of both goods (80 > 30 food, 40 > 30 clothing), so it holds absolute advantage in both. For comparative advantage: Country A's cost of 1 food = 40/80 = 0.5 clothing; Country B's cost of 1 food = 30/30 = 1 clothing. Since 0.5 < 1, Country A has comparative advantage in food. Country B has comparative advantage in clothing (1 food per clothing vs. 2 for A). Option A is impossible because no country can hold comparative advantage in both goods, since comparative advantage is inherently relative. Option C is wrong because Country A's clothing output (40) exceeds Country B's (30). Option D reverses the comparative advantage calculation.",
   },
   {
     id: "bc-10",
@@ -225,7 +225,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Wheat drops from 200 to 150 tons when tractor production rises from 10 to 12. That is a loss of 50 tons for 2 additional tractors — 50 tons combined. Option A gives the per-unit cost (25 tons each), not the combined figure the question asks for. Option C confuses the remaining wheat output with the wheat sacrificed. Option D uses the original wheat level rather than the amount forgone.",
+      "Wheat drops from 200 to 150 tons when tractor production rises from 10 to 12. That is a loss of 50 tons for 2 additional tractors, so 50 tons combined. Option A gives the per-unit cost (25 tons each), not the combined figure the question asks for. Option C confuses the remaining wheat output with the wheat sacrificed. Option D uses the original wheat level rather than the amount forgone.",
   },
   {
     id: "bc-11",
@@ -239,7 +239,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "The first 5 additional units of X cost only 2 units of Y (0.4 Y per X). The next 5 cost 8 units of Y (1.6 Y per X). The per-unit sacrifice is rising — the definition of increasing opportunity costs, and the reason the PPC bows outward. Option A would require each batch of 5 extra X units to always cost the same amount of Y. Option B would mean each unit of X gets cheaper in terms of Y forgone, which is the opposite of the numbers shown. Option D describes a firm-level cost phenomenon, not a PPC tradeoff pattern.",
+      "The first 5 additional units of X cost only 2 units of Y (0.4 Y per X). The next 5 cost 8 units of Y (1.6 Y per X). The per-unit sacrifice is rising, which is the definition of increasing opportunity costs and the reason the PPC bows outward. Option A would require each batch of 5 extra X units to always cost the same amount of Y. Option B would mean each unit of X gets cheaper in terms of Y forgone, which is the opposite of the numbers shown. Option D describes a firm-level cost phenomenon, not a PPC tradeoff pattern.",
   },
   {
     id: "bc-12",
@@ -253,7 +253,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      "Country M's domestic cost of 1 laptop is 2 phones (120/60). Country N's is 1 phone (80/80). Country N has comparative advantage in laptops; Country M in phones. At a trade price of 1.5 phones per laptop, Country M obtains a laptop for 1.5 phones instead of 2 (saving 0.5), and Country N receives 1.5 phones for a laptop that domestically cost only 1 phone (gaining 0.5 extra). Both benefit. Option A ignores two centuries of gains-from-trade logic. Option B is half right — both gain, not just one. Option D miscalculates; 1.5 is less than M's domestic cost of 2, so M comes out ahead.",
+      "Country M's domestic cost of 1 laptop is 2 phones (120/60). Country N's is 1 phone (80/80). Country N has comparative advantage in laptops; Country M in phones. At a trade price of 1.5 phones per laptop, Country M obtains a laptop for 1.5 phones instead of 2 (saving 0.5), and Country N receives 1.5 phones for a laptop that domestically cost only 1 phone (gaining 0.5 extra). Both benefit. Option A ignores two centuries of gains-from-trade logic. Option B is half right, since both gain, not just one. Option D miscalculates; 1.5 is less than M's domestic cost of 2, so M comes out ahead.",
   },
   {
     id: "bc-13",
@@ -281,7 +281,7 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Marginal analysis — comparing the additional benefit to the additional cost — is the decision rule. The marginal revenue product (MRP) measures the extra revenue the worker generates; the wage is the extra cost. Hire when MRP > wage, stop when MRP = wage. Option A confuses marginal with total output. Option C is too broad; positive total revenue says nothing about whether the next hire adds more revenue than cost. Option D is wrong because a firm can profitably hire beyond the point where average product peaks, so long as MRP still exceeds the wage.",
+      "Marginal analysis (comparing the additional benefit to the additional cost) is the decision rule. The marginal revenue product (MRP) measures the extra revenue the worker generates; the wage is the extra cost. Hire when MRP > wage, stop when MRP = wage. Option A confuses marginal with total output. Option C is too broad; positive total revenue says nothing about whether the next hire adds more revenue than cost. Option D is wrong because a firm can profitably hire beyond the point where average product peaks, so long as MRP still exceeds the wage.",
   },
   {
     id: "bc-15",
@@ -295,6 +295,6 @@ export const basicConceptsQuestions: PracticeQuestion[] = [
     ],
     correctIndex: 1,
     explanation:
-      "Opportunity cost is measured in terms of what was sacrificed, not in dollars spent. By choosing the highway, the government forgoes the school system upgrade — and that forgone alternative is the opportunity cost. Option A confuses accounting cost with opportunity cost. Option C double-counts by adding both options. Option D is wrong because even borrowed funds carry opportunity costs: the $500 million directed to the highway cannot simultaneously fund the schools, and borrowing itself creates future repayment obligations.",
+      "Opportunity cost is measured in terms of what was sacrificed, not in dollars spent. By choosing the highway, the government forgoes the school system upgrade, and that forgone alternative is the opportunity cost. Option A confuses accounting cost with opportunity cost. Option C double-counts by adding both options. Option D is wrong because even borrowed funds carry opportunity costs: the $500 million directed to the highway cannot simultaneously fund the schools, and borrowing itself creates future repayment obligations.",
   },
 ];
