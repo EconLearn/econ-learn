@@ -7,9 +7,9 @@ export const marketFailureContent = {
   sections: [
     {
       heading: "When Markets Get It Wrong",
-      content: `Markets are genuinely good at allocating scarce resources most of the time. Prices carry information, voluntary exchange usually makes both sides better off, and competition drives efficiency in ways central planning never managed. But there are specific, well-documented situations where free markets produce outcomes that leave society measurably worse off than it could be. These aren't fringe cases. They show up everywhere.
+      content: `Markets are genuinely good at allocating scarce resources most of the time. Prices carry information, voluntary exchange usually makes both sides better off, and competition drives efficiency in ways central planning never managed. But there are specific situations where free markets produce outcomes that leave society measurably worse off than it could be. And these aren't fringe cases. They show up everywhere.
 
-**Market failure** is what economists call it when unregulated markets produce a socially suboptimal result. Too much of something harmful gets made, too little of something beneficial, or some product that people clearly want never gets produced at all.
+**Market failure** is what economists call it when unregulated markets produce a socially suboptimal result. Too much of something harmful gets made, too little of something beneficial gets made, or some product that people clearly want never gets produced at all.
 
 Four sources account for most of it:
 - **Externalities**: costs or benefits that spill onto people who weren't part of the transaction (the steel mill that gives the whole town asthma)
@@ -17,55 +17,55 @@ Four sources account for most of it:
 - **Information asymmetry**: one side of a deal knows things the other side doesn't, which George Akerlof formalized in a 1970 paper that eventually won him the 2001 Nobel
 - **Market power**: a firm or small group of firms controlling a market tightly enough to restrict output and jack up prices
 
-Each of these breaks a core assumption behind the competitive model. When those assumptions fail, the equilibrium price and quantity stop maximizing social welfare.`,
+Every one of these breaks a core assumption behind the competitive model. When those assumptions fail, the equilibrium price and quantity stop maximizing social welfare.`,
     },
     {
       heading: "Externalities: Costs and Benefits That Spill Over",
       content: `A steel mill in Gary, Indiana runs its furnaces and puts sulfur dioxide into the air. The owners pay for coal, labor, equipment. They do not pay for the asthma hospitalizations in surrounding neighborhoods, the corroded buildings, or the damage to nearby forests. Those costs land on people who never agreed to the deal and never saw a cent of profit. The gap between what the firm pays (**private cost**) and what society actually pays (**social cost**) is a **negative externality**.
 
-The market overproduces when a negative externality exists. Steel ends up too cheap because its price doesn't reflect the full damage being done. Buyers and sellers are happy at the market equilibrium, but society would be better off with less steel and less pollution. The socially optimal quantity is lower than what the market delivers on its own.
+The market overproduces when a negative externality exists. Steel ends up too cheap because its price doesn't reflect the full damage being done. Buyers and sellers are perfectly happy at the market equilibrium, but society would be better off with less steel and less pollution. The socially optimal quantity is lower than what the market delivers on its own.
 
-Positive externalities work the other direction. You get a flu shot in October and obviously you benefit, since you skip a week of misery. But your coworker benefits too, and your elderly neighbor, and the stranger next to you on the subway, because you're less likely to pass the virus to any of them. That spillover benefit is a **positive externality**.
+Positive externalities work the other direction. You get a flu shot in October and obviously you benefit, you skip a week of misery. But your coworker benefits too, and your elderly neighbor, and the stranger next to you on the subway, because you're less likely to pass the virus to any of them. That spillover benefit is a **positive externality**.
 
-With a positive externality, the market underproduces. Not enough people get vaccinated because each person only weighs their own benefit against the cost and ignores the benefit they're providing to everyone around them. **Social benefit** exceeds **private benefit**, so the socially optimal quantity is higher than what the market generates.
+With a positive externality the market underproduces. Not enough people get vaccinated because each person only weighs their own benefit against the cost and ignores the benefit they're providing to everyone around them. **Social benefit** exceeds **private benefit**, so the socially optimal quantity is higher than what the market generates on its own.
 
-The pattern is straightforward and it gets tested constantly on the AP exam: negative externalities mean too much production, positive externalities mean too little. If a free-response question describes a polluting factory and you write that the market "underproduces," you'll lose points.`,
+The pattern here is straightforward and it gets tested constantly on the AP exam. Negative externalities mean too much production, positive externalities mean too little. If a free-response question describes a polluting factory and you write that the market "underproduces," you will lose points.`,
     },
     {
       heading: "Public Goods and the Free-Rider Problem",
-      content: `Fireworks go off over a city on the Fourth of July. Everybody in the area can watch, whether they chipped in money or not. You can't block one person's view without blocking everyone's. Your enjoyment of the show doesn't reduce the experience for the person standing beside you.
+      content: `Fireworks go off over a city on the Fourth of July. Everybody in the area can watch, whether they chipped in money or not. You can't block one person's view without blocking everyone's. And your enjoyment of the show doesn't reduce the experience for the person standing next to you.
 
 Two features define a **public good**:
 - **Non-excludable**: there's no practical way to prevent non-payers from consuming it
 - **Non-rivalrous**: one person using it doesn't diminish what's left for others
 
-National defense is the standard textbook example. Once a country maintains a military, every resident gets the protection regardless of whether they paid taxes. A lighthouse warns every ship that passes. Clean air. Public radio signals. Basic research funded by the NSF, like the work that led to GPS (which the military developed in the 1970s and opened to civilians in 2000).
+National defense is the standard textbook example. Once a country maintains a military, every resident gets the protection regardless of whether they paid taxes. A lighthouse warns every ship that passes. Clean air. Public radio signals. Basic research funded by the NSF, like the work that led to GPS, which the military developed in the 1970s and opened to civilians in 2000.
 
-The problem is obvious: if you get the benefit without paying, why pay? That's the **free-rider problem**. Rational individuals wait for somebody else to cover the cost. If enough people free-ride, nobody pays and the good either never gets produced or gets produced in a tiny quantity relative to how much society values it.
+The problem is obvious. If you get the benefit without paying, why would you pay? That's the **free-rider problem**. Rational individuals wait for somebody else to cover the cost. If enough people free-ride, nobody pays and the good either never gets produced or gets produced in a tiny quantity relative to how much society actually values it.
 
-Private firms can't solve this. A fireworks company can't bill spectators because it has no mechanism to exclude non-payers. The market fails even though the good is clearly worth more than it costs. Governments step in and fund public goods through taxation, not because of any ideological preference for government, but because it directly addresses a specific, identifiable market failure.`,
+Private firms can't solve this. A fireworks company can't bill spectators because it has no mechanism to exclude non-payers. The market fails even though the good is clearly worth more than it costs to produce. Governments step in and fund public goods through taxation, not because of any ideological preference for government, but because it directly addresses a specific, identifiable market failure.`,
     },
     {
       heading: "Information Asymmetry: The Market for Lemons",
-      content: `Used car shopping. The seller knows if the car sat in a flood for two days, if the transmission grinds in cold weather, if the engine burns a quart of oil every 500 miles. You, the buyer, don't know any of that. One side has significantly better information than the other. That's **information asymmetry**, and it can wreck an entire market.
+      content: `You're shopping for a used car. The seller knows if the car sat in a flood for two days, if the transmission grinds in cold weather, if the engine burns a quart of oil every 500 miles. You don't know any of that. One side has significantly better information than the other. That's **information asymmetry**, and it can wreck an entire market.
 
-George Akerlof showed how in his famous 1970 paper. Suppose half the used cars out there are solid ("peaches") worth $10,000 and half are garbage ("lemons") worth $5,000. Buyers can't tell which is which, so they offer the average: $7,500. Owners of peaches know their cars are worth $10,000 and won't sell for $7,500, so they pull their cars off the market. The remaining pool tilts toward lemons. Buyers notice, lower their offer. More peach owners bail. The spiral continues until mostly lemons are left, or the market collapses entirely. This is **adverse selection**: bad products systematically driving out good ones.
+George Akerlof showed how in his famous 1970 paper. Suppose half the used cars out there are solid ("peaches") worth $10,000 and half are garbage ("lemons") worth $5,000. Buyers can't tell which is which, so they offer the average, $7,500. Owners of peaches know their cars are worth $10,000 and won't sell for $7,500, so they pull their cars off the market. The remaining pool tilts toward lemons. Buyers notice, lower their offer. More peach owners bail. The spiral continues until mostly lemons are left, or the market collapses entirely. This is **adverse selection**, bad products systematically driving out good ones.
 
-**Moral hazard** is the flip side. Here, somebody changes their behavior after a deal is done because the other party can't watch them closely enough. Buy comprehensive fire insurance and maybe you get a little careless about candles, skip the electrical inspection, put off replacing that old dryer vent, because the insurance company eats the cost now, not you. The insurer can't monitor you around the clock.
+**Moral hazard** is the flip side. Somebody changes their behavior after a deal is done because the other party can't watch them closely enough. Buy comprehensive fire insurance and maybe you get a little careless about candles, skip the electrical inspection, put off replacing that old dryer vent. Because the insurance company eats the cost now, not you. The insurer can't monitor you around the clock.
 
-Real-world fixes include warranties (the seller signals confidence by bearing repair costs), vehicle history reports like Carfax (third-party information filling the gap), occupational licensing for doctors and lawyers, and mandatory disclosure rules like the SEC's financial reporting requirements for public companies.`,
+Real-world fixes include warranties where the seller signals confidence by bearing repair costs, vehicle history reports like Carfax that fill the information gap, occupational licensing for doctors and lawyers, and mandatory disclosure rules like the SEC's financial reporting requirements for public companies.`,
     },
     {
       heading: "Market Power",
-      content: `Your cable bill runs $120 a month because in a lot of American cities, one company provides broadband. No competitor to switch to. The firm charges well above its production cost and your options are to pay or go without internet. That's **market power**, which is the ability to set prices above the competitive level.
+      content: `Your cable bill runs $120 a month because in a lot of American cities, one company provides broadband. No competitor to switch to. The firm charges well above its production cost and your options are to pay or go without internet. That's **market power**, the ability to set prices above the competitive level.
 
 In a perfectly competitive market, lots of firms sell identical products and no individual firm can move the price. Competition grinds price down to marginal cost, firms earn zero economic profit in the long run, and consumers get maximum output at the lowest sustainable price.
 
-**Monopoly** is the extreme version. One seller, no close substitutes, complete control over output. The monopolist restricts production below the competitive level, charges more, and creates **deadweight loss**, meaning mutually beneficial transactions that would have happened under competition simply don't occur.
+**Monopoly** is the extreme version. One seller, no close substitutes, complete control over output. The monopolist restricts production below the competitive level, charges more, and creates **deadweight loss**. Mutually beneficial transactions that would have happened under competition simply don't occur.
 
-**Natural monopolies** are a special case where one firm can serve the whole market at lower average cost than two or more firms could. Water utilities, electric grids, rail networks. Running two parallel sewer systems through a city would be absurdly wasteful. The monopoly is efficient on the production side (economies of scale are enormous), but without regulation the firm still exploits its pricing power. That tension between production efficiency and pricing abuse is why natural monopolies get regulated rather than broken up.
+**Natural monopolies** are a special case where one firm can serve the whole market at lower average cost than two or more firms could. Water utilities, electric grids, rail networks. Running two parallel sewer systems through a city would be absurdly wasteful. The monopoly is efficient on the production side because economies of scale are enormous, but without regulation the firm still exploits its pricing power. That tension between production efficiency and pricing abuse is why natural monopolies get regulated rather than broken up.
 
-Market power doesn't have to be absolute to cause damage. **Oligopolies**, which are markets with a handful of dominant players like U.S. airlines, wireless carriers, or social media platforms, produce outcomes somewhere between the competitive ideal and full monopoly. Usually closer to monopoly, if we're being honest about it.`,
+And market power doesn't have to be absolute to cause damage. **Oligopolies**, markets with a handful of dominant players like U.S. airlines, wireless carriers, or social media platforms, produce outcomes somewhere between the competitive ideal and full monopoly. Usually closer to monopoly, if we're being honest about it.`,
     },
     {
       heading: "What Government Can Do (and Sometimes Makes Worse)",
@@ -75,13 +75,13 @@ Market power doesn't have to be absolute to cause damage. **Oligopolies**, which
 - **Subsidies** reduce the price consumers face for goods with positive externalities (subsidized flu shots, federal Pell Grants for college tuition), pushing consumption toward the socially optimal level
 - **Regulation** can set emission caps, mandate disclosure, or require safety standards. Command-and-control rules directly limit harmful activity, though they can be blunt, forcing every plant to cut pollution by the same percentage regardless of how much it costs each one.
 - **Tradable permits** cap total pollution and let firms buy and sell allowances. A firm that can cut emissions cheaply does so and sells its extra permits to a firm where cleanup costs more. The overall cap is met at the lowest total cost to the economy.
-- **Public provision** means the government produces the good itself, funded by taxes: national defense, interstate highways, basic research through the NIH and NSF
+- **Public provision** means the government produces the good itself, funded by taxes. National defense, interstate highways, basic research through the NIH and NSF.
 
-Government intervention doesn't automatically improve things, though. **Government failure** happens when the intervention creates new inefficiencies or worsens existing ones. Regulators sometimes lack critical information about the industries they oversee. Political pressure can redirect policy toward well-connected interest groups instead of the general public. A badly designed farm subsidy might encourage overproduction of corn that sits in storage. A rent ceiling can create housing shortages worse than the affordability problem it was supposed to fix. New York's experience with rent control over the past 80 years has generated a small library of research on this.
+But government intervention doesn't automatically improve things. **Government failure** happens when the intervention creates new inefficiencies or worsens existing ones. Regulators sometimes lack critical information about the industries they oversee. Political pressure can redirect policy toward well-connected interest groups instead of the general public. A badly designed farm subsidy might encourage overproduction of corn that sits in storage. A rent ceiling can create housing shortages worse than the affordability problem it was supposed to fix. New York's experience with rent control over the past 80 years has generated a small library of research on this.
 
 **Worked example:** A factory's pollution causes $20 in health damages per unit of output. The government imposes a **Pigouvian tax** of $20 per unit. Before the tax, the firm produced 1,000 units at its private-cost equilibrium. After the tax, marginal cost jumps by $20 and output drops to 800 units, which is the social-cost equilibrium. Those 200 units that no longer get produced were units where social costs exceeded social benefits. Deadweight loss is eliminated. Tax revenue comes to $20 x 800 = $16,000, which can fund cleanup or compensate affected communities.
 
-The takeaway isn't that government always works or always fails. Markets and governments can both misallocate resources. Good policy compares the imperfect market outcome against the imperfect government alternative and picks whichever gets closer to efficiency.`,
+The takeaway here isn't that government always works or always fails. Markets and governments can both misallocate resources. Good policy compares the imperfect market outcome against the imperfect government alternative and picks whichever gets closer to efficiency.`,
     },
   ],
 };

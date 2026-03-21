@@ -7,39 +7,39 @@ export const publicGoodsContent = {
   sections: [
     {
       heading: "Negative Externalities",
-      content: `Two supply curves on the graph. The lower one is private supply, the upper one is social cost. That vertical gap between them is the external cost per unit, and it's the whole story.
+      content: `Two supply curves on the graph. The lower one is private supply, the upper one is social cost. That vertical gap between them is the external cost per unit. That gap is the whole story.
 
-A coal plant generates electricity and dumps sulfur dioxide into the atmosphere. Communities downwind end up with higher asthma rates. They never signed up for that cost.
+A coal plant generates electricity and dumps sulfur dioxide into the atmosphere. Communities downwind end up with higher asthma rates. They never signed up for that.
 
-The uncompensated damage imposed on third parties is a **negative externality**. The factory looks at its own production costs (labor, fuel, machinery) when deciding how much to produce. It ignores the health damage it inflicts on everybody else. The factory's own costs are the **marginal private cost (MPC)**. Tack on the external damage and you get the **marginal social cost (MSC)**, which is always higher when a negative externality exists.
+The uncompensated damage imposed on third parties is a **negative externality**. The factory looks at its own production costs like labor, fuel, and machinery when deciding how much to produce. It ignores the health damage it inflicts on everybody else. The factory's own costs are the **marginal private cost (MPC)**. Tack on the external damage and you get the **marginal social cost (MSC)**, which is always higher when a negative externality exists.
 
-Because MSC sits above MPC, the market price ends up too low and quantity produced too high. The market **overproduces** relative to the social optimum. On the graph, look at where demand crosses private supply versus where it crosses the social cost curve. That quantity gap is the overproduction, and the shaded triangle between the two intersections represents deadweight loss. Every unit produced in that gap costs society more than the benefit it generates, but the market cranks them out anyway because the firm doesn't see those costs on its books.
+Because MSC sits above MPC, the market price ends up too low and quantity produced too high. The market **overproduces** relative to the social optimum. On the graph, look at where demand crosses private supply versus where it crosses the social cost curve. That quantity gap is the overproduction, and the shaded triangle between the two intersections represents deadweight loss. Every unit produced in that gap costs society more than the benefit it generates. But the market cranks them out anyway because the firm doesn't see those costs on its books.
 
-Carbon emissions from driving, noise from late-night construction next to apartment buildings, secondhand cigarette smoke, and antibiotic resistance driven by overuse in livestock feed are all negative externalities producing that same pattern on the graph.`,
+Carbon emissions from driving, noise from late-night construction next to apartment buildings, secondhand cigarette smoke, antibiotic resistance driven by overuse in livestock feed. All negative externalities producing that same pattern on the graph.`,
     },
     {
       heading: "Positive Externalities",
-      content: `Flip to the demand side of the graph. Two demand curves this time: private demand below, social benefit above. The gap is the external benefit per unit.
+      content: `Flip to the demand side of the graph. Two demand curves this time, private demand below, social benefit above. The gap is the external benefit per unit.
 
-Getting a flu vaccine protects you directly. Obviously. But it also protects everyone you'd otherwise sneeze on: your coworker in the next cubicle, the elderly neighbor you wave to every morning, the immunocompromised person on the bus. They get a benefit they never paid for.
+Getting a flu vaccine protects you directly. Obviously. But it also protects everyone you'd otherwise sneeze on. Your coworker in the next cubicle, the elderly neighbor you wave to every morning, the immunocompromised person on the bus. They get a benefit they never paid for.
 
-That spillover to third parties is a **positive externality**. The buyer weighs only their own benefit (skipping a week of fever and body aches) and ignores the broader social gain their vaccination provides. The buyer's personal gain is the **marginal private benefit (MPB)**. Add in the benefit to everyone else and you get the **marginal social benefit (MSB)**.
+That spillover to third parties is a **positive externality**. The buyer weighs only their own benefit, skipping a week of fever and body aches, and ignores the broader social gain their vaccination provides. The buyer's personal gain is the **marginal private benefit (MPB)**. Add in the benefit to everyone else and you get the **marginal social benefit (MSB)**.
 
 MSB exceeds MPB, so the market price is too high and the quantity consumed too low. The market **underproduces**. On the graph, the social benefit curve floats above private demand, and the equilibrium quantity falls short of where MSB intersects supply.
 
-Education is probably the most cited example. A more educated worker earns more (that's the private benefit), but a more educated workforce also means higher productivity across firms that hire those workers, lower crime rates, and stronger civic participation. None of those benefits appear on anyone's tuition bill. R&D spending by tech companies generates knowledge spillovers that competitors and other industries can build on. Beekeepers whose bees pollinate neighboring farms produce an external benefit the beekeeper can't capture in honey prices. Home renovations that lift an entire block's property values also fit the pattern.`,
+Education is probably the most cited example. A more educated worker earns more, that's the private benefit. But a more educated workforce also means higher productivity across firms that hire those workers, lower crime rates, and stronger civic participation. None of those benefits appear on anyone's tuition bill. R&D spending by tech companies generates knowledge spillovers that competitors and other industries can build on. Beekeepers whose bees pollinate neighboring farms produce an external benefit the beekeeper can't capture in honey prices. Home renovations that lift an entire block's property values also fit the pattern.`,
     },
     {
       heading: "Pigouvian Taxes and Subsidies",
       content: `Toggle the tax control on the graph. The private supply curve jumps up to meet the social cost curve. Deadweight loss vanishes.
 
-Markets overproduce when there's a negative externality and underproduce when there's a positive one. Arthur Pigou, writing at Cambridge in 1920, proposed the fix that economists still rely on: make people face the full social cost or benefit of their actions through prices.
+Markets overproduce when there's a negative externality and underproduce when there's a positive one. Arthur Pigou, writing at Cambridge in 1920, proposed the fix that economists still rely on. Make people face the full social cost or benefit of their actions through prices.
 
 A **Pigouvian tax** is a per-unit tax set equal to the external cost. Factory inflicts $15 of pollution damage per unit of output, so you tax each unit $15. The firm's private cost rises to match social cost. Supply curve shifts up until it overlaps with MSC. The market produces the socially optimal quantity on its own after that. No banning, no mandates.
 
 A **Pigouvian subsidy** handles the positive externality case. Flu vaccines generate $15 of external benefit per dose, so you subsidize each dose by $15. Effective demand rises to match social benefit. Toggle the subsidy control on the graph and watch private demand climb up to meet the social benefit curve.
 
-The appeal of the Pigouvian approach is that it uses the market to fix the market. Adjust prices so that self-interested decisions lead to the socially optimal outcome, without any central planner picking quantities or prohibition needed. British Columbia introduced a carbon tax in 2008 at $10 per ton of CO2 and gradually raised it to $65 by 2023. Revenue-neutral by design: the province cut income and business taxes by equivalent amounts. That's a Pigouvian tax working in the real world, not just on a chalkboard.`,
+The whole appeal of the Pigouvian approach is that it uses the market to fix the market. You adjust prices so that self-interested decisions lead to the socially optimal outcome, no central planner picking quantities, no prohibition needed. British Columbia introduced a carbon tax in 2008 at $10 per ton of CO2 and gradually raised it to $65 by 2023. Revenue-neutral by design, the province cut income and business taxes by equivalent amounts. That's a Pigouvian tax working in the real world, not just on a chalkboard.`,
     },
     {
       heading: "Public Goods and the Free-Rider Problem",
@@ -49,23 +49,23 @@ The appeal of the Pigouvian approach is that it uses the market to fix the marke
 
 **Non-excludable** means you can't keep non-payers from consuming the good. **Non-rival** means one person's consumption doesn't reduce what's available for anyone else.
 
-National defense is the standard example on every AP exam. The military protects every person in the country at once (non-rival), and there's no way to defend selected citizens while leaving others exposed (non-excludable). Street lighting works the same way. Public fireworks on the Fourth of July. Open-source software like Linux, which anyone can download and run without reducing its availability, is another example. Basic scientific research funded by government agencies also qualifies, since published findings are available to everyone.
+National defense is the standard example on every AP exam. The military protects every person in the country at once, that's non-rival, and there's no way to defend selected citizens while leaving others exposed, that's non-excludable. Street lighting works the same way. Public fireworks on the Fourth of July. Open-source software like Linux, which anyone can download and run without reducing its availability, is another example. Basic scientific research funded by government agencies also qualifies since published findings are available to everyone.
 
-If you benefit whether you pay or not, why would you pay? The **free-rider problem**. Everybody wants the good, everybody has an incentive to let somebody else cover the tab. If enough people free-ride, the good never gets produced at all, or it gets produced at a fraction of the quantity society actually wants.
+If you benefit whether you pay or not, why would you pay? That's the **free-rider problem**. Everybody wants the good, everybody has an incentive to let somebody else cover the tab. If enough people free-ride, the good never gets produced at all, or it gets produced at a fraction of the quantity society actually wants.
 
 Private markets fail here because there's no revenue mechanism. Governments fund public goods through compulsory taxation instead, so your tax dollars pay for defense, parks, and flood levees whether you personally asked for them or not. The compulsion is the point. It solves the free-rider problem by eliminating the option to opt out of payment.`,
     },
     {
       heading: "The Coase Theorem and Property Rights",
-      content: `A rancher's cattle trample a neighboring farmer's crops. The rancher profits. The farmer loses. Straightforward negative externality. Ronald Coase argued in a famous 1960 paper that under certain conditions, the government doesn't need to get involved at all.
+      content: `A rancher's cattle trample a neighboring farmer's crops. The rancher profits. The farmer loses. Straightforward negative externality. But Ronald Coase argued in a famous 1960 paper that under certain conditions, the government doesn't need to get involved at all.
 
-The **Coase theorem**: if property rights are well-defined and transaction costs are low, private parties can negotiate to the efficient outcome regardless of who initially holds the rights.
+The **Coase theorem** says that if property rights are well-defined and transaction costs are low, private parties can negotiate to the efficient outcome regardless of who initially holds the rights.
 
 Give the farmer the legal right to undamaged crops. The rancher will offer payment for grazing permission, but only up to the amount the rancher actually gains from grazing. If that gain exceeds the farmer's crop damage, they strike a deal and both end up better off. If not, the cattle stay penned. Efficient either way.
 
 Now flip the rights. The rancher has the legal right to let cattle roam. The farmer offers to pay the rancher to pen them, up to the value of avoided crop damage. Same efficient allocation of resources, just different distribution of money.
 
-In practice, though, Coase hits hard limits fast. **Transaction costs** can be enormous. Try getting 200,000 people affected by factory pollution across an industrial corridor into a room to negotiate. Property rights are sometimes unclear (who owns the air above a smokestack?). Power imbalances warp the bargaining. So for large-scale externalities like climate change, which involves billions of people across every country on the planet, Pigouvian taxes and direct regulation remain the go-to tools. Coase works beautifully in two-party disputes with clear property lines and low negotiating costs, and it breaks down almost everywhere else.`,
+In practice, though, Coase hits hard limits fast. **Transaction costs** can be enormous. Try getting 200,000 people affected by factory pollution across an industrial corridor into a room to negotiate. Property rights are sometimes unclear, like who owns the air above a smokestack. Power imbalances warp the bargaining. So for large-scale externalities like climate change, which involves billions of people across every country on the planet, Pigouvian taxes and direct regulation remain the go-to tools. Coase works beautifully in two-party disputes with clear property lines and low negotiating costs. It breaks down almost everywhere else.`,
     },
     {
       heading: "Worked Example: Calculating the Optimal Pigouvian Tax",
@@ -78,13 +78,13 @@ In practice, though, Coase hits hard limits fast. **Transaction costs** can be e
 **Q_market = 53.3 units**
 **P_market = 10 + 0.7(53.3) = $47.33**
 
-That intersection on the graph is where the market settles when no one accounts for the $15 external cost.
+That intersection on the graph is where the market settles when nobody accounts for the $15 external cost.
 
 **Social cost curve.** MSC = MPC + external cost:
 
 MSC = (10 + 0.7Q) + 15 = **25 + 0.7Q**
 
-The upper curve on the graph sits exactly $15 above the lower one at every quantity. Parallel shift.
+The upper curve on the graph sits exactly $15 above the lower one at every quantity. Just a parallel shift.
 
 **Socially optimal outcome.** Set MSC = Demand:
 
@@ -93,12 +93,12 @@ The upper curve on the graph sits exactly $15 above the lower one at every quant
 **Q_optimal = 43.3 units**
 **P_optimal = 90 - 0.8(43.3) = $55.33**
 
-**Deadweight loss** from the externality (the shaded triangle):
+**Deadweight loss** from the externality, that shaded triangle:
 
 DWL = 0.5 x (Q_market - Q_optimal) x (external cost)
 DWL = 0.5 x (53.3 - 43.3) x 15 = **$75**
 
-**Pigouvian tax.** Set it at $15 per widget, equal to the external cost. Toggle the tax on the graph: private supply jumps up by $15 and lands right on top of the MSC curve. The new market equilibrium matches the social optimum. Deadweight loss disappears.
+**Pigouvian tax.** Set it at $15 per widget, equal to the external cost. Toggle the tax on the graph and private supply jumps up by $15, lands right on top of the MSC curve. The new market equilibrium matches the social optimum. Deadweight loss disappears.
 
 Verification: with the $15 tax baked in, the new supply curve is P = 25 + 0.7Q, which is identical to MSC. The market corrects itself.`,
     },

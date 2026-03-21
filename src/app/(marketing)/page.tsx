@@ -816,7 +816,7 @@ export default function HomePage() {
               </div>
               <span className="text-sm opacity-60">Built for AP Economics students</span>
             </div>
-            <p className="text-sm opacity-60">&copy; 2024-2026 Jude Wallis. All rights reserved. EconLearn&trade;</p>
+            <p className="text-sm opacity-60">&copy; 2026 Jude Wallis. All rights reserved. EconLearn&trade;</p>
           </div>
         </div>
       </footer>

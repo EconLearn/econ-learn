@@ -4,11 +4,11 @@ export const monopolyContent = {
   sections: [
     {
       heading: "The Only Seller",
-      content: `Back in the late 1800s, plenty of economists figured monopolies would sort themselves out, since high profits would lure competitors and the dominance would crack. Then Standard Oil happened. John D. Rockefeller controlled over 90% of U.S. oil refining by 1880, and he held that position for decades using railroad rebates, predatory pricing, and aggressive horizontal integration. Competitors couldn't get a foothold because Rockefeller had systematically locked down the supply chain.
+      content: `Back in the late 1800s, a lot of economists figured monopolies would sort themselves out. High profits would lure competitors, the dominance would crack, problem solved. Then Standard Oil happened. John D. Rockefeller controlled over 90% of U.S. oil refining by 1880, and he held that grip for decades through railroad rebates, predatory pricing, and aggressive horizontal integration. Competitors couldn't get a foothold because Rockefeller had systematically locked down the entire supply chain.
 
-A **monopolist** is the sole seller in a market with no close substitutes. Unlike a wheat farmer competing against thousands of nearly identical operations, the monopolist faces zero competition and has full control over price, making it a **price maker**.
+A **monopolist** is the sole seller in a market with no close substitutes. Unlike a wheat farmer competing against thousands of nearly identical operations, the monopolist faces zero competition and has full control over price. That makes it a **price maker**.
 
-Pfizer holding a patent on a blockbuster cancer drug. De Beers controlling 85% of the world's rough diamond supply through the 1990s. Your local electric utility. In each case, buyers either pay the asking price or they go without.
+Pfizer holding a patent on a blockbuster cancer drug. De Beers controlling 85% of the world's rough diamond supply through the 1990s. Your local electric utility. In every one of these cases, buyers either fork over the asking price or they go without.
 
 What keeps competitors out? A **barrier to entry**:
 - **Patents** give pharmaceutical companies 20 years of exclusivity. Humira earned AbbVie over $200 billion before its patent expired in 2023
@@ -16,44 +16,44 @@ What keeps competitors out? A **barrier to entry**:
 - Massive startup costs, because nobody casually builds a second electrical grid to serve the same city
 - Government franchise: your local water utility probably holds a legal monopoly granted by the municipality
 
-Take away the barrier and monopoly power collapses. That point comes up constantly on AP free-response questions about long-run monopoly behavior, and students who don't emphasize it lose points they shouldn't.`,
+Yank away the barrier and monopoly power collapses. That point comes up constantly on AP free-response questions about long-run monopoly behavior, and students who don't hammer it lose points they shouldn't.`,
     },
     {
       heading: "Why MR Is Less Than Price",
-      content: `Suppose a firm sells 10 units at $50 each. To sell an 11th unit, the price has to drop to $49, and not just for the new buyer. The demand curve slopes down, so the price falls to $49 on *all* units. The firm gains $49 from the additional sale but loses $1 on each of the 10 units it was already selling, because those buyers now pay $49 instead of $50. Net gain: $49 minus $10 = $39. That $39 is the **marginal revenue**, and it's well below the $49 price.
+      content: `Say a firm is selling 10 units at $50 each. To move an 11th unit, the price has to drop to $49, and not just for the new buyer. The demand curve slopes down, so the price falls to $49 on *all* units. The firm picks up $49 from the additional sale but loses $1 on each of the 10 units it was already selling, because those buyers now pay $49 instead of $50. Net gain: $49 minus $10 = $39. That $39 is the **marginal revenue**, and it sits well below the $49 price.
 
-For a monopolist, MR is always less than price.
+For a monopolist, MR is always less than price. Always.
 
-A perfectly competitive firm never deals with this because it sells at the market price without moving it. The monopolist *is* the market, so every output decision shifts the price for every buyer. On the graph, the **MR curve** lies below the **demand curve**. With a linear demand curve, both start at the same vertical intercept, but MR falls twice as fast. That widening gap between price and MR is what drives monopoly profit maximization, the deadweight loss triangle, and basically everything else in this unit.`,
+A perfectly competitive firm never has to worry about this because it sells at the market price without moving it. But the monopolist *is* the market, so every output decision shifts the price for every single buyer. On the graph, the **MR curve** lies below the **demand curve**. With a linear demand curve, both start at the same vertical intercept, but MR drops twice as fast. That widening gap between price and MR is what drives monopoly profit maximization, the deadweight loss triangle, and basically everything else you'll see in this unit.`,
     },
     {
       heading: "Profit Maximization: MR = MC",
-      content: `The monopolist follows the same profit rule as any firm: keep producing as long as the next unit brings in more revenue than it costs. Stop when **MR = MC**.
+      content: `The monopolist follows the same profit rule as any firm: keep producing as long as the next unit brings in more revenue than it costs to make. Stop when **MR = MC**.
 
-The mistake that wrecks exam scores is confusing the quantity decision with the price decision. On a free-response, if they ask you to identify the monopoly price and you point to where MR crosses MC on the vertical axis, that's wrong. Two separate steps:
+The mistake that wrecks exam scores here is mixing up the quantity decision with the price decision. On a free-response, if they ask you to identify the monopoly price and you point to where MR crosses MC on the vertical axis, that's wrong. There are two separate steps:
 
 1. Find the quantity where MR = MC. Call it Qm.
-2. Go *up* to the demand curve at Qm to read the maximum price buyers will pay. That price is Pm.
+2. Go *up* to the demand curve at Qm to read the maximum price buyers will pay. That's Pm.
 
-Pfizer doesn't look at where MR = MC and charge that dollar amount. Pfizer determines the output level where MR = MC, then checks the demand curve to see what patients (or insurance companies) will actually pay for that quantity. The price ends up above MC, sometimes far above it.
+Think about it this way. Pfizer doesn't look at where MR = MC and just charge that dollar amount. Pfizer figures out the output level where MR = MC, then checks the demand curve to see what patients (or insurance companies) will actually pay for that quantity. The price ends up above MC, sometimes way above it.
 
-The result: **less output** and a **higher price** than what a competitive market would produce. Competition pushes production out to where P = MC. The monopolist stops well short of that, leaving willing buyers unserved.`,
+The result: **less output** and a **higher price** than what a competitive market would produce. Competition pushes production all the way out to where P = MC. The monopolist stops well short of that, leaving willing buyers unserved.`,
     },
     {
       heading: "Deadweight Loss",
-      content: `A patient would pay $200 for a drug that costs $30 to produce. Under competition, that transaction happens and both sides benefit. Under monopoly, the firm prices the drug at $250 and the patient walks away with nothing. The $170 of potential surplus that would have existed is just gone. Neither party captures it.
+      content: `A patient would pay $200 for a drug that costs $30 to produce. Under competition, that transaction happens and both sides walk away better off. Under monopoly, the firm slaps a $250 price tag on it and the patient walks away with nothing. The $170 of potential surplus that would have existed? Just gone. Neither party captures it.
 
-Add up that lost surplus across every unit between the monopoly quantity (Qm) and the competitive quantity (Qc), and you get the **deadweight loss (DWL)** triangle. On the graph, it sits between those two output levels, representing trades where buyers valued the good above production cost but got priced out.
+Add up all that lost surplus across every unit between the monopoly quantity (Qm) and the competitive quantity (Qc), and you get the **deadweight loss (DWL)** triangle. On the graph, it sits between those two output levels, representing trades where buyers valued the good above production cost but got priced out.
 
-DWL is *not* the monopolist's profit, and students confuse these two constantly. Profit is a transfer of surplus from consumers to the producer, but that surplus still exists somewhere in the economy. Deadweight loss is surplus that vanishes entirely.
+DWL is *not* the monopolist's profit, and students mix these up constantly. Profit is a transfer of surplus from consumers to the producer, but that surplus still exists somewhere in the economy. Deadweight loss is surplus that vanishes entirely. Nobody gets it.
 
-The U.S. Department of Justice pursues **antitrust regulation** because of this. The wider the gap between Qm and Qc, the larger the DWL triangle, and the more society loses. The 1998 antitrust case against Microsoft and the 2020 suit against Google both trace their underlying economic argument back to deadweight loss and consumer harm.`,
+The U.S. Department of Justice pursues **antitrust regulation** because of exactly this. The wider the gap between Qm and Qc, the larger the DWL triangle, and the more society loses. The 1998 antitrust case against Microsoft and the 2020 suit against Google both trace their core economic argument back to deadweight loss and consumer harm.`,
     },
     {
       heading: "Worked Example",
-      content: `Demand: **P = 100 - Q**. Cost: **MC = 10 + 0.5Q**. Work through the monopoly outcome, then compare it to competition.
+      content: `Demand: **P = 100 - Q**. Cost: **MC = 10 + 0.5Q**. Work through the monopoly outcome, then compare it to what competition would give you.
 
-**Derive MR.** For any linear demand P = a - bQ, double the slope: MR = a - 2bQ.
+**Derive MR.** For any linear demand P = a - bQ, you double the slope: MR = a - 2bQ.
 
 **MR = 100 - 2Q**
 
@@ -63,7 +63,7 @@ The U.S. Department of Justice pursues **antitrust regulation** because of this.
 90 = 2.5Q
 **Qm = 36 units**
 
-**Read the price off the demand curve** (not MR):
+**Read the price off the demand curve** (not MR, this is where people mess up):
 
 Pm = 100 - 36 = **$64**
 
@@ -73,7 +73,7 @@ Pm = 100 - 36 = **$64**
 90 = 1.5Q
 **Qc = 60 units**, **Pc = $40**
 
-The monopolist produces 24 fewer units (36 vs. 60) and charges $24 more ($64 vs. $40). Every unit between Q = 36 and Q = 60 would have generated surplus for somebody, because buyers valued those units above production cost. That lost triangle is the deadweight loss.`,
+The monopolist produces 24 fewer units (36 vs. 60) and charges $24 more ($64 vs. $40). Every single unit between Q = 36 and Q = 60 would have generated surplus for somebody, because buyers valued those units above production cost. That lost triangle is the deadweight loss.`,
     },
   ],
 };

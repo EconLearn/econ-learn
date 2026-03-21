@@ -7,59 +7,59 @@ export const basicMacroContent = {
   sections: [
     {
       heading: "Why Zoom Out? Micro vs Macro",
-      content: `Microeconomics had been around since at least the 1870s: supply curves, demand curves, individual firm behavior, all of that. But when the U.S. economy cratered in 1930, none of those tools could explain why everything was falling apart at the same time. Why were 15 million people out of work by 1933? Why was every market collapsing simultaneously? The existing theory could tell you why wheat prices dropped after a good harvest. It couldn't tell you why the whole system was seizing up.
+      content: `Economists had supply curves and demand curves and firm-level analysis going back to the 1870s. But when the U.S. economy fell off a cliff in 1930, none of that could explain why everything was breaking at once. 15 million people were out of work by 1933. Every market was tanking simultaneously. The existing toolkit could tell you why wheat got cheaper after a bumper harvest. It had absolutely nothing to say about why the whole system was locking up.
 
-That gap forced economists to invent **macroeconomics** as its own field. **Microeconomics** looks at individual markets, firms, and consumers (the trees). **Macroeconomics** looks at the forest: national output, the overall price level, total employment across the economy.
+That gap is what forced economists to build **macroeconomics** as its own separate field. **Microeconomics** zooms in on individual markets, firms, and consumers. **Macroeconomics** pulls the camera way back and looks at national output, the overall price level, total employment across the entire economy.
 
-A coffee shop with lines out the door can still go bankrupt if a nationwide recession kills demand for $5 lattes. The owner didn't do anything wrong. The entire economy shifted underneath them. On the AP exam, you'll get questions that test whether you can tell a macro question from a micro one, and that distinction basically didn't exist in formal economics before the Great Depression forced it into being.`,
+Think of it this way. A coffee shop with lines out the door can still go bankrupt if a nationwide recession kills demand for $5 lattes. The owner did nothing wrong. The whole economy shifted underneath them. On the AP exam you'll see questions testing whether you can tell a macro question from a micro one, and it's worth remembering that distinction basically didn't exist in formal economics before the Great Depression forced it into being.`,
     },
     {
       heading: "The Circular Flow Model",
-      content: `François Quesnay was a physician to King Louis XV, not an economist, but in 1758 he published the *Tableau Économique*, which was basically the first attempt to diagram how money moves through an economy. The modern **circular flow model** is a descendant of that same idea, just with more moving parts.
+      content: `François Quesnay was a physician to King Louis XV, not an economist, but in 1758 he published the *Tableau Économique*, which was basically the first attempt anyone made to diagram how money moves through an economy. The modern **circular flow model** grew out of that same idea, just with more moving parts.
 
-The basic version is simple. **Households** sell their labor to **firms**. Firms pay wages. Households spend those wages buying the stuff firms produce. Money goes around and around.
+The simple version goes like this. **Households** sell their labor to **firms**. Firms pay wages. Households take those wages and buy the stuff firms produce. Money goes around and around.
 
-Two more players make it messier. The **government** takes taxes from households and firms, then pushes money back out through spending on public goods, transfer payments (Social Security checks, unemployment insurance), and subsidies. The **foreign sector** adds exports (money flowing in from other countries) and imports (money flowing out).
+Then you add two more players and it gets messier. The **government** pulls taxes from households and firms, then pushes money back out through spending on public goods, transfer payments (Social Security checks, unemployment insurance), subsidies. The **foreign sector** brings in exports (money flowing in from other countries) and imports (money flowing out).
 
-Every dollar someone spends becomes income for someone else. That's the whole engine. When households suddenly stop buying things, the way they did after Lehman Brothers collapsed in September 2008, firms lose revenue, lay people off, and those newly unemployed workers cut their spending too. Within six months of Lehman, 3.6 million American jobs disappeared. The loop can lock up fast.
+Every dollar someone spends becomes income for someone else. That's the whole engine. When households suddenly stop buying things, like they did after Lehman Brothers collapsed in September 2008, firms lose revenue, lay people off, and those newly unemployed workers cut their spending too. Within six months of Lehman, 3.6 million American jobs vanished. The loop locks up fast.
 
-**Leakages** are what drain money out of the circular flow: saving, taxes, and imports. **Injections** put money back in: investment, government spending, and exports. When leakages exceed injections, the economy contracts. Quesnay was onto something 270 years ago. An economy is a system of interdependent flows, and when one channel gets disrupted, the shock ripples through everything else.`,
+**Leakages** drain money out of the circular flow: saving, taxes, and imports. **Injections** put money back in: investment, government spending, and exports. When leakages exceed injections, the economy contracts. Quesnay was onto something 270 years ago. An economy is a system of interdependent flows, and when one channel gets disrupted the shock ripples through everything else.`,
     },
     {
       heading: "Three Macroeconomic Goals",
-      content: `The Employment Act of 1946 made it official U.S. policy to pursue three macroeconomic objectives, and these same three goals show up in basically every intro macro course worldwide.
+      content: `The Employment Act of 1946 made it official U.S. policy to chase three macroeconomic objectives, and these same three goals show up in basically every intro macro course on the planet.
 
-**1. Economic growth**, measured by increases in real GDP per capita. China averaged about 10% annual growth from 1980 to 2010, which pulled hundreds of millions of people out of poverty in a single generation. No other economic force in recorded history has done anything comparable at that speed or scale.
+**1. Economic growth**, measured by increases in real GDP per capita. China averaged about 10% annual growth from 1980 to 2010, pulling hundreds of millions of people out of poverty in a single generation. Nothing else in recorded economic history has come close to that speed or scale.
 
-**2. Low unemployment.** Joblessness isn't just a number on a chart. It erodes skills, tears apart communities, and snowballs into long-term poverty. U.S. unemployment hit 14.7% in April 2020 when COVID shutdowns idled the economy almost overnight. That was the worst reading since the Bureau of Labor Statistics started tracking it monthly in 1940.
+**2. Low unemployment.** Joblessness isn't just a number on a chart. It erodes skills, tears communities apart, snowballs into long-term poverty. U.S. unemployment hit 14.7% in April 2020 when COVID shutdowns idled the economy almost overnight. That was the worst reading since the Bureau of Labor Statistics started tracking it monthly in 1940.
 
-**3. Stable prices.** When prices go haywire, either up or down quickly, planning becomes impossible. Zimbabwe's hyperinflation in November 2008 hit an estimated 79.6 billion percent per month, which meant prices were roughly doubling every 24 hours. Currency became worthless. People bartered for goods. You can't save for the future or invest in a business when money loses its value between breakfast and lunch.
+**3. Stable prices.** When prices go haywire in either direction, planning becomes impossible. Zimbabwe's hyperinflation in November 2008 hit an estimated 79.6 billion percent per month, meaning prices roughly doubled every 24 hours. Currency became worthless. People resorted to barter. You can't save for the future or invest in a business when money loses its value between breakfast and lunch.
 
-These three goals bump into each other all the time. Policies that push unemployment really low tend to create inflation. Aggressive anti-inflation moves like Paul Volcker jacking the federal funds rate above 20% in 1981 can throw the economy into a painful recession. That tension between stable prices and full employment is basically the central drama of macroeconomic policymaking, and it's been that way since the 1940s.`,
+These three goals crash into each other constantly. Policies that push unemployment really low tend to spark inflation. Aggressive anti-inflation moves like Paul Volcker jacking the federal funds rate above 20% in 1981 can throw the economy into a brutal recession. That tension between stable prices and full employment is basically the central drama of macroeconomic policymaking, and it has been since the 1940s.`,
     },
     {
       heading: "Business Cycle Phases",
-      content: `The National Bureau of Economic Research (NBER) has been officially dating U.S. business cycles since 1929. Economies don't grow in a straight line. Output expands, overshoots, contracts, and recovers in a repeating pattern called the **business cycle**.
+      content: `The National Bureau of Economic Research (NBER) has been officially dating U.S. business cycles since 1929. Economies don't grow in a straight line. Output expands, overshoots, contracts, recovers, and the whole thing repeats in a pattern called the **business cycle**.
 
-**Expansion.** Real GDP goes up, unemployment comes down, businesses invest, consumers feel confident. The longest U.S. expansion on record ran from June 2009 to February 2020, almost 128 straight months of growth before COVID ended it.
+**Expansion.** Real GDP climbs, unemployment drops, businesses invest, consumers feel confident. The longest U.S. expansion on record ran from June 2009 to February 2020, almost 128 straight months of growth before COVID killed it.
 
-**Peak.** The top. Output and employment are at their maximum, but cracks are forming. The housing market peaked in mid-2006, a full two years before the financial system blew up in September 2008. Inflation often starts ticking up near the peak because the economy is bumping against its capacity limits.
+**Peak.** The top. Output and employment are at their maximum, but cracks are forming underneath. The housing market peaked in mid-2006, a full two years before the financial system blew up in September 2008. Inflation often starts ticking up near the peak because the economy is bumping against its capacity limits.
 
 **Contraction (recession).** Real GDP falls for a sustained stretch. Firms cut production, workers get laid off, consumer spending drops. The common shorthand is two consecutive quarters of falling real GDP, though the NBER actually uses a broader set of indicators (employment, industrial production, real income) to make its official call.
 
-**Trough.** The bottom of the dip. Output has stopped falling, the economy stabilizes, and eventually the next expansion begins.
+**Trough.** Rock bottom. Output has stopped falling, the economy stabilizes, and eventually the next expansion begins.
 
-Quick diagnostic: if unemployment is dropping and GDP is rising, you're in an expansion. If unemployment is climbing and GDP is falling, that's a contraction. The NBER has identified 34 completed business cycles in the U.S. between 1854 and 2020, so this pattern is deeply baked into how market economies work.`,
+Here's a quick diagnostic for the exam: if unemployment is dropping and GDP is rising, you're in an expansion. If unemployment is climbing and GDP is falling, that's a contraction. The NBER has identified 34 completed business cycles in the U.S. between 1854 and 2020, so this pattern is deeply baked into how market economies work.`,
     },
     {
       heading: "Economic Systems",
-      content: `Every society has to answer three questions: what gets produced, how does it get produced, and who gets the output. The way a society answers those questions defines its **economic system**, and the 20th century basically ran a giant experiment testing the options.
+      content: `Every society has to answer three questions: what gets produced, how does it get produced, and who gets the output. How a society answers those questions defines its **economic system**, and the 20th century basically ran a massive experiment testing the options.
 
-A **market economy** lets private individuals and firms make the decisions through price signals. When Americans wanted more cars in the 1920s, auto prices and profits went up, which attracted new producers. Chrysler was founded in 1925, jumping into a booming market. Nobody in a government office issued an order. The price mechanism coordinated millions of separate decisions without any central plan.
+A **market economy** lets private individuals and firms make the calls through price signals. When Americans wanted more cars in the 1920s, auto prices and profits went up, which attracted new producers. Chrysler was founded in 1925, jumping into a booming market. Nobody in a government office issued an order. The price mechanism coordinated millions of separate decisions without any central plan.
 
-A **command economy** puts the government in the driver's seat. The Soviet Union's Gosplan agency set production targets for everything from steel tonnage to how many shoes to make, starting in 1928. Centralized control could mobilize resources fast, and Soviet industrialization in the 1930s happened at a remarkable pace. But without price signals telling planners what people actually wanted, the system consistently overproduced goods nobody needed and underproduced goods everybody did. By the 1980s, chronic shortages of basic consumer items were a permanent feature of daily life.
+A **command economy** puts the government in charge. The Soviet Union's Gosplan agency set production targets for everything from steel tonnage to how many shoes to make, starting in 1928. Centralized control could mobilize resources fast, and Soviet industrialization in the 1930s happened at a remarkable pace. But without price signals telling planners what people actually wanted, the system kept overproducing goods nobody needed and underproducing goods everybody did. By the 1980s, chronic shortages of basic consumer items were just a permanent feature of daily life.
 
-The Soviet Union collapsed in 1991, but that didn't prove government has no role in an economy. In practice, every country on earth runs a **mixed economy** that blends market forces with government intervention. The U.S. has public schools, Medicare (since 1965), and environmental regulations (the EPA was created in 1970) layered on top of private enterprise. China operates state-owned enterprises alongside a massive private sector that generates over 60% of its GDP. The real question was never really "market or command." It was always about the mix.`,
+The Soviet Union collapsed in 1991, but that didn't prove government has no role in an economy. In practice every country on earth runs a **mixed economy** blending market forces with government intervention. The U.S. has public schools, Medicare (since 1965), and environmental regulations (the EPA was created in 1970) layered on top of private enterprise. China operates state-owned enterprises alongside a massive private sector generating over 60% of its GDP. The real question was never "market or command." It was always about the mix.`,
     },
     {
       heading: "Worked Example: Identifying the Business Cycle",
@@ -72,13 +72,13 @@ Year 4: Real GDP = $830B, Unemployment = 6.1%
 
 **Question: Identify the phase of the business cycle in each year.**
 
-**Year 1 to Year 2:** GDP jumped from $800B to $860B (that's 7.5% growth) and unemployment fell from 5.0% to 4.2%. This is **expansion**, with output climbing and the labor market tightening. Similar to what the U.S. looked like between about 2014 and 2018.
+**Year 1 to Year 2:** GDP jumped from $800B to $860B (that's 7.5% growth) and unemployment fell from 5.0% to 4.2%. That's **expansion**, output climbing and the labor market tightening. Similar to what the U.S. looked like between about 2014 and 2018.
 
-**Year 2 to Year 3:** Growth slowed way down. GDP barely moved from $860B to $870B (roughly 1.2%), and unemployment only ticked down to 4.0%. The economy is approaching its **peak**, near maximum output but losing steam. This looks a lot like late 2006.
+**Year 2 to Year 3:** Growth slowed way down. GDP barely moved from $860B to $870B (roughly 1.2%), and unemployment only ticked down to 4.0%. The economy is approaching its **peak**, near maximum output but losing momentum. This looks a lot like late 2006.
 
-**Year 3 to Year 4:** GDP fell from $870B to $830B, a 4.6% decline. Unemployment jumped to 6.1%. That's a **contraction**, with output shrinking and firms cutting workers.
+**Year 3 to Year 4:** GDP fell from $870B to $830B, a 4.6% decline. Unemployment jumped to 6.1%. That's a **contraction**, output shrinking and firms cutting workers.
 
-The thing to focus on is the *direction* of real GDP and unemployment, not the levels themselves. A high GDP number doesn't mean expansion if that number is heading downward.`,
+The thing you want to focus on is the *direction* of real GDP and unemployment, not the levels. A high GDP number doesn't mean expansion if that number is heading downward.`,
     },
   ],
 };

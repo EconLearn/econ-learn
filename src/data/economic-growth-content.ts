@@ -7,19 +7,19 @@ export const economicGrowthContent = {
   sections: [
     {
       heading: "Why Some Countries Are Rich and Others Aren't",
-      content: `In 1820, the richest countries in the world were perhaps three times wealthier per person than the poorest. By 2020, that gap had widened to more than 100-to-1. The average American earns roughly 50 times more than the average person in the Democratic Republic of the Congo. A child born in Norway can expect to live past 80. In Sierra Leone, past 55.
+      content: `In 1820, the richest countries in the world were maybe three times wealthier per person than the poorest. By 2020, that gap had widened to more than 100-to-1. The average American earns roughly 50 times more than the average person in the Democratic Republic of the Congo. A child born in Norway can expect to live past 80. In Sierra Leone, past 55.
 
-The short answer to why these gaps exist is **economic growth**, meaning sustained increases in real GDP per capita over time. Countries that grew consistently for decades pulled away from those that stagnated. The divergence accelerated after 1800, when the Industrial Revolution in Britain set off a wave of capital accumulation and technological change that eventually spread to Western Europe, North America, and parts of East Asia.
+The short answer to why these gaps exist is **economic growth**, sustained increases in real GDP per capita over time. Countries that grew consistently for decades pulled away from those that stagnated. The divergence accelerated after 1800, when the Industrial Revolution in Britain set off a wave of capital accumulation and technological change that eventually spread to Western Europe, North America, and parts of East Asia.
 
 South Korea and Ghana had nearly identical GDP per capita in 1960, roughly $1,100 each in today's dollars. By 2020, South Korea's was more than 20 times higher. Same starting point. Radically different trajectories. South Korea invested heavily in education, built export-oriented industries under Park Chung-hee's government in the 1960s, maintained stable institutions, and aggressively adopted foreign technology. Ghana struggled through a series of military coups, underinvestment, and commodity dependence for much of the same period.
 
-Growth determines whether a society has modern hospitals or does not, whether most children finish school or drop out to work. Understanding its sources may be the most consequential question in all of economics.`,
+Growth determines whether a society has modern hospitals or does not, whether most children finish school or drop out to work. Understanding its sources is probably the most consequential question in all of economics.`,
     },
     {
       heading: "Physical Capital and Human Capital",
-      content: `A farmer with a John Deere tractor produces ten times more food than one with a hand plow. That tractor is **physical capital**, which includes the tools, machines, factories, infrastructure, and equipment workers use to produce goods and services. More capital per worker means more output per worker. The logic is ancient, but it scaled dramatically during the Industrial Revolution, when steam engines and mechanized looms multiplied British textile output by orders of magnitude between 1780 and 1830.
+      content: `A farmer with a John Deere tractor produces ten times more food than one with a hand plow. That tractor is **physical capital**, the tools, machines, factories, infrastructure, and equipment workers use to produce goods and services. More capital per worker means more output per worker. The logic is ancient, but it scaled dramatically during the Industrial Revolution when steam engines and mechanized looms multiplied British textile output by orders of magnitude between 1780 and 1830.
 
-Capital alone was never enough. The farmer also needs to know how to operate and maintain the tractor, read soil reports, and choose planting strategies. That knowledge is **human capital**, meaning the skills, education, training, and health that make workers productive.
+But capital alone was never enough. The farmer also needs to know how to operate and maintain the tractor, read soil reports, and choose planting strategies. That knowledge is **human capital**, the skills, education, training, and health that make workers productive.
 
 The two types accumulate through different channels. Physical capital grows when societies redirect resources toward investment. China invested close to 45% of its GDP for decades after Deng Xiaoping's reforms began in 1978, constructing highways, factories, and entire cities at a pace with no historical precedent. Human capital grows through education and training. Countries with high literacy rates, strong university systems, and healthy populations consistently produce more per worker. The return on education is among the most robust findings in empirical economics: an extra year of schooling raises individual earnings by roughly 8-13% on average, across countries and time periods.
 
@@ -27,15 +27,15 @@ Both types of capital face **diminishing returns**. The first tractor on a farm 
     },
     {
       heading: "Technology and Total Factor Productivity",
-      content: `If growth depended only on piling up more capital and labor, diminishing returns would eventually grind it to a halt. Yet Britain has been growing since the 1780s. The United States has grown for over two centuries. Something else sustains the engine.
+      content: `If growth depended only on piling up more capital and labor, diminishing returns would eventually grind it to a halt. Yet Britain has been growing since the 1780s. The United States has grown for over two centuries. Something else keeps the engine running.
 
 That something is **technology**, defined broadly as any advance in knowledge that produces more output from the same inputs. Better seed varieties developed by Norman Borlaug's Green Revolution in the 1960s. More efficient algorithms powering Google's search engine. Smarter logistics at Amazon's fulfillment centers. New drugs that keep workers healthy and productive. Technology expands the frontier of what is possible.
 
-Economists measure this residual through **total factor productivity (TFP)**, which is the portion of output growth that cannot be explained by increases in labor or capital alone. Robert Solow formalized this concept in 1956, and it earned him the Nobel Prize in 1987. If an economy added no new workers and no new machines but still produced 2% more output, that 2% is TFP growth. It represents doing things smarter, not just doing more.
+Economists measure this residual through **total factor productivity (TFP)**, the portion of output growth that cannot be explained by increases in labor or capital alone. Robert Solow formalized this concept in 1956, and it earned him the Nobel Prize in 1987. If an economy added no new workers and no new machines but still produced 2% more output, that 2% is TFP growth. It represents doing things smarter, not just doing more.
 
 TFP is what separates rich countries from the rest over the very long run. The U.S. produces vastly more per worker than it did in 1900, and the explanation is not longer hours or proportionally more machines. It is the technology embedded in those machines and the knowledge carried by those workers.
 
-Developing countries benefit from a powerful advantage: technology can be adopted, not just invented. South Korea did not pioneer the semiconductor. It imported the knowledge, often through licensing deals and reverse engineering in the 1970s and 1980s, and built an industry around it. Samsung shipped its first memory chip in 1983. Technology diffusion from rich to poor countries is one of the most potent channels for catch-up growth.`,
+And developing countries benefit from a powerful advantage here: technology can be adopted, not just invented. South Korea did not pioneer the semiconductor. It imported the knowledge, often through licensing deals and reverse engineering in the 1970s and 1980s, and built an industry around it. Samsung shipped its first memory chip in 1983. Technology diffusion from rich to poor countries is one of the most potent channels for catch-up growth.`,
     },
     {
       heading: "The Rule of 70",
@@ -54,7 +54,7 @@ After 35 years, Country A has doubled once to $20,000. Country B has doubled rou
 
 Extend to 70 years and the gap becomes staggering. Country A reaches $40,000. Country B surpasses $250,000.
 
-China averaging 10% growth from 1980 to 2010 is what moved hundreds of millions out of poverty in barely one generation. At that rate, the economy doubled every seven years. A 2% rate would have required 35 years for the same doubling. Compounding is relentless. Three percentage points of difference in the annual growth rate, sustained over decades, produces an entirely different civilization.`,
+China averaging 10% growth from 1980 to 2010 is what moved hundreds of millions out of poverty in barely one generation. At that rate, the economy doubled every seven years. A 2% rate would have required 35 years for the same doubling. Compounding is relentless. Three percentage points of difference in the annual growth rate, sustained over decades, produces an entirely different civilization. You really cannot overstate how much this matters.`,
     },
     {
       heading: "Policy Levers for Growth",
@@ -62,7 +62,7 @@ China averaging 10% growth from 1980 to 2010 is what moved hundreds of millions 
 
 **Encourage investment.** Capital accumulation requires saving and investment. The U.S. Investment Tax Credit, first introduced under Kennedy in 1962, offered firms a direct tax reduction for purchasing equipment. China's government channeled enormous state resources into infrastructure for decades. Lower corporate taxes, investment incentives, and stable macroeconomic conditions all tend to boost capital formation.
 
-**Invest in education and health.** Human capital is built through schools, universities, vocational programs, and public health systems. South Korea spent heavily on education during its industrialization phase. By the 1990s it had one of the world's highest rates of university enrollment. On the other side, a workforce devastated by malaria or HIV cannot be productive, which partly explains growth difficulties across parts of sub-Saharan Africa during the 1980s and 1990s.
+**Invest in education and health.** Human capital is built through schools, universities, vocational programs, and public health systems. South Korea spent heavily on education during its industrialization phase, and by the 1990s it had one of the world's highest rates of university enrollment. On the other side, a workforce devastated by malaria or HIV cannot be productive, which partly explains growth difficulties across parts of sub-Saharan Africa during the 1980s and 1990s.
 
 **Support research and development.** Technology drives long-run growth, and R&D creates new technology. Most basic research generates positive **spillover effects** that spread far beyond the firm funding it. The internet itself grew out of DARPA-funded research in the 1960s. Because private firms cannot capture the full social return, they underinvest relative to the optimum. Government funding for basic science, patent protections (codified in the U.S. since the Patent Act of 1790), and R&D tax credits help close that gap.
 

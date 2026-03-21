@@ -6,63 +6,63 @@ export const productionCostsContent = {
   sections: [
     {
       heading: "The Short-Run Production Function",
-      content: `A bakery with 3 ovens can bake 50 loaves per hour at full tilt if someone is actually running them properly. Put 1 baker on all 3 ovens and output hits about 40 loaves -- she's stretched too thin, constantly running between stations. Bring in a 2nd baker and output jumps to 100 because they can split the workload. A 3rd pushes production to 140, and a 4th only gets you to 155 because at that point there just aren't enough ovens to keep everyone busy. That pattern of rapid early gains tapering off is the **short-run production function**.
+      content: `Picture a bakery with 3 ovens that can crank out 50 loaves per hour at full capacity if someone's actually running them right. Put 1 baker on all 3 ovens and output hits about 40 loaves, she's stretched too thin, constantly running between stations. Bring in a 2nd baker and output jumps to 100 because they can split the workload. A 3rd pushes production to 140, and a 4th only gets you to 155 because at that point there just aren't enough ovens to keep everyone busy. That pattern of rapid early gains tapering off is the **short-run production function**.
 
-**Short run** in economics has a specific technical meaning: at least one input is fixed. The bakery can't install a 4th oven by tomorrow morning. The lease is signed, the equipment is bolted down, the square footage is what it is. Labor is the only thing management can adjust quickly.
+**Short run** in economics has a specific technical meaning: at least one input is fixed. The bakery can't install a 4th oven by tomorrow morning. The lease is signed, the equipment is bolted down, the square footage is what it is. Labor is the only thing management can adjust on short notice.
 
-**Total product (TP)** is just total output at each level of labor. **Marginal product (MP)** measures the extra output from one more worker -- baker 2 added 60 loaves (MP = 60), baker 3 added 40 (MP = 40), baker 4 added only 15 (MP = 15). MP went up initially because of specialization gains, then dropped once the fixed ovens became a bottleneck. That rise-then-fall in MP is what shapes every cost curve you'll see in this unit.`,
+**Total product (TP)** is just total output at each level of labor. **Marginal product (MP)** measures the extra output from one more worker. Baker 2 added 60 loaves (MP = 60), baker 3 added 40 (MP = 40), baker 4 added only 15 (MP = 15). MP went up at first because of specialization gains, then dropped once the fixed ovens became a bottleneck. That rise-then-fall pattern in MP is what shapes every single cost curve you'll see in this unit.`,
     },
     {
       heading: "The Law of Diminishing Marginal Returns",
-      content: `**Diminishing marginal returns** is not a theoretical claim -- it's a physical constraint that kicks in whenever you keep cramming more of one input into a fixed set of other inputs.
+      content: `**Diminishing marginal returns** isn't some theoretical claim, it's a physical constraint that kicks in whenever you keep cramming more of one input into a fixed set of other inputs.
 
-The qualifier "eventually" does real work in that sentence. Early on, adding workers actually raises MP because people can specialize. Two assemblers on a line beat two people each doing the whole job solo, since one can wire while the other solders. A third doing quality checks might boost output even further per person. MP climbs during this specialization phase.
+The word "eventually" does real work in that sentence. Early on, adding workers actually raises MP because people can specialize. Two assemblers on a line beat two people each doing the whole job solo, since one can wire while the other solders. A third person doing quality checks might boost output even further per person. MP climbs during this specialization phase.
 
-But put twenty workers on that same three-station line and they're tripping over each other waiting for equipment.
+But put twenty workers on that same three-station line and they're literally tripping over each other waiting for equipment.
 
-The connection to costs is mechanical and direct -- if worker 8 adds 15 units and worker 9 adds only 10, those last 10 units each required more labor per unit, so they cost more to produce. Diminishing marginal returns cause **marginal cost (MC)** to rise, which is exactly why the MC curve eventually slopes upward. The College Board loves testing whether students can trace that link from the production side to the cost side.`,
+The connection to costs is mechanical and direct. If worker 8 adds 15 units and worker 9 adds only 10, those last 10 units each required more labor per unit, so they cost more to produce. Diminishing marginal returns cause **marginal cost (MC)** to rise, which is exactly why the MC curve eventually slopes upward. The College Board loves testing whether students can trace that link from the production side over to the cost side.`,
     },
     {
       heading: "From Production to Cost Curves",
-      content: `Production and cost curves are mirror images of each other. When MP is rising, MC is falling. When MP falls, MC rises.
+      content: `Production and cost curves are mirror images of each other. When MP is rising, MC is falling. When MP falls, MC rises. Once you see that relationship the cost curves stop being mysterious.
 
-**Total cost (TC)** breaks into two pieces. **Total fixed cost (TFC)** covers things like rent, insurance premiums, equipment leases -- the bills that show up whether you produce zero units or ten thousand. **Total variable cost (TVC)** covers wages, raw materials, electricity consumed on the production floor. These move with output.
+**Total cost (TC)** breaks into two pieces. **Total fixed cost (TFC)** covers things like rent, insurance premiums, equipment leases, basically the bills that show up whether you produce zero units or ten thousand. **Total variable cost (TVC)** covers wages, raw materials, electricity consumed on the production floor. These move with output.
 
 TC = TFC + TVC.
 
-Four per-unit cost curves show up on the standard graph that appears on basically every AP exam. **Marginal Cost (MC)** = change in TC / change in Q. **Average Total Cost (ATC)** = TC / Q. **Average Variable Cost (AVC)** = TVC / Q. **Average Fixed Cost (AFC)** = TFC / Q. You need to know all four cold, plus how they relate to each other.
+Four per-unit cost curves show up on the standard graph that appears on basically every AP exam. **Marginal Cost (MC)** = change in TC / change in Q. **Average Total Cost (ATC)** = TC / Q. **Average Variable Cost (AVC)** = TVC / Q. **Average Fixed Cost (AFC)** = TFC / Q. You need to know all four cold, and you need to know how they relate to each other.
 
-AFC falls continuously -- it mathematically has to. A $5,000 monthly lease spread over 100 units is $50 per unit; spread it over 1,000 units and it drops to $5. It never bottoms out or turns around. As output gets very large, ATC and AVC get closer and closer together because that AFC wedge between them is shrinking toward zero.`,
+AFC falls continuously, and it mathematically has to. A $5,000 monthly lease spread over 100 units is $50 per unit. Spread it over 1,000 units and it drops to $5. It never bottoms out or turns around. And as output gets really large, ATC and AVC get closer and closer together because that AFC wedge between them keeps shrinking toward zero.`,
     },
     {
       heading: "MC Crosses ATC and AVC at Their Minimums",
-      content: `The GPA analogy is genuinely the best way to understand this. If your semester GPA comes in below your cumulative, the cumulative drops. If it comes in above, the cumulative rises. The marginal always pulls the average toward itself.
+      content: `The GPA analogy is honestly the best way to understand this. If your semester GPA comes in below your cumulative, the cumulative drops. If it comes in above, the cumulative rises. The marginal always pulls the average toward itself.
 
-Cost curves work on the exact same math. When MC sits below ATC, every additional unit is cheaper than the current average, dragging ATC down. The moment MC climbs above ATC, each new unit costs more than average, and ATC starts rising. **MC must intersect ATC at ATC's minimum point.** The identical logic holds for AVC -- MC crosses through AVC's minimum too.
+Cost curves work on the exact same math. When MC sits below ATC, every additional unit is cheaper than the current average, so it drags ATC down. The moment MC climbs above ATC, each new unit costs more than average and ATC starts rising. **MC must intersect ATC at ATC's minimum point.** The identical logic holds for AVC, MC crosses through AVC's minimum too.
 
-AVC bottoms out at a lower quantity than ATC does, and the reason is pure arithmetic. ATC = AVC + AFC. Even after AVC has started climbing, AFC is still declining (remember, it always declines). That declining AFC component keeps tugging ATC downward for a while longer -- so ATC doesn't reach its minimum until later, at a higher output level than where AVC bottomed. I've seen students lose FRQ points for drawing these minimums at the same quantity, so get the ordering right on your graphs.`,
+Here's a detail that matters for the exam: AVC bottoms out at a lower quantity than ATC does, and the reason is pure arithmetic. ATC = AVC + AFC. Even after AVC has started climbing, AFC is still declining (remember, it always declines). That declining AFC component keeps tugging ATC downward for a while longer, so ATC doesn't reach its minimum until later, at a higher output level than where AVC bottomed out. I've seen students lose FRQ points for drawing these minimums at the same quantity, so get the ordering right on your graphs.`,
     },
     {
       heading: "Economies and Diseconomies of Scale",
-      content: `The **long run** is the planning horizon where nothing is fixed. A firm can triple its factory floor, replace every machine, move to a different state entirely. The question changes from "how many workers should we hire?" to "what size should this whole operation be?"
+      content: `The **long run** is the planning horizon where nothing is fixed. A firm can triple its factory floor, replace every machine, move to a different state entirely. The question shifts from "how many workers should we hire?" to "what size should this whole operation be?"
 
 **Long-run average total cost (LRATC)** maps out the answer across three zones.
 
-**Economies of scale** show up on the downward-sloping left side. Toyota cranking out 500,000 Camrys a year can justify robotic welding systems that a 5,000-car-a-year shop never could -- and can negotiate steel prices at bulk rates and spread a $1.8 billion R&D budget across far more units. Per-unit cost drops as scale grows.
+**Economies of scale** show up on the downward-sloping left side. Toyota cranking out 500,000 Camrys a year can justify robotic welding systems that a 5,000-car-a-year shop never could, and they can negotiate steel prices at bulk rates and spread a $1.8 billion R&D budget across way more units. Per-unit cost drops as scale grows.
 
 **Diseconomies of scale** are the upward-sloping right side. A company with 200,000 employees tends to drown in management layers, duplicated departments, and meetings about meetings. Communication slows down, decisions take forever, and per-unit cost starts climbing again.
 
-**Constant returns to scale** fill the flat middle section where doubling all inputs doubles output and average cost holds steady. The output level where LRATC first hits this floor is **minimum efficient scale**. In industries where that number is massive -- semiconductor fabs cost $20+ billion to build, Boeing spent roughly $32 billion developing the 787 -- you end up with only a handful of firms because nobody else can reach the scale needed to compete on cost.`,
+**Constant returns to scale** fill the flat middle section where doubling all inputs doubles output and average cost holds steady. The output level where LRATC first hits this floor is called **minimum efficient scale**. In industries where that number is massive (semiconductor fabs cost $20+ billion to build, Boeing spent roughly $32 billion developing the 787), you end up with only a handful of firms because nobody else can reach the scale needed to compete on cost.`,
     },
     {
       heading: "Connecting Costs to Market Structure",
-      content: `Every output decision a firm makes traces back to these cost curves. A competitive firm produces where P = MC. A monopolist produces where MR = MC. Regardless of market structure, MC is the backbone of the production decision.
+      content: `Every output decision a firm makes traces back to these cost curves. A competitive firm produces where P = MC. A monopolist produces where MR = MC. Regardless of what market structure you're in, MC is the backbone of the production decision.
 
-The other half of the question: should the firm produce at all?
+But there's a second question: should the firm produce at all?
 
-If price sits above ATC, the firm earns economic profit. If price is below ATC but above AVC, the firm is losing money -- but operating still beats shutting down because revenue covers all variable costs and chips away at the fixed cost bill. Shutting down means zero revenue while those fixed costs (the lease, the insurance) keep coming due. Price below AVC is where it gets ugly: every additional unit produced actually makes total losses worse than just closing the doors. That's the **shutdown point**, and students mix it up with the break-even point constantly on the AP exam.
+If price sits above ATC, the firm earns economic profit. If price is below ATC but still above AVC, the firm is losing money, but operating still beats shutting down because revenue covers all variable costs and chips away at the fixed cost bill. Shutting down means zero revenue while those fixed costs (the lease, the insurance) keep coming due anyway. Price below AVC is where it gets ugly: every additional unit produced actually makes total losses *worse* than just closing the doors. That's the **shutdown point**, and students mix it up with the break-even point constantly on the AP exam.
 
-Stitch those rules together for a competitive firm: it supplies output along its MC curve, but only at prices at or above minimum AVC. Below that threshold, quantity supplied is zero. So the **short-run supply curve** is the segment of MC that sits above AVC. This is a standard multiple-choice question -- the 2019 AP Micro exam had a version of it.`,
+Stitch those rules together for a competitive firm: it supplies output along its MC curve, but only at prices at or above minimum AVC. Below that threshold, quantity supplied is zero. So the **short-run supply curve** is the segment of MC that sits above AVC. This is a standard multiple-choice question, the 2019 AP Micro exam had a version of it.`,
     },
     {
       heading: "Worked Example",
@@ -75,13 +75,13 @@ Per-unit breakdown:
 - AVC = $160 / 8 = **$20** per shirt
 - ATC = $280 / 8 = **$35** per shirt
 
-Sanity check: AVC + AFC = $20 + $15 = $35 = ATC. This relationship always holds -- if your numbers don't add up, something went wrong.
+Sanity check: AVC + AFC = $20 + $15 = $35 = ATC. This relationship always holds. If your numbers don't add up, something went wrong somewhere.
 
-The shop prints a 9th shirt, and that extra shirt costs $42 to produce. MC = $42. What happens to ATC?
+Now the shop prints a 9th shirt, and that extra shirt costs $42 to produce. MC = $42. What happens to ATC?
 
 New TC = $280 + $42 = $322. New ATC = $322 / 9 = $35.78. ATC went up from $35 to $35.78 because the MC of $42 exceeded the old ATC of $35, pulling the average upward. This is the marginal-pulls-the-average logic at work with actual numbers.
 
-Flip it around -- if the 9th shirt had only cost $28 to produce (MC = $28, which is below the $35 ATC), new ATC = $308 / 9 = $34.22. The average drops. MC below ATC pulls it down; MC above ATC pushes it up. That tug-of-war is why MC intersects ATC at its lowest point.`,
+Flip it around. If that 9th shirt had only cost $28 to produce (MC = $28, which is below the $35 ATC), new ATC = $308 / 9 = $34.22. The average drops. MC below ATC pulls it down, MC above ATC pushes it up. That tug-of-war is exactly why MC intersects ATC at its lowest point.`,
     },
   ],
 };

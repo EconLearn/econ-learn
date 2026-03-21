@@ -12,83 +12,83 @@ export const elasticityContent = {
   sections: [
     {
       heading: "Price Elasticity of Demand",
-      content: `A gas station bumps the price from $3.50 to $4.00 a gallon. Weekly sales drop from 10,000 gallons to 9,500. That's a 14.3% price hike (midpoint method) and only a 5.1% decline in quantity. The ratio of those two percentages gives us **price elasticity of demand (Ed)**:
+      content: `Say a gas station bumps its price from $3.50 to $4.00 a gallon. Weekly sales drop from 10,000 gallons to 9,500. That works out to a 14.3% price hike (using the midpoint method) and only a 5.1% decline in quantity. The ratio of those two percentages is what economists call **price elasticity of demand (Ed)**:
 
 **Ed = % change in quantity demanded / % change in price**
 
-In this case, Ed = -5.1% / 14.3% = -0.36. Take the absolute value: |Ed| = 0.36. Demand is inelastic, so drivers grumble but they keep filling up because they need to get to work.
+So here, Ed = -5.1% / 14.3% = -0.36. Take the absolute value and you get |Ed| = 0.36. Demand is inelastic. Drivers grumble at the pump, sure, but they still fill up because they need to get to work.
 
-The coefficient always comes out negative since demand curves slope downward. Economists drop the sign and work with |Ed|. One thing that trips students up: a straight-line demand curve does *not* have constant elasticity. The slope stays the same everywhere, sure, but elasticity depends on the ratio P/Q, and that ratio changes at every point along the line.
+The coefficient always comes out negative because demand curves slope downward. Economists just drop the sign and work with |Ed|. One thing that trips people up constantly: a straight-line demand curve does *not* have constant elasticity. The slope stays the same everywhere, yeah, but elasticity depends on the ratio P/Q, and that ratio changes at every single point along the line.
 
-The AP Micro exam expects you to use the **midpoint method** for calculations, because it eliminates the problem of getting a different answer depending on which price-quantity pair you start from. The formulas: %ΔQ = (Q2 - Q1) / ((Q1 + Q2)/2) and %ΔP = (P2 - P1) / ((P1 + P2)/2).`,
+The AP exam expects you to use the **midpoint method** for calculations. The reason is that it eliminates the annoying problem of getting a different answer depending on which price-quantity pair you start from. The formulas: %ΔQ = (Q2 - Q1) / ((Q1 + Q2)/2) and %ΔP = (P2 - P1) / ((P1 + P2)/2).`,
     },
     {
       heading: "Elastic, Inelastic, and Unit Elastic",
-      content: `Novo Nordisk raises the price of insulin by 15%. Sales barely move because diabetic patients need the drug regardless. Louis Vuitton raises handbag prices by 15%. A lot of shoppers walk away. That gap between the two reactions is the difference between **elastic** and **inelastic** demand.
+      content: `Novo Nordisk raises the price of insulin by 15%. Sales barely move, because diabetic patients need the drug whether it costs $300 or $350. Louis Vuitton raises handbag prices by 15%. A whole lot of shoppers walk away. That gap between those two reactions is the difference between **elastic** and **inelastic** demand.
 
-|Ed| > 1 means **elastic** demand. Quantity changes by a larger percentage than the price change. Buyers have substitutes, or they can wait, or the purchase is discretionary enough to skip altogether.
+|Ed| > 1 means **elastic** demand. Quantity changes by a bigger percentage than the price did. Buyers have substitutes, or they can wait, or the purchase is discretionary enough to just skip altogether.
 
-|Ed| < 1 means **inelastic** demand. Quantity barely budges. Gasoline, electricity, prescription medications: buyers absorb the price increase because they don't have a realistic alternative.
+|Ed| < 1 means **inelastic** demand. Quantity barely budges. Gasoline, electricity, prescription medications. Buyers absorb the price increase because they don't have a realistic alternative.
 
-|Ed| = 1 means **unit elastic** demand. Percentage changes match exactly. On a linear demand curve, this only occurs at the midpoint.
+|Ed| = 1 means **unit elastic** demand. The percentage changes match exactly. On a linear demand curve this only happens at the midpoint.
 
-Two extreme cases round things out. **Perfectly elastic** demand (|Ed| = infinity) produces a horizontal curve, meaning any price increase above the market level sends quantity to zero. **Perfectly inelastic** demand (|Ed| = 0) produces a vertical curve where price moves freely and quantity never changes.`,
+Two extreme cases round things out. **Perfectly elastic** demand (|Ed| = infinity) gives you a horizontal curve, meaning any price increase above the market level sends quantity straight to zero. **Perfectly inelastic** demand (|Ed| = 0) gives you a vertical curve where price moves up and down freely and quantity never changes at all.`,
     },
     {
       heading: "The Total Revenue Test",
-      content: `A bookstore sells 500 copies a week at $12 each, bringing in $6,000. Should the owner raise the price to $14? **TR = P x Q**, and when price goes up, P and Q pull revenue in opposite directions. Elasticity determines which force wins.
+      content: `A bookstore sells 500 copies a week at $12 each, pulling in $6,000. Should the owner raise the price to $14? **TR = P x Q**, and when price goes up, P and Q are pulling revenue in opposite directions. Elasticity determines which force wins that tug-of-war.
 
-In the **elastic range** (|Ed| > 1), a price cut actually raises revenue. The surge in quantity more than compensates for the lower per-unit price. Netflix dropped its basic plan from $9.99 to $6.99 in certain markets during 2023 and saw subscriber counts jump enough to boost total revenue in those regions. Raising the price in this range causes customers to leave faster than the higher price can make up for.
+In the **elastic range** (|Ed| > 1), a price cut actually *raises* revenue. The surge in quantity more than compensates for collecting less per unit. Netflix dropped its basic plan from $9.99 to $6.99 in certain markets during 2023 and saw subscriber counts jump enough to boost total revenue in those regions. Raising the price in this range just causes customers to leave faster than the higher price can make up for.
 
-In the **inelastic range** (|Ed| < 1), the math flips. A price cut hurts revenue because quantity barely responds and you collect less per unit on roughly the same volume. Pharmaceutical companies operate squarely in this zone, which is why they can raise prices and watch revenue climb.
+In the **inelastic range** (|Ed| < 1), the math completely flips. A price cut hurts revenue because quantity barely responds and you're collecting less per unit on roughly the same volume of sales. Pharmaceutical companies operate squarely in this zone, which is exactly why they can raise prices year after year and watch revenue climb.
 
 At **unit elasticity** (|Ed| = 1), revenue peaks. Any price movement in either direction reduces TR.`,
     },
     {
       heading: "Determinants of Elasticity",
-      content: `Five factors explain most of the variation in elasticity across different goods.
+      content: `Five factors explain most of the variation in elasticity across different goods, and the AP exam loves testing whether you can identify which ones apply to a given scenario.
 
-The availability of **substitutes** is the biggest driver by far. Dasani competes with Aquafina, Fiji, tap water, and a dozen store brands, so demand is elastic. Your local electric utility faces no real competitor, so demand is inelastic.
+The availability of **substitutes** is the biggest driver by far. Dasani competes with Aquafina, Fiji, tap water, and a dozen store brands, so demand is elastic. Your local electric utility faces basically no competition, so demand is inelastic. Simple as that.
 
-Whether the good is a **necessity or a luxury** matters a lot. Nobody comparison-shops for an ambulance ride. A $300 increase in the price of a designer watch? That purchase gets postponed or dropped. Necessities lock buyers in; luxuries give them room to walk away.
+Whether the good is a **necessity or a luxury** matters a lot too. Nobody comparison-shops for an ambulance ride. But a $300 increase in the price of a designer watch? That purchase gets postponed or just dropped entirely. Necessities lock buyers in. Luxuries give them room to walk away.
 
-**Budget share** plays a role too. A 10% jump in the price of table salt costs a household maybe $0.40 a year, which is totally unnoticeable. A 10% jump in rent reshapes an entire monthly budget. Goods that eat up a larger fraction of income provoke stronger reactions from consumers.
+**Budget share** plays a role. A 10% jump in the price of table salt costs a household maybe $0.40 a year, which nobody even notices. A 10% jump in rent reshapes an entire monthly budget. Goods that eat up a bigger fraction of your income provoke way stronger reactions.
 
-**Time horizon** changes the picture significantly. When gas prices surged in 2022, drivers kept filling up in the short run (inelastic). Over the next two years, EV sales climbed 35% and public transit ridership recovered. Demand became more elastic as buyers found alternatives.
+**Time horizon** changes the picture significantly. When gas prices surged in 2022, drivers kept filling up in the short run (inelastic). But over the next two years, EV sales climbed 35% and public transit ridership recovered. Demand got more elastic as buyers found alternatives they didn't have at first.
 
-**Market definition** is the fifth factor. "Food" is inelastic because nobody quits eating. But "organic blueberries from the farmer's market on Elm Street" is elastic, because plenty of substitutes exist at that narrow level of specificity.`,
+**Market definition** is the fifth factor. "Food" is inelastic because nobody quits eating. But "organic blueberries from the farmer's market on Elm Street" is elastic, because plenty of substitutes exist once you define the market that narrowly.`,
     },
     {
       heading: "Cross-Price and Income Elasticity",
-      content: `Pepsi raises its price by 10%, and Coke sales climb 7%. A printer drops from $200 to $150, and ink cartridge sales rise. These relationships between different goods need a different elasticity measure.
+      content: `Pepsi raises its price by 10% and Coke sales climb 7%. A printer drops from $200 to $150 and ink cartridge sales go up. These relationships between different goods need their own elasticity measure.
 
 **Cross-price elasticity of demand:**
 
 **Exy = % change in Qd of good X / % change in price of good Y**
 
-The sign does the classifying. Positive Exy means the goods are **substitutes** (Coke and Pepsi, Uber and Lyft). When one gets more expensive, buyers switch to the other. Negative Exy means **complements** (printers and ink cartridges, hot dogs and buns). Cheaper printers drive more ink sales. A value near zero means the goods are essentially unrelated.
+The sign does all the classifying for you. Positive Exy means the goods are **substitutes** (Coke and Pepsi, Uber and Lyft). When one gets more expensive, buyers jump to the other. Negative Exy means **complements** (printers and ink cartridges, hot dogs and buns). Cheaper printers drive more ink sales. A value near zero means the goods are basically unrelated.
 
-For income changes rather than price changes:
+For income changes instead of price changes:
 
 **Income elasticity (Ei) = % change in Qd / % change in income**
 
-Positive Ei marks a **normal good**. Within that category, goods with Ei > 1 are luxuries (demand grows faster than income, like international vacations and designer clothing), and goods with 0 < Ei < 1 are necessities (demand grows, just more slowly, like groceries and basic utilities). Negative Ei flags an **inferior good**: as incomes rise, people buy less of it. Store-brand pasta gives way to Barilla once paychecks get bigger.
+Positive Ei marks a **normal good**. Within that category, goods with Ei > 1 are luxuries (demand grows faster than income, think international vacations and designer clothing), and goods with 0 < Ei < 1 are necessities (demand still grows, just more slowly, like groceries and basic utilities). Negative Ei flags an **inferior good**: as incomes rise, people buy less of it. Store-brand pasta gives way to Barilla once paychecks get bigger.
 
-The AP exam puts serious weight on being able to read a coefficient like -0.6 or +2.3 and classify the good right away, without hesitation.`,
+The AP exam puts serious weight on being able to look at a coefficient like -0.6 or +2.3 and classify the good immediately, no hesitation.`,
     },
     {
       heading: "Elasticity and the AP Exam",
-      content: `Elasticity questions show up on roughly 15-20% of the AP Microeconomics exam, and the patterns are pretty consistent year to year.
+      content: `Elasticity questions show up on something like 15-20% of the AP Microeconomics exam, and the patterns they test are surprisingly consistent from year to year.
 
-You need to be able to calculate |Ed| using the **midpoint method** from two price-quantity pairs, classify demand as elastic/inelastic/unit elastic based on the coefficient, predict what happens to **total revenue** after a price change, and explain why one good has more elastic demand than another by citing specific determinants.
+You need to be able to calculate |Ed| using the **midpoint method** from two price-quantity pairs. You need to classify demand as elastic, inelastic, or unit elastic based on the coefficient. You need to predict what happens to **total revenue** after a price change. And you need to explain why one good has more elastic demand than another by pointing to specific determinants.
 
-Free-response prompts tend to embed elasticity inside larger scenarios. A per-unit tax lands on a market and the question asks how the burden splits between buyers and sellers. That answer depends entirely on relative elasticity of demand and supply. Or a firm facing inelastic demand raises its price, and the question asks why revenue still goes up.
+Free-response prompts tend to bury elasticity inside bigger scenarios. A per-unit tax lands on a market and the question asks how the burden splits between buyers and sellers. That answer depends entirely on relative elasticity of demand and supply. Or a firm facing inelastic demand raises its price, and they ask you to explain why revenue went up instead of down.
 
-Two mechanical skills get tested more than anything else: the **total revenue test** and the **midpoint formula**. Get the arithmetic right and the reasoning follows pretty naturally.`,
+Two mechanical skills get tested more than anything else: the **total revenue test** and the **midpoint formula**. Get the arithmetic right and the reasoning follows from there pretty naturally.`,
     },
     {
       heading: "Worked Example",
-      content: `A coffee shop sells large lattes at **$5 each**, moving **200 cups per week**. The owner raises the price to **$6**. Weekly sales drop to **160 cups**. Calculate the price elasticity of demand.
+      content: `A coffee shop sells large lattes at **$5 each**, moving **200 cups per week**. The owner bumps the price to **$6**. Weekly sales drop to **160 cups**. Find the price elasticity of demand.
 
 **Percentage change in quantity (midpoint method):**
 
@@ -104,9 +104,9 @@ Ed = -22.2% / 18.2% = **-1.22**
 
 Absolute value: |Ed| = 1.22.
 
-**Classification:** |Ed| = 1.22 > 1, so demand is **elastic** over this price range. Buyers cut back more than proportionally to the price increase.
+**Classification:** |Ed| = 1.22 > 1, so demand is **elastic** over this price range. Buyers cut back by a bigger percentage than the price went up.
 
-**Revenue check:** Before the hike, TR = $5 x 200 = $1,000. After, TR = $6 x 160 = $960. Revenue fell by $40, and that confirms the elastic rule. When demand is elastic, a price increase reduces total revenue because the quantity drop outweighs the higher per-unit price.`,
+**Revenue check:** Before the hike, TR = $5 x 200 = $1,000. After, TR = $6 x 160 = $960. Revenue fell by $40, which confirms exactly what the elastic rule predicts. When demand is elastic, a price increase actually reduces total revenue because the quantity drop outweighs the higher per-unit price. The owner would have been better off leaving the price alone.`,
     },
   ],
 };

@@ -4,43 +4,43 @@ export const adasContent = {
   sections: [
     {
       heading: "From Micro to Macro",
-      content: `U.S. real GDP dropped from $15.6 trillion in Q4 2007 to $14.4 trillion by Q2 2009 -- a decline of nearly 8%. Unemployment hit 10%. The housing sector collapsed first, but the damage bled into banking, auto manufacturing, retail, and state government budgets. One sector's failure dragged everything else down with it.
+      content: `U.S. real GDP went from $15.6 trillion in Q4 2007 down to $14.4 trillion by Q2 2009. That is nearly an 8% drop. Unemployment hit 10%. Housing blew up first, then the damage spread into banking, auto manufacturing, retail, state government budgets. One sector dragged everything else down with it.
 
-The **AD/AS model** is built to analyze exactly this kind of economy-wide event. Instead of looking at one product or one industry, it handles total output and the overall price level simultaneously.
+The **AD/AS model** exists to analyze exactly that kind of economy-wide disaster. You are not looking at one product or one industry anymore. You are looking at total output and the overall price level at the same time.
 
-The axes swap out the micro variables from your standard supply-and-demand diagrams. **Price Level (PL)** on the vertical axis represents the average of all prices in the economy, measured by something like the CPI or the GDP deflator -- not the price of any single good. **Real GDP (Y)** on the horizontal axis is total output adjusted for inflation.
+The axes are different from your micro supply-and-demand graphs. **Price Level (PL)** goes on the vertical axis and it represents the average of all prices in the economy, measured by something like the CPI or the GDP deflator. Not the price of any single good. **Real GDP (Y)** on the horizontal axis is total output adjusted for inflation.
 
-This is the framework for diagnosing recessions, explaining inflation, and evaluating whether fiscal or monetary policy is helping or making things worse.`,
+This is what you use to diagnose recessions, explain inflation, and figure out whether fiscal or monetary policy is actually helping or just making things worse.`,
     },
     {
       heading: "Aggregate Demand (AD)",
-      content: `Consumers buy groceries. Businesses buy equipment. The government builds highways and funds school districts. Foreigners buy American soybeans and software. Add it all up: **aggregate demand** = C + I + G + (X - M).
+      content: `Consumers buy groceries. Businesses buy equipment. The government builds highways and funds school districts. Foreigners buy American soybeans and software. Add all of that up and you get **aggregate demand** = C + I + G + (X - M).
 
-The AD curve slopes downward, and there are three distinct reasons why.
+The AD curve slopes downward, and there are three separate reasons for it.
 
-**Wealth effect**: when the price level rises, the purchasing power of people's savings erodes. A household with $50,000 in the bank feels poorer when everything costs more, so they spend less. **Interest rate effect**: a higher price level increases money demand because people need more cash to buy the same stuff, which pushes interest rates up. Higher rates choke off business investment and big-ticket consumer purchases -- houses, cars, appliances. **Exchange rate effect**: rising domestic prices make American goods more expensive for foreign buyers, cutting into exports, while imports start looking like a better deal. Net exports decline.
+**Wealth effect**: when the price level rises, the purchasing power of people's savings gets eaten away. A household sitting on $50,000 in the bank feels poorer when everything costs more, so they cut back on spending. **Interest rate effect**: a higher price level means people need more cash just to buy the same stuff, so money demand goes up, which pushes interest rates higher. Higher rates choke off business investment and big purchases like houses, cars, appliances. **Exchange rate effect**: rising domestic prices make American goods more expensive for foreign buyers, which cuts into exports, and imports start looking like a better deal. Net exports fall.
 
-What shifts the whole AD curve? Consumer confidence swings, changes in government spending, tax policy, monetary policy decisions, shifts in foreign income. The Fed slashing rates to near zero during COVID in March 2020 was a massive rightward push on AD. A tax hike shifts AD left. When the European economy strengthened through 2017, U.S. exports picked up and AD shifted right.`,
+What shifts the whole AD curve? Consumer confidence swings, changes in government spending, tax policy, monetary policy decisions, shifts in foreign income. The Fed slashing rates to near zero during COVID in March 2020 was a massive rightward push on AD. A tax hike shifts AD left. When the European economy got stronger through 2017, U.S. exports picked up and AD shifted right.`,
     },
     {
       heading: "Short-Run Aggregate Supply (SRAS)",
-      content: `Picture a factory owner in 2021. Prices for her products are climbing, but her workers' wages are locked in by contracts signed six months earlier. Every unit sold earns a wider margin than she expected, so she ramps up production. Scale that dynamic across millions of firms and you get the upward slope of **SRAS**.
+      content: `Picture a factory owner in 2021. Prices for her products are climbing, but her workers' wages are locked in by contracts signed six months earlier. Every unit she sells earns a wider margin than she expected, so she ramps up production. Scale that across millions of firms and you get the upward slope of **SRAS**.
 
-"Short run" in this context means the window where input prices -- especially wages -- remain sticky. Workers signed contracts last quarter. Suppliers quoted raw material prices months ago. That lag between rising output prices and still-fixed input costs is what gives the curve its positive slope.
+"Short run" here means the window where input prices, especially wages, stay sticky. Workers signed contracts last quarter. Suppliers quoted raw material prices months ago. That lag between rising output prices and still-fixed input costs is what gives the curve its positive slope.
 
-Anything that changes production costs across the whole economy shifts SRAS. The 1973 OPEC oil embargo sent energy costs through the roof and shifted SRAS sharply left -- which is why we got stagflation instead of a normal recession. A manufacturing technology breakthrough that lowers unit costs shifts SRAS right. Wage changes, commodity price swings, changes in business taxes, new regulations, supply chain disruptions (the Suez Canal blockage in 2021 comes to mind) -- all of these work through the SRAS channel.`,
+Anything that changes production costs across the whole economy shifts SRAS. The 1973 OPEC oil embargo sent energy costs through the roof and shifted SRAS sharply left, which is why we got stagflation instead of a normal recession. A manufacturing technology breakthrough that lowers unit costs shifts SRAS right. Wage changes, commodity price swings, changes in business taxes, new regulations, supply chain disruptions like the Suez Canal blockage in 2021, all of these work through the SRAS channel.`,
     },
     {
       heading: "LRAS and Full Employment",
-      content: `The **Long-Run Aggregate Supply (LRAS)** curve is a vertical line. Once all wages and prices have fully adjusted, output depends entirely on the economy's real resources: the size of the workforce, the capital stock, and the state of technology. If you doubled every price and every wage overnight, nothing real would change -- the same machines exist, the same people show up to work on Monday, the same software runs the same processes.
+      content: `The **Long-Run Aggregate Supply (LRAS)** curve is a vertical line. Once all wages and prices have fully adjusted, output depends entirely on the economy's real resources. The size of the workforce, the capital stock, the state of technology. If you doubled every price and every wage overnight, nothing real would change. The same machines exist, the same people show up to work on Monday, the same software runs the same processes.
 
-That vertical line sits at **potential GDP**, which is the economy's maximum sustainable output level.
+That vertical line sits at **potential GDP**, the economy's maximum sustainable output level.
 
-Where the economy sits relative to LRAS tells you a lot. Left of LRAS means a recessionary gap -- factories running below capacity, unemployment above the natural rate. The U.S. in 2009 and again briefly in spring 2020.
+Where the economy sits relative to LRAS tells you a lot. Left of LRAS means a recessionary gap, factories running below capacity, unemployment above the natural rate. That was the U.S. in 2009 and again briefly in spring 2020.
 
-Right of LRAS is an inflationary gap -- the economy running hotter than it can sustain. Overtime everywhere, firms competing aggressively for scarce workers, upward pressure on wages. The late 1960s before inflation really took off.
+Right of LRAS is an inflationary gap, the economy running hotter than it can sustain. Overtime everywhere, firms competing aggressively for scarce workers, upward pressure on wages. Think the late 1960s before inflation really took off.
 
-Self-correction works through wages, but it's slow. In a recessionary gap, high unemployment gradually pushes wages down as workers compete for scarce jobs. Lower wages reduce production costs, shifting SRAS right until output drifts back toward potential. In an inflationary gap, tight labor markets bid wages up, shifting SRAS left and cooling things off. The mechanism is real -- but it can take years, which is the whole argument for why active fiscal and monetary policy might be needed rather than just waiting around.`,
+Self-correction works through wages, but it is slow. In a recessionary gap, high unemployment gradually pushes wages down as workers compete for scarce jobs. Lower wages reduce production costs, shifting SRAS right until output drifts back toward potential. In an inflationary gap, tight labor markets bid wages up, shifting SRAS left and cooling things off. The mechanism is real. But it can take years, and that is the whole argument for why active fiscal and monetary policy might be needed rather than just waiting around.`,
     },
     {
       heading: "Worked Example",
@@ -50,9 +50,9 @@ Self-correction works through wages, but it's slow. In a recessionary gap, high 
 
 Change in AD = 5 x $10B = **$50 billion rightward shift**.
 
-The spending chain works like this: the government pays $10B to construction firms for highway projects. Workers earn that income and spend 80% of it -- $8B -- at restaurants, retail stores, on rent. Those recipients in turn spend 80% of the $8B, which is $6.4B. The series $10B + $8B + $6.4B + $5.12B + ... converges to $50B.
+Here is how the spending chain works. The government pays $10B to construction firms for highway projects. Workers earn that income and spend 80% of it, $8B, at restaurants, retail stores, on rent. Those recipients spend 80% of the $8B, which is $6.4B. The series $10B + $8B + $6.4B + $5.12B + ... converges to $50B.
 
-Now compare a **$10B tax cut** instead. Tax multiplier = -MPC / (1 - MPC) = -0.8 / 0.2 = **-4**. The same $10B only shifts AD right by $40B. Why the $10B gap? Government spending injects the full $10B into the spending stream on day one -- all of it gets spent immediately on goods and services. A tax cut hands households $10B, but they save 20% of it before spending anything. Only $8B enters the first round of spending. The spending multiplier exceeds the tax multiplier by exactly 1 regardless of what the MPC is (this is the balanced budget multiplier result). The AP exam tests this distinction regularly -- know which multiplier to use for which policy.`,
+Now compare a **$10B tax cut** instead. Tax multiplier = -MPC / (1 - MPC) = -0.8 / 0.2 = **-4**. The same $10B only shifts AD right by $40B. Why the $10B gap? Government spending injects the full $10B into the spending stream on day one, all of it gets spent immediately on goods and services. A tax cut hands households $10B, but they save 20% of it before spending anything. Only $8B enters the first round of spending. The spending multiplier exceeds the tax multiplier by exactly 1 regardless of what the MPC is (this is the balanced budget multiplier result). The AP exam tests this distinction constantly, so know which multiplier to use for which policy.`,
     },
   ],
 };

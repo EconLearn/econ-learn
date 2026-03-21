@@ -7,63 +7,63 @@ export const consumerChoiceContent = {
   sections: [
     {
       heading: "Why Do People Buy What They Buy?",
-      content: `Economists model purchasing decisions using the concept of **utility**, which is basically the satisfaction or benefit you get from consuming something.
+      content: `Economists model purchasing decisions using something called **utility**, which is really just a fancy word for the satisfaction or benefit you get from consuming a good.
 
-The question isn't whether you enjoy lattes. The question is how much satisfaction the next latte gives you per dollar compared to everything else that dollar could buy. That ratio (satisfaction per dollar) is what drives every purchasing decision in the model. When you pay $15.49/month for Netflix Standard instead of $10.99/month for Spotify Premium, you're implicitly saying the marginal dollar spent on Netflix returns more satisfaction to you than the marginal dollar on Spotify. Economists call that additional satisfaction from one more unit **marginal utility**.
+But here's the thing. The question isn't whether you enjoy lattes. The question is how much satisfaction the *next* latte gives you per dollar compared to everything else that dollar could buy. That ratio, satisfaction per dollar, is what drives every purchasing decision in the model. When you fork over $15.49/month for Netflix Standard instead of $10.99/month for Spotify Premium, you're implicitly saying the marginal dollar spent on Netflix returns more satisfaction to you than the marginal dollar on Spotify. Economists call that additional satisfaction from one more unit **marginal utility**.
 
-Nobody walks around with a satisfaction meter, obviously. Utility isn't directly measurable in the real world. But the framework is useful because it forces you to think systematically about trade-offs. You can't have everything, so the question becomes what combination of goods squeezes the most satisfaction out of your limited budget.`,
+Nobody walks around with a satisfaction meter, obviously. Utility isn't directly measurable in any real-world sense. But the framework is useful because it forces you to think systematically about trade-offs. You can't have everything (that's scarcity again), so the question becomes what combination of goods squeezes the most satisfaction out of your limited budget.`,
     },
     {
       heading: "The Third Slice of Pizza Problem",
-      content: `First slice when you haven't eaten since breakfast: amazing. Second slice, still solid. Third slice, fine but you're not excited anymore. By the fourth or fifth you're kind of forcing it.
+      content: `First slice of pizza when you haven't eaten since breakfast: amazing. Second slice, still solid. Third slice, it's fine but you're not exactly excited anymore. By the fourth or fifth you're kind of forcing it down.
 
-That's the **law of diminishing marginal utility** in action: each additional unit of a good delivers less extra satisfaction than the previous one. The first hour of a new video game pulls you in completely. Hour eight feels like a chore.
+That pattern is the **law of diminishing marginal utility** in action: each additional unit of a good delivers less extra satisfaction than the one before it. The first hour of a new video game pulls you in completely. Hour eight feels like a chore.
 
-This matters for way more than just pizza preferences. Diminishing marginal utility is why consumers spread their spending across many goods instead of dumping their entire paycheck on one thing. If the tenth coffee of the day adds essentially zero satisfaction, that $5 is obviously better spent on lunch. At some point the declining marginal utility of coffee drops below the marginal utility of food or entertainment or whatever else, and you switch. Look at the utility curve on the graph and see how it flattens as quantity goes up. That flattening IS diminishing marginal utility.
+This matters for way more than just pizza preferences. Diminishing marginal utility is the reason consumers spread their spending across a bunch of different goods instead of dumping their entire paycheck on one thing. If the tenth coffee of the day adds essentially zero satisfaction, that $5 is obviously better spent on lunch. At some point the declining marginal utility of coffee drops below the marginal utility of food or entertainment or whatever else, and you switch. Look at the utility curve on the graph and see how it flattens as quantity goes up. That flattening IS diminishing marginal utility, right there on the screen.
 
-It also gives you another way to understand why demand curves slope downward, which you covered in earlier sections. You'll only buy the next unit if the price drops enough to justify the lower marginal utility that unit provides.`,
+It also gives you another way to understand why demand curves slope downward, which you already covered in the supply and demand section. You'll only buy the next unit if the price drops enough to justify the lower marginal utility that unit provides.`,
     },
     {
       heading: "Budget Constraints: The Reality Check",
-      content: `Wanting stuff is the easy part.
+      content: `Wanting stuff is the easy part. Paying for it is where things get interesting.
 
-A **budget constraint** shows every combination of goods you can afford given your income and the prices you face. It's the straight line on the graph.
+A **budget constraint** shows every combination of goods you can actually afford given your income and the prices you face. It's the straight line on the graph.
 
-Suppose you have $60 a month for entertainment and you're choosing between movies at $15 each and books at $10 each. Blow it all on movies and you get 4. All on books, 6. Mix it: 2 movies and 3 books uses exactly $60. The budget constraint is the line connecting all possible combinations that exactly exhaust your budget.
+Say you've got $60 a month for entertainment and you're choosing between movies at $15 each and books at $10 each. Blow it all on movies and you get 4. All on books, 6. Mix it up, 2 movies and 3 books, and that uses exactly $60. The budget constraint is the line connecting all those combinations that exactly exhaust your budget.
 
-The slope of that line equals the negative price ratio: -(P_movies / P_books) = -(15/10) = -1.5. That slope represents the market's trade-off rate. To get one more movie you give up 1.5 books, and you don't get to negotiate that. The market sets it.
+The slope of that line equals the negative price ratio: -(P_movies / P_books) = -(15/10) = -1.5. That slope is the market's trade-off rate. To get one more movie you have to give up 1.5 books, and you don't get to negotiate that. The market sets it.
 
-Income changes shift the whole line in or out while keeping the slope the same (parallel shift). Price changes rotate it. If the movie price drops, the budget line pivots outward along the movie axis, so you can afford more movies now but your book-buying power didn't change. This distinction between parallel shifts and rotations comes up constantly on the AP exam: parallel shift means income changed, rotation means a price changed. Getting those mixed up is an easy way to lose points.`,
+Income changes shift the whole line in or out while keeping the slope the same (parallel shift). Price changes rotate it. If the movie price drops, the budget line pivots outward along the movie axis, so you can afford more movies now but your book-buying power didn't change at all. This distinction between parallel shifts and rotations comes up constantly on the AP exam: parallel shift means income changed, rotation means a price changed. Getting those mixed up is an easy way to throw away points.`,
     },
     {
       heading: "The Utility-Maximizing Rule",
-      content: `A rational consumer wants to wring the maximum total satisfaction out of every dollar. The rule for doing that is actually pretty elegant:
+      content: `A rational consumer wants to wring the maximum total satisfaction out of every dollar they spend. The rule for doing that is actually pretty elegant:
 
-Allocate spending so that the **marginal utility per dollar** is equal across all goods:
+Allocate your spending so that the **marginal utility per dollar** is equal across all goods:
 
 MU_A / P_A = MU_B / P_B = MU_C / P_C ...
 
-Here's why it works. You're spending on tacos ($2 each) and burritos ($5 each). The last taco gave you 20 utils, so that's 10 utils per dollar. The last burrito gave you 15 utils, which is only 3 utils per dollar. You're getting way more bang for your buck on tacos. Shift money away from burritos toward tacos. Each dollar you pull from burritos costs you 3 utils but gains you 10 on tacos. Keep shifting until the ratios equalize.
+Here's why that works. You're spending on tacos ($2 each) and burritos ($5 each). The last taco gave you 20 utils, so that's 10 utils per dollar. The last burrito gave you 15 utils, which is only 3 utils per dollar. You're getting way more bang for your buck on tacos. So shift money away from burritos toward tacos. Each dollar you pull from burritos costs you 3 utils but gains you 10 on tacos. Keep shifting until the ratios equalize.
 
-If MU_A / P_A > MU_B / P_B, buy more of A and less of B. As you consume more A, diminishing marginal utility pulls MU_A down. As you consume less B, MU_B rises. Eventually the per-dollar ratios converge.
+If MU_A / P_A > MU_B / P_B, buy more of A and less of B. As you consume more A, diminishing marginal utility pulls MU_A down. As you consume less B, MU_B rises. Eventually the per-dollar ratios converge and you can't do any better.
 
-That convergence is **consumer equilibrium**, where there's no way to reshuffle your spending and squeeze out more total utility. On the graph, it's where the green dot sits on the budget line. Drag it anywhere else and total utility drops.`,
+That convergence point is **consumer equilibrium**, the spot where there's no way to reshuffle your spending and squeeze out more total utility. On the graph, it's where the green dot sits on the budget line. Drag it anywhere else and total utility drops.`,
     },
     {
       heading: "Income and Substitution Effects",
-      content: `When the price of a good changes, two separate things happen at once. The AP Micro exam tested this distinction in 2024 free-response, and it remains one of those concepts that sounds simple until you try to explain it precisely on paper.
+      content: `When the price of a good changes, two separate things happen at the same time. The AP Micro exam tested this distinction on the 2024 free-response, and it's one of those concepts that sounds simple until you actually try to explain it precisely on paper.
 
-Suppose your gym membership drops from $60/month to $30/month.
+Say your gym membership drops from $60/month to $30/month.
 
-The **substitution effect**: the gym just got cheaper relative to every other way you could spend that money, like rock climbing, yoga classes, or a home workout setup. Compared to those alternatives, the gym is now a better deal per dollar, so you substitute toward it and cut back on other activities. The substitution effect always, every single time, pushes you toward the good that got cheaper. No exceptions.
+The **substitution effect**: the gym just got cheaper relative to every other way you could spend that money, like rock climbing, yoga classes, or a home workout setup. Compared to those alternatives the gym is now a better deal per dollar, so you substitute toward it and cut back on the other stuff. The substitution effect always, every single time, pushes you toward the good that got cheaper. No exceptions to that rule.
 
-The **income effect**: you're now spending $30 less on the gym each month. That functions exactly like getting a $30 raise, so your real purchasing power went up. What you do with that extra buying power depends on whether the gym is a **normal good** (you'd use it more as your income rises) or an **inferior good** (you'd actually use it less as income rises, and maybe you'd switch to a fancier boutique fitness studio instead).
+The **income effect**: you're now spending $30 less on the gym each month. That functions exactly like getting a $30 raise, your real purchasing power just went up. What you do with that extra buying power depends on whether the gym is a **normal good** (you'd use it more as your income rises) or an **inferior good** (you'd actually use it less as income rises, maybe switching to a fancier boutique fitness studio instead).
 
-For **normal goods**, both effects push the same direction: price drops, you buy more. Clean and simple. For **inferior goods**, they push against each other. Substitution says buy more (it's relatively cheaper), but income says buy less (you're effectively richer and this is an inferior good). In the rare extreme where the income effect actually overpowers the substitution effect, you get a **Giffen good**, meaning demand goes up when price goes up. Robert Giffen supposedly observed this with potatoes during the Irish famine in the 1840s. It's mostly a theoretical curiosity but it showed up on the 2019 AP exam, so know what it is.`,
+For **normal goods**, both effects push the same direction: price drops, you buy more. Clean and simple. For **inferior goods**, they push against each other. Substitution says buy more (it's relatively cheaper), but income says buy less (you're effectively richer and this is an inferior good). In the rare extreme case where the income effect actually overpowers the substitution effect, you get a **Giffen good**, where demand goes *up* when price goes *up*. Robert Giffen supposedly observed this with potatoes during the Irish famine in the 1840s. It's mostly a theoretical curiosity, but it showed up on the 2019 AP exam so you should know what it is.`,
     },
     {
       heading: "Worked Example: Finding the Optimal Bundle",
-      content: `A student has **$24** to spend on two goods: coffee (C) at **$4 per cup** and sandwiches (S) at **$6 each**. The table below shows marginal utility for each unit:
+      content: `A student has **$24** to spend on two goods: coffee (C) at **$4 per cup** and sandwiches (S) at **$6 each**. Here's the marginal utility for each unit:
 
 | Units | MU of Coffee | MU of Sandwich |
 |-------|-------------|----------------|
@@ -87,7 +87,7 @@ Sandwiches (price = $6):
 - 3rd sandwich: 18/6 = **3.0**
 - 4th sandwich: 12/6 = **2.0**
 
-**Step 2: Rank purchases by MU per dollar and buy in order.**
+**Step 2: Rank purchases by MU per dollar and buy in that order.**
 
 Highest MU/$ first: 1st coffee (5.0) and 1st sandwich (5.0) are tied. Buy both.
 Spent so far: $4 + $6 = **$10**. Remaining: $14.
@@ -95,7 +95,7 @@ Spent so far: $4 + $6 = **$10**. Remaining: $14.
 Next highest: 2nd coffee (4.0) and 2nd sandwich (4.0), tied again. Buy both.
 Spent: $10 + $4 + $6 = **$20**. Remaining: $4.
 
-Next: 3rd coffee (3.0) and 3rd sandwich (3.0) are tied, but only $4 left. A coffee costs $4, a sandwich costs $6. Can only afford the coffee.
+Next: 3rd coffee (3.0) and 3rd sandwich (3.0) are tied, but you've only got $4 left. Coffee costs $4, a sandwich costs $6. Can only afford the coffee.
 Spent: $20 + $4 = **$24**. Budget gone.
 
 **Step 3: Verify the optimal bundle.**
@@ -104,7 +104,7 @@ Spent: $20 + $4 = **$24**. Budget gone.
 Total spending: 3($4) + 2($6) = $12 + $12 = $24. Budget fully spent.
 Total utility: (20 + 16 + 12) + (30 + 24) = 48 + 54 = **102 utils**.
 
-At this bundle, the last coffee has MU/P = 12/4 = 3.0, and the last sandwich has MU/P = 24/6 = 4.0. Not perfectly equal, but that's because the budget can't stretch to a 3rd sandwich at $6. Shifting $4 away from the 3rd coffee (losing 12 utils) wouldn't free up enough to buy another sandwich. This is the best allocation the budget allows.`,
+At this bundle, the last coffee has MU/P = 12/4 = 3.0 and the last sandwich has MU/P = 24/6 = 4.0. Not perfectly equal, but that's because the budget physically can't stretch to a 3rd sandwich at $6. Shifting $4 away from the 3rd coffee (losing 12 utils) wouldn't free up enough to buy another sandwich anyway. This is the best allocation the budget allows.`,
     },
   ],
 };

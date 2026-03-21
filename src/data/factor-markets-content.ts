@@ -6,51 +6,51 @@ export const factorMarketsContent = {
   sections: [
     {
       heading: "Derived Demand",
-      content: `A coal mine in West Virginia employs 400 workers. Then natural gas prices drop 30% over eighteen months, utilities start switching fuel sources, and coal demand collapses. The mine lays off 250 people. Those miners didn't suddenly become worse at digging -- the problem was that nobody wanted to buy what they were digging up.
+      content: `A coal mine in West Virginia has 400 workers on payroll. Then natural gas prices drop 30% over eighteen months, utilities start switching fuel sources, and coal demand falls off a cliff. The mine lays off 250 people. Those miners didn't suddenly forget how to dig. The problem was that nobody wanted to buy what they were digging up anymore.
 
-That chain is **derived demand**. The demand for any factor of production (labor, capital, land) exists only because there's demand for whatever that factor helps produce.
+That whole chain is what economists call **derived demand**. The demand for any factor of production, whether it's labor, capital, or land, only exists because there's demand for whatever that factor helps produce.
 
-Consumers want iPhones, so Apple contracts with Foxconn, and Foxconn hires assembly workers in Shenzhen. If iPhone sales crater, those assembly jobs disappear. The hiring was never really about the workers themselves -- it was about the product they build and whether customers will pay for it. When you see the labor demand curve shift, your first question should be: what changed in the **product market**? The tech boom raised demand for software engineers not because HR departments developed a sudden appreciation for people who write code, but because consumers were pouring billions into apps, cloud storage, and streaming services.`,
+Think about it this way. Consumers want iPhones, so Apple contracts with Foxconn, and Foxconn hires assembly workers in Shenzhen. If iPhone sales crater, those assembly jobs vanish. The hiring was never really about the workers themselves, it was about the product they build and whether customers will pay for it. So when you see a labor demand curve shift on an exam question, your first instinct should be to ask what changed in the **product market**. The tech boom raised demand for software engineers not because HR departments suddenly started appreciating people who write code, but because consumers were dumping billions into apps, cloud storage, and streaming services.`,
     },
     {
       heading: "Marginal Revenue Product",
-      content: `Every hiring decision boils down to one comparison: does the next worker bring in more revenue than they cost?
+      content: `Every single hiring decision boils down to one comparison. Does the next worker bring in more revenue than they cost?
 
 **Marginal Revenue Product (MRP)** = MR x MPL
 
-For a competitive firm, MR equals the market price, so MRP = P x MPL. A bakery sells loaves at $4. A new baker produces 25 extra loaves per day. MRP = $4 x 25 = $100. If the going wage is $85, hire that baker -- the firm nets $15. At a wage of $110, don't. The math doesn't work.
+For a competitive firm, MR equals the market price, so MRP = P x MPL. Say a bakery sells loaves at $4. A new baker produces 25 extra loaves per day. MRP = $4 x 25 = $100. If the going wage is $85, you hire that baker, the firm nets $15. At a wage of $110, you don't. The math just doesn't work.
 
-The firm keeps adding workers until MRP = wage. That's the profit-maximizing rule.
+The firm keeps adding workers until MRP = wage. That's the profit-maximizing rule, and it comes up constantly.
 
-The **labor demand curve** slopes downward because of diminishing marginal returns. Baker 3 adds 25 loaves, baker 4 adds 18, baker 5 adds 11. Since MPL shrinks with each additional hire, MRP drops too. If you plot MRP against the number of workers, that downward-sloping line is the firm's demand curve for labor. On AP free-response questions they sometimes give you a table of output data and ask you to derive the demand curve -- it's just MRP at each employment level.`,
+The **labor demand curve** slopes downward because of diminishing marginal returns. Baker 3 adds 25 loaves, baker 4 adds 18, baker 5 adds 11. MPL shrinks with each additional hire, so MRP drops too. If you plot MRP against the number of workers, that downward-sloping line is the firm's demand curve for labor. On AP free-response questions they'll sometimes hand you a table of output data and ask you to derive the demand curve. Don't overthink it, it's just MRP at each employment level.`,
     },
     {
       heading: "Labor Supply",
-      content: `Would you work a warehouse shift for $8/hour? Most people wouldn't bother. At $35/hour you might rearrange your Saturday plans. Every hour worked is an hour of **leisure** sacrificed, and that trade-off sits at the center of labor supply.
+      content: `Would you work a warehouse shift for $8/hour? Most people wouldn't bother. At $35/hour you might rearrange your Saturday plans. Every hour worked is an hour of **leisure** you're giving up, and that trade-off sits at the center of labor supply.
 
-The **market labor supply curve** slopes upward -- higher wages pull more people into the workforce and convince existing workers to put in more hours. At $12/hour only the most eager applicants show up; at $28/hour the applicant pool grows considerably.
+The **market labor supply curve** slopes upward. Higher wages pull more people into the workforce and convince existing workers to put in more hours. At $12/hour only the most eager applicants show up. At $28/hour the applicant pool grows considerably.
 
-What shifts the whole curve? Immigration is a big one. A wave of trained nurses entering the U.S. from the Philippines shifts the nursing labor supply curve rightward at every wage level, which puts downward pressure on equilibrium nursing wages. Changes in career preferences matter too -- the surge of interest in tech careers from roughly 2012 to 2022 shifted supply rightward for software roles, which is part of why entry-level developer salaries didn't rise as fast as senior engineer salaries during that period. Competition between occupations also shifts things around. When JPMorgan raised starting analyst pay to $110,000 in 2021, consulting firms like McKinsey and BCG saw their applicant pools thin out -- their labor supply curves shifted left.`,
+What shifts the whole curve? Immigration is a big one. A wave of trained nurses entering the U.S. from the Philippines shifts the nursing labor supply curve rightward at every wage level, which puts downward pressure on equilibrium nursing wages. Changes in career preferences matter too. The surge of interest in tech careers from roughly 2012 to 2022 shifted supply rightward for software roles, and that's part of why entry-level developer salaries didn't rise as fast as senior engineer salaries during that period. Competition between occupations also shifts things around. When JPMorgan raised starting analyst pay to $110,000 in 2021, consulting firms like McKinsey and BCG saw their applicant pools thin out. Their labor supply curves shifted left.`,
     },
     {
       heading: "Wage Determination",
-      content: `A software engineer's $155,000 salary comes from the same place any price comes from: supply meeting demand. The **equilibrium wage** sits at the intersection of labor supply and labor demand. At that wage, every firm willing to hire at that rate finds workers, and every worker willing to accept that rate finds a job.
+      content: `A software engineer's $155,000 salary comes from the same place any price comes from. Supply meeting demand. The **equilibrium wage** sits at the intersection of labor supply and labor demand. At that wage, every firm willing to hire at that rate finds workers, and every worker willing to accept that rate finds a job.
 
 When AI investment ramped up, firms scrambled for ML engineers, MRP jumped, and labor demand shifted right. Wages went up. Employment went up. That's roughly the story of Silicon Valley from 2015 through 2024, compressed into one supply-and-demand graph.
 
 The reverse works the same way. A coding bootcamp graduating 10,000 new junior web developers pushes **labor supply** right. Entry-level developer wages fall, but total employment rises as firms scoop up the cheaper talent for projects that weren't worth staffing at the old wage.
 
-Same framework as product markets, just with different labels. The good being traded is labor. The price is the wage.`,
+It's the same framework as product markets, just with different labels. The good being traded is labor. The price is the wage.`,
     },
     {
       heading: "Monopsony",
-      content: `One employer in town -- a rural hospital that's the only place hiring nurses within 50 miles. Those nurses can't just "go work somewhere else" without uprooting their families, selling their houses, pulling kids out of school. That employer is a **monopsony** (single buyer of labor), and it has leverage that a competitive employer doesn't have.
+      content: `Picture one employer in town. A rural hospital that's the only place hiring nurses within 50 miles. Those nurses can't just "go work somewhere else" without uprooting their families, selling their houses, pulling kids out of school. That employer is a **monopsony**, a single buyer of labor, and it has leverage that a competitive employer just doesn't have.
 
-A competitive firm takes the market wage as given and hires as many workers as it wants at that rate. The monopsonist faces the entire upward-sloping supply curve alone. To attract one more nurse, it has to raise the wage -- and not just for the new hire, but for every nurse already on payroll. That's why the **marginal factor cost (MFC)** of hiring one more worker exceeds the wage on the supply curve. The MFC curve sits above the supply curve, and the gap between them represents those extra costs of raising everyone's pay.
+A competitive firm takes the market wage as given and hires as many workers as it wants at that rate. The monopsonist faces the entire upward-sloping supply curve alone. To attract one more nurse, it has to raise the wage, and not just for the new hire, but for every nurse already on payroll. That's why the **marginal factor cost (MFC)** of hiring one more worker exceeds the wage on the supply curve. The MFC curve sits above the supply curve, and the gap between them represents those extra costs of raising everyone's pay.
 
-The monopsonist hires where MRP = MFC, then pays the wage read off the supply curve at that quantity. Result: fewer workers hired and lower wages compared to a competitive market.
+The monopsonist hires where MRP = MFC, then pays the wage read off the supply curve at that quantity. Fewer workers hired. Lower wages. Both compared to a competitive market.
 
-A well-placed **minimum wage** -- set above the monopsony wage but below where the competitive equilibrium would be -- can actually fix this. It flattens the supply curve up to the mandated wage, which collapses MFC down to equal that wage, and the gap disappears. The firm ends up hiring more workers at a higher wage. This is one of the rare cases where a price floor can increase both employment and wages rather than creating a surplus, and the AP exam tests it specifically because students expect minimum wages to always cause unemployment.`,
+And here's the part that trips people up on the AP exam. A well-placed **minimum wage**, set above the monopsony wage but below where the competitive equilibrium would be, can actually fix this. It flattens the supply curve up to the mandated wage, which collapses MFC down to equal that wage, and the gap disappears. The firm ends up hiring more workers at a higher wage. This is one of the rare cases where a price floor can increase both employment and wages rather than creating a surplus. The exam tests it specifically because students expect minimum wages to always cause unemployment.`,
     },
     {
       heading: "Worked Example",
@@ -60,11 +60,11 @@ Worker 5 has MPL = 8 chairs per day.
 
 MRP = P x MPL = $12 x 8 = **$96**
 
-That's $96 in revenue against $72 in wage cost. Yes -- hire. The firm nets $24 from adding that worker.
+That's $96 in revenue against $72 in wage cost. Yes, hire. The firm nets $24 from adding that worker.
 
-Worker 6? MPL drops to 5 chairs. MRP = $12 x 5 = **$60**. The worker generates $60 but costs $72. That's a $12 loss on net. Don't hire.
+What about worker 6? MPL drops to 5 chairs. MRP = $12 x 5 = **$60**. The worker generates $60 but costs $72. That's a $12 loss. Don't hire.
 
-**Optimal employment: 5 workers.** The rule is straightforward -- keep hiring as long as MRP >= wage, stop the moment the next worker's MRP drops below the wage. Two numbers, one comparison.`,
+**Optimal employment: 5 workers.** The rule is simple. Keep hiring as long as MRP >= wage, stop the moment the next worker's MRP drops below the wage. Two numbers, one comparison.`,
     },
   ],
 };

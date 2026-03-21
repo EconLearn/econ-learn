@@ -12,65 +12,65 @@ export const supplyDemandExplanation = {
   sections: [
     {
       heading: "The Core Model",
-      content: `Gasoline prices aren't set by some committee in Washington. They come out of millions of separate decisions: drivers deciding whether to fill up today or wait, refineries deciding how much crude to process, gas stations adjusting their signs based on what the place across the street is charging. The whole thing is decentralized, and it works better than most people expect.
+      content: `Nobody in Washington sits in a room and decides what gas should cost. The price you see at the pump comes out of millions of individual decisions happening all at once, drivers choosing whether to fill up or wait until Thursday, refineries calculating how much crude to run through, and the gas station on the corner watching what the Chevron across the street just posted on its sign. The whole system is completely decentralized, and honestly it works way better than you'd expect.
 
-**Supply and demand** is the framework economists use to make sense of all that. Buyers push for lower prices, sellers push for higher ones, and the tug-of-war lands on an **equilibrium**, which is the price where quantity buyers want to purchase matches what sellers want to produce. This applies to concert tickets, apartment rents, hourly wages, the price of a dozen eggs at Kroger. Basically everything with a market price.
+**Supply and demand** is how economists make sense of all that chaos. Buyers want prices low, sellers want them high, and the back-and-forth settles on an **equilibrium**, the price where the quantity people want to buy lines up exactly with what sellers want to produce. Concert tickets, apartment rents, hourly wages, the price of a dozen eggs at Kroger. If it has a market price, this model explains how it got there.
 
-The 2022 AP Micro exam leaned on this framework heavily. Walking into that test without being able to draw a supply-and-demand diagram was like showing up to a math exam without knowing how to add.`,
+The 2022 AP Micro exam leaned on this framework hard. Walking in without being able to draw a supply-and-demand diagram was basically like showing up to a calculus final without knowing what a fraction is.`,
     },
     {
       heading: "Demand: The Buyer's Side",
-      content: `**Demand** is the entire schedule of how many units consumers would buy at each possible price. Not just one price. Every price. At $500 for an iPhone, Apple sells a certain number; at $1,200, fewer; at $200, a whole lot more.
+      content: `**Demand** is the full schedule of how many units consumers would buy at every possible price. Not one price. Every price. When Apple prices the iPhone at $500, they sell a certain number. At $1,200, fewer people bite. At $200, everyone and their grandma grabs one.
 
-The **Law of Demand** says price and quantity demanded move in opposite directions, which gives you a downward-sloping demand curve on the graph. Sneakers at $80, people grab a pair. Same sneakers at $200, most walk past. Drop them to $40 on a clearance rack and some people buy two.
+The **Law of Demand** says price and quantity demanded move in opposite directions, and that's what gives you the downward-sloping demand curve on the graph. Sneakers at $80, people grab a pair. Same sneakers at $200, most people walk right past. Slap a $40 clearance sticker on them and some people buy two.
 
-A huge AP exam pitfall: mixing up *change in quantity demanded* with *change in demand*. If you write on a free-response that "demand decreased" when the question describes a price increase, the grader takes off points, and they should, because those are different things. A price change slides you along the existing curve. The whole curve only shifts when something other than the good's own price changes:
-- **Income** rising means people eat out more (restaurant meals are a *normal good*), but their ramen purchases might actually drop since ramen is an *inferior good* for most people once they can afford better food
-- **Substitute prices**: Pepsi drops to 99 cents and Coke loses customers
-- Cultural shifts or viral trends, like the 2023 Stanley tumbler craze that sent demand through the roof in about two weeks
-- **Expectations** about future prices: rumors of a tariff on electronics next month make people rush to buy laptops right now
-- Market size: 10,000 new college students pour into a town every August, and cheap pizza demand spikes`,
+Here's an AP exam pitfall that costs students points every single year: mixing up *change in quantity demanded* with *change in demand*. If you write on a free-response that "demand decreased" when the question is describing a price increase, the grader takes off points. And honestly they should, because those are completely different things. A price change just slides you along the existing curve. The whole curve only shifts when something other than the good's own price changes:
+- **Income** goes up and people start eating out more (restaurant meals are a *normal good*), but their ramen purchases might actually drop since ramen is an *inferior good* for most people once they can afford real food
+- **Substitute prices**: Pepsi drops to 99 cents a can and Coke starts losing customers
+- Cultural shifts or viral trends, like the 2023 Stanley tumbler craze that sent demand through the roof in about two weeks flat
+- **Expectations** about future prices: rumors of a tariff on electronics next month and suddenly everyone rushes to buy laptops right now
+- Market size: 10,000 new college students pour into a town every August, and cheap pizza demand spikes overnight`,
     },
     {
       heading: "Supply: The Seller's Side",
-      content: `A wheat farmer sees wheat prices double overnight. What does she do? Plants more wheat, maybe converting a few hundred acres that had been growing corn. Profit pulls resources toward whatever pays well, and that basic logic is the entire foundation of the supply side.
+      content: `A wheat farmer checks the futures market one morning and sees wheat prices have doubled overnight. What does she do? She plants more wheat, maybe converts a few hundred acres that had been growing corn. Profit pulls resources toward whatever pays well, and that basic logic is the entire foundation of the supply side.
 
-The **Law of Supply**: higher prices lead to higher *quantity supplied*. Supply curve slopes upward because production gets more attractive as prices climb.
+The **Law of Supply**: higher prices mean higher *quantity supplied*. The supply curve slopes upward because producing stuff gets more attractive as prices climb. Pretty intuitive when you think about it.
 
 What shifts the entire supply curve?
-- A spike in **input costs**: steel prices rise and automakers supply fewer vehicles at every price level
-- **Technology** breakthroughs: fracking in the mid-2000s unlocked oil reserves across North Dakota and Texas, and U.S. oil supply shifted dramatically right
-- More sellers entering the market (a wave of new coffee shops opens in your neighborhood)
-- **Government policy** goes both ways: a $0.02-per-ounce tax on sugary drinks shrinks supply, while a federal subsidy on solar panels expands it
-- Natural disasters: a freeze in Florida wrecks the orange crop, supply shifts left, and OJ prices at the store jump within weeks`,
+- A spike in **input costs**: steel prices jump 40% and automakers supply fewer vehicles at every price level
+- **Technology** breakthroughs: fracking in the mid-2000s unlocked massive oil reserves across North Dakota and Texas, and U.S. oil supply shifted dramatically to the right
+- More sellers entering the market (suddenly a wave of new coffee shops opens in your neighborhood)
+- **Government policy** cuts both ways: a $0.02-per-ounce tax on sugary drinks shrinks supply, while a federal subsidy on solar panels expands it
+- Natural disasters: a freeze hits Florida and wrecks the orange crop, supply shifts left, and OJ prices at the store jump within weeks`,
     },
     {
       heading: "Equilibrium",
-      content: `The **equilibrium price** and **equilibrium quantity** are where the supply and demand curves cross. At that price, the amount buyers want to purchase matches what sellers want to produce exactly.
+      content: `The **equilibrium price** and **equilibrium quantity** sit right where the supply and demand curves cross. At that exact price, the number of units buyers want to purchase matches what sellers want to produce. No leftovers, no empty shelves.
 
-Above equilibrium, sellers stock shelves that don't empty. That unsold inventory (a *surplus*) pressures them to cut prices, run sales, mark things down. The price drifts back toward equilibrium.
+Above equilibrium, sellers stock shelves that don't clear. That unsold inventory (a *surplus*) pressures them to cut prices, run sales, start marking things down. The price drifts back toward equilibrium on its own.
 
-Below equilibrium, buyers show up and the product is gone. That *shortage* gives sellers room to raise prices, or buyers start outbidding each other. Price climbs back up.
+Below equilibrium, buyers show up and the product is already gone. That *shortage* gives sellers room to raise prices, or buyers start outbidding each other. Price climbs back up.
 
-This self-correcting mechanism is why economists call equilibrium a "resting point." The market doesn't stay away from it for long unless something external, like a government price control, pins the price somewhere else. Even then, the underlying pressure to return to equilibrium never goes away. On the 2019 AP Micro free-response, students who couldn't explain this adjustment process lost easy points on what was otherwise a straightforward question.`,
+This self-correcting mechanism is why economists call equilibrium a "resting point." The market doesn't stay away from it for long unless something external like a government price control pins the price somewhere else. And even then, the underlying pressure to snap back to equilibrium never actually goes away. On the 2019 AP Micro free-response, students who couldn't walk through this adjustment process lost easy points on what should have been a straightforward question.`,
     },
     {
       heading: "Shifts vs. Movements Along the Curve",
-      content: `One question sorts this out every time: *did the good's own price change, or did something else change?*
+      content: `There's one question that sorts this out every single time: *did the good's own price change, or did something else change?*
 
-**Own price changed** → you get a **movement along the curve**. The curve stays put, and you slide to a different point on it. Gas goes from $3.50 to $4.00 a gallon, so you drive a bit less. That's movement *along* the demand curve.
+**Own price changed** means you get a **movement along the curve**. The curve stays exactly where it is, you just slide to a different point on it. Gas goes from $3.50 to $4.00 a gallon, so you drive a bit less. That's movement *along* the demand curve.
 
-**Something else changed** → the entire curve **shifts**. Tesla releases a $25,000 electric car, and millions of drivers stop caring about gasoline at *any* price, so the gas demand curve shifts left.
+**Something else changed** means the entire curve **shifts**. Tesla releases a $25,000 electric car and millions of drivers stop caring about gasoline at *any* price, so the gas demand curve shifts left.
 
-If a free-response says "the price of corn increased, so demand for corn decreased" and you agree with that phrasing, you just signaled to the grader that you don't understand the model. The price of corn going up means *quantity demanded* decreased, meaning movement along the curve. Demand itself didn't move. This distinction sounds pedantic, but on the AP exam it is worth real points every single year.
+If a free-response prompt says "the price of corn increased, so demand for corn decreased" and you agree with that phrasing, you just told the grader you don't understand the model. The price of corn going up means *quantity demanded* decreased, which is movement along the curve. Demand itself didn't budge. This distinction sounds pedantic, but on the AP exam it costs people real points every single year.
 
-A quick filter that works: if the cause is the good's own price, it's a movement. If the cause is income, preferences, input costs, technology, substitutes, complements, expectations, or policy, it's a shift.`,
+Quick filter that always works: if the cause is the good's own price, it's a movement. If the cause is income, preferences, input costs, technology, substitutes, complements, expectations, or government policy, it's a shift.`,
     },
     {
       heading: "Worked Example",
-      content: `Given: **Demand: P = 100 - 2Q** and **Supply: P = 20 + Q**. Find equilibrium.
+      content: `You're given: **Demand: P = 100 - 2Q** and **Supply: P = 20 + Q**. Find equilibrium.
 
-**Step 1:** Set the equations equal. At equilibrium, the price on both sides matches:
+**Step 1:** Set the equations equal. At equilibrium the price on both sides has to match:
 
 100 - 2Q = 20 + Q
 
@@ -80,27 +80,27 @@ A quick filter that works: if the cause is the good's own price, it's a movement
 80 = 3Q
 **Q = 26.67 units**
 
-**Step 3:** Plug Q into either equation for P. Using supply:
+**Step 3:** Plug Q back into either equation to get P. Using supply:
 
 P = 20 + 26.67 = **$46.67**
 
-Verify with demand: P = 100 - 2(26.67) = 100 - 53.33 = $46.67. Same answer, which confirms we didn't make an algebra mistake.
+Check it with demand: P = 100 - 2(26.67) = 100 - 53.33 = $46.67. Same answer both ways, so you know there's no algebra mistake.
 
-In plain English: at $46.67, buyers want exactly 26.67 units and sellers want to produce exactly 26.67 units. No surplus, no shortage.
+Translation: at $46.67, buyers want exactly 26.67 units and sellers want to produce exactly 26.67 units. No surplus, no shortage, everyone's happy.
 
-*Bonus application:* What if the exam asks about a surplus or shortage at P = $60? Plug $60 into both equations. Demand gives Q = 20; supply gives Q = 40. Quantity supplied exceeds quantity demanded by 20 units, so that's a surplus of 20.`,
+*Bonus application:* What if the exam asks about a surplus or shortage at P = $60? Just plug $60 into both equations. Demand gives Q = 20, supply gives Q = 40. Quantity supplied exceeds quantity demanded by 20 units, so that's a surplus of 20.`,
     },
     {
       heading: "Price Controls",
-      content: `Governments sometimes decide the market price is too high or too low and intervene. The results follow a predictable pattern.
+      content: `Sometimes the government looks at the market price and decides it's too high or too low, so they step in. The results follow a pretty predictable pattern every time.
 
-A **price ceiling** is a legal *maximum*. New York City's rent stabilization program caps what landlords can charge on roughly one million apartments. When that cap sits below the equilibrium rent, more tenants want apartments than landlords are willing to offer at the capped price, creating a *shortage*. Long waitlists, under-the-table payments, and buildings that don't get maintained are the typical fallout.
+A **price ceiling** is a legal *maximum*. New York City's rent stabilization program caps what landlords can charge on roughly one million apartments. When that cap sits below the equilibrium rent, more tenants want apartments than landlords are willing to offer at the capped price, and you get a *shortage*. Long waitlists, under-the-table payments, buildings that don't get maintained. The usual fallout.
 
-A **price floor** is a legal *minimum*. The federal **minimum wage** (stuck at $7.25 per hour since 2009) is the classic example. Set it above the equilibrium wage, and more workers want jobs than firms want to fill. The resulting *surplus* of labor is unemployment.
+A **price floor** is a legal *minimum*. The federal **minimum wage** (stuck at $7.25 per hour since 2009, which is kind of wild) is the textbook example. Set it above the equilibrium wage and more workers want jobs than firms want to fill. The resulting *surplus* of labor is what economists call unemployment.
 
-There's a memory trick that saves AP students every year: floors go *under* something to hold it up, so they prop the price above equilibrium (surplus). Ceilings press *down* from above, holding the price below equilibrium (shortage). If you write on the exam that a price ceiling creates a surplus, that answer earns zero.
+There's a memory trick that saves AP students every year: floors go *under* something to hold it up, so they prop the price above equilibrium (surplus). Ceilings press *down* from above, holding the price below equilibrium (shortage). If you write on the exam that a price ceiling creates a surplus, that answer earns zero points.
 
-Both binding controls generate **deadweight loss**, because transactions that would have made both buyer and seller better off simply never happen.`,
+Both binding controls generate **deadweight loss**, because transactions that would have made both buyer and seller better off just never happen. The deals are there, the gains from trade exist, but the price control blocks them.`,
     },
   ],
 };

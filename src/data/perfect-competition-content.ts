@@ -6,67 +6,67 @@ export const perfectCompetitionContent = {
   sections: [
     {
       heading: "Price-Taking Behavior",
-      content: `You might think a business always has some control over what it charges. After all, someone sets the price tag. But a wheat farmer in Kansas growing 500 acres of hard red winter wheat (the same variety planted across thousands of farms from Nebraska to Oklahoma) has zero pricing power. Zero. The farmer sells at whatever the Chicago Board of Trade says wheat is worth that day. Charging a penny more means buyers walk next door. Charging less leaves money on the table for no reason.
+      content: `You'd think every business gets at least some say in what it charges. Somebody has to write the price tag, right? But a wheat farmer in Kansas growing 500 acres of hard red winter wheat, the exact same variety planted across thousands of farms from Nebraska to Oklahoma, has absolutely zero pricing power. None. The farmer sells at whatever the Chicago Board of Trade quotes that morning. Try charging a penny more and buyers walk next door. Charge less and you're just throwing money away for no reason.
 
-That's what economists mean by **price taker**. The firm faces a perfectly horizontal demand curve at the market price. Sell as much as you want at that price, but deviate upward and sales collapse to nothing.
+That's what economists call a **price taker**. The firm faces a perfectly horizontal demand curve at the market price. You can sell as much as you want at that price, but bump it up even slightly and your sales drop to nothing.
 
-Four conditions produce this outcome: many small firms, identical products, perfect information among buyers and sellers, and free entry and exit. No real-world market nails all four conditions simultaneously. Agricultural commodities come close. Certain financial markets, like U.S. Treasury bills, come close too. The model isn't meant to be a photograph of reality. It's a blueprint that generates surprisingly accurate predictions about pricing, output, and long-run adjustment.`,
+Four conditions create this situation: lots of small firms, identical products, perfect information on both sides, and free entry and exit. No real market hits all four at once. Agricultural commodities get close. So do certain financial markets like U.S. Treasury bills. But the model was never meant to be a photograph of reality. It's more like a blueprint, and it turns out to generate surprisingly accurate predictions about pricing, output, and how markets adjust over time.`,
     },
     {
       heading: "Profit Maximization: P = MC",
-      content: `Every firm, whether it's a Kansas wheat operation or Apple Inc., follows the same basic decision rule: keep producing as long as each additional unit brings in more revenue than it costs to make.
+      content: `Every firm on the planet, whether it's a Kansas wheat operation or Apple Inc., follows the same basic logic: keep producing as long as each additional unit brings in more revenue than it costs to make.
 
-In a competitive market, selling one more bushel adds exactly the market price to revenue. So **MR = P**. The profit-maximizing rule **MR = MC** simplifies to **P = MC**. Find where the market price line intersects the marginal cost curve. That intersection tells you the optimal quantity.
+In a competitive market, selling one more bushel adds exactly the market price to your revenue. So **MR = P**. And since the profit-maximizing rule is **MR = MC**, that simplifies to **P = MC**. You find where the market price line crosses the marginal cost curve, and that intersection is your optimal quantity.
 
-Produce past that point and each extra unit costs more to make than it earns. Stop short and you've left profitable units sitting on the table unmade. If the AP free-response gives you a cost schedule and asks for the profit-maximizing output, and you pick the quantity where ATC is lowest instead of where P = MC, that answer earns nothing.
+Go past that point and each extra unit costs more to produce than it earns you. Stop short and you've left profitable units sitting on the table, unmade. One mistake that shows up constantly on AP free-responses: the exam gives you a cost schedule and asks for profit-maximizing output, and students pick the quantity where ATC is lowest instead of where P = MC. That answer earns zero points.
 
-Try shifting market demand or supply on the graph and watch how the equilibrium price moves. The firm's output adjusts automatically to wherever P = MC lands on its cost curve.`,
+Try shifting market demand or supply on the graph and watch the equilibrium price move. The firm's output adjusts automatically to wherever P = MC lands on its cost curve.`,
     },
     {
       heading: "Short-Run Profit and Loss",
-      content: `Three scenarios play out in the short run, and which one applies depends entirely on where the market price lands relative to the firm's cost curves.
+      content: `Three scenarios can play out in the short run, and which one you're dealing with depends entirely on where the market price sits relative to the firm's cost curves.
 
-**P > ATC**: the firm earns economic profit. Each unit sold brings in more than it costs on average. The gap between price and ATC, multiplied by quantity, gives the profit rectangle you see shaded on the graph.
+**P > ATC**: the firm earns economic profit. Every unit sold brings in more than it costs on average, and the gap between price and ATC multiplied by quantity gives you that profit rectangle shaded on the graph.
 
-**P < ATC but P > AVC**: the firm is losing money. But it keeps producing anyway. Why? Fixed costs (the lease on the building, the equipment loans) have to be paid whether the firm produces or shuts the doors. As long as revenue covers all variable costs and chips away at some fixed costs, shutting down would actually mean a *bigger* loss. So the firm stays open and absorbs the hit.
+**P < ATC but P > AVC**: the firm is losing money. But it keeps producing anyway. Why would it do that? Because fixed costs like the building lease and equipment loans have to be paid whether the firm makes a single unit or shuts the doors entirely. As long as revenue covers all variable costs and chips away at some of those fixed costs, shutting down would actually produce a *bigger* loss. So the firm stays open and takes the hit.
 
-**P < AVC**: shut it down. Revenue doesn't even cover the cost of the inputs that go directly into production. Every additional unit dug the hole deeper. The firm produces nothing and eats the fixed costs. That price level is the **shutdown point**.`,
+**P < AVC**: shut it down. Revenue can't even cover the cost of inputs that go directly into production. Every additional unit just digs the hole deeper. The firm produces nothing and eats the fixed costs. That price level is the **shutdown point**.`,
     },
     {
       heading: "The Shutdown Condition",
-      content: `A restaurant pays $5,000 a month in rent whether it opens or not. Staying open brings in $8,000 in revenue against $7,000 in food, wages, and utilities. Staying open: $8,000 − $7,000 − $5,000 = −$4,000 loss. Closing: −$5,000 loss (just rent). Staying open is the less painful option by $1,000.
+      content: `Say a restaurant pays $5,000 a month in rent whether it opens or not. Staying open pulls in $8,000 in revenue against $7,000 in food, wages, and utilities. Staying open: $8,000 minus $7,000 minus $5,000 = negative $4,000. Closing: negative $5,000 (just rent). Staying open is the less painful option by $1,000.
 
-Now suppose revenue drops to $6,000 with those same $7,000 in variable costs. Staying open: $6,000 − $7,000 − $5,000 = −$6,000. Closing: −$5,000. Shut the doors. Operating makes the loss worse.
+Now suppose revenue drops to $6,000 with those same $7,000 in variable costs. Staying open: $6,000 minus $7,000 minus $5,000 = negative $6,000. Closing: negative $5,000. Shut the doors. Operating just makes the loss worse.
 
-The rule is clean: **shut down when P < minimum AVC**. Below that threshold, the firm's quantity supplied is zero. Above it, the firm uses the MC curve to determine how much to produce. That makes the **short-run supply curve** the portion of the MC curve that sits above minimum AVC.
+The rule is clean: **shut down when P < minimum AVC**. Below that threshold, the firm's quantity supplied is zero. Above it, the firm uses the MC curve to figure out how much to produce. And that's what makes the **short-run supply curve** the portion of the MC curve sitting above minimum AVC.
 
-On the 2018 AP Micro exam, a question gave students AVC = $12 and price = $10 and asked whether the firm should operate. If you wrote "yes, because the firm should always produce in the short run," that was zero points.`,
+On the 2018 AP Micro exam, a question gave students AVC = $12 and a price of $10 and asked whether the firm should operate. If you wrote "yes, because the firm should always produce in the short run," that was zero points. You need to compare price to AVC, not just assume the firm keeps going.`,
     },
     {
       heading: "Long-Run Equilibrium",
-      content: `Profits attract competitors. Losses drive them away. Those two sentences explain almost the entire long-run story.
+      content: `Profits attract competitors. Losses drive them away. Those two sentences explain almost the entire long-run story of perfect competition.
 
-When firms earn economic profit, outsiders notice. New entrants flood the market, supply increases, and the market price falls. Profits shrink. Entry keeps going until there's nothing extra to attract newcomers.
+When firms are earning economic profit, outsiders notice. New entrants flood in, supply increases, and the market price drops. Profits shrink. Entry keeps happening until there's nothing extra left to attract newcomers.
 
-When firms are losing money, the weakest ones exit. Supply decreases. The market price rises, and losses shrink for whoever remains. Exit continues until the surviving firms break even.
+When firms are losing money, the weakest ones bail. Supply decreases, the market price climbs, and losses shrink for whoever sticks around. Exit continues until the surviving firms break even.
 
-The endpoint is **P = minimum ATC** for every firm. Economic profit hits zero.
+The endpoint is **P = minimum ATC** for every firm. Economic profit lands at zero.
 
-That "zero" confuses people who haven't studied economics before. Zero economic profit doesn't mean the business is failing. It means owners earn exactly what they'd earn in their next best alternative, which is their **opportunity cost** of capital and time. A firm reporting zero economic profit could easily be posting $2 million in accounting profit. The business is healthy. It's just not earning anything *above* what's needed to keep resources invested here rather than elsewhere.`,
+That "zero" trips up people who haven't studied economics before. Zero economic profit does not mean the business is failing. It means the owners earn exactly what they'd earn in their next best alternative, their **opportunity cost** of capital and time. A firm reporting zero economic profit could easily be posting $2 million in accounting profit. The business is perfectly healthy. It's just not pulling in anything *above* what's needed to keep resources parked here instead of somewhere else.`,
     },
     {
       heading: "Efficiency in Perfect Competition",
-      content: `Perfect competition delivers two efficiency outcomes that no other market structure can match in the long run. This is why the model matters even though no real market is perfectly competitive.
+      content: `Perfect competition delivers two efficiency outcomes that no other market structure can match in the long run. This is the reason the model matters even though no real market is perfectly competitive.
 
-**Allocative efficiency** means P = MC. The price consumers pay for the last unit produced equals the marginal cost of making it. Resources flow exactly where consumers value them most. You cannot reshuffle production to make anyone better off without making someone else worse off.
+**Allocative efficiency** means P = MC. The price consumers pay for the last unit equals the marginal cost of making it. Resources flow exactly where consumers value them most, and you can't reshuffle production to make anyone better off without making someone else worse off.
 
 **Productive efficiency** means every firm produces at the lowest point on its ATC curve. Nothing wasted. Output gets made at the lowest possible cost per unit.
 
-When your AP textbook says a monopoly creates deadweight loss or that monopolistic competition leads to "excess capacity," the measuring stick is always perfect competition. Every other market structure (monopoly, oligopoly, monopolistic competition) falls short of at least one of these benchmarks in specific, measurable ways. That's not a minor academic distinction. It's the foundation of antitrust policy, regulatory economics, and most of the second half of AP Microeconomics.`,
+When your AP textbook says a monopoly creates deadweight loss or that monopolistic competition leads to "excess capacity," the measuring stick is always perfect competition. Every other market structure falls short of at least one of these benchmarks in specific, measurable ways. And that's not some minor academic distinction. It's the foundation of antitrust policy, regulatory economics, and most of the second half of AP Microeconomics.`,
     },
     {
       heading: "Worked Example",
-      content: `Market price is **$40**. A firm's marginal cost function is **MC = 5 + 1.5Q**. Find the profit-maximizing quantity and calculate total profit.
+      content: `Market price is **$40**. A firm's marginal cost function is **MC = 5 + 1.5Q**. Find the profit-maximizing quantity and figure out total profit.
 
 **Set P = MC.** The firm is a price taker, so MR = P = $40.
 
@@ -77,12 +77,12 @@ When your AP textbook says a monopoly creates deadweight loss or that monopolist
 35 = 1.5Q
 **Q = 23.33 units**
 
-**Calculate profit.** Suppose the firm's ATC at Q = 23.33 is $32. Profit per unit is the difference between price and ATC:
+**Calculate profit.** Suppose the firm's ATC at Q = 23.33 is $32. Profit per unit is just the gap between price and ATC:
 
 Profit per unit = P - ATC = 40 - 32 = **$8**
 Total profit = 8 x 23.33 = **$186.67**
 
-What if the market price were $28 instead? Set 28 = 5 + 1.5Q, giving Q = 15.33. If ATC at that output is $33, then P < ATC, and the firm incurs a loss of $5 per unit. The firm should check whether P > AVC. If so, the firm keeps producing to cover some fixed costs. If P < AVC, the firm shuts down.`,
+Now what if the market price dropped to $28? Set 28 = 5 + 1.5Q, and you get Q = 15.33. If ATC at that output is $33, then P < ATC, so the firm is losing $5 per unit. The next step is checking whether P > AVC. If it is, the firm keeps producing to cover some fixed costs. If P < AVC, shut it down.`,
     },
   ],
 };
